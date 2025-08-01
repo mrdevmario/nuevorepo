@@ -1163,6 +1163,13 @@ a.header__icon--account.link {
   object-fit: contain;
   background-color: white;
 }
+.media img[src*="image-place-holder.png"] {
+  object-fit: contain;
+  width: 70%;
+  height: 70%;
+  margin: auto;
+  display: block;
+}
 
 
 .media > img {
