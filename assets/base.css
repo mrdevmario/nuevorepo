@@ -1159,7 +1159,7 @@ a.header__icon--account.link {
 .media > img[src=""],
 .media > img[src="null"],
 .media > img[src="undefined"] {
-  content: url("https://cdn.shopify.com/s/files/1/0844/6391/1230/files/image-place-holder.png?v=1754073054");
+  content: url("https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591");
   object-fit: contain;
   background-color: white;
 }
