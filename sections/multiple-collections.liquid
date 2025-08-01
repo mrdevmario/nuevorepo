@@ -660,104 +660,95 @@ class MultiCollectionHandler {
       </div>
     `;
   }
+createProductCard(product) {
+  const firstVariant = product.variants[0];
+  const comparePrice = firstVariant.compare_at_price > firstVariant.price
+    ? `<span class="price--compare">${this.formatMoney(firstVariant.compare_at_price)}</span>`
+    : '';
 
-  createProductCard(product) {
-    const firstVariant = product.variants[0];
-    const comparePrice = firstVariant.compare_at_price > firstVariant.price ? 
-      `<span class="price--compare">${this.formatMoney(firstVariant.compare_at_price)}</span>` : '';
-    
-    const imageRatio = '{{ section.settings.image_ratio }}';
-    const showSecondaryImage = {{ section.settings.show_secondary_image | json }};
-    
-    const primaryImage = product.featured_image || (product.images && product.images[0]);
-    const secondaryImage = showSecondaryImage && product.images && product.images[1];
-    
-    const imageUrlSmall = `${primaryImage.src}&width=200`;
+  const imageRatio = '{{ section.settings.image_ratio }}';
+  const showSecondaryImage = {{ section.settings.show_secondary_image | json }};
 
-const imageMarkup = primaryImage ? `
-  <div class="card__media">
-    <div class="media media--transparent media--hover-effect">
-      <img
-        srcset="${imageUrlSmall} 1x, ${imageUrlSmall}&dpr=2 2x"
-        src="${imageUrlSmall}"
-        sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-        alt="${product.title}"
-        loading="lazy"
-        class="motion-reduce"
-        width="200"
-        height="200"
-      >
-      ${secondaryImage ? `
+  const primaryImage = product.featured_image || (product.images && product.images[0]);
+  const secondaryImage = showSecondaryImage && product.images && product.images[1];
+
+  const placeholderImage = 'https://cdn.shopify.com/s/files/your-placeholder.jpg'; // ⚠️ Usa tu imagen real
+
+  const imageUrlSmall = primaryImage?.src
+    ? `${primaryImage.src.split('?')[0]}?width=200`
+    : placeholderImage;
+
+  const imageUrlSmall2x = primaryImage?.src
+    ? `${primaryImage.src.split('?')[0]}?width=400`
+    : placeholderImage;
+
+  const imageMarkup = `
+    <div class="card__media">
+      <div class="media media--transparent media--hover-effect">
         <img
-          srcset="${secondaryImage.src}&width=200 1x, ${secondaryImage.src}&width=200&dpr=2 2x"
-          src="${secondaryImage.src}&width=200"
+          srcset="${imageUrlSmall} 1x, ${imageUrlSmall2x} 2x"
+          src="${imageUrlSmall}"
           sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-          alt="${product.title}"
+          alt="${product.title || 'No image available'}"
           loading="lazy"
           class="motion-reduce"
           width="200"
           height="200"
         >
-      ` : ''}
+        ${
+          secondaryImage?.src
+            ? `
+          <img
+            srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=400 2x"
+            src="${secondaryImage.src.split('?')[0]}?width=200"
+            sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+            alt="${product.title}"
+            loading="lazy"
+            class="motion-reduce"
+            width="200"
+            height="200"
+          >
+        `
+            : ''
+        }
+      </div>
     </div>
-  </div>
-` : '<div class="card__media"><div class="media media--transparent"><div class="no-image-placeholder">No image available</div></div></div>';
-    return `
-      <div class="grid__item">
-        <div class="card-wrapper product-card-wrapper underline-links-hover">
-          <div class="card card--standard card--media ${imageRatio !== 'adapt' ? `card--${imageRatio}` : ''} ${product.featured_image ? '' : 'card--text-only card--soft'}">
-            <div class="card__inner color-background-2 ratio${imageRatio === 'adapt' && primaryImage ? ` ratio--adapt`: ''}"
-              style="${imageRatio === 'adapt' && primaryImage ? `--ratio-percent: ${1 / (primaryImage.width / primaryImage.height) * 100}%;` : ''}"
-            >
-              ${imageMarkup}
-            </div>
-            <div class="card__content">
-              <div class="card__information">
-              ${product.product_type ? `<div class="product-card__category">${product.product_type}</div>` : ''}
-                <h3 class="card__heading">
-                  <a href="/products/${product.handle}" class="full-unstyled-link">
-                    ${product.title}
-                  </a>
-                </h3>
-                
-                {%- if section.settings.show_vendor -%}
-                  <div class="card-information__text caption-with-letter-spacing light">
-                    ${product.vendor}
-                  </div>
-                {%- endif -%}
+  `;
 
-                <div class="card-information">
-                  {%- if section.settings.show_rating -%}
-                    <div class="rating" role="img" aria-label="Rating">
-                      <span aria-hidden="true" class="rating-star" style="--rating: ${product.rating || 0}; --rating-max: 5.0; --rating-decimal: 0;">
-                      </span>
-                    </div>
-                  {%- endif -%}
-                  
-                  <div class="price ${firstVariant.compare_at_price > firstVariant.price ? 'price--on-sale' : ''}">
-                    <div class="price__regular">
-                      <span class="price-item price-item--regular">
-                        ${this.formatMoney(firstVariant.price)}
-                      </span>
-                      ${comparePrice}
-                    </div>
+  return `
+    <div class="grid__item">
+      <div class="card-wrapper product-card-wrapper underline-links-hover">
+        <div class="card card--standard card--media ${imageRatio !== 'adapt' ? `card--${imageRatio}` : ''}">
+          <div class="card__inner color-background-2 ratio${imageRatio === 'adapt' && primaryImage ? ` ratio--adapt` : ''}"
+            style="${imageRatio === 'adapt' && primaryImage ? `--ratio-percent: ${1 / (primaryImage.width / primaryImage.height) * 100}%;` : ''}">
+            ${imageMarkup}
+          </div>
+          <div class="card__content">
+            <div class="card__information">
+              ${product.product_type ? `<div class="product-card__category">${product.product_type}</div>` : ''}
+              <h3 class="card__heading">
+                <a href="/products/${product.handle}" class="full-unstyled-link">
+                  ${product.title}
+                </a>
+              </h3>
+              <div class="card-information">
+                <div class="price ${firstVariant.compare_at_price > firstVariant.price ? 'price--on-sale' : ''}">
+                  <div class="price__regular">
+                    <span class="price-item price-item--regular">
+                      ${this.formatMoney(firstVariant.price)}
+                    </span>
+                    ${comparePrice}
                   </div>
                 </div>
               </div>
-              
-              {%- if section.settings.enable_quick_add -%}
-                <div class="quick-add no-js-hidden">
-                  <button type="button" class="button button--full-width button--secondary" data-product-id="${product.id}">
-                    Quick add
-                  </button>
-                </div>
-              {%- endif -%}
             </div>
           </div>
         </div>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
+
 
   formatMoney(price) {
     return new Intl.NumberFormat('en-US', {
