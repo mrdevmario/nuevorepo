@@ -1136,22 +1136,16 @@ a.header__icon--account.link {
   background-color: transparent;
 }
 
-.media::after {
-  content: "";
-  position: absolute;
-  top: 10px;     
-  bottom: 10px;  
-  left: 0;
-  right: 0;
-  background-color: white;
-  z-index: 0;
-}
-
 .media > *:not(.zoom):not(.deferred-media__poster-button),
 .media model-viewer {
-  z-index: 1;
+  display: block;
+  max-width: 80%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
-
 
 .media > img {
   object-fit: cover;
