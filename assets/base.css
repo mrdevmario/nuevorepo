@@ -4679,3 +4679,11 @@ h1.cart__empty-text {
     margin-top: 12px;
   }
 }
+.product-card__category {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
