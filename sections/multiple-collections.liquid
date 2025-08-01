@@ -413,7 +413,8 @@ class MultiCollectionHandler {
       }
 
       // Move type filter logic outside of the alloy check
-      if (selectedTypes.includes('Liner Kits')) {
+     if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
+
         const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
         const filteredByAlloys = activeAlloyTags.length > 0 
           ? filteredProducts.filter(product => 
