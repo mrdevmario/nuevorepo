@@ -413,8 +413,7 @@ class MultiCollectionHandler {
       }
 
       // Move type filter logic outside of the alloy check
-     if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
-
+      if (selectedTypes.includes('Liner Kits')) {
         const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
         const filteredByAlloys = activeAlloyTags.length > 0 
           ? filteredProducts.filter(product => 
@@ -673,34 +672,36 @@ class MultiCollectionHandler {
     const primaryImage = product.featured_image || (product.images && product.images[0]);
     const secondaryImage = showSecondaryImage && product.images && product.images[1];
     
-    const imageMarkup = primaryImage ? `
-      <div class="card__media">
-        <div class="media media--transparent media--hover-effect">
-          <img
-            srcset="${primaryImage.src} 1x, ${primaryImage.src} 2x"
-            src="${primaryImage.src}"
-            sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-            alt="${product.title}"
-            loading="lazy"
-            class="motion-reduce"
-            width="${primaryImage.width || ''}"
-            height="${primaryImage.height || ''}"
-          >
-          ${secondaryImage ? `
-            <img
-              srcset="${secondaryImage.src} 1x, ${secondaryImage.src} 2x"
-              src="${secondaryImage.src}"
-              sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-              alt="${product.title}"
-              loading="lazy"
-              class="motion-reduce"
-              width="${secondaryImage.width || ''}"
-              height="${secondaryImage.height || ''}"
-            >
-          ` : ''}
-        </div>
-      </div>
-    ` : '<div class="card__media"><div class="media media--transparent"><div class="no-image-placeholder">No image available</div></div></div>';
+    const imageUrlSmall = `${primaryImage.src}&width=400`;
+
+const imageMarkup = primaryImage ? `
+  <div class="card__media">
+    <div class="media media--transparent media--hover-effect">
+      <img
+        srcset="${imageUrlSmall} 1x, ${imageUrlSmall}&dpr=2 2x"
+        src="${imageUrlSmall}"
+        sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+        alt="${product.title}"
+        loading="lazy"
+        class="motion-reduce"
+        width="400"
+        height="400"
+      >
+      ${secondaryImage ? `
+        <img
+          srcset="${secondaryImage.src}&width=400 1x, ${secondaryImage.src}&width=400&dpr=2 2x"
+          src="${secondaryImage.src}&width=400"
+          sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+          alt="${product.title}"
+          loading="lazy"
+          class="motion-reduce"
+          width="400"
+          height="400"
+        >
+      ` : ''}
+    </div>
+  </div>
+` : '<div class="card__media"><div class="media media--transparent"><div class="no-image-placeholder">No image available</div></div></div>';
 
     return `
       <div class="grid__item">
