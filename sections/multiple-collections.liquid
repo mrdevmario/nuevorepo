@@ -669,46 +669,51 @@ createProductCard(product) {
   const imageRatio = '{{ section.settings.image_ratio }}';
   const showSecondaryImage = {{ section.settings.show_secondary_image | json }};
 
-  const placeholderImage = 'https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591';
+  const primaryImage = product.featured_image || (product.images && product.images[0]);
+  const secondaryImage = showSecondaryImage && product.images && product.images[1];
 
-const primaryImage = product.featured_image || (product.images && product.images[0]);
-const primaryImageUrl = primaryImage?.src
-  ? `${primaryImage.src.split('?')[0]}?width=200`
-  : placeholderImage;
+  const placeholderImage = 'https://cdn.shopify.com/s/files/your-placeholder.jpg'; // ⚠️ Usa tu imagen real
 
-const secondaryImageUrl = secondaryImage?.src
-  ? `${secondaryImage.src.split('?')[0]}?width=200`
-  : null;
+  const imageUrlSmall = primaryImage?.src
+    ? `${primaryImage.src.split('?')[0]}?width=200`
+    : placeholderImage;
 
-const imageMarkup = `
-  <div class="card__media">
-    <div class="media media--transparent media--hover-effect">
-      <img
-        srcset="${primaryImageUrl} 1x, ${primaryImageUrl}&dpr=2 2x"
-        src="${primaryImageUrl}"
-        sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-        alt="${product.title || 'Product image'}"
-        loading="lazy"
-        class="motion-reduce"
-        width="200"
-        height="200"
-      >
-      ${secondaryImageUrl ? `
+  const imageUrlSmall2x = primaryImage?.src
+    ? `${primaryImage.src.split('?')[0]}?width=400`
+    : placeholderImage;
+
+  const imageMarkup = `
+    <div class="card__media">
+      <div class="media media--transparent media--hover-effect">
         <img
-          srcset="${secondaryImageUrl} 1x, ${secondaryImageUrl}&dpr=2 2x"
-          src="${secondaryImageUrl}"
+          srcset="${imageUrlSmall} 1x, ${imageUrlSmall2x} 2x"
+          src="${imageUrlSmall}"
           sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-          alt="${product.title || 'Product image'}"
+          alt="${product.title || 'No image available'}"
           loading="lazy"
           class="motion-reduce"
           width="200"
           height="200"
         >
-      ` : ''}
+        ${
+          secondaryImage?.src
+            ? `
+          <img
+            srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=400 2x"
+            src="${secondaryImage.src.split('?')[0]}?width=200"
+            sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+            alt="${product.title}"
+            loading="lazy"
+            class="motion-reduce"
+            width="200"
+            height="200"
+          >
+        `
+            : ''
+        }
+      </div>
     </div>
-  </div>
-`;
-
+  `;
 
   return `
     <div class="grid__item">
