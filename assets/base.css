@@ -4687,25 +4687,3 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
-.card__heading {
-  margin: 0 !important;
- display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  height: auto !important;
-  max-height: calc(1.2em * 2) !important;
-  word-wrap: break-word !important;
-  hyphens: auto !important;
-}
-
-.card__heading a {
-  display: block !important;
-  color: inherit !important;
-  text-decoration: none !important;
-}
-
-.card__heading a:hover {
-  text-decoration: underline !important;
-}
