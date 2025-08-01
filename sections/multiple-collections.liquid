@@ -672,7 +672,7 @@ class MultiCollectionHandler {
     const primaryImage = product.featured_image || (product.images && product.images[0]);
     const secondaryImage = showSecondaryImage && product.images && product.images[1];
     
-    const imageUrlSmall = `${primaryImage.src}&width=400`;
+    const imageUrlSmall = `${primaryImage.src}&width=200`;
 
 const imageMarkup = primaryImage ? `
   <div class="card__media">
