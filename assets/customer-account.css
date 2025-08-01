@@ -1,0 +1,498 @@
+.customer__account {
+  padding: 40px 64px;
+}
+
+.customer__account .grid__wrapper {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 50px;
+}
+
+.customer__account .side__bar {
+  padding: 24px;
+}
+
+.customer__account .side__bar span {
+  font-size: 18px;
+  line-height: 23px;
+  font-family: Roboto;
+  color: #19454b;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.customer__account .side__bar .tab,
+.customer__account .side__bar p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.customer__account .side__bar p {
+  margin: 0;
+  margin-top: 16px;
+}
+
+.customer__account .side__bar p a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.customer__account .tabs__wrapper {
+  padding-bottom: 16px;
+  border-bottom: 2px solid #19454b;
+}
+
+.customer__account h4.header__wrapper {
+  margin: 0;
+  margin-bottom: 24px;
+  font-size: 18px;
+  line-height: 23px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 700;
+  padding: 0;
+}
+
+.customer__account .header__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.customer__account .header__navigation .sort__options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.customer__account .header__navigation span {
+  font-size: 18px;
+  line-height: 23px;
+  font-family: Roboto;
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.customer__account .header__navigation span:first-child {
+  color: #19454b;
+  font-weight: 700;
+  cursor: auto;
+}
+
+.customer__account .header__navigation .nec_search .search__input.field__input {
+  width: 392px;
+  height: 32px;
+}
+
+.customer__account .order__list .order__card {
+  padding: 24px 32px;
+  background-color: #f1efec;
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.customer__account .order__list .order__card .header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 !important;
+  margin-bottom: 24px;
+}
+
+.customer__account .order__list .order__card .order__confirmation p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.customer__account .order__list .order__card .header__wrapper span {
+  text-transform: capitalize;
+  font-size: 18px;
+  line-height: 23px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 500;
+  letter-spacing: 0.36px;
+}
+
+.customer__account .order__list .order__card .order__confirmation span.round {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.customer__account .order__list .order__card .order__confirmation .clr__yellow {
+  background: #ffc700;
+}
+
+.customer__account .order__list .order__card .order__confirmation .clr__dark {
+  background: #716c6c;
+}
+
+.customer__account .order__list .order__card .order__confirmation .clr__green {
+  background: #4dc959;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper .image__wrapper {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper .image__wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper .items p {
+  font-size: 18px;
+  line-height: 23px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 500;
+  letter-spacing: 0.36px;
+  text-transform: capitalize;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.customer__account .order__list .order__card .order__details .flex__wrapper .items p.price {
+  font-size: 14px;
+  line-height: 17px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 500;
+  letter-spacing: 0.36px;
+  margin-bottom: 0;
+}
+
+.customer__account .order__list .order__card .order__details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 24px;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper .btn {
+  display: block;
+  width: 214px;
+  height: 53px;
+  border-radius: 4px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 800;
+  letter-spacing: 0.36px;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper .btn.green {
+  background: #19454b;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper .btn.blue {
+  background: #1e4a7d;
+}
+
+.customer__account .order__list .order__card .order__details .btn__wrapper span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 214px;
+  height: 53px;
+  border-radius: 4px;
+  color: #19454b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.invoice__popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-width: 90%;
+  width: 1200px;
+  border-radius: 10px;
+  z-index: 999999;
+}
+
+.invoice__popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+.invoice__popup .grid__wrapperr {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.invoice__popup .grid__wrapperrr {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+}
+
+.invoice__popup h1,
+.invoice__popup h2 {
+  font-size: 24px;
+  font-family: Roboto;
+  color: #1e4a7d;
+  font-weight: 800;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.invoice__popup strong {
+  font-size: 20px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.invoice__popup .columns p {
+  text-align: left;
+  font-size: 14px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.invoice__popup p {
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 500;
+}
+
+.invoice__popup hr {
+  margin: 4rem 0;
+}
+
+.invoice__popup table td {
+  text-align: left !important;
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 500;
+}
+
+.invoice__popup table thead th {
+  font-size: 18px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 700;
+}
+
+.invoice__popup .last__item {
+  font-size: 16px;
+  line-height: 22px;
+  font-family: Roboto;
+  color: #19454b;
+  font-weight: 500;
+}
+
+.invoice__popup img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.invoice__popup u a {
+  color: #1e4a7d;
+}
+
+.invoice__popup button.print__invoice {
+  border: none;
+  outline: none;
+  margin-top: 40px;
+  width: 214px;
+  height: 53px;
+  border-radius: 4px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #19454b;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 800;
+  letter-spacing: 0.36px;
+}
+
+@media (min-width: 1023px) and (max-width: 1299px) {
+  .customer__account .grid__wrapper {
+    gap: 24px;
+  }
+
+  .customer__account .side__bar {
+    padding-inline: 0;
+    padding-right: 24px;
+  }
+
+  .customer__account .header__navigation {
+    align-items: baseline;
+    gap: 24px;
+    flex-direction: column;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper .btn {
+    width: 190px;
+    height: 50px;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper a {
+    font-size: 14px;
+  }
+
+  .customer__account .order__list .order__card .order__details {
+    gap: 50px;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .customer__account .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .customer__account {
+    padding: 50px 20px;
+  }
+
+  .customer__account .side__bar {
+    padding: 0;
+    padding-block: 20px;
+  }
+
+  .customer__account .order__list .order__card .order__details {
+    row-gap: 50px;
+  }
+
+  .customer__account .order__list .order__card {
+    padding: 32px;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper {
+    gap: 10px;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper span {
+    justify-content: flex-start;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper .btn {
+    height: 50px;
+  }
+}
+
+@media (max-width: 525px) {
+  .customer__account .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .customer__account {
+    padding: 30px 20px;
+  }
+
+  .customer__account .side__bar {
+    padding: 0;
+    padding-block: 20px;
+  }
+
+  .customer__account .order__list .order__card .order__details {
+    row-gap: 50px;
+    flex-direction: column;
+  }
+
+  .customer__account .order__list .order__card {
+    padding: 32px;
+    padding-inline: 24px;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper {
+    gap: 10px;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper span {
+    justify-content: flex-start;
+  }
+
+  .customer__account .order__list .order__card .order__details .btn__wrapper .btn {
+    height: 50px;
+  }
+
+  .invoice__popup {
+    padding: 24px;
+    top: 50%;
+    max-height: 660px;
+    overflow: scroll;
+  }
+
+  .invoice__popup .grid__wrapperr {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .invoice__popup .grid__wrapperrr {
+    grid-template-columns: 1fr;
+  }
+
+  .invoice__popup .last__item {
+    margin-top: 14px !important;
+  }
+
+  .customer__account .order__list .order__card .header__wrapper.order__shipped {
+    flex-wrap: wrap;
+    row-gap: 15px;
+  }
+}

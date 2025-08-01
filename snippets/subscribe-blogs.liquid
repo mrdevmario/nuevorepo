@@ -1,0 +1,40 @@
+<div class="page-width">
+  <div class="grid__wrapper">
+    <div>
+      <h4>{{ section.settings.heading }}</h4>
+      <h5>{{ section.settings.description }}</h5>
+      <div class="form__wrapper">
+        {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label for="email">
+          Email address
+        </label>
+        <div class="flex__wrapper">
+          <input id="email" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Your email address"
+            aria-required="true" required>
+          <button type="submit" name="Subscribe">Subscribe</button>
+        </div>
+        {%- if form.errors -%}
+        <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+          {%- render 'icon-error' -%}
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </small>
+        {%- endif -%}
+      </div>
+      {%- if form.posted_successfully? -%}
+      <h3 class="newsletter-form__message newsletter-form__message--success form__message"
+        id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>
+        {% render 'icon-success' -%}
+        {{- 'newsletter.success' | t }}
+      </h3>
+      {%- endif -%}
+      <p>We're commited to your privacy, NECS uses the information you provide to us to send you new blogs content. You
+        may unsubscribe at any time. For more information check out our <a href="">privacy policy</a></p>
+      {% endform %}
+    </div>
+    <div class="image__wrapper">
+      <img src="{{ section.settings.image | img_url: " master" }}" alt="Blogs Newsletter Image">
+    </div>
+  </div>
+</div>

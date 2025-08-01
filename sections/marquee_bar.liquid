@@ -1,0 +1,115 @@
+<div class="marquee_bar">
+  <div class="marquee enable-animation marquee--hover-pause nec_desktop">
+    <ul class="marquee__content">
+       {% for block in section.blocks limit: 4 %}
+      <li class="message">
+        <a href="{{ block.settings.mq_link }}">{{ block.settings.mq_info }}</a>
+      </li>
+      {% endfor %} 
+    </ul>
+    <ul class="marquee__content">
+       {% for block in section.blocks limit: 4 %}
+      <li class="message">
+        <a href="{{ block.settings.mq_link }}">{{ block.settings.mq_info }}</a>
+      </li>
+      {% endfor %} 
+    </ul>
+    <ul class="marquee__content">
+       {% for block in section.blocks limit: 4 %}
+      <li class="message">
+        <a href="{{ block.settings.mq_link }}">{{ block.settings.mq_info }}</a>
+      </li>
+      {% endfor %} 
+    </ul>
+  </div>
+  <div class="content_txt nec_mobile">
+    {{ section.settings.ct_txt }}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "marquee_bar",
+    "settings": [
+      {
+      "type":"text",
+      "id":"ct_txt",
+      "label":"Add Contact Text"  
+    }
+     
+    ],
+    "blocks": [
+    {
+      "type": "marquee",
+      "name": "marquee",
+      "settings": [
+        {
+      "type":"url",
+      "id":"mq_link",
+      "label":"Add Link"  
+    },
+      {
+      "type":"text",
+      "id":"mq_info",
+      "label":"Add Text"  
+    }
+      ]
+    }
+  ],
+  "presets":[
+  {
+    "name":"Marquee Bar"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>  
+.marquee_bar { height: 50px; line-height: 50px; background:#1E4A7D; }
+ul.marquee__content li a {text-decoration: none; color: #FFF; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 100%; letter-spacing: 0.36px; text-transform: uppercase; }
+.marquee { --gap: 1rem; position: relative; display: flex; overflow: hidden; user-select: none; gap: 30px; } 
+.marquee__content {flex-shrink: 0;display: flex;gap: 30px;min-width: 53%; margin: 0; padding: 0;}
+ul.marquee__content li{position:relative;} 
+ul.marquee__content li:before { content: "~"; position: absolute; left: -21px; color: #FFF; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 100%; letter-spacing: 0.36px; text-transform: uppercase; top: 14px; }
+ul.marquee__content li.message:nth-child(2) a {color: #F9C001;}  
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__content {
+    animation-play-state: paused !important;
+  }
+}
+.enable-animation .marquee__content {animation: scroll 40s linear infinite;list-style-type: none;}
+.marquee--hover-pause:hover .marquee__content {animation-play-state: paused;}
+.marquee--fit-content {max-width: fit-content;}
+.marquee--pos-absolute .marquee__content:last-child {position: absolute;top: 0;left: 0;}
+.enable-animation .marquee--pos-absolute .marquee__content:last-child {animation-name: scroll-abs;}
+@keyframes scroll-abs {
+  from {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
+} 
+
+@media screen and (min-width:320px) and (max-width:767px){
+.marquee_bar {height: 50px;line-height: 50px;}
+.content_txt.nec_mobile { color: #F9C001; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: 0.36px; text-transform: uppercase; align-items: center; justify-content: center; display: flex; height: 50px; }
+}  
+@media screen and (min-width:768px) and (max-width:991px){
+.marquee_bar {height: 50px;line-height: 50px;}
+.content_txt.nec_mobile { color: #F9C001; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: 0.36px; text-transform: uppercase; align-items: center; justify-content: center; display: flex; height: 50px; }
+}  
+
+
+  
+</style>
+
+{% javascript %}
+{% endjavascript %}

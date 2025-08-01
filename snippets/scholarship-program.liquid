@@ -1,0 +1,28 @@
+<div class="scholarship__program">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      <div class="left__column">
+        <div>
+          <h2>{{ section.settings.heading }}</h2>
+          <p>{{ section.settings.description }}</p>
+          <h3>{{ section.settings.approved_events }}</h3>
+          <div class="content__wrapper">
+            {% for block in section.blocks %}
+            {% if block.settings != empty %}
+            <div class="badge__wrapper">
+              <span>{{ block.settings.badge }}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <a href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+        </div>
+      </div>
+      <div class="right__column">
+        {% if section.settings.bg_image != empty %}
+        <img src="{{ section.settings.side_image | img_url: 'master' }}" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="fireguard__session">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      <div class="left__column">
+        <div>
+          <h2>{{ section.settings.heading }}</h2>
+          <p>{{ section.settings.description }}</p>
+          <div>
+            
+            {% assign is_form_show = true %}
+
+            {% form 'contact' %}
+              <div class="select__location">
+              {% for block in section.blocks %}
+                {% if block.type == 'select_location' %}
+                  {% if block.settings != empty %}
+                    <h4>{{ block.settings.tab_heading }}</h4>
+                    <div class="tabs__wrapper">
+                      
+                      {% if block.settings.tab_intobtn %}
+                        {% assign is_form_show = false %}
+                        <a href="javascript:void(0);" data-cal-link="fireguard/trainingsessionvt" data-cal-namespace="trainingsessionvt" data-cal-config='{"layout":"month_view"}' class="tab_intobtn">{{ block.settings.tab_title_1 }}</a>
+                        <a href="javascript:void(0);" data-cal-link="fireguard/fireguard-training-va" data-cal-namespace="fireguard-training-va" data-cal-config='{"layout":"month_view"}' class="tab_intobtn">{{ block.settings.tab_title_2 }}</a>
+                      {% else %}
+                        <label for="city_{{ block.settings.tab_title_1 }}">
+                          <input id="city_{{ block.settings.tab_title_1 }}" type="radio" name="contact[city]" value="{{ block.settings.tab_title_1 }}" checked style="display: none"/>
+                          <span>{{ block.settings.tab_title_1 }}</span>
+                        </label>
+                        <label for="city_{{ block.settings.tab_title_2 }}">
+                          <input id="city_{{ block.settings.tab_title_2 }}" type="radio" name="contact[city]" style="display: none"/>
+                          <span>{{ block.settings.tab_title_2 }}</span>
+                        </label>
+                      {% endif %}
+                    
+                    </div>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% if is_form_show %}
+            <div class="calendar__picker">
+              <div class="custom__input">
+                <input type="text" class="training__calendar" id="date" name="contact[date]" placeholder="Select a date"
+                  readonly />
+                <img class="custom__arrow" src="{{ 'chevron-up.svg' | asset_url }}" />
+              </div>
+            </div>
+            <div class="overlay">
+              <div class="training__form">
+                {{ form.errors | default_errors }}
+
+                <div class="name">
+                  <label for="name">Name<span><sup>*</sup></span></label>
+                  <input type="text" name="contact[name]" id="name" class="custom__field" placeholder="Name" required />
+                </div>
+                <div class="email">
+                  <label for="email">Email<span><sup>*</sup></span></label>
+                  <input type="email" name="contact[email]" class="custom__field" id="email" placeholder="Email"
+                    required />
+                </div>
+                <div class="phone">
+                  <label for="phone">Phone Number<span><sup>*</sup></span></label>
+                  <input type="tel" name="contact[phone]" id="phone" class="custom__field" placeholder="Phone number"
+                    required />
+                </div>
+                <div class="submit">
+                  <input type="submit" value="Submit" id="submit__btn" />
+                </div>
+                <img src="{{ 'x.svg' | asset_url }}" alt="Close Button" class="close__btn">
+              </div>
+            </div>
+            {% endif %}
+            {% endform %}
+          </div>
+        </div>
+      </div>
+      <div class="right__column">
+        {% for block in section.blocks %}
+        {% if block.type == 'side_image' %}
+        {% if block.settings != empty %}
+        <img src="{{ block.settings.side_image | img_url: 'master' }}" />
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Cal element-click embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", "trainingsessionvt", {origin:"https://cal.com"});
+  Cal.ns.trainingsessionvt("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false,"layout":"month_view"});
+
+  Cal("init", "fireguard-training-va", {origin:"https://cal.com"});
+  Cal.ns["fireguard-training-va"]("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<!-- Cal element-click embed code ends -->

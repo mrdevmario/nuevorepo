@@ -1,0 +1,74 @@
+{{ 'training-trust.css' | asset_url | stylesheet_tag }}
+{% render 'training-trust' %}
+
+{% schema %}
+{
+  "name": "Training Trust",
+  "tag": "section",
+  "class": "training-trust",
+  "settings": [     
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "max_blocks": 1,
+   "blocks": [
+    {
+      "name": "Logos",
+      "type": "logos",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_1",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_2",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_3",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_4",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_5",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_6",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Training Trust",
+      "blocks": [
+        {
+          "type": "logos"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

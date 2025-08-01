@@ -1,0 +1,21 @@
+<style>
+  .soles__banner {
+    background: linear-gradient(288deg, rgba(0, 0, 0, 0.10) 0.02%, rgba(0, 0, 0, 0.00) 68.49%), url('{{ section.settings.bg_image | img_url: 'master' }}'), lightgray 0px -196.097px / 100% 221.652% no-repeat;
+    background-size: 120%;
+    background-position: 78% 28%;
+  }
+
+  @media (max-width: 525px) {
+    .soles__banner {
+      background: linear-gradient(11deg, rgba(0, 0, 0, 0.80) 5.66%, rgba(0, 0, 0, 0.00) 43.25%), url('{{ section.settings.bg_image | img_url: 'master' }}'), lightgray 0px -179.18px / 100% 221.652% no-repeat;
+    }
+  }
+</style>
+
+<div class="soles__banner">
+  <div class="page-width">
+    <div class="soles__banner-wrapper">
+      <img src="{{ section.settings.stacked_image | img_url: 'master'  }}" alt="Stacked Image" class="stacked-image">
+    </div>
+  </div>
+</div>

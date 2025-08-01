@@ -1,0 +1,16 @@
+{{ 'job-badges.css' | asset_url | stylesheet_tag }}
+{% render 'job-badges' %}
+
+{% schema %}
+{
+  "name": "Job Badges",
+  "tag": "section",
+  "class": "job-badges",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Job Badges"
+    }
+  ]
+}
+{% endschema %}

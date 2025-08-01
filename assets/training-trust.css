@@ -1,0 +1,113 @@
+.training__trust {
+  margin-block: 64px;
+}
+
+.training__trust .grid__wrapper {
+  display: grid;
+  grid-template-columns: 416px 1fr;
+  gap: 144px;
+}
+
+.training__trust h2 {
+  color: #1e4a7d;
+  font-family: Poppins;
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.training__trust .logos__wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* justify-content: right; */
+  gap: 48px;
+  row-gap: 35px;
+}
+
+.training__trust .logos__wrapper .image__wrapper {
+  width: 110px;
+  height: 84px;
+}
+
+.training__trust .logos__wrapper .image__wrapper:nth-child(5),
+.training__trust .logos__wrapper .image__wrapper:last-child {
+  width: 110px;
+  height: 100px;
+}
+
+.training__trust .logos__wrapper .image__wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .training__trust {
+    margin-block: 60px;
+  }
+
+  .training__trust .logos__wrapper {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .training__trust .page-width {
+    padding-inline: 20px;
+  }
+
+  .training__trust h2 {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .training__trust .grid__wrapper {
+    grid-template-columns: 330px 1fr;
+    gap: 70px;
+  }
+
+  .training__trust .logos__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .training__trust {
+    margin-block: 50px;
+  }
+}
+
+@media (max-width: 525px) {
+  .training__trust {
+    margin-block: 50px;
+  }
+
+  .training__trust .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .training__trust .logos__wrapper {
+    display: grid;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: flex-start;
+  }
+
+  .training__trust h2 {
+    font-size: 32px;
+    line-height: 32px;
+    text-align: center;
+    width: 290px;
+    margin-inline: auto;
+    margin-bottom: 16px;
+  }
+}

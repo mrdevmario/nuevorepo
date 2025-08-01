@@ -1,0 +1,41 @@
+{{ 'working-with-ncs.css' | asset_url | stylesheet_tag }}
+{% render 'working-with-ncs' %}
+
+{% schema %}
+{
+  "name": "Working with NCS",
+  "tag": "section",
+  "class": "working-with-ncs",
+  "settings": [
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side Image"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_map",
+      "label": "Show map",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Working with NCS"
+    }
+  ]
+}
+{% endschema %}

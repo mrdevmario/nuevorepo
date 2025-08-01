@@ -1,0 +1,428 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "c8fac123-d7d7-4aec-8ea1-9dd0badc7562": {
+      "type": "sheet_heading",
+      "blocks": {
+        "0ac13788-ab05-4cda-bc2e-0646ea140d0f": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-a-aluminum-chimney-liner",
+            "txt": "BEST-Flex Model \"A\" Aluminum Chimney Liner"
+          }
+        },
+        "73d77fa8-be62-457b-bca4-62008abb3419": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-l-stainless-steel-chimney-liner",
+            "txt": "BEST-Flex Model \"L\" Stainless Steel Chimney Liner"
+          }
+        },
+        "e81efad7-f15a-4fce-a7d2-f2e41552a062": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-h-stainless-steel-chimney-liner",
+            "txt": "BEST-Flex Model \"H\" Stainless Steel Chimney Liner"
+          }
+        },
+        "1ea92d95-93f1-41fc-9720-11d5f4fdcd16": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-r-stainless-steel-chimney-liner",
+            "txt": "BEST-Flex Model \"R\" Stainless Steel Chimney Liner"
+          }
+        },
+        "bf6c2d55-59f1-4aae-93c1-e6aa0ca28546": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-s-stainless-steel-chimney-liner",
+            "txt": "BEST-Flex Model \"S\" Stainless Steel Chimney Liner"
+          }
+        },
+        "0ed272bf-e16f-4e41-9924-1b35d2629b10": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-sc-storm-collar",
+            "txt": "BEST-Flex Model \"LHRE\" SC Storm Collar"
+          }
+        },
+        "12a9f9ad-d991-4cf3-a618-6fcdc9bc5ca9": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-a-cla-aluminum-liner-caps",
+            "txt": "BEST-Flex Model \"A\" CLA Aluminum Liner Caps"
+          }
+        },
+        "c2dfd2ce-f52f-41ce-be48-02a30d65e7ab": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-slip-slip-pipe",
+            "txt": "BEST-Flex Model \"LHR\" SLIP Slip Pipe"
+          }
+        },
+        "22f9b887-3a72-4d78-9b78-4e471882d802": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-cl-round-lid",
+            "txt": "BEST-Flex Model \"LHR\" CL Round Lid"
+          }
+        },
+        "0c98fbd6-0db2-4fd2-9543-7699f6a859b7": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tb-tee-body",
+            "txt": "BEST-Flex Model \"LHR\" TB Tee Body"
+          }
+        },
+        "4f160c20-955a-4081-86e4-40487d9c6cfd": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-cmm-coupler-male-male",
+            "txt": "BEST-Flex Model \"LHR\" CMM Coupler Male Male"
+          }
+        },
+        "a0efd24c-15fa-4247-a5c2-920791b2c920": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tc-top-clamp",
+            "txt": "BEST-Flex Model \"LHR\" TC Top Clamp"
+          }
+        },
+        "40697f71-09ef-47b4-a37b-e22628dd23df": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-a-cmma-coupler-male-male-aluminum",
+            "txt": "BEST-Flex Model \"A\" CMMA Coupler Male Male Aluminum"
+          }
+        },
+        "1b57d129-0b81-4a30-8563-d04bdb364229": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tec-tee-end-cap",
+            "txt": "BEST-Flex Model \"LHR\" TEC Tee End Cap"
+          }
+        },
+        "f6268e89-8772-48a0-8dfa-5717d7565fd0": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-ea-adjustable-elbow",
+            "txt": "BEST-Flex Model \"LHR\" EA Adjustable Elbow"
+          }
+        },
+        "6aa20986-31b2-4e7c-902f-bbbf6b18bdc9": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tecp-tee-end-cap-pellet",
+            "txt": "BEST-Flex Model \"LHR\" TECP Tee End Cap Pellet"
+          }
+        },
+        "47c9dc4b-e1e3-4910-beda-7e536d12d6cf": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-ef-fixed-elbow",
+            "txt": "BEST-Flex Model \"LHR\" EF Fixed Elbow"
+          }
+        },
+        "1f56d821-32a4-4582-a6b1-a1b93caba367": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tf-tee-fixed",
+            "txt": "BEST-Flex Model \"LHR\" TF Tee Fixed"
+          }
+        },
+        "73132b37-c184-4687-9641-a30148b26f2e": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-ga-gas-adapter",
+            "txt": "BEST-Flex Model \"LHR\" GA Gas Adapter"
+          }
+        },
+        "b33f1f35-18d8-403c-8bbf-02544179c224": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tfpl-tee-fixed-pellet-long",
+            "txt": "BEST-Flex Model \"LHR\" TFPL Tee Fixed Pellet Long"
+          }
+        },
+        "cf8ce08c-b949-4e89-aee1-6a00a083e52c": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-ia-insert-slide-adapter",
+            "txt": "BEST-Flex IA Insert Slide Adapter"
+          }
+        },
+        "b650ec80-197c-4e3a-8e8f-7a39b377cd07": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tfps-tee-fixed-pellet-short",
+            "txt": "BEST-Flex Model \"LHR\" TFPS Tee Fixed Pellet Short"
+          }
+        },
+        "7729fb72-64fd-49f2-b748-013d2a085c1c": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-ib-insert-boot",
+            "txt": "BEST-Flex IB Insert Boot"
+          }
+        },
+        "4d9c4680-0118-4d6f-8aff-9b513fc206f5": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tp-top-plate",
+            "txt": "BEST-Flex Model \"LHR\" TP Top Plate"
+          }
+        },
+        "dc2491d7-9e98-4a54-81b7-d5e5e8b4c139": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-ir-increaser-reducer",
+            "txt": "BEST-Flex Model \"LHR\" IR Increaser / Reducer"
+          }
+        },
+        "3bdedb21-5eb3-42b1-8ed3-4a7a74c4e83d": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tpc-top-plate-with-collar",
+            "txt": "BEST-Flex Model \"LHR\" TPC Top Plate with Collar"
+          }
+        },
+        "75c8e802-bbeb-4791-a419-9a09173d99dc": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-irs-increaser-reducer",
+            "txt": "BEST-Flex Model \"LHR\" IRS Increaser / Reducer"
+          }
+        },
+        "f7755bbc-0921-42c7-bfd4-7e3db3b174a6": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tpcc-square-lid",
+            "txt": "BEST-Flex Model \"LHR\" TPCC Square Lid"
+          }
+        },
+        "e2e2854e-6110-4880-ad0b-fcfa71042242": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-lpc-liner-pull-cone",
+            "txt": "BEST-Flex LPC Liner Pull Cone"
+          }
+        },
+        "41c6cdf1-c2df-4a5b-ba93-4cdf70016f87": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tpcc-round-lid",
+            "txt": "BEST-Flex Model \"LHR\" TPCC Round Lid"
+          }
+        },
+        "e0be882d-557e-45f1-b0e7-68c3a1f86eec": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-a-mca-mortar-collar-aluminum",
+            "txt": "BEST-Flex Model \"A\" MCA Mortar Collar Aluminum"
+          }
+        },
+        "f8391f9a-b014-4c3e-88ed-f69324eb3568": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tpcf-top-plate-with-collar-flue-fit",
+            "txt": "BEST-Flex Model \"LHR\" TPCF Top Plate with Collar Flue Fit"
+          }
+        },
+        "201a950b-03e3-4ad7-9708-0f4ad224a3bd": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-ts-tee-snout",
+            "txt": "BEST-Flex Model \"LHR\" TS Tee Snout"
+          }
+        },
+        "e89586e9-90e6-4409-ab2c-c58aabe9ccd6": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-tt-two-part-tee",
+            "txt": "BEST-Flex Model \"LHR\" TT Two Part Tee"
+          }
+        },
+        "867cc33a-85c4-4400-b3fa-a11348dbf1a3": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-uto-universal-take-off",
+            "txt": "BEST-Flex Model \"LHR\" UTO Universal Take Off"
+          }
+        },
+        "ff48051e-d200-41c6-8ac3-6fc4a2a380fd": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-aa-appliance-adapter",
+            "txt": "BEST-Flex Model \"LHR\" AA Appliance Adapter"
+          }
+        },
+        "0e2ee9cc-4b64-43b6-a686-61be796e799f": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-ad-adapter",
+            "txt": "BEST-Flex AD Adapter"
+          }
+        },
+        "73a37828-2d15-4f6d-85df-414d8576b409": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-pa-pellet-adapter",
+            "txt": "BEST-Flex Model \"LHR\" PA Pellet Adapter"
+          }
+        },
+        "d8e4d456-6721-4cef-aea7-c864d25cf806": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-bp-bottom-plate",
+            "txt": "BEST-Flex Model \"LHR\" BP Bottom Plate"
+          }
+        },
+        "fd0d34e6-0c56-4208-a8ea-73d619a63a4a": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-sa-stove-adapter",
+            "txt": "BEST-Flex Model \"LHR\" SA Stove Adapter"
+          }
+        },
+        "3a08c6a8-e978-4d45-97ad-228d7b54e82f": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-c-coupler",
+            "txt": "BEST-Flex Model \"LHR\" C Coupler"
+          }
+        },
+        "7b29a191-6dd9-4aca-b001-909b9bc7af8a": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-teclpc-tee-end-cap-liner-pull-cone",
+            "txt": "BEST-Flex TECLPC Tee End Cap Liner Pull Cone"
+          }
+        },
+        "d19843e9-b1b8-4e04-a909-3b4a7fd32a70": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-cc-coupler-with-clamps",
+            "txt": "BEST-Flex Model \"LHR\" CC Coupler with Clamps"
+          }
+        },
+        "03112916-f6d6-40f5-863f-3e57f69395a7": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-a-tpa-top-plate-aluminum",
+            "txt": "BEST-Flex Model \"A\" TPA Top Plate Aluminum"
+          }
+        },
+        "400a7772-23ac-4428-b6dc-527c44cfa70b": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/best-flex-model-lhr-cl-square-lid",
+            "txt": "BEST-Flex Model \"LHR\" CL Square Lid"
+          }
+        },
+        "text_wM9i8m": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/fireguard-ceramic-coating",
+            "txt": "FireGuard Ceramic Resurfacing & Repair System"
+          }
+        },
+        "text_9Ggyx7": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/copy-of-fireguard-ceramic-resurfacing",
+            "txt": "ChamberGuard Smoke Chamber Restoration Systems"
+          }
+        },
+        "text_AEq7L4": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/guardian-chimney-liner",
+            "txt": "Guardian Chimney Liner"
+          }
+        },
+        "text_3GYNFw": {
+          "type": "text",
+          "settings": {
+            "link": "shopify://pages/copy-of-chamberguard-smoke-chamber-restoration-systems",
+            "txt": "Guardian SCR Smoke Chamber Restoration"
+          }
+        }
+      },
+      "block_order": [
+        "0ac13788-ab05-4cda-bc2e-0646ea140d0f",
+        "73d77fa8-be62-457b-bca4-62008abb3419",
+        "e81efad7-f15a-4fce-a7d2-f2e41552a062",
+        "1ea92d95-93f1-41fc-9720-11d5f4fdcd16",
+        "bf6c2d55-59f1-4aae-93c1-e6aa0ca28546",
+        "0ed272bf-e16f-4e41-9924-1b35d2629b10",
+        "12a9f9ad-d991-4cf3-a618-6fcdc9bc5ca9",
+        "c2dfd2ce-f52f-41ce-be48-02a30d65e7ab",
+        "22f9b887-3a72-4d78-9b78-4e471882d802",
+        "0c98fbd6-0db2-4fd2-9543-7699f6a859b7",
+        "4f160c20-955a-4081-86e4-40487d9c6cfd",
+        "a0efd24c-15fa-4247-a5c2-920791b2c920",
+        "40697f71-09ef-47b4-a37b-e22628dd23df",
+        "1b57d129-0b81-4a30-8563-d04bdb364229",
+        "f6268e89-8772-48a0-8dfa-5717d7565fd0",
+        "6aa20986-31b2-4e7c-902f-bbbf6b18bdc9",
+        "47c9dc4b-e1e3-4910-beda-7e536d12d6cf",
+        "1f56d821-32a4-4582-a6b1-a1b93caba367",
+        "73132b37-c184-4687-9641-a30148b26f2e",
+        "b33f1f35-18d8-403c-8bbf-02544179c224",
+        "cf8ce08c-b949-4e89-aee1-6a00a083e52c",
+        "b650ec80-197c-4e3a-8e8f-7a39b377cd07",
+        "7729fb72-64fd-49f2-b748-013d2a085c1c",
+        "4d9c4680-0118-4d6f-8aff-9b513fc206f5",
+        "dc2491d7-9e98-4a54-81b7-d5e5e8b4c139",
+        "3bdedb21-5eb3-42b1-8ed3-4a7a74c4e83d",
+        "75c8e802-bbeb-4791-a419-9a09173d99dc",
+        "f7755bbc-0921-42c7-bfd4-7e3db3b174a6",
+        "e2e2854e-6110-4880-ad0b-fcfa71042242",
+        "41c6cdf1-c2df-4a5b-ba93-4cdf70016f87",
+        "e0be882d-557e-45f1-b0e7-68c3a1f86eec",
+        "f8391f9a-b014-4c3e-88ed-f69324eb3568",
+        "201a950b-03e3-4ad7-9708-0f4ad224a3bd",
+        "e89586e9-90e6-4409-ab2c-c58aabe9ccd6",
+        "867cc33a-85c4-4400-b3fa-a11348dbf1a3",
+        "ff48051e-d200-41c6-8ac3-6fc4a2a380fd",
+        "0e2ee9cc-4b64-43b6-a686-61be796e799f",
+        "73a37828-2d15-4f6d-85df-414d8576b409",
+        "d8e4d456-6721-4cef-aea7-c864d25cf806",
+        "fd0d34e6-0c56-4208-a8ea-73d619a63a4a",
+        "3a08c6a8-e978-4d45-97ad-228d7b54e82f",
+        "7b29a191-6dd9-4aca-b001-909b9bc7af8a",
+        "d19843e9-b1b8-4e04-a909-3b4a7fd32a70",
+        "03112916-f6d6-40f5-863f-3e57f69395a7",
+        "400a7772-23ac-4428-b6dc-527c44cfa70b",
+        "text_wM9i8m",
+        "text_9Ggyx7",
+        "text_AEq7L4",
+        "text_3GYNFw"
+      ],
+      "settings": {
+        "spec_strip": "NEED A CUSTOM ORDER? TRY OUR CUSTOM CAP BUILDER",
+        "heading": "BEST FLEX PRODUCT<br> \nSPECIFICATION SHEETS/Standard Submittals"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "c8fac123-d7d7-4aec-8ea1-9dd0badc7562"
+  ]
+}

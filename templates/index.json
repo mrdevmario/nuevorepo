@@ -1,0 +1,471 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_FK3KxB": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "class": "",
+        "custom_liquid": "<a href=\"https://cdn.shopify.com/s/files/1/0844/6391/1230/files/April_Closure_web_pdf_d794b2d6-b7a1-4554-9b09-805008f2df81.pdf?v=1742918467\" target=\"_blank\" class=\"notice-banner\">\n \n</a>\n\n<style>\n.notice-banner {\n  display: block;\n  width: 100%;\n  background-image: url('https://cdn.shopify.com/s/files/1/0844/6391/1230/files/april_fulfillment_schedule_4.png?v=1742906061');\n  background-size: cover;\n  background-position: center;\n  color: #fff;\n  text-align: center;\n  padding: 60px 20px;\n  font-size: 1.2rem;\n  font-weight: bold;\n  text-decoration: none;\n  border: 1px solid #e1c773;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n  transition: opacity 0.3s ease;\n}\n\n.notice-banner:hover {\n  opacity: 0.9;\n}\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "2c58a410-20b6-463f-a06f-99decba3a73c": {
+      "type": "main_banner",
+      "blocks": {
+        "b8a4230f-329f-46f8-b4d3-a8a896e56ec0": {
+          "type": "image_section",
+          "settings": {
+            "bg_color": "#b3d4f3",
+            "img_id": "shopify://shop_images/Hero-Image-_No-Sky-transformed.webp",
+            "banner_subhead": "NEW ENGLAND CHIMNEY SUPPLY",
+            "banner_mobile_subhead": "NEW ENGLAND CHIMNEY SUPPLY",
+            "banner_head": "Unwavering<br>Product Standards.<br>\n<span>Unbeatable Service.</span>",
+            "banner_mobile_head": "A NEW ENGLAND COMPANY,<br>\n<span>LEADING THE NATION.</span>",
+            "banner_txt": "We are the nation's <span>leading manufacturer &amp; supplier of chimney products,</span><br>boasting unparalleled in-house product control. Serving professionals<br>nationwide, we guarantee impeccable service, free local deliveries on our<br>trucks, and unmatched customer support.",
+            "banner_mobile_txt": "We are the <span>leading manufacturer &amp;<br> supplier of chimney products</span> to <br>chimney professionals across the nation.",
+            "btn_link": "https://catalog.newenglandchimneysupply.com/view/106847915/",
+            "btn_txt": "SHOP CHIMNEY SUPPLIES NOW"
+          }
+        }
+      },
+      "block_order": [
+        "b8a4230f-329f-46f8-b4d3-a8a896e56ec0"
+      ],
+      "custom_css": [
+        ".banner_section img {width: auto; height: 1067px; position: absolute; top: 0; right: -381px;}",
+        "@media screen and (max-width: 1599px) {.banner_section img {width: auto; height: 1067px; position: absolute; top: 0; right: -481px; }}",
+        "@media screen and (max-width: 699px) {.banner_section img {width: auto; height: 1067px; position: absolute; top: 200px; right: -481px; }}"
+      ],
+      "settings": {}
+    },
+    "9f9fa5fc-67a8-4861-9ca3-83ee66152419": {
+      "type": "marquee_bar",
+      "blocks": {
+        "2e7a96da-f18b-4b09-ad41-3d7ffce06877": {
+          "type": "marquee",
+          "settings": {
+            "mq_link": "#",
+            "mq_info": "ORDER BY PHONE NOW - CALL US TODAY: (888) 900-8106"
+          }
+        },
+        "9045b839-be0a-486d-9e9f-4af5333f23e8": {
+          "type": "marquee",
+          "settings": {
+            "mq_link": "#",
+            "mq_info": "ORDER BY E-MAIL NOW - E-Mail us today: order@nesbestflex.com"
+          }
+        }
+      },
+      "block_order": [
+        "2e7a96da-f18b-4b09-ad41-3d7ffce06877",
+        "9045b839-be0a-486d-9e9f-4af5333f23e8"
+      ],
+      "settings": {
+        "ct_txt": "CALL Us TODAY: (888) 900-8106"
+      }
+    },
+    "363a8aa1-0bc1-4635-9b16-5452de5c857c": {
+      "type": "collection_grid",
+      "blocks": {
+        "60bb832e-524f-4a7a-9774-b5b4a7cddefe": {
+          "type": "text",
+          "settings": {
+            "coll": "liner-kits-1",
+            "coll_name": "Liner Kits",
+            "coll_tag": "",
+            "custom_url": "https://catalog.newenglandchimneysupply.com/view/106847915/6/"
+          }
+        },
+        "f26b7f31-ab1d-4122-bdeb-c34c80e0895d": {
+          "type": "text",
+          "settings": {
+            "coll": "liners",
+            "coll_name": "Liners",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "8a2ecb15-444b-4b29-8e22-69fc3fdd5cb5": {
+          "type": "text",
+          "settings": {
+            "coll": "caps-dampers",
+            "coll_name": "Caps &amp; Dampers",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "4b562f44-c786-4a1e-a849-23b1db5526b5": {
+          "type": "text",
+          "settings": {
+            "coll": "adapters-fittings",
+            "coll_name": "Components, <br>Adapters &amp; Fittings",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "0f207f96-1804-4c5f-9748-54be43482ce1": {
+          "type": "text",
+          "settings": {
+            "coll": "liner-insulation",
+            "coll_name": "Liner Insulation",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "aeb871a8-9ff8-4a39-8b83-953ed8471853": {
+          "type": "text",
+          "settings": {
+            "coll": "tools-accessories",
+            "coll_name": "Tools &amp; Accessories",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "d7e5a8d8-6ce4-4bec-bcd5-6a0b9379bc7e": {
+          "type": "text",
+          "settings": {
+            "coll": "chimney-repair-and-restoration",
+            "coll_name": "Chimney Repair<br>and Restoration",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "1c15f98a-e1f9-4b9d-97e8-4be42097be5e": {
+          "type": "text",
+          "settings": {
+            "coll": "class-a-chimneys",
+            "coll_name": "Class A Chimneys",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "25345bdf-d54b-4f4e-b3da-3a3cae455836": {
+          "type": "text",
+          "settings": {
+            "coll": "black-stovepipe-single-double",
+            "coll_name": "Black Stovepipe<br>\nSingle Double",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "b6f2a92c-ce76-441c-85d6-d12ac2649470": {
+          "type": "text",
+          "settings": {
+            "coll": "venting-systems-b-vent",
+            "coll_name": "Venting systems<br>B-Vent",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "2ede9fe9-95f8-4f6c-9211-d8138388d90b": {
+          "type": "text",
+          "settings": {
+            "coll": "galv",
+            "coll_name": "Galv",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "89c2bc76-559e-4464-8e46-428984bf6dac": {
+          "type": "text",
+          "settings": {
+            "coll": "l-vent",
+            "coll_name": "L-vent",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "eb1116fc-c390-4b6a-adce-6286d19780e3": {
+          "type": "text",
+          "settings": {
+            "coll": "pellet-vent",
+            "coll_name": "Pellet Vent",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        },
+        "1163246f-9b8d-4d5e-b79f-c6288924e10c": {
+          "type": "text",
+          "settings": {
+            "coll": "refractory-panels-cleanout-doors",
+            "coll_name": "Refractory Panels<br>&amp; Cleanout Doors",
+            "coll_tag": "",
+            "custom_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "60bb832e-524f-4a7a-9774-b5b4a7cddefe",
+        "f26b7f31-ab1d-4122-bdeb-c34c80e0895d",
+        "8a2ecb15-444b-4b29-8e22-69fc3fdd5cb5",
+        "4b562f44-c786-4a1e-a849-23b1db5526b5",
+        "0f207f96-1804-4c5f-9748-54be43482ce1",
+        "aeb871a8-9ff8-4a39-8b83-953ed8471853",
+        "d7e5a8d8-6ce4-4bec-bcd5-6a0b9379bc7e",
+        "1c15f98a-e1f9-4b9d-97e8-4be42097be5e",
+        "25345bdf-d54b-4f4e-b3da-3a3cae455836",
+        "b6f2a92c-ce76-441c-85d6-d12ac2649470",
+        "2ede9fe9-95f8-4f6c-9211-d8138388d90b",
+        "89c2bc76-559e-4464-8e46-428984bf6dac",
+        "eb1116fc-c390-4b6a-adce-6286d19780e3",
+        "1163246f-9b8d-4d5e-b79f-c6288924e10c"
+      ],
+      "settings": {
+        "heading": "FIND WHAT YOU NEED<br>\n<span>AND FIND IT FAST!</span>",
+        "paragraph": "Find the right supplies for any job, with top quality products, superb support<br> and fast shipping",
+        "bottom_head": "All Stainless Steel NECS Manufactured Products <br>come with a lifetime transferrable warranty.",
+        "grid_url": "#",
+        "grid_btn": "",
+        "bottom_mobile_head": "ALL PRODUCTS COME <br>\nWITH A TRANSFERABLE",
+        "bottom_mobile_head2": "LIFETIME WARRANTY",
+        "grid_mobile_url": "#",
+        "grid_mobile_btn": "EXPLORE OUR FULL RANGE"
+      }
+    },
+    "f2fb0198-fbb9-42c4-a9a4-10914a468661": {
+      "type": "our_services",
+      "blocks": {
+        "6f1e577d-73a1-4f93-9ec8-ddc6010c08aa": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/delivery.svg",
+            "title": "WE DELIVER NATIONWIDE",
+            "desc": "We deliver locally ourselves and nationwide through trusted partners."
+          }
+        },
+        "3d318b4e-72e0-4557-a1da-fd5c5c20ea15": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/support.svg",
+            "title": "TECHNICAL SUPPORT",
+            "desc": "All of our products come with trained support from our team."
+          }
+        },
+        "c355533e-f846-4d51-9e83-2cc47041568c": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/customize.svg",
+            "title": "PRODUCT CUSTOMIZATION",
+            "desc": "Our custom engineering and design team are ready to serve your needs."
+          }
+        },
+        "509522c7-f361-4d24-aab0-e816adf022cd": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/support-agent.svg",
+            "title": "LOCAL SUPPORT",
+            "desc": "Real-time, local phone support,  always there when you need it."
+          }
+        }
+      },
+      "block_order": [
+        "6f1e577d-73a1-4f93-9ec8-ddc6010c08aa",
+        "3d318b4e-72e0-4557-a1da-fd5c5c20ea15",
+        "c355533e-f846-4d51-9e83-2cc47041568c",
+        "509522c7-f361-4d24-aab0-e816adf022cd"
+      ],
+      "settings": {
+        "head": "OUR SERVICES",
+        "mobile_desc": "",
+        "read_url": "#",
+        "read_txt": ""
+      }
+    },
+    "3e34a9d4-192c-4025-8cd3-e5837bfb7a6b": {
+      "type": "home-map-block",
+      "blocks": {
+        "template--21683348799806__3e34a9d4-192c-4025-8cd3-e5837bfb7a6b-information_column-1": {
+          "type": "information_column",
+          "settings": {
+            "custom_css": "information_column_1",
+            "show_background": false,
+            "icon_text": "HQ",
+            "icon_background": "linear-gradient(90deg, rgba(30, 74, 125, 1) 50%, rgba(249, 192, 1, 1) 50%)",
+            "heading": "Corporate  Headquarters:",
+            "show_content_icon": false,
+            "text_1": "34 Commerce Street,\nWilliston, VT 05495",
+            "text_1_icon": "#1e4a7d",
+            "text_2": "",
+            "text_2_icon": "#f9c001"
+          }
+        },
+        "99809f06-c0ac-4e62-b319-05a76ef2c68c": {
+          "type": "information_column",
+          "settings": {
+            "custom_css": "information_column_2",
+            "show_background": false,
+            "icon_text": "MA",
+            "icon_background": "linear-gradient(90deg, rgba(30, 74, 125, 1) 50%, rgba(249, 192, 1, 1) 50%)",
+            "heading": "Mid-Atlantic Facility:",
+            "show_content_icon": false,
+            "text_1": "7956-B Cameron Brown Court, Springfield, VA 22153",
+            "text_1_icon": "#1e4a7d",
+            "text_2": "",
+            "text_2_icon": "#f9c001"
+          }
+        },
+        "bf57a8a7-4dec-4879-aca7-ef62b396e24d": {
+          "type": "information_column",
+          "settings": {
+            "custom_css": "shadow-none",
+            "show_background": true,
+            "icon_text": "",
+            "icon_background": "linear-gradient(90deg, rgba(30, 74, 125, 1) 50%, rgba(249, 192, 1, 1) 50%)",
+            "heading": "Our LOCAL fleet:",
+            "show_content_icon": true,
+            "text_1": "Delivery area covered by our Mid-Atlantic trucks",
+            "text_1_icon": "#1e4a7d",
+            "text_2": "Delivery area covered by our Corporate trucks",
+            "text_2_icon": "#f9c001"
+          }
+        },
+        "62de96fd-6325-47aa-8c78-dd96b1f32852": {
+          "type": "information_column",
+          "settings": {
+            "custom_css": "shadow-none",
+            "show_background": true,
+            "icon_text": "",
+            "icon_background": "linear-gradient(90deg, rgba(30, 74, 125, 0), rgba(132, 198, 163, 1) 0%)",
+            "heading": "NATIONWIDE DELIVERY:",
+            "show_content_icon": false,
+            "text_1": "Area served by our delivery partners",
+            "text_1_icon": "#1e4a7d",
+            "text_2": "",
+            "text_2_icon": "#f9c001"
+          }
+        }
+      },
+      "block_order": [
+        "template--21683348799806__3e34a9d4-192c-4025-8cd3-e5837bfb7a6b-information_column-1",
+        "99809f06-c0ac-4e62-b319-05a76ef2c68c",
+        "bf57a8a7-4dec-4879-aca7-ef62b396e24d",
+        "62de96fd-6325-47aa-8c78-dd96b1f32852"
+      ],
+      "settings": {
+        "map_image": "shopify://shop_images/map-home-layer.svg"
+      }
+    },
+    "787f82a2-16ab-4981-88f2-1ec8f6481c89": {
+      "type": "training",
+      "settings": {
+        "head": "Training you<br>\ncan trust",
+        "left_image": "shopify://shop_images/logo-1.jpg",
+        "right_image": "shopify://shop_images/logo-2.jpg",
+        "right_image2": "shopify://shop_images/logo-3.jpg"
+      }
+    },
+    "signup_tour_J6PXWq": {
+      "type": "signup_tour",
+      "settings": {
+        "image": "shopify://shop_images/tour_bg2.jpg",
+        "head": "SIGN UP<br>\nFOR A TOUR of our facility!",
+        "text": "Come  \nmeet the team and see how we make the BEST products in the industry.",
+        "tour_url": "#",
+        "tour_btn": "REQUEST A TOUR"
+      }
+    },
+    "466a3bfb-d6e2-4e91-82a8-51e05e887f0d": {
+      "type": "testimonials",
+      "blocks": {
+        "cust_say_pfTehP": {
+          "type": "cust_say",
+          "settings": {
+            "custom_liquid": "<script src=\"https://static.elfsight.com/platform/platform.js\" data-use-service-core=\"\" defer></script> <div class=\"elfsight-app-f8d82552-49c6-40fe-a048-34df7b817db0\" data-elfsight-app-lazy=\"\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "cust_say_pfTehP"
+      ],
+      "settings": {
+        "custmers_head": "WHAT OUR CUSTOMERS SAY"
+      }
+    },
+    "57268b4b-1e2e-4bd1-9ce3-b578b2c8ad58": {
+      "type": "signup_tour",
+      "custom_css": [
+        "/* For text and heading drop shadow */h1,h2,h3,h4,h5,h6,p,span {text-shadow: 2px 2px 4px #000000; color: white; /* Set the text fill color */}",
+        " /* Button drop shadow */button {color: white; /* Text fill color */ text-shadow: 2px 2px 4px #000000; font-weight: bold; /* Makes button text clearer with shadow */}",
+        " /* Optional button styling */button {background-color: #fff; /* Button background color */ border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Customer_Service_Survey_v2.jpg",
+        "head": "We Want to<br>\nhear from you!",
+        "text": "Let us know about your experiences with the NECS team!",
+        "tour_url": "https://forms.office.com/r/AZrteHeEs6",
+        "tour_btn": "Give us feedback"
+      }
+    },
+    "71d7dfba-84c1-4645-9e5b-1c4593355e63": {
+      "type": "join_team",
+      "settings": {
+        "image": "shopify://shop_images/mike_with_liner.png",
+        "mobile_image": "shopify://shop_images/mike_with_liner_2.png",
+        "head": "Take the next step UP<br>\nON YOUR CAREER LADDER.<br><span>JOIN OUR TEAM.</span>",
+        "txt": "Looking to take the next step in your career with a supportive team that's<br>focused on growth? <span>We're hiring!</span><br><br><span>Join our team</span> and take advantage of the <span>competitive compensation</span><br> and great <span>potential for advancement</span> we offer.",
+        "btn_url": "shopify://pages/jobs",
+        "btn_txt": "See our available positions"
+      }
+    },
+    "c625fa5a-c2bb-45b7-b39c-6c352896e3fc": {
+      "type": "nec_imgsec",
+      "blocks": {
+        "83ad2ae0-4be4-4fff-98a8-9ef19d0c573f": {
+          "type": "NEC_Images",
+          "settings": {
+            "image": "shopify://shop_images/sweep_1.jpg",
+            "title": "Request A Physical Catalog Today by Clicking Above!"
+          }
+        },
+        "019fe76b-ec39-4e92-9a3a-36cda83410e5": {
+          "type": "NEC_Images",
+          "settings": {
+            "image": "shopify://shop_images/sweep_2.jpg",
+            "title": "Request A Physical Catalog Today by Clicking Above!"
+          }
+        },
+        "6e831cfe-512f-4f21-8342-0ba872c7a244": {
+          "type": "NEC_Images",
+          "settings": {
+            "image": "shopify://shop_images/sweep_3.jpg",
+            "title": "Request A Physical Catalog Today by Clicking Above!"
+          }
+        }
+      },
+      "block_order": [
+        "83ad2ae0-4be4-4fff-98a8-9ef19d0c573f",
+        "019fe76b-ec39-4e92-9a3a-36cda83410e5",
+        "6e831cfe-512f-4f21-8342-0ba872c7a244"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 699px) {.nec_block:nth-of-type(1), .nec_block:nth-of-type(2) {display: none; }}"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "custom_liquid_FK3KxB",
+    "2c58a410-20b6-463f-a06f-99decba3a73c",
+    "9f9fa5fc-67a8-4861-9ca3-83ee66152419",
+    "363a8aa1-0bc1-4635-9b16-5452de5c857c",
+    "f2fb0198-fbb9-42c4-a9a4-10914a468661",
+    "3e34a9d4-192c-4025-8cd3-e5837bfb7a6b",
+    "787f82a2-16ab-4981-88f2-1ec8f6481c89",
+    "signup_tour_J6PXWq",
+    "466a3bfb-d6e2-4e91-82a8-51e05e887f0d",
+    "57268b4b-1e2e-4bd1-9ce3-b578b2c8ad58",
+    "71d7dfba-84c1-4645-9e5b-1c4593355e63",
+    "c625fa5a-c2bb-45b7-b39c-6c352896e3fc"
+  ]
+}

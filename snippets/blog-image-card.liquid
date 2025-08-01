@@ -1,0 +1,18 @@
+<div class="page-width">
+  <div class="grid__wrapper">
+    <div class="left__column">
+      <img src='{{ section.settings.article.image | img_url: "master" }}'
+        alt="{{ section.settings.article.image.alt }}">
+    </div>
+    <div class="right__column">
+      <div class="article_date">
+        <span>{{ section.settings.article.author }}</span>
+        <span class="dot">&nbsp</span>
+        <span>{{ section.settings.article.published_at | date: '%B %d, %Y' }}</span>
+      </div>
+      <h3>{{ section.settings.article.title }}</h3>
+      <p>{{ section.settings.article.content | strip_html }}</p>
+      <a href="{{ section.settings.article.url }}" target="_blank">Read more</a>
+    </div>
+  </div>
+</div>

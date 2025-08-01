@@ -1,0 +1,58 @@
+.scholarship-program-banner {
+  height: 368px;
+  padding-bottom: 64px;
+}
+
+.scholarship-program-banner .page-width {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.scholarship-program-banner .banner__content h1 {
+  margin: 0;
+}
+
+.scholarship-program-banner .banner__content span {
+  display: block;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 64px;
+  line-height: 64px;
+  font-weight: 900;
+  letter-spacing: -1.28px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .scholarship-program-banner .page-width {
+    padding: 0 20px;
+  }
+
+  .scholarship-program-banner .banner__content span {
+    font-size: 44px;
+    line-height: 44px;
+  }
+}
+
+@media (max-width: 525px) {
+  .scholarship-program-banner {
+    height: 519px;
+    padding-bottom: 32px;
+  }
+
+  .scholarship-program-banner .banner__content span {
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .scholarship-program-banner .page-width {
+    height: 100%;
+    display: flex;
+    align-items: end;
+  }
+
+  .scholarship-program-banner .banner__content {
+    padding-left: 32px;
+  }
+}

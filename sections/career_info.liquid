@@ -1,0 +1,106 @@
+<div class="career_strip nec_mobile">{{ section.settings.spec_strip }}</div>
+<div class="career page-width">
+<div class="career_cont">  
+<h2>{{ section.settings.heading }}</h2>
+<div class="career_block">  
+  <div class="career_content">
+    <h4>{{ section.settings.info_title }}</h4>
+    <p>{{ section.settings.info_txt }}</p>
+  </div>
+  <div class="career_img">
+    <img src="{{ section.settings.img_1 | img_url:'master' }}">
+    <img src="{{ section.settings.img_2 | img_url:'master' }}">
+  </div>
+</div>
+</div>
+  <hr>
+</div>
+
+{% schema %}
+  {
+    "name": "Career_Info",
+    "settings": [
+     {
+        "type":"text",
+        "id":"spec_strip",
+        "label":"Add Strip Text"
+      },
+     {
+        "type":"html",
+        "id":"heading",
+        "label":"Add Heading"
+      },
+      {
+        "type":"html",
+        "id":"info_title",
+        "label":"Add Career Title"
+      },
+      {
+        "type":"html",
+        "id":"info_txt",
+        "label":"Add Career Text"
+      },
+      {
+        "type":"image_picker",
+        "id":"img_1",
+        "label":"Add Image 1"
+      },
+      {
+        "type":"image_picker",
+        "id":"img_2",
+        "label":"Add Image 2"
+      } 
+    ],  
+"presets":[
+  {
+    "name":"Career_Info"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+.career_strip.nec_mobile { color: #F9C001; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 140%; display: flex; padding: 16px; text-align: center;justify-content: center; align-items: center; gap: 16px; background: #1E4A7D;display:none; }
+.career_cont h2 {color: #1E4A7D; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: -2.56px; text-transform: uppercase;margin: 0;padding:24px 0 }
+.career_block { display: flex; gap: 24px; padding-top: 24px; }
+.career_img {display: flex; gap: 24px;flex-grow: 1;}
+.career_content {flex: 0 0 42.5%;flex-grow: 1;}
+.career_content h4 { color:#19454B; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; margin: 0 0 8px 0;}
+.career_content p { color:  #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 124%; letter-spacing: -0.36px;margin: 0; }
+.career_img img {width: 310px; height: 240px; object-fit: cover; border-radius: 5px;} 
+.career hr {margin: 32px 0;background: #19454B; opacity: 0.2;}
+  
+@media screen and (min-width:320px) and (max-width:767px){ 
+.career_cont h2{color: #1E4A7D; font-family: Poppins; font-size: 28px; font-style: normal; font-weight: 700; line-height: 30px; letter-spacing: -1.12px; text-transform: uppercase;    padding-top: 40px;}
+.career_block {flex-direction: column; padding: 0 0 25px 0;}
+.career_content {order: 2;}
+.career_img {order: 1;    gap: 16px;}
+.career_img img {width: 48%; height: auto;}
+.career hr {display: none;}
+.career_strip.nec_mobile {display:block; }
+body.jobs .nec_rtmenu {background: #F9C001;}
+body.jobs .header-wrapper--border-bottom {border-bottom: 0;}
+
+}  
+@media screen and (min-width:768px) and (max-width:991px){  
+.career_cont h2 {font-size: 38px; line-height: 30px;    padding-top: 40px;}
+.career_block {flex-direction: column;padding-top: 0;}
+.career_content {order: 2;}
+.career_img {order: 1;    gap: 24px;}
+.career_strip.nec_mobile {display:block; }
+}
+@media screen and (min-width:992px) and (max-width:1365px){  
+.career_block {flex-direction: column; padding: 0 0 25px 0;}
+.career_content {order: 2;}
+.career_img {order: 1;    gap: 16px;}
+.career_img img {width: 100%; height: auto;}
+.career_cont h2 {font-size: 48px;}
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+.career_strip.nec_mobile {font-size: 10px; padding: 16px 8px;}
+.career_cont h2 {font-size: 25px; line-height: 30px; padding-top: 30px;}
+.career_content p {font-size: 16px;}
+}
+
+</style>
+

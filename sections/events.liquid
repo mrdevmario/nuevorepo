@@ -1,0 +1,65 @@
+{{ 'events.css' | asset_url | stylesheet_tag }}
+{% render 'events' %}
+
+{% schema %}
+{
+  "name": "Events",
+  "tag": "section",
+  "class": "events__section",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Event",
+      "type": "event",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "event_image",
+          "label": "Event Image"
+        },
+
+        {
+          "type": "html",
+          "id": "event_date",
+          "label": "Event Date"
+        },
+
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event Title"
+        },
+
+        {
+          "type": "text",
+          "id": "event_location",
+          "label": "Event Location"
+        },
+
+        {
+          "type": "text",
+          "id": "event_description",
+          "label": "Event Description"
+        },
+
+        {
+          "type": "url",
+          "id": "event_link",
+          "label": "Event Button Link"
+        },
+
+        {
+          "type": "text",
+          "id": "event_btn",
+          "label": "Event Button Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Events"
+    }
+  ]
+}
+{% endschema %}

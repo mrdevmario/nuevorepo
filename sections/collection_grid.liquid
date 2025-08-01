@@ -1,0 +1,168 @@
+<section class="nec_supply">
+<div class="collection-grid page-width">
+<h2>{{ section.settings.heading }}</h2>
+<p>{{ section.settings.paragraph }}</p>
+<div class="collection_main"> 
+{% for block in section.blocks %}
+{% assign collection = collections[block.settings.coll] %}
+<div class="collection_block">
+  <a href="{{ block.settings.custom_url | default: collection.url }}" target="_blank"><div class="prod-img"><img src="{{ collection.featured_image | img_url:'master' }}"></div></a>
+  <div class="collect_title">
+  <span>{{ block.settings.coll_tag }}</span>
+   <a href="{{ block.settings.custom_url | default: collection.url }}"><h3>{{ block.settings.coll_name }}{% comment %}}{{ collection.title | truncate: 20 , "" }}{% endcomment %}</h3></a>
+   {% comment %}}<a href="{{ collection.url }}"><button>{{ section.settings.button-text3 }}</button></a>{% endcomment %}
+   </div>
+</div>
+{% endfor %} 
+ </div>
+<div class="cgrid_bottom nec_desktop">
+  <h3 style="margin-bottom: 30px;">{{ section.settings.bottom_head }}</h3>
+  {% if section.settings.grid_btn != blank %}
+    <a href="{{ section.settings.grid_url }}" class="cgrid_btn">{{ section.settings.grid_btn }}</a>
+  {% endif %}
+</div>
+<div class="cgrid_bottom nec_mobile">
+  <h4 class="text_1">{{ section.settings.bottom_mobile_head }}</h4>
+  <h3 class="text_2">{{ section.settings.bottom_mobile_head2 }}</h3>
+  <a href="{{ section.settings.grid_mobile_url }}" class="cgrid_btn">{{ section.settings.grid_mobile_btn }}</a>
+</div>
+
+</div>
+</section>
+{% schema %}
+  {
+    "name": "Collection-grid",
+    "settings": [
+     {
+        "type":"html",
+        "id":"heading",
+        "label":"Add Heading"
+      },
+     {
+        "type":"html",
+        "id":"paragraph",
+        "label":"Add Text"
+      },
+      {
+        "type":"html",
+        "id":"bottom_head",
+        "label":"Add Bottom Heading"
+      },     
+      {
+        "type":"url",
+        "id":"grid_url",
+        "label":"Add Button URL"
+      },
+      {
+        "type":"text",
+        "id":"grid_btn",
+        "label":"Add Button Text"
+      },
+       {
+        "type":"html",
+        "id":"bottom_mobile_head",
+        "label":"Add Bottom Mobile Heading 1"
+      },
+       {
+        "type":"html",
+        "id":"bottom_mobile_head2",
+        "label":"Add Bottom Mobile Heading 2"
+      },
+      {
+        "type":"url",
+        "id":"grid_mobile_url",
+        "label":"Add Button Mobile URL"
+      },
+      {
+        "type":"text",
+        "id":"grid_mobile_btn",
+        "label":"Add Button Mobile Text"
+      } 
+    ],
+  "blocks":[
+  {
+    "type":"text",
+    "name":"Choose-Collection",
+    "settings":[
+    {
+      "type":"collection",
+      "id":"coll",
+      "label":"Choose-Collection"
+    },
+    {
+        "type":"html",
+        "id":"coll_name",
+        "label":"Custom Collection Name"
+      },
+    {
+        "type":"text",
+        "id":"coll_tag",
+        "label":"Collection Tag"
+      },
+    {
+        "type":"url",
+        "id":"custom_url",
+        "label":"Custom Collection URL (opcional)"
+      }
+    ]
+  }
+  ],
+"presets":[
+  {
+    "name":"Collection-grid"
+  }
+]
+  }
+{% endschema %}
+
+<style>  
+.nec_supply{background: #F1EFEC;}
+.collection-grid {padding-top: 96px; padding-bottom: 96px;}
+.collection-grid h2 { color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: -2.56px; text-transform: uppercase; margin: 0; }
+.collection-grid h2 span {color:#39AA6E}
+.collection-grid p {margin-bottom: 64px;margin-top: 18px;color: #19454B; text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px; }
+.cgrid_bottom {text-align: center;}
+.cgrid_bottom h3 { color: var(--State-Blue, #1E4A7D); text-align: center; font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase;     margin: 64px 0;}
+a.cgrid_btn {padding: 16px 32px; justify-content: center; align-items: center; gap: 8px; border-radius: 40px; background: #39AA6E; display: inline-block; color: #FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; text-decoration: none; }
+a.cgrid_btn:hover{background: #1E4A7D;}
+.collection_main { display: flex; gap: 24px; width: 100%; align-items: center; justify-content: left; flex-wrap: wrap; padding: 0 154px; }
+.collection_block {padding: 16px 9px; border-radius: 8px; background: #FFF; box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.04); }
+.collection_block .prod-img img {min-width: 181px; height: 181px; border-radius: 4px;}
+.collect_title h3 { color: #19454B; text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; margin: 20px 0 0 0; min-height: 48px; display: flex; align-items: center; justify-content: center; }
+.collect_title a {text-decoration: none;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+.collection-grid {padding: 40px 0;}
+.collection-grid h2 {margin: 0;font-size: 28px; font-weight: 700; line-height: 30px; letter-spacing: -1.12px;}
+.collection-grid p {margin-bottom: 24px;padding: 0 40px;}
+.cgrid_bottom h3 {font-size: 24px; line-height: 24px; margin: 24px 0; font-size: 18px; font-weight: 700; line-height: 25px;}
+a.cgrid_btn { padding: 16px 32px; font-size: 16px; text-transform: uppercase; text-decoration: none; margin: 16px 0; }  
+.collection_main {gap: 24px; width: 100%;align-items: center; justify-content: center; flex-wrap: wrap; padding: 0;}
+.collection_block .prod-img img {min-width: 149px; height: 149px; border-radius: 4px;}
+.collect_title h3 { font-family: Roboto; margin: 20px 0 0 0; min-height: 40px; display: flex; align-items: center; justify-content: center; color: #19454B; text-align: center; font-size: 14.858px; font-style: normal; font-weight: 700; line-height: 120%; }
+.cgrid_bottom h4.text_1 {color: #39AA6E; text-align: center; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 700; line-height: 20px; text-transform: uppercase; margin-bottom: 12px!important; }
+.cgrid_bottom h3.text_2 {color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 28px; font-style: normal; font-weight: 700; line-height: 30px; letter-spacing: -1.12px; text-transform: uppercase;margin-top: 0; }
+}
+  
+@media screen and (min-width:768px) and (max-width:991px){  
+.collection-grid {padding: 40px 0;}
+.collection-grid h2 {margin: 0;font-size: 45px; font-weight: 700; line-height: 50px; letter-spacing: -1.12px;}
+.collection-grid p {margin-bottom: 24px;padding: 0 40px;}
+.cgrid_bottom h3 {font-size: 24px; line-height: 24px; margin: 24px 0; font-size: 18px; font-weight: 700; line-height: 25px;}
+a.cgrid_btn { padding: 16px 32px; font-size: 16px; text-transform: uppercase; text-decoration: none; margin: 16px 0; }  
+.collection_main {gap: 24px; width: 100%;align-items: center; justify-content: center; flex-wrap: wrap; padding: 0;}
+.collection_block .prod-img img {min-width: 149px; height: 149px; border-radius: 4px;}
+.collect_title h3 { font-family: Roboto; margin: 20px 0 0 0; min-height: 40px; display: flex; align-items: center; justify-content: center; color: #19454B; text-align: center; font-size: 14.858px; font-style: normal; font-weight: 700; line-height: 120%; }
+.cgrid_bottom h4.text_1 {color: #39AA6E; text-align: center; font-family: Poppins; font-size: 23px; font-style: normal; font-weight: 700; line-height: 23px; text-transform: uppercase; margin-bottom: 12px!important; }
+.cgrid_bottom h3.text_2 {color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 40px; font-style: normal; font-weight: 700; line-height: 45px; letter-spacing: -1.12px; text-transform: uppercase;margin-top: 0; }
+}
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+  .collection-grid {padding: 70px 0;}
+  .cgrid_bottom h3 {margin: 50px 0;}
+}
+
+</style>
+
+{% javascript %}
+{% endjavascript %}

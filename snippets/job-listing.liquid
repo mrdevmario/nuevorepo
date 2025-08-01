@@ -1,0 +1,130 @@
+<div class="page-width">
+  <div class="job__outline">
+    <h4>Job Outline</h4>
+    <div class="grid__wrapper">
+      <div class="left__column">
+        {% comment %} <h5>Role & Responsibilities</h5> {% endcomment %}
+        {{ page.metafields.custom.role_responsibilities.value }}
+      </div>
+      <div class="right__column">
+        {% comment %} <h5>SKILLS</h5> {% endcomment %}
+        {{ page.metafields.custom.skills.value }}
+      </div>
+    </div>
+  </div>
+
+  <div class="benefits-and-requirements">
+    <div class="grid__wrapper">
+     {% if page.metafields.custom.benefits != blank %}
+      <div class="left__column">
+        <h5>Benefits</h5>
+        {{ page.metafields.custom.benefits.value }}
+      </div>
+     {% endif %}
+     {% if page.metafields.custom.requirements != blank %}
+      <div class="right__column">
+        <div class="requirements" {% if request.path == '/pages/production-manufacturing-manager' %}style="background: transparent;"{% endif %}>
+        {% if request.path == '/pages/kit-liner-assembler' %}
+          <h5>Work Experience:</h5>
+         {% else %}
+          <h5>Requirements</h5>
+        {% endif %}
+          {% comment %} <h5>Requirements</h5> {% endcomment %}
+          {{ page.metafields.custom.requirements.value }}
+        </div>
+        <div class="our__passion">
+          <span>Our passion at New England Chimney Supply is:</span>
+          <p>“To positively affect the lives of the people we come in contact with.”</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+   </div>
+  <hr />
+
+  {% if page.metafields.custom.other_desc %}
+  <div class="other_desc">
+    {{ page.metafields.custom.other_desc.value }}
+  </div>
+  {% endif %}
+
+  <div class="overview">
+  {% if page.metafields.custom.overview %}
+    <h4>Overview</h4>
+    <div class="grid__wrapper">
+      {{ page.metafields.custom.overview.value }}
+    </div>
+    <hr>
+  {% endif %}
+    {% comment %}
+    <a href="{{ page.metafields.custom.apply_now_link.value }}">Apply Now</a>
+    {% endcomment %}
+    {% capture subject_line %}Application for {{ page.title }}{% endcapture %}
+    {% comment %} <style>
+      form.job__application label {
+          color: #19454b;
+          font-family: Roboto;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 130%;
+          letter-spacing: -.36px;
+          display: block;
+          margin-top: 16px;
+          margin-bottom: 12px;
+      }
+      form.job__application input#Name,
+      form.job__application input#PhoneNumber,
+      form.job__application input#Email {
+          width: 100%;
+          padding: 16px;
+          border-radius: 4px;
+          background: #f1efec;
+          font-variant-numeric: lining-nums proportional-nums;
+          font-family: Roboto;
+          font-weight: 500;
+          line-height: 125%;
+          outline: none;
+          border: none;
+      }
+      form.job__application input.submit__button {
+          display: flex;
+          margin-top: 16px;
+          padding: 16px 120px;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          font-family: Roboto;
+          font-weight: 800;
+          line-height: 130%;
+          letter-spacing: .32px;
+          text-transform: uppercase;
+          font-size: 16px;
+          border-radius: 40px;
+          background: #19454b;
+          width: 186px;
+          cursor: pointer;
+      }
+    </style>
+    <form class="job__application" action="/contact" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="contact[subject]" value="{{ subject_line }}">
+    
+      <label for="Name">Name</label>
+      <input type="text" id="Name" name="contact[name]" required>
+    
+      <label for="PhoneNumber">Phone Number</label>
+      <input type="tel" id="PhoneNumber" name="contact[phone]" required>
+    
+      <label for="Email">Email Address</label>
+      <input type="email" id="Email" name="contact[email]" required>
+    
+      <label for="CoverLetter">Cover Letter (Optional)</label>
+      <input type="file" id="CoverLetter" class="upload__button__form" name="contact[cover_letter]" accept=".pdf,.doc,.docx">
+    
+      <label for="Resume">Resume</label>
+      <input type="file" id="Resume" class="upload__button__form" name="contact[resume]" accept=".pdf,.doc,.docx" required>
+    
+      <input type="submit" class="submit__button" value="Submit Application">
+    </form> {% endcomment %}
+    <div class="pxFormGenerator" id="Po5nSZuzX2iVC4O5C8VgVA"></div>
+  </div>
+</div>

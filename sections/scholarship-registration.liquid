@@ -1,0 +1,50 @@
+{{ 'scholarship-registration.css' | asset_url | stylesheet_tag }}
+{% render 'scholarship-registration' %}
+
+{% schema %}
+{
+  "name": "Scholarship Registration",
+  "tag": "section",
+  "class": "scholarship-registration",
+  "settings": [     
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side Image"
+    }
+  ],
+  "max_blocks": 1,
+  "blocks": [
+    {
+      "name": "Scholarship Form",
+      "type": "scholarship_form",
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scholarship Registration",
+      "blocks": [
+        {
+          "type": "scholarship_form"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

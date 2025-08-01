@@ -1,0 +1,75 @@
+{{ 'scholarship-program.css' | asset_url | stylesheet_tag }}
+{% render 'scholarship-program' %}
+
+{% schema %}
+{
+  "name": "Scholarship Program",
+  "tag": "section",
+  "class": "scholarship-program",
+  "settings": [     
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side Image"
+    },
+
+    {
+      "type": "text",
+      "id": "approved_events",
+      "label": "Events Heading",
+      "default": "Currently approved education events and classes:"
+    },
+
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text"
+    },
+
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "name": "Approved Events & Classes",
+      "type": "approved_events",
+      "settings": [
+        {
+          "type": "html",
+          "id": "badge",
+          "label": "Badge"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scholarship Program",
+      "blocks": [
+        {
+          "type": "approved_events"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

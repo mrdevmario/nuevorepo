@@ -1,0 +1,52 @@
+.job-badges {
+  margin-block: 40px;
+}
+
+.job-badges h1 {
+  color: #1e4a7d;
+  font-family: Poppins;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 48px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.job-badges .badges {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.job-badges .badges span {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: #f1efec;
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .job-badges .page-width {
+    padding-inline: 20px;
+  }
+
+  .job-badges h1 {
+    font-size: 32px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 525px) {
+}

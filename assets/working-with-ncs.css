@@ -1,0 +1,152 @@
+.working-with-ncs {
+  padding-top: 24px;
+}
+
+.working-with-ncs .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.working-with-ncs .left__column {
+  padding-right: 40px;
+}
+
+.working-with-ncs h2 {
+  color: #1e4a7d;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.working-with-ncs p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: -0.36px;
+}
+
+.working-with-ncs .right__column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.working-with-ncs .right__column .image__wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 312px;
+  width: 100%;
+}
+
+.working-with-ncs .right__column .image__wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.working-with-ncs .right__column .map {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 312px;
+  width: 100%;
+}
+
+.working-with-ncs .right__column .map iframe {
+  height: 100%;
+  width: 100%;
+}
+
+.working-with-ncs hr {
+  margin: 0;
+  margin-block: 32px;
+  background-color: #19454b;
+  opacity: 0.2;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .working-with-ncs .page-width {
+    padding-inline: 20px;
+  }
+
+  .working-with-ncs .left__column {
+    padding-right: 20px;
+  }
+
+  .working-with-ncs .right__column {
+    grid-template-columns: 1fr;
+  }
+
+  .working-with-ncs .right__column .image__wrapper,
+  .working-with-ncs .right__column .map {
+    height: 250px;
+  }
+}
+
+@media (max-width: 525px) {
+  .job-badges {
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  .job-badges .badges span {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    margin-bottom: 8px;
+  }
+
+  .job-badges h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  .working-with-ncs .left__column {
+    padding-right: 0;
+  }
+
+  .working-with-ncs h2 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 0 0 8px;
+  }
+
+  .working-with-ncs .grid__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .working-with-ncs .right__column {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .working-with-ncs .right__column .image__wrapper,
+  .working-with-ncs .right__column .map {
+    height: 200px;
+  }
+
+  .working-with-ncs {
+    padding-top: 16px;
+  }
+
+  .working-with-ncs hr {
+    margin-block: 8px;
+    margin-top: 24px;
+  }
+
+  .working-with-ncs .right__column {
+    gap: 16px;
+  }
+}

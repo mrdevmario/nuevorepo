@@ -1,0 +1,111 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "scholarship_program_banner_Hme3Ur": {
+      "type": "scholarship-program-banner",
+      "settings": {
+        "bg_image": "shopify:\/\/shop_images\/scholarship-banner.svg",
+        "bg_mobile": "shopify:\/\/shop_images\/scholarship-banner-mobile.svg",
+        "heading": "<span>NECS BEST Education<\/span>\n<span>Scholarship Program<\/span>"
+      }
+    },
+    "simple_text_7VinfU": {
+      "type": "simple-text",
+      "settings": {
+        "description": "<span> At NECS, we are committed to promoting a higher level of excellence within the industry. As a tangible demonstration of this commitment, we are proud to announce our dedication to funding approved educational events and classes for YOUR BUSINESS — because at NECS, we believe in shaping the future of the industry through professional growth and education. Join us on the path to industry distinction today.<\/span>"
+      }
+    },
+    "events_and_classes_wAkaaD": {
+      "type": "events-and-classes",
+      "blocks": {
+        "event_badges_jWn9te": {
+          "type": "event_badges",
+          "settings": {
+            "event_badges": "<li>CCP Review and Exam<\/li>\n<li>CSIA Review and Exam<\/li>\n<li>CSIA Sweeps Week<\/li>\n<li>SureFire: Training Academy<\/li>\n<li>CVC Coaching - Online or live training<\/li>\n<li>Approved individual State guild workshops<\/li>\n<li>More to Follow...<\/li>"
+          }
+        },
+        "event_rules_BLckNx": {
+          "type": "event_rules",
+          "settings": {
+            "background": "#F1EFEC",
+            "heading": "Rules:",
+            "event_list": "<li>1% of your annual sales with New England Chimney Supply will be eligible for credit towards approved educational events and\/or classes. (For Example: $25,000 in purchases with NECS = $250 in credit)<\/li>\n<li>Collect and keep all receipts for education for the 2024 year.<\/li>\n<li>Turn all receipts in by January 31st 2025.<\/li>\n<li>All credits will be applied to accounts by February 15th 2025.<\/li>\n<li>Credits can be used through 12\/31\/2025.<\/li>\n<li>Rebates can not be carried over to the following year and must be used in the year applied to the account.<\/li>"
+          }
+        }
+      },
+      "block_order": [
+        "event_badges_jWn9te",
+        "event_rules_BLckNx"
+      ],
+      "settings": {
+        "heading": "Currently approved education events and classes",
+        "description": "",
+        "btn_text": "",
+        "btn_link": "#"
+      }
+    },
+    "scholarship_registration_QtUeHE": {
+      "type": "scholarship-registration",
+      "blocks": {
+        "scholarship_form_y39Fp9": {
+          "type": "scholarship_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "scholarship_form_y39Fp9"
+      ],
+      "settings": {
+        "heading": "Registration:",
+        "description": "Enter your information below to sign up for the BEST Education Scholarship Program today!",
+        "side_image": "shopify:\/\/shop_images\/necs-scholarship.svg"
+      }
+    },
+    "training_trust_VxP4hn": {
+      "type": "training-trust",
+      "blocks": {
+        "logos_MqdEaK": {
+          "type": "logos",
+          "settings": {
+            "logo_1": "shopify:\/\/shop_images\/CCP_RGB_web-logo-1.png",
+            "logo_2": "shopify:\/\/shop_images\/training-logo-2.svg",
+            "logo_3": "shopify:\/\/shop_images\/trust-logo-3.svg",
+            "logo_4": "shopify:\/\/shop_images\/trust-logo-4..svg",
+            "logo_5": "shopify:\/\/shop_images\/CCJ_RGB_web-logo-3.png",
+            "logo_6": "shopify:\/\/shop_images\/CCR_RGB_web-logo-2.png"
+          }
+        }
+      },
+      "block_order": [
+        "logos_MqdEaK"
+      ],
+      "settings": {
+        "heading": "Training you\ncan trust"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "scholarship_program_banner_Hme3Ur",
+    "simple_text_7VinfU",
+    "events_and_classes_wAkaaD",
+    "scholarship_registration_QtUeHE",
+    "training_trust_VxP4hn"
+  ]
+}

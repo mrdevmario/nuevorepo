@@ -1,0 +1,45 @@
+<style>
+  .contact-info__wrapper .grid__wrapper {
+    background-color: {{ section.settings.background }};
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+</style>
+
+<div class="contact-info__wrapper">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'hours' %}
+          <div class="hours__wrapper">
+            <h2>{{ block.settings.heading }}</h2>
+            <div class="days__time">
+              <h5>{{ block.settings.days_1 }}</h5>
+              <p>{{ block.settings.time_1 }}</p>
+            </div>
+            <div class="days__time">
+              <h5>{{ block.settings.days_2 }}</h5>
+              <p>{{ block.settings.time_2 }}</p>
+            </div>
+            <div class="days__time">
+              <h5>{{ block.settings.days_3 }}</h5>
+              <p>{{ block.settings.time_3 }}</p>
+            </div>
+          </div>
+          {% when 'address' %}
+          <div class="address__wrapper">
+            <h2>{{ block.settings.heading }}</h2>
+            <div class="address__information">
+              <h5>{{ block.settings.sub_heading_1 }}</h5>
+              <p>{{ block.settings.address_description_1 }}</p>
+            </div>
+             <div class="address__information">
+              <h5>{{ block.settings.sub_heading_2 }}</h5>
+              <p>{{ block.settings.address_description_2 }}</p>
+            </div>
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

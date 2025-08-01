@@ -1,0 +1,82 @@
+{{ 'fireguard-session.css' | asset_url | stylesheet_tag }}
+{% render 'fireguard-session' %}
+
+{% schema %}
+{
+  "name": "Fireguard Session",
+  "tag": "section",
+  "class": "fireguard-session",
+  "settings": [
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "name": "Select Location",
+      "type": "select_location",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_heading",
+          "label": "Tab Heading"
+        },
+
+        {
+          "type": "text",
+          "id": "tab_title_1",
+          "label": "Tab Title"
+        },
+
+        {
+          "type": "text",
+          "id": "tab_title_2",
+          "label": "Tab Title"
+        },
+        
+        {
+          "type": "checkbox",
+          "label": "Convert Above Tabs to Button",
+          "id": "tab_intobtn",
+          "default": false
+        }
+      ]
+    },
+
+    {
+      "name": "Side Image",
+      "type": "side_image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "side_image",
+          "label": "Side Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fireguard Session",
+      "blocks": [
+        {
+          "type": "select_location"
+        },
+
+        {
+          "type": "side_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

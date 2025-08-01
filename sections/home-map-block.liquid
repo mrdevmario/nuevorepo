@@ -1,0 +1,94 @@
+{{ 'home-map.css' | asset_url | stylesheet_tag }}
+{% render 'home-map' %}
+
+{% schema %}
+{
+  "name": "Home Map Block",
+  "tag": "section",
+  "class": "home-map",
+  "settings": [     
+     {
+        "type": "image_picker",
+        "id": "map_image",
+        "label": "Map Image"
+     }
+  ],
+  "max_blocks": 4,
+   "blocks": [
+    {
+      "name": "Information Column",
+      "type": "information_column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "custom_css",
+          "label": "Add custom CSS class"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_background",
+          "label": "Show Background Color?",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text"
+        },
+        {
+          "type": "color_background",
+          "id": "icon_background",
+          "label": "Background Color",
+          "default": "linear-gradient(90deg, rgba(30,74,125,1) 50%, rgba(249,192,1,1) 50%)"
+        },
+        {
+          "type": "html",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_content_icon",
+          "label": "Show color icon with description?",
+          "default": false
+        },
+        {
+          "type": "html",
+          "id": "text_1",
+          "label": "Text Description"
+        },
+        {
+          "type": "color",
+          "id": "text_1_icon",
+          "label": "First Description Icon",
+          "default": "#1E4A7D"
+        },
+        {
+          "type": "html",
+          "id": "text_2",
+          "label": "Text Description"
+        },
+        {
+          "type": "color",
+          "id": "text_2_icon",
+          "label": "Second Description Icon",
+          "default": "#F9C001"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Map Block",
+      "blocks": [
+        {
+          "type": "information_column"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["index"]
+  }
+}
+{% endschema %}

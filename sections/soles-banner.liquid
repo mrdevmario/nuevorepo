@@ -1,0 +1,28 @@
+{{ 'soles-banner.css' | asset_url | stylesheet_tag }}
+{% render 'soles-banner' %}
+
+{% schema %}
+{
+  "name": "Soles Banner",
+  "tag": "section",
+  "class": "soles-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "stacked_image",
+      "label": "Stacked Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Soles Banner"
+    }
+  ]
+}
+{% endschema %}

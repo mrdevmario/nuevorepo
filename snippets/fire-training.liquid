@@ -1,0 +1,36 @@
+<div class="fire__training">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      <div class="left__column">
+        {% if section.settings.bg_image != empty %}
+        <img src="{{ section.settings.side_image | img_url: 'master' }}" />
+        {% endif %}
+      </div>
+      <div class="right__column">
+        <div>
+          <div class="logo__image">
+            <img src="{{ section.settings.logo | img_url: 'master' }}" alt="Fire Sessions Logo">
+          </div>
+          <h2>{{ section.settings.heading }}</h2>
+          <p>{{ section.settings.description }}</p>
+          <h3>{{ section.settings.upcoming_sessions_heading }}</h3>
+          <div class="location__card">
+            {% for block in section.blocks %}
+            {% if block.settings != empty %}
+            <div class="card__wrapper">
+              <h4>{{ block.settings.title }}</h4>
+              <span>{{ block.settings.date }}</span>
+              <p>{{ block.settings.description }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <div class="btn__group">
+            <a href="{{ section.settings.btn_1_link }}" target="_blank">{{ section.settings.btn_1_text }}</a>
+            <a href="{{ section.settings.btn_2_link }}" target="_blank">{{ section.settings.btn_2_text }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+{{ 'blog-image-card.css' | asset_url | stylesheet_tag }}
+{% render 'blog-image-card' %}
+
+{% schema %}
+{
+  "name": "Featured Blog",
+  "tag": "section",
+  "class": "blog-image-card",
+  "settings": [
+    {
+      "type": "article",
+      "id": "article",
+      "label": "Article"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Blog"
+    }
+  ],
+  	"enabled_on": {
+    "templates": ["blog"]
+  }
+}
+{% endschema %}

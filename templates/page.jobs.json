@@ -1,0 +1,496 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "7257c533-ff3c-4b24-a677-68531e02bc59": {
+      "type": "career_info",
+      "settings": {
+        "spec_strip": "NEED A CUSTOM ORDER? TRY OUR CUSTOM CAP BUILDER",
+        "heading": "Career OPPORTUNITIES at NECS",
+        "info_title": "Working with NECS",
+        "info_txt": "NECS is a dynamic and growing\nmanufacturing company specializing in chimney venting systems. With a passion\nfor what we do, we're excited to announce that NECS is now in its 14th year of\nbusiness, marking a dynamic milestone in our journey. With facilities in New England\nand the Mid-Atlantic, we strive to provide top-notch services to our customers\nacross the nation. \nAt NECS, we assist our customers in\ncreating a comprehensive parts list for their custom projects. We seamlessly\nprocess their orders, manufacture the products in-house, and ensure timely\ndelivery through our dedicated NECS trucks. Throughout this process, we\nmaintain and contribute to an enthusiastic and supportive atmosphere. If you\nare someone who shares our enthusiasm and enjoys a fulfilling work experience,\nwe invite you to consider a career with us.",
+        "img_1": "shopify://shop_images/Custom_6.jpg",
+        "img_2": "shopify://shop_images/IMG_0328-min_1.jpg"
+      }
+    },
+    "85b15d73-5e06-4460-858d-114c5370db1d": {
+      "type": "Featured_Positions",
+      "blocks": {
+        "26c031c5-aec4-452a-972e-e0e0510e64cb": {
+          "type": "text",
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Customer Experience Specialist",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an customer experience specialist to work in our Williston, VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "https://new-england-chimney-supply.myshopify.com/pages/customer-experience-specialist"
+          }
+        },
+        "text_zeUFGN": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "VP Sales",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an VP of Sales to work in our Williston, VT OR Springfield, VA facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/vice-president-sales"
+          }
+        },
+        "text_MKJENy": {
+          "type": "text",
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Warehouse Lead",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for a Warehouse Lead to work in our Williston, VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/copy-of-accounting-associate"
+          }
+        },
+        "text_wwpmkP": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Customer Experience Lead",
+            "job_type": "Full Time",
+            "loc_class": "a",
+            "job_location": "Springfield, VA",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an customer experience lead to work in our Springfield, VA facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/copy-of-customer-experience-specialist"
+          }
+        },
+        "text_bgcPEz": {
+          "type": "text",
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Customer Experience Supervisor",
+            "job_type": "Full Time",
+            "loc_class": "a",
+            "job_location": "Springfield, VA",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for a Customer Experience Supervisor to work in our Springfield, VA facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/customer-experience-supervisor"
+          }
+        },
+        "text_PYGVqe": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Accounting Manager",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an accounting manager to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "https://newenglandchimneysupply.com/pages/accounting-manager"
+          }
+        },
+        "text_4XYMnB": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Sheet Metal Design Engineer / CNC Operator",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an Sheet Metal Design Engineer/CNC Operator to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "https://newenglandchimneysupply.com/pages/sheet-metal-design-engineer-cnc-operator"
+          }
+        },
+        "text_YhdX6H": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Sheet Metal Fabricator",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an Sheet Metal Fabricator to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "https://newenglandchimneysupply.com/pages/sheet-metal-fabricator"
+          }
+        },
+        "text_4rHLzX": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Production / Manufacturing Manager",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an Production / Manufacturing Manager to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/production-manufacturing-manager"
+          }
+        },
+        "text_qKGjKC": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Kit-Liner Assembler",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an Kit-Liner Assembler to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "https://newenglandchimneysupply.com/pages/kit-liner-assembler"
+          }
+        },
+        "text_3wV3TD": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Manufacturing supervisor",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an manufacturing supervisor to work in our Williston, VT base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/manufacturing-supervisor"
+          }
+        },
+        "text_zq8KER": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Production Planning Scheduler",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for Production Planning to work in our VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/production-planning-scheduler"
+          }
+        },
+        "text_JGftAT": {
+          "type": "text",
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Manufacturing Fabricator",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for Manufacturing Fabricator to work in our VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/copy-of-manufacturing-laborer"
+          }
+        },
+        "text_dJLMkX": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#d7eee2",
+            "job_title": "Production Planning Scheduler",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Experienced",
+            "job_desc": "Opening for an Production Planning to work in our VT and VA base.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/production-planning-scheduler"
+          }
+        },
+        "text_dqy7tq": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#f1efec",
+            "job_title": "Delivery Driver",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Entry-level",
+            "job_desc": "Opening for a Delivery Driver to work in our Williston, VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/delivery-driver"
+          }
+        },
+        "text_P9tybU": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#f1efec",
+            "job_title": "Warehouse Associate",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Entry-level",
+            "job_desc": "Opening for a Warehouse Associate to work in our Williston, VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/warehouse-associate"
+          }
+        },
+        "text_xbBjMH": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "bg_color": "#f1efec",
+            "job_title": "Sheet Metal Fabricator - Components",
+            "job_type": "Full Time",
+            "loc_class": "b",
+            "job_location": "Williston, VT",
+            "job_exp": "Entry-level",
+            "job_desc": "Opening for a Sheet Metal Fabricator to work in our Williston, VT facility.",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/sheet-metal-fabricator-components"
+          }
+        },
+        "73244edc-4f1c-4ee8-8dc8-7836d67ab0ec": {
+          "type": "loc_btn",
+          "settings": {
+            "btn_loc_class": "a",
+            "btn_location": "Springfield, VA"
+          }
+        },
+        "a694a9b4-399a-4fb3-936b-b13715b4e1fc": {
+          "type": "loc_btn",
+          "settings": {
+            "btn_loc_class": "b",
+            "btn_location": "Williston, VT"
+          }
+        }
+      },
+      "block_order": [
+        "26c031c5-aec4-452a-972e-e0e0510e64cb",
+        "text_zeUFGN",
+        "text_MKJENy",
+        "text_wwpmkP",
+        "text_bgcPEz",
+        "text_PYGVqe",
+        "text_4XYMnB",
+        "text_YhdX6H",
+        "text_4rHLzX",
+        "text_qKGjKC",
+        "text_3wV3TD",
+        "text_zq8KER",
+        "text_JGftAT",
+        "text_dJLMkX",
+        "text_dqy7tq",
+        "text_P9tybU",
+        "text_xbBjMH",
+        "73244edc-4f1c-4ee8-8dc8-7836d67ab0ec",
+        "a694a9b4-399a-4fb3-936b-b13715b4e1fc"
+      ],
+      "settings": {
+        "heading": "Featured Positions:"
+      }
+    },
+    "a338928a-60c4-4e34-a68d-eb4a54a23b0b": {
+      "type": "current_opportunities",
+      "blocks": {
+        "36c644fb-7727-4336-b7d0-523cf520b8c2": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Delivery Route Driver",
+            "job_location": "Springfield, VA",
+            "job_salary": "$27k",
+            "job_tag": "Full Time",
+            "job_link": "#"
+          }
+        },
+        "text_crg4Me": {
+          "type": "text",
+          "settings": {
+            "job_position": "Engineering Tech",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/copy-of-customer-experience-supervisor"
+          }
+        },
+        "e7eb4357-822b-4edb-aa34-dbc3e52b7fa4": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Warehouse Assistant",
+            "job_location": "Springfield, VA",
+            "job_salary": "$13k",
+            "job_tag": "Part Time",
+            "job_link": "#"
+          }
+        },
+        "text_NM8jhV": {
+          "type": "text",
+          "settings": {
+            "job_position": "Production Planning Scheduler\t- L1",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/production-planning-scheduler-l1"
+          }
+        },
+        "afb51e99-eca7-4cd1-9c55-a2148402e411": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Warehouse Laborer",
+            "job_location": "Williston, VT",
+            "job_salary": "$21k",
+            "job_tag": "Full Time",
+            "job_link": "#"
+          }
+        },
+        "text_a84zAB": {
+          "type": "text",
+          "settings": {
+            "job_position": "Delivery Driver",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/delivery-driver"
+          }
+        },
+        "text_iw8Qwm": {
+          "type": "text",
+          "settings": {
+            "job_position": "Warehouse Associate",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/warehouse-associate"
+          }
+        },
+        "text_CzJRMC": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Sheet Metal Fabricator - Components",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/sheet-metal-fabricator-components"
+          }
+        },
+        "text_GkzDY4": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Sheet Metal Fabricator - Custom Caps",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/copy-of-sheet-metal-fabricator-custom-caps"
+          }
+        },
+        "text_hkcRTR": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Manufacturing Laborer",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/manufacturing-laborer"
+          }
+        },
+        "text_jfmj9m": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "job_position": "Manufacturing-Powdercoat/Weathertite",
+            "job_location": "Williston, VT",
+            "job_salary": "",
+            "job_tag": "",
+            "job_link": "shopify://pages/manufacturing-powdercoat-weathertite"
+          }
+        }
+      },
+      "block_order": [
+        "36c644fb-7727-4336-b7d0-523cf520b8c2",
+        "text_crg4Me",
+        "e7eb4357-822b-4edb-aa34-dbc3e52b7fa4",
+        "text_NM8jhV",
+        "afb51e99-eca7-4cd1-9c55-a2148402e411",
+        "text_a84zAB",
+        "text_iw8Qwm",
+        "text_CzJRMC",
+        "text_GkzDY4",
+        "text_hkcRTR",
+        "text_jfmj9m"
+      ],
+      "settings": {
+        "heading": "Current opportunities:"
+      }
+    },
+    "67ca1235-9695-487c-a87c-a282acf07403": {
+      "type": "freq_seekout",
+      "settings": {
+        "heading": "",
+        "resume_heading": "don’t see a current position that you’re a specialist at?",
+        "resume_text": "If you don’t see a position that suits your skill set, please feel free to submit your resume to jobs@nesbestflex.com"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "7257c533-ff3c-4b24-a677-68531e02bc59",
+    "85b15d73-5e06-4460-858d-114c5370db1d",
+    "a338928a-60c4-4e34-a68d-eb4a54a23b0b",
+    "67ca1235-9695-487c-a87c-a282acf07403"
+  ]
+}

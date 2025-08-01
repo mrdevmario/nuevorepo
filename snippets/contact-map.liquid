@@ -1,0 +1,23 @@
+<style>
+  .contact-map__wrapper h1 {
+    font-size: {{ section.settings.font_size }}px;
+    color: {{ section.settings.color }};
+  }
+</style>
+
+<div class="contact-map__wrapper">
+  <div class="page-width">
+    <h1>{{ section.settings.heading }}</h1>
+    <hr class="line" />
+    {% if section.settings.show_map %}
+      <div class="map__grid">
+        <div class="embeded__map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.007745526217!2d-73.12322272400638!3d44.45351240030328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cca7901b778923f%3A0x667b0181f7792512!2sNew%20England%20Chimney%20Supply!5e0!3m2!1sen!2s!4v1720442920677!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="embeded__map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6953.9807093487!2d-77.21539402323343!3d38.74091031551901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b652d81c1e4b31%3A0x3918189600451bb1!2sNew%20England%20Chimney%20Supply!5e0!3m2!1sen!2s!4v1704192488401!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

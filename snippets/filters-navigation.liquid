@@ -1,0 +1,51 @@
+
+{%- for filter in collection.filters -%}
+  {% if filter.label == "Product type" %}
+      {%- assign show_filters = false -%}
+      {%- for value in filter.values -%}
+         {%- liquid
+            if value.active and value.label == "Liner Kits"
+              assign show_alloy = true
+            endif
+          -%}
+      {%- endfor -%}
+  {% endif %}
+  {% if filter.label == "Alloy" %}
+      {%- assign show_liner_type = false -%}
+      {%- for value in filter.values -%}
+         {%- liquid
+            if value.active
+              assign show_liner_type = true
+            endif
+          -%}
+      {%- endfor -%}
+  {% endif %}
+  {% if filter.label == 'Alloy' or filter.label == 'Liner Type' %}
+    <div class="flex__wrapper" style="display: {% if filter.label == 'Alloy' and show_alloy %} flex {% elsif filter.label == 'Liner Type' and show_liner_type %}flex{% else %}none{% endif %}" id="{{- filter.label | escape | downcase | split: " " | join: "_" -}}-tree">
+      {%- liquid
+        assign sorted_values = filter.values
+        # Keep the selected values grouped together when operator is AND
+        if filter.operator == 'AND'
+          assign active_filter_values = filter.values | where: 'active', true
+          assign inactive_filter_values = filter.values | where: 'active', false
+          assign sorted_values = active_filter_values | concat: inactive_filter_values
+        endif
+      -%}
+
+      {%- for value in sorted_values -%}
+
+        {% liquid
+          assign is_disabled = false
+          if value.count == 0 and value.active == false
+            assign is_disabled = true
+          endif
+        %}
+
+         <div class="custom__checkbox" {% if filter.label == 'Liner Type' and is_disabled %}style="display: none"{%endif%}>
+          <input type="checkbox" id="{{- filter.label | escape | downcase | split: " " | join: "_" -}}_{{- value.label | escape | downcase -}}" value="{{- value.label | escape -}}" {% if value.active %}checked{% endif %}>
+          <label for="{{- filter.label | escape | downcase | split: " " | join: "_" -}}_{{- value.label | escape | downcase -}}">{{- value.label | escape -}}</label>
+        </div>
+      {%- endfor -%}
+    </div>
+  {% endif %}
+{%- endfor -%}

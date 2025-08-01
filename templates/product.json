@@ -1,0 +1,165 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "166d3e08-c713-4bd1-aa1f-afe91072b099": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'breadcrumb' %}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "1d004a8c-cadf-4359-809e-2d267cc2d084": {
+          "type": "sku",
+          "settings": {
+            "text_style": "body"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "aff5c273-f49b-409d-99e6-df4cbd5c2a82": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "AVAILABLE OPTIONS:",
+            "icon": "none",
+            "content": "<div class=\"chart_table\"><table>\n\t\t  <tbody> \n\t\t  <tr>\n\t\t\t<td><\/td>\n\t\t\t<td>3\" dia<\/td>\n\t\t\t<td>4\" dia<\/td>\n\t\t\t<td>5\" dia<\/td>\n\t\t\t<td>5.5\" dia<\/td>\n\t\t\t<td>6\" dia<\/td>\n\t\t\t<td>6.5\" dia<\/td>\n            <td>7\" dia<\/td>\n\t\t\t<td>7.5\" dia<\/td>\n\t\t\t<td>8\" dia<\/td>\t\t\t\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>15'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>20'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>25'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>30'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>35'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>40'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>45'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>50'<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t\t<td>L315TK-R6<\/td>\n\t\t  <\/tr>\n\t\t  \n\n\t  <\/tbody>\n<\/table><\/div>",
+            "page": ""
+          }
+        },
+        "7388e276-0ad1-49c7-ae9c-801a236d7208": {
+          "type": "chart",
+          "settings": {
+            "chart_head": "AVAILABLE OPTIONS:"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "9571b134-2d0d-491e-aa72-e2830947b9bb": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "ea161da8-6245-4342-9861-ae9a7378a99a": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"kit_include\">\n{{ product.metafields.custom.kit_includes }}\n<\/div>\n<!-- Dropdown for Top Clamp Option -->\n{% assign top_clamp_options = product.metafields.custom.top_clamp | split: \",\" %}\n{% if top_clamp_options.size > 0 %}\n  <div>\n    <label for=\"topClampDropdown\">Select a Top Clamp Option:<\/label>\n    <select id=\"topClampDropdown\" name=\"topClampDropdown\">\n      {% for option in top_clamp_options %}\n        <option value=\"{{ option | strip_newlines | replace: '\"', '' | replace: '[', '' | replace: ']', '' }}\">{{ option | strip_newlines | replace: '\"', '' | replace: '[', '' | replace: ']', '' }}<\/option>\n      {% endfor %}\n    <\/select>\n  <\/div>\n{% endif %}\n\n<!-- JavaScript to Capture Dropdown Value on Form Submission -->\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    var form = document.querySelector('form');\n    var dropdown = document.getElementById('topClampDropdown');\n\n    form.addEventListener('submit', function(event) {\n      if (dropdown) {\n        var selectedOption = dropdown.value;\n        var input = document.createElement('input');\n        input.type = 'hidden';\n        input.name = 'properties[Top Clamp]';\n        input.value = selectedOption;\n        form.appendChild(input);\n      }\n    });\n  });\n<\/script>"
+          }
+        },
+        "b1d3a991-0974-4738-8ea1-5cf037617cd0": {
+          "type": "category",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "166d3e08-c713-4bd1-aa1f-afe91072b099",
+        "title",
+        "1d004a8c-cadf-4359-809e-2d267cc2d084",
+        "price",
+        "aff5c273-f49b-409d-99e6-df4cbd5c2a82",
+        "7388e276-0ad1-49c7-ae9c-801a236d7208",
+        "variant_picker",
+        "quantity_selector",
+        "9571b134-2d0d-491e-aa72-e2830947b9bb",
+        "ea161da8-6245-4342-9861-ae9a7378a99a",
+        "b1d3a991-0974-4738-8ea1-5cf037617cd0"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "background-2",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 40
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "Related Products",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "6cc01813-2293-48f2-b986-029065fe6511": {
+      "type": "featured-collection",
+      "settings": {
+        "class": "nec_related",
+        "title": "Related Products",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "frontpage",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "6cc01813-2293-48f2-b986-029065fe6511"
+  ]
+}

@@ -1,0 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "disabled": true,
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "blogs_banner_kDQKHQ": {
+      "type": "blogs-banner",
+      "settings": {
+        "heading": "<span>New England Chimney Supply<\/span>\n<span>news, blogs, &amp; vlogs<\/span>",
+        "bg_image": "shopify:\/\/shop_images\/blogs-banner_cb681dec-a08e-42ee-8df7-02d82bde3b2e.jpg"
+      }
+    },
+    "blog_image_card_FqYKTq": {
+      "type": "blog-image-card",
+      "settings": {
+        "article": "news\/fireguard"
+      }
+    },
+    "latest_articles_bdUbey": {
+      "type": "latest-articles",
+      "settings": {
+        "heading": "Latest Articles",
+        "blog": "news"
+      }
+    },
+    "subscribe_blogs_QdDWEc": {
+      "type": "subscribe-blogs",
+      "settings": {
+        "heading": "NECS Blogs",
+        "description": "Subscribe to our Blogs",
+        "image": "shopify:\/\/shop_images\/Emails-amico.svg"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "blogs_banner_kDQKHQ",
+    "blog_image_card_FqYKTq",
+    "latest_articles_bdUbey",
+    "subscribe_blogs_QdDWEc"
+  ]
+}

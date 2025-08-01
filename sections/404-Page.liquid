@@ -1,0 +1,87 @@
+<section class="pag404V2">
+  <div class="pag404V2_wrapper">
+    <div class="pag404V2_inner">
+      <div class="pag404V2_title_wrapper">
+        <h1>404</h1>
+        <h2>Oops! That page can’t be found.</h2>
+        <p>It looks like nothing was found at this location. Maybe try one of the links below or a search?</p>
+      </div>
+
+      <div class="pag404V2_search">
+        <div class="nec_search">
+          <predictive-search class="search-modal__form" data-loading-text="Po ngarkohet...">
+            <form action="/search" method="get" role="search" class="search search-modal__form">
+              <div class="field">
+                <input
+                  class="search__input field__input"
+                  id="Search-In-Modal"
+                  type="search"
+                  name="q"
+                  value=""
+                  placeholder="Search"
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-owns="predictive-search-results-list"
+                  aria-controls="predictive-search-results-list"
+                  aria-haspopup="listbox"
+                  aria-autocomplete="list"
+                  autocorrect="off"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                >
+                <label class="field__label" for="Search-In-Modal">Search</label>
+                <input type="hidden" name="options[prefix]" value="last">
+                <button class="search__button field__button" aria-label="Search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path d="M13.8067 13.36L11.54 11.1C12.2713 10.1683 12.6681 9.01777 12.6667 7.83334C12.6667 6.7785 12.3539 5.74736 11.7678 4.87029C11.1818 3.99323 10.3489 3.30965 9.37431 2.90598C8.39978 2.50231 7.32742 2.39669 6.29285 2.60248C5.25829 2.80827 4.30798 3.31622 3.5621 4.0621C2.81622 4.80798 2.30827 5.75829 2.10248 6.79285C1.89669 7.82742 2.00231 8.89978 2.40598 9.87431C2.80965 10.8489 3.49323 11.6818 4.37029 12.2678C5.24736 12.8539 6.2785 13.1667 7.33334 13.1667C8.51777 13.1681 9.66831 12.7713 10.6 12.04L12.86 14.3067C12.922 14.3692 12.9957 14.4188 13.077 14.4526C13.1582 14.4864 13.2453 14.5039 13.3333 14.5039C13.4213 14.5039 13.5085 14.4864 13.5897 14.4526C13.671 14.4188 13.7447 14.3692 13.8067 14.3067C13.8692 14.2447 13.9188 14.171 13.9526 14.0897C13.9864 14.0085 14.0039 13.9213 14.0039 13.8333C14.0039 13.7453 13.9864 13.6582 13.9526 13.577C13.9188 13.4957 13.8692 13.422 13.8067 13.36ZM3.33334 7.83334C3.33334 7.04221 3.56793 6.26885 4.00746 5.61106C4.44698 4.95326 5.0717 4.44057 5.8026 4.13782C6.53351 3.83507 7.33777 3.75585 8.1137 3.91019C8.88962 4.06454 9.60235 4.4455 10.1618 5.00491C10.7212 5.56432 11.1021 6.27705 11.2565 7.05297C11.4108 7.8289 11.3316 8.63317 11.0289 9.36407C10.7261 10.095 10.2134 10.7197 9.55562 11.1592C8.89782 11.5987 8.12446 11.8333 7.33334 11.8333C6.27247 11.8333 5.25505 11.4119 4.50491 10.6618C3.75476 9.91162 3.33334 8.8942 3.33334 7.83334Z" fill="#254238"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search="">
+                <div class="predictive-search__loading-state">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    role="presentation"
+                    class="spinner"
+                    viewBox="0 0 66 66"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </div>
+              <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+            </form>
+          </predictive-search>
+        </div>
+      </div>
+
+      <div class="pag404V2_usefull_links">
+        {% assign pag404V2_menu = 'error-404-menu' %}
+
+        {% if linklists[pag404V2_menu].links.size > 0 %}
+            <ul>
+              {% for link in linklists[pag404V2_menu].links %}
+                <li>
+                  <a href="{{ link.url }}">
+                    {{ link.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+        {% else %}
+          <p>No menu items found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 V2",
+  "settings": []
+}
+{% endschema %}

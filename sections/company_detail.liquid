@@ -1,0 +1,73 @@
+<div class="nec_comp page-width">
+  <div class="nec_comp_cont">
+    <div class="nec_comp_left">    
+    <h2>{{ section.settings.comp_left_head }}</h2>
+      <p>{{ section.settings.comp_left_txt }}</p>  
+    </div>
+    <div class="nec_comp_right">
+      <h2>{{ section.settings.comp_right_head }}</h2>
+      <p>{{ section.settings.comp_right_txt }}</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "CompanyDetails",
+    "settings": [
+     {
+        "type":"html",
+        "id":"comp_left_head",
+        "label":"Add Left Heading"
+      },
+      {
+        "type":"html",
+        "id":"comp_left_txt",
+        "label":"Add Left text"
+      },
+       {
+        "type":"html",
+        "id":"comp_right_head",
+        "label":"Add Right Heading"
+      },
+      {
+        "type":"html",
+        "id":"comp_right_txt",
+        "label":"Add Right text"
+      } 
+  ],
+"presets":[
+  {
+    "name":"Company Details"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+.nec_comp_cont {display: flex; padding: 64px 0;}
+.nec_comp_left, .nec_comp_right {flex: 0 0 50%;padding:40px;}
+.nec_comp_right {border-radius: 8px; background: #F1EFEC;}
+.nec_comp_left h2 { color:#19454B; font-family: Poppins; font-size: 32px; font-style: normal; font-weight: 900; line-height: 32px; text-transform: uppercase; margin:0 0 24px 0;}
+.nec_comp_left p { color:#19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;     margin: 0;}
+.nec_comp_right h2 { color:  #19454B; font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase;margin: 0 0 16px 0; }
+.nec_comp_right p { color:#19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;    margin: 0; }
+  
+@media screen and (min-width:320px) and (max-width:767px){ 
+.nec_comp.page-width {padding: 24px;}
+.nec_comp_cont {padding: 0; flex-direction: column; }
+.nec_comp_left{padding: 16px;}
+.nec_comp_right {padding:20px;}
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+
+}  
+@media screen and (min-width:768px) and (max-width:991px){  
+.nec_comp_cont {flex-direction: column; padding: 20px 0 48px 0;}
+}
+@media screen and (min-width:992px) and (max-width:1365px){  
+
+}
+
+</style>
+

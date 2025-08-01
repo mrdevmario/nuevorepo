@@ -1,0 +1,121 @@
+<div class="upcoming_events page-width">
+  <h2 class="event_head">{{ section.settings.event_head }}</h2>
+  <div class="events_cont">
+  {% for block in section.blocks %}
+  <div class="events_block">
+     <div class="event_logo">
+        <img src="{{ block.settings.event_logo |img_url:'master' }}"> 
+     </div>
+     <h3>{{ block.settings.date_range }}</h3> 
+     <h2 class="event_title">{{ block.settings.event_title }}</h2>
+     <h6>{{ block.settings.event_int }}</h6>
+     <p>{{ block.settings.event_dt }}</p>
+     <a href="{{ block.settings.btn_url }}">{{ block.settings.btn_txt }}</a>
+  </div>
+  {% endfor %} 
+   </div>
+</div>
+{% schema %}
+{
+  "name": "NEC_Events", 
+  "settings": [
+       {
+          "type":"html",
+          "id":"event_head",
+          "label":"Add Event Heading"
+        }
+  ],
+  "blocks":[
+    {
+      "type":"NEC_Events",
+      "name":"Events",
+      "settings":[       
+        {
+          "type":"image_picker",
+          "id":"event_logo",
+          "label":"Add Event Logo"
+        },
+         {
+          "type":"text",
+          "id":"date_range",
+          "label":"Add Date"
+        },
+         {
+          "type":"html",
+          "id":"event_title",
+          "label":"Add Event Title"
+        },
+        {
+          "type":"html",
+          "id":"event_int",
+          "label":"Add Event Info"
+        },
+         {
+          "type":"html",
+          "id":"event_dt",
+          "label":"Add Event Detail"
+        },
+         {
+          "type":"url",
+          "id":"btn_url",
+          "label":"Add Event Button URL"
+        },
+         {
+          "type":"html",
+          "id":"btn_txt",
+          "label":"Add Event Button Text"
+        }  
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"NEC_Events"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  h2.event_head { margin: 40px 0 48px 0; color: var(--State-Blue, #1E4A7D); text-align: center; font-family: Poppins; font-size: 48px; font-style: normal; font-weight: 900; line-height: 100%; text-transform: uppercase; }
+  .events_cont{margin-bottom: 24px; display: flex;gap: 24px;}
+  .event_logo { position: absolute; right: 18px; top: 18px; }
+  .events_block {position:relative;border-radius: 4px; background: #F1EFEC; display: flex; padding: 64px 56px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 8px; flex: 1 0 0; align-self: stretch; }
+  .events_block h3 { margin: 0; color: var(--State-Blue, #1E4A7D); font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; }
+  h2.event_title { margin: 0; color: var(--Darkest-Green, #19454B); font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase; }
+  .events_block h6 { margin: 0; color: var(--State-Blue, #1E4A7D); font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; }
+  .events_block p { margin: 0; color: var(--Darkest-Green, #19454B); font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; }
+  .events_block a { display: flex; padding: 16px 32px; justify-content: center; align-items: flex-start; gap: 8px; border-radius: 40px; background: var(--Darkest-Green, #19454B); color: #FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; text-decoration: none; margin-top: 16px;}
+
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+  .events_block {padding: 40px 24px;gap: 0;}
+  .event_logo {position: absolute; right: 8px; top: 8px;}
+  .event_logo img {width: 100%;height:88px;}
+  h2.event_title {font-size: 18px;line-height: 20px;}
+  .events_block h3 {font-size: 16px;font-style: normal;font-weight: 600;}
+  .events_block h6 {font-size: 16px;margin-top: 5px; margin-bottom: 5px;}
+  .events_block p {font-size: 18px;font-weight: 400;}
+  h2.event_head {margin: 24px 0 24px 0; font-size: 32px;line-height: 32px;}
+  .events_cont { flex-direction: column;}  
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+  .events_block {padding: 40px 24px;gap: 0;}
+  .event_logo {position: absolute; right: 20px; top: 20px;}
+  .event_logo img {width: 100%;height:88px;}
+  h2.event_title {font-size: 18px;line-height: 20px;}
+  .events_block h3 {font-size: 16px;font-style: normal;font-weight: 600;}
+  .events_block h6 {font-size: 16px;margin-top: 5px; margin-bottom: 5px;}
+  .events_block p {font-size: 18px;font-weight: 400;}
+  h2.event_head {margin: 24px 0 24px 0; font-size: 45px; line-height: 50px;}
+  .events_cont { flex-direction: column;}  
+  }
+@media screen and (min-width: 320px) and (max-width: 389px) {
+  .event_logo img { height: 65px;}
+}
+
+  
+</style>
+
+{% javascript %}
+{% endjavascript %}

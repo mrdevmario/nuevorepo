@@ -1,0 +1,16 @@
+{{ 'job-listing.css' | asset_url | stylesheet_tag }}
+{% render 'job-listing' %}
+
+{% schema %}
+{
+  "name": "Job Listing",
+  "tag": "section",
+  "class": "job-listing",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Job Listing"
+    }
+  ]
+}
+{% endschema %}

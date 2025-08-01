@@ -1,0 +1,97 @@
+.training__banner {
+  height: 368px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.training__banner .page-width {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.training__banner .training__content h1 {
+  margin: 0;
+}
+
+.training__banner .training__content span {
+  display: block;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 64px;
+  line-height: 64px;
+  font-weight: 900;
+  letter-spacing: -1.28px;
+  text-transform: uppercase;
+}
+
+.training__banner .logos__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.training__banner .logos__wrapper .image__wrapper {
+  /* width: 96px;
+  height: 64px; */
+  width: 120px;
+  height: 92px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 5px;
+  padding: 4px;
+  background: #fff;
+}
+
+.training__banner .logos__wrapper .image__wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 375px) and (max-width: 526px) {
+  .training__banner .logos__wrapper .image__wrapper {
+    width: 94px;
+    height: 72px;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .training__banner .page-width {
+    padding: 0 20px;
+  }
+
+  .training__banner .training__content span {
+    font-size: 44px;
+    line-height: 44px;
+  }
+}
+
+@media (max-width: 525px) {
+  .training__banner {
+    height: 400px;
+  }
+
+  .training__banner .training__content span {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .training__banner .logos__wrapper {
+    margin-top: 30px;
+  }
+
+  .training__banner .page-width {
+    height: 100%;
+    display: flex;
+    align-items: end;
+  }
+
+  .training__banner .training__content {
+    padding-bottom: 20px;
+  }
+}

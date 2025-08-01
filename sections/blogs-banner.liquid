@@ -1,0 +1,31 @@
+{{ 'blogs-banner.css' | asset_url | stylesheet_tag }}
+{% render 'blogs-banner' %}
+
+{% schema %}
+{
+  "name": "Blogs Banner",
+  "tag": "section",
+  "class": "blogs-banner",
+  "settings": [
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blogs Banner"
+    }
+  ],
+  	"enabled_on": {
+    "templates": ["blog"]
+  }
+}
+{% endschema %}

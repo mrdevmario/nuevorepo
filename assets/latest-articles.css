@@ -1,0 +1,139 @@
+.latest-articles {
+  margin-block: 64px;
+}
+
+.latest-articles h4 {
+  margin: 0;
+  margin-bottom: 64px;
+  font-size: 24px;
+  line-height: 24px;
+  font-family: Poppins;
+  font-weight: 700;
+  color: #1e4a7d;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.latest-articles .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 40px;
+  row-gap: 64px;
+  padding-inline: 24px;
+}
+
+.latest-articles .grid__wrapper .image__wrapper {
+  width: 100%;
+  height: 226px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.latest-articles .grid__wrapper .image__wrapper img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+
+.latest-articles .grid__wrapper .article__content {
+  padding-inline: 8px;
+}
+
+.latest-articles .grid__wrapper h3 {
+  font-family: Roboto;
+  font-weight: 700;
+  margin: 0;
+  margin: 20px 0 8px 0;
+  font-size: 20px;
+  line-height: 26px;
+  color: #1e4a7d;
+}
+
+.latest-articles .grid__wrapper p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 8px;
+  color: #19454b;
+  font-family: Roboto;
+}
+
+.latest-articles .grid__wrapper .article_date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.latest-articles .grid__wrapper .article_date span {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+  font-family: Roboto;
+  color: #19454b;
+}
+
+.latest-articles .grid__wrapper .article_date span.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #39aa6e;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .latest-articles .grid__wrapper .article__content {
+    padding-inline: 0;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .latest-articles .grid__wrapper .article_date {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .latest-articles .grid__wrapper {
+    column-gap: 30px;
+    row-gap: 50px;
+    padding-inline: 0;
+  }
+
+  .latest-articles .grid__wrapper h3 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .latest-articles .grid__wrapper .article__content {
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: 525px) {
+  .latest-articles {
+    margin-block: 40px;
+  }
+
+  .latest-articles .grid__wrapper {
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+    padding-inline: 0;
+  }
+
+  .latest-articles h4 {
+    margin: 0 0 40px;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 900;
+  }
+
+  .latest-articles .grid__wrapper p {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}

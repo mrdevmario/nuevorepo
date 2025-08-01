@@ -1,0 +1,37 @@
+{{ 'subscribe-blogs.css' | asset_url | stylesheet_tag }}
+{% render 'subscribe-blogs' %}
+
+{% schema %}
+{
+  "name": "Subscribe Blogs",
+  "tag": "section",
+  "class": "subscribe-blogs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Discription"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Blogs Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscribe Blogs"
+    }
+  ],
+  	"enabled_on": {
+    "templates": ["blog"]
+  }
+}
+{% endschema %}

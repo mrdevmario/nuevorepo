@@ -1,0 +1,91 @@
+.contact-info__wrapper {
+  margin-bottom: 64px;
+}
+
+.contact-info__wrapper .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.contact-info__wrapper .grid__wrapper .hours__wrapper,
+.contact-info__wrapper .grid__wrapper .address__wrapper {
+  padding: 40px;
+}
+
+.contact-info__wrapper .grid__wrapper h2,
+.contact-info__wrapper .grid__wrapper h5 {
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #19454b;
+}
+
+.contact-info__wrapper .grid__wrapper h2 {
+  font-family: Poppins;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.contact-info__wrapper .grid__wrapper h5 {
+  font-family: Roboto;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.contact-info__wrapper .grid__wrapper p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.36px;
+  margin: 0;
+}
+
+.contact-info__wrapper .grid__wrapper .days__time,
+.contact-info__wrapper .grid__wrapper .address__information {
+  margin-top: 24px;
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .contact-info__wrapper .grid__wrapper .hours__wrapper,
+  .contact-info__wrapper .grid__wrapper .address__wrapper {
+    padding: 40px;
+  }
+
+  .contact-info__wrapper .grid__wrapper .days__time,
+  .contact-info__wrapper .grid__wrapper .address__information {
+    margin-top: 16px;
+  }
+
+  .contact-info__wrapper .grid__wrapper {
+    gap: 10px;
+  }
+
+  .contact-info__wrapper .page-width {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 525px) {
+  .contact-info__wrapper {
+    margin-bottom: 24px;
+  }
+
+  .contact-info__wrapper .page-width {
+    padding: 0 24px;
+  }
+
+  .contact-info__wrapper .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .contact-info__wrapper .grid__wrapper .hours__wrapper,
+  .contact-info__wrapper .grid__wrapper .address__wrapper {
+    padding: 24px;
+  }
+}

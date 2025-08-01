@@ -1,0 +1,613 @@
+
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- if section.settings.enable_quick_add -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="collection-layout">
+      <!-- Active filters -->
+      <div class="active-filters-wrapper">
+        <div class="active-filters" id="active-filters">
+          <!-- Active filters will be rendered here -->
+        </div>
+        <div class="metafilter-tags" id="metafilter-tags">
+          <!-- Metafilter tags will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Side filters -->
+      <div class="collection-filters" id="collection-filters">
+        <div class="filter-group">
+          <h3 class="filter-group__title">Product type</h3>
+          <div class="filter-options" id="product-type-filters">
+            <!-- Filters will be generated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Main product container -->
+      <div class="collection-content">
+        <div id="ProductGridContainer">
+          <div class="collection">
+            <div id="product-grid" data-id="{{ section.id }}" class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop">
+            </div>
+          </div>
+          <div id="pagination-container" class="pagination center"></div>
+          <div id="loading-indicator" style="display: none">Loading more products...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+class CollectionHandler {
+  constructor() {
+    this.productGrid = document.getElementById('product-grid');
+    this.loadingIndicator = document.getElementById('loading-indicator');
+    this.paginationContainer = document.getElementById('pagination-container');
+    this.filterContainer = document.getElementById('product-type-filters');
+    this.activeFiltersContainer = document.getElementById('active-filters');
+    this.productsPerPage = {{ section.settings.products_per_page }};
+    this.currentPage = 1;
+    this.filteredProducts = [];
+    this.activeFilters = new Set();
+    this.activeMetafilters = new Set();
+    this.availableMetafields = {
+      alloy: new Set(),
+      liner_kit_type: new Set(),
+      liner_type: new Set()
+    };
+
+    this.initialize();
+  }
+
+  async initialize() {
+    await this.setupFilters();
+    await this.handleFilterChange();
+  }
+
+  async setupFilters() {
+    try {
+      const response = await fetch(window.location.href + '/products.json');
+      const data = await response.json();
+      const productTypes = new Set();
+
+      if (data.products) {
+        data.products.forEach(product => {
+          if (product.product_type) {
+            productTypes.add(product.product_type);
+          }
+        });
+      }
+
+      const allFilters = [...productTypes].sort();
+      this.filterContainer.innerHTML = allFilters.map(type => `
+        <div class="filter-option">
+          <label class="filter-checkbox">
+            <input type="checkbox" value="${type}" data-filter="type">
+            <span class="checkbox-custom"></span>
+            <span class="filter-label">${type}</span>
+          </label>
+        </div>
+      `).join('');
+
+      const checkboxes = this.filterContainer.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => this.handleFilterChange());
+      });
+    } catch (error) {
+      console.error('Error setting up filters:', error);
+    }
+  }
+
+  async handleFilterChange() {
+    const selectedTypes = Array.from(document.querySelectorAll('input[data-filter="type"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    this.activeFilters = new Set(selectedTypes);
+    this.availableMetafields = {
+      alloy: new Set(),
+      liner_kit_type: new Set(),
+      liner_type: new Set()
+    };
+
+    this.filteredProducts = [];
+    this.productGrid.innerHTML = '';
+    this.loadingIndicator.style.display = 'block';
+
+    try {
+      const response = await fetch(window.location.href + '/products.json');
+      const data = await response.json();
+
+      if (data.products) {
+        this.filteredProducts = data.products.filter(product => {
+          let isValid = this.activeFilters.size === 0 || this.activeFilters.has(product.product_type);
+
+          if (isValid && this.activeMetafilters.size > 0) {
+            isValid = Array.from(this.activeMetafilters).every(filter => {
+              const [type, value] = filter.split(':');
+              const metafieldValue = product.metafields?.find(m => 
+                (type === 'alloy' && m.namespace === 'custom' && m.key === 'alloy') ||
+                (type === 'liner_kit_type' && m.namespace === 'custom' && m.key === 'liner_kit_type') ||
+                (type === 'liner_type' && m.namespace === 'custom' && m.key === 'liner_type')
+              )?.value;
+              return metafieldValue === value;
+            });
+          }
+
+          if (isValid && this.activeFilters.size > 0) {
+            const alloy = product.metafields?.find(m => m.namespace === 'custom' && m.key === 'alloy')?.value;
+            const linerKitType = product.metafields?.find(m => m.namespace === 'custom' && m.key === 'liner_kit_type')?.value;
+            const linerType = product.metafields?.find(m => m.namespace === 'custom' && m.key === 'liner_type')?.value;
+
+            if (alloy) this.availableMetafields.alloy.add(alloy);
+            if (linerKitType) this.availableMetafields.liner_kit_type.add(linerKitType);
+            if (linerType) this.availableMetafields.liner_type.add(linerType);
+          }
+
+          return isValid;
+        });
+
+        this.renderActiveFilters();
+        await this.showPage(1);
+      }
+    } catch (error) {
+      console.error('Error handling filter change:', error);
+    } finally {
+      this.loadingIndicator.style.display = 'none';
+    }
+  }
+
+  renderActiveFilters() {
+    const activeHtml = Array.from(this.activeFilters).map(filter => `
+      <button class="active-filter-tag">
+        ${filter}
+        <span class="active-filter-remove" onclick="collectionHandler.removeFilter('${filter}')">×</span>
+      </button>
+    `).join('');
+
+    this.activeFiltersContainer.innerHTML = activeHtml;
+    this.renderMetafilterTags();
+  }
+
+  renderMetafilterTags() {
+    const metafilterLabels = {
+      alloy: 'Alloy',
+      liner_kit_type: 'Liner Kit Type',
+      liner_type: 'Liner Type'
+    };
+
+    let html = '';
+
+    if (this.activeFilters.size > 0) {
+      Object.entries(this.availableMetafields).forEach(([type, values]) => {
+        if (values.size > 0) {
+          values.forEach(value => {
+            const isActive = this.activeMetafilters.has(`${type}:${value}`);
+            html += `
+              <button 
+                class="metafilter-tag ${isActive ? 'active' : ''}"
+                data-metafilter="${type}:${value}"
+                onclick="collectionHandler.toggleMetafilter('${type}:${value}')"
+              >
+                ${metafilterLabels[type]}: ${value}
+                ${isActive ? '<span class="metafilter-remove">×</span>' : ''}
+              </button>
+            `;
+          });
+        }
+      });
+    }
+
+    document.getElementById('metafilter-tags').innerHTML = html;
+  }
+
+  removeFilter(filter) {
+    this.activeFilters.delete(filter);
+    const checkbox = document.querySelector(`input[data-filter="type"][value="${filter}"]`);
+    if (checkbox) checkbox.checked = false;
+    this.handleFilterChange();
+  }
+
+  toggleMetafilter(filter) {
+    if (this.activeMetafilters.has(filter)) {
+      this.activeMetafilters.delete(filter);
+    } else {
+      this.activeMetafilters.add(filter);
+    }
+    this.handleFilterChange();
+  }
+
+  async showPage(page) {
+    if (page < 1) return;
+
+    const start = (page - 1) * this.productsPerPage;
+    const end = start + this.productsPerPage;
+    const pageProducts = this.filteredProducts.slice(start, end);
+
+    if (pageProducts.length > 0) {
+      this.productGrid.innerHTML = pageProducts.map(product => this.createProductCard(product)).join('');
+      this.currentPage = page;
+    }
+
+    this.renderPagination();
+  }
+
+  renderPagination() {
+    const totalPages = Math.ceil(this.filteredProducts.length / this.productsPerPage);
+
+    this.paginationContainer.innerHTML = `
+      <div class="pagination">
+        <button class="pagination__button" ${this.currentPage === 1 ? 'disabled' : ''} 
+          onclick="collectionHandler.showPage(${this.currentPage - 1})">
+          ←
+        </button>
+        <button class="pagination__button" ${this.currentPage >= totalPages ? 'disabled' : ''} 
+          onclick="collectionHandler.showPage(${this.currentPage + 1})">
+          →
+        </button>
+      </div>
+    `;
+  }
+
+  createProductCard(product) {
+    const firstVariant = product.variants[0];
+    const comparePrice = firstVariant.compare_at_price > firstVariant.price ? 
+      `<span class="price--compare">${this.formatMoney(firstVariant.compare_at_price)}</span>` : '';
+
+    return `
+      <div class="grid__item">
+        <div class="card-wrapper product-card-wrapper underline-links-hover">
+          <div class="card card--standard card--media">
+            <div class="card__inner ratio">
+              <div class="card__media">
+                <div class="media media--transparent media--hover-effect">
+                  ${product.images && product.images[0] ? `
+                    <img
+                      srcset="${product.images[0].src}"
+                      src="${product.images[0].src}"
+                      alt="${product.title}"
+                      loading="lazy"
+                      class="motion-reduce"
+                      width="533"
+                      height="533"
+                    >
+                  ` : '<div class="no-image-placeholder">No image available</div>'}
+                </div>
+              </div>
+            </div>
+            <div class="card__content">
+              <div class="card__information">
+                <h3 class="card__heading h5">
+                  <a href="/products/${product.handle}" class="full-unstyled-link">
+                    ${product.title}
+                  </a>
+                </h3>
+                <div class="card-information">
+                  <div class="price">
+                    <div class="price__regular">
+                      <span class="price-item price-item--regular">
+                        ${this.formatMoney(firstVariant.price)}
+                      </span>
+                      ${comparePrice}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  formatMoney(cents) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(cents / 100);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.collectionHandler = new CollectionHandler();
+});
+</script>
+
+<style>
+.active-filters-wrapper {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.active-filters,
+.metafilter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.metafilter-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.metafilter-tag.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.metafilter-remove {
+  margin-left: 8px;
+  font-size: 1.2rem;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collection-layout {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.collection-filters {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.collection-content {
+  flex-grow: 1;
+}
+
+.filter-group {
+  margin-bottom: 25px;
+  border: 1px solid #e8e8e8;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.filter-group__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.filter-label {
+  flex-grow: 1;
+  font-size: 0.9rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.pagination__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 749px) {
+  .collection-layout {
+    flex-direction: column;
+  }
+
+  .collection-filters {
+    width: 100%;
+  }
+}
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Collection Grid Merged",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "arch",
+          "label": "Arch"
+        },
+        {
+          "value": "blob",
+          "label": "Blob"
+        }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": false,
+      "label": "Enable quick add"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

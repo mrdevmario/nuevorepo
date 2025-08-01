@@ -1,0 +1,102 @@
+<div class="nec_tour" style="background-image:url('{{ section.settings.image | img_url:'master' }}')">
+  <!--<img src="{{ section.settings.image | img_url:'master' }}">-->
+  <div class="tour_cont">
+    <div class="tour_content page-width">
+      <div class="tour_block">
+      <h2>{{ section.settings.head }}</h2>
+      <p>{{ section.settings.text }}</p>
+      <a href="{{ section.settings.tour_url }}" data-cal-link="newenglandchimneysupply/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'>{{ section.settings.tour_btn }}</a>   
+      </div>
+      <div class="tour_emt"></div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "NEC_Tour",
+    "settings": [
+     {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Add BG Image"  
+    },
+    {
+      "type":"html",
+      "id":"head",
+      "label":"Add Heading"  
+    },
+     {
+      "type":"html",
+      "id":"text",
+      "label":"Add Text"  
+    },
+     {
+      "type":"url",
+      "id":"tour_url",
+      "label":"Add Button URL"
+    },
+    {
+      "type":"text",
+      "id":"tour_btn",
+      "label":"Add Button Text"
+    }  
+    ], 
+  "presets":[
+  {
+    "name":"NEC Tour"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>
+.nec_tour {position: relative; height: 412px; background-size: cover; background-position: bottom;}
+.nec_tour img {width: 100%;} 
+.tour_cont {position: absolute; width: 100%; bottom: 60px;}
+.tour_content {display: flex;}
+.tour_block {flex-basis: 35%;}
+.tour_content h2 { color: #FFF; font-family: Poppins; font-size: 48px; font-style: normal; font-weight: 900; line-height: 100%; text-transform: uppercase;    margin: 0; } 
+.tour_content p { color:#FFF; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; }
+.tour_content a { display: inline-block; padding: 16px 32px; justify-content: center; align-items: center; gap: 8px; border-radius: 40px; background: #FFF; color:#1E4A7D; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; text-decoration: none;     margin-top: 17px;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+.tour_block {flex-basis: 100%;}
+.tour_content h2 { color: #FFF; font-family: Poppins; font-weight: 900; text-transform: uppercase; font-size: 32px; font-style: normal; line-height: 32px; margin: 0 0 16px 0; }
+.tour_content p {font-size: 16px; font-weight: 500; line-height: 130%;}
+}
+
+@media screen and (min-width:768px) and (max-width:991px){  
+.tour_block {flex-basis: 100%;}
+.tour_content h2 { color: #FFF; font-family: Poppins; font-weight: 900; text-transform: uppercase; font-size: 45px; font-style: normal; line-height: 50px; margin: 0 0 16px 0; }
+.tour_content p {font-size: 16px; font-weight: 500; line-height: 130%;}
+}
+
+
+
+</style>
+
+<!-- Cal element-click embed code begins -->
+
+<script type="text/javascript">
+
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+
+Cal("init", "30min", {origin:"https://cal.com"});
+
+ 
+
+ 
+
+  // Important: Please add the following attributes to the element that should trigger the calendar to open upon clicking.
+
+  // `data-cal-link="newenglandchimneysupply/30min"`
+
+  // data-cal-namespace="30min"
+
+  // `data-cal-config='{"layout":"month_view"}'`
+
+ 
+
+  Cal.ns["30min"]("ui", {"styles":{"branding":{"brandColor":"#000000"}},"hideEventTypeDetails":false,"layout":"month_view"});
+
+  </script>

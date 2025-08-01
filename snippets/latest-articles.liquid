@@ -1,0 +1,31 @@
+<div class="page-width">
+  <h4>{{ section.settings.heading }}</h4>
+  <div class="grid__wrapper">
+    {%- assign blog = blogs[section.settings.blog] -%}
+    {% if blog.articles_count > 0 %}
+        {%- paginate blog.articles by 6 -%}
+        {% for article in blog.articles %}
+          <div class="article__item">
+            <a href="{{ article.url }}" target="_blank" style="text-decoration: none">
+              <div class="image__wrapper">
+                <img src='{{ article.image | img_url: "master" }}' />
+              </div>
+              <div class="article__content">
+                <h3>{{ article.title }}</h3>
+                <div class="article_date">
+                  <span>{{ article.author }}</span>
+                  <span class="dot">&nbsp</span>
+                  <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
+                </div>
+                <p>{{ article.content | strip_html }}</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+        {%- if paginate.pages > 1 -%}
+         {%- render 'pagination', paginate: paginate -%}
+        {%- endif -%}
+       {%- endpaginate -%}
+    {% endif %}
+  </div>
+</div>

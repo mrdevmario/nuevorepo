@@ -1,0 +1,67 @@
+.soles__banner {
+  height: 412px;
+}
+
+.soles__banner .page-width {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+}
+
+.soles__banner .stacked-image {
+  width: 540px;
+  height: 106px;
+}
+
+@media (min-width: 1450px) {
+  .soles__banner {
+    background-position: 50% 27%!important;
+    background-size: cover!important;
+    height: 512px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .soles__banner .stacked-image {
+    width: 500px;
+  }
+
+  .soles__banner {
+    background-size: 150% !important;
+    background-position: 52% 28% !important;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .soles__banner {
+    background-size: 160% !important;
+    background-position: 50% 30% !important;
+    height: 345px;
+    padding-right: 50px;
+  }
+
+  .soles__banner .stacked-image {
+    width: 410px;
+  }
+}
+
+@media (max-width: 525px) {
+  .soles__banner {
+    height: 519px;
+    padding-right: 0;
+    padding: 0 20px 40px;
+    background-size: 406% !important;
+    background-position: 30% 29% !important;
+  }
+
+  .soles__banner .page-width {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
+
+  .soles__banner .stacked-image {
+    width: 338px;
+  }
+}

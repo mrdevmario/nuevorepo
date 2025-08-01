@@ -1,0 +1,41 @@
+<style>
+  .training__banner {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.00) 50%),
+    url('{{ section.settings.bg_image.src | img_url: 'original' }}'),
+    lightgray 50% / cover no-repeat;
+    background-blend-mode: darken, normal;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+</style>
+
+<div class="training__banner">
+  <div class="page-width">
+    <div class="training__content">
+    <h1>{{ section.settings.heading }}</h1>
+      <div class="logos__wrapper">
+        {% for block in section.blocks %}
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_1 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_5 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_6 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_2 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_3 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        <div class="image__wrapper">
+          <img src="{{ block.settings.logo_4 | img_url: 'master' }}" alt="Logo Image">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

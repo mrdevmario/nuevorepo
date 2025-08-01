@@ -1,0 +1,230 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "events_banner_Krq48m": {
+      "type": "events-banner",
+      "settings": {
+        "bg_image": "shopify://shop_images/scholarship-banner.svg",
+        "bg_mobile": "shopify://shop_images/scholarship-banner-mobile.svg",
+        "heading": "INDUSTRY EVENTS"
+      }
+    },
+    "events_ga6irR": {
+      "type": "events",
+      "blocks": {
+        "event_jATVVU": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/fire-training.svg",
+            "event_date": "<span>JULY</span>\n<span>14th-19th</span>",
+            "event_title": "F.I.R.E. Training at NECS Vermont",
+            "event_location": "Williston, VT",
+            "event_description": "The first Fireplace & Chimney Inspection Certification by Fireplace Investigation, Research & Education Service, for professionals in various industries.",
+            "event_link": "https://www.f-i-r-e-service.com/Class-Dates.php",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_CkDf96": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/chimeny-expo.svg",
+            "event_date": "<span></span>\n<span>AUGUST</span>",
+            "event_title": "NCSG 2025 Annual Chimney Expo",
+            "event_location": "King of Prussia PA",
+            "event_description": "Hands-On Training ensures up-to-date safety measures & requirements, vital for business success.",
+            "event_link": "https://www.ncsg.org/event-calendar",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_6UEYLV": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/sweepfest.svg",
+            "event_date": "<span>JUNE</span>\n<span>28th</span>",
+            "event_title": "NEACHP 2025 Annual Sweepfest",
+            "event_location": "Concord, NH",
+            "event_description": "Learn masonry, earn CEUs, and enjoy New Hampshire hospitality.",
+            "event_link": "https://nhvtguild.org/events/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_Rc9zif": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/nycsg.svg",
+            "event_date": "<span>JULY</span>\n<span>24th-27th</span>",
+            "event_title": "NYCSG 2025 Annual Summer Workshop & Training Event",
+            "event_location": "Middle Grove, NY",
+            "event_description": "Largest state association, promotes chimney/fire safety, offers education & training.",
+            "event_link": "https://nystatechimneysweepguild.org/events/?month=7&yr=2024",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_jg4tfx": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/the-gathering.jpg",
+            "event_date": "<span>September</span>\n<span>18th-21st</span>",
+            "event_title": "The Gathering",
+            "event_location": "Prosperity, SC",
+            "event_description": "S.C. Chimney Sweep Guild's annual event, 'The Gathering,' honors Herb Fulmer & 'Lucky Dale' Meisinger, exchanging stories & techniques.",
+            "event_link": "https://www.southcarolinachimneysweeps.org/upcoming_events.html",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_FkXhhr": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/mid-atlantic.svg",
+            "event_date": "<span>August</span>\n<span>19</span>",
+            "event_title": "Mid Atlantic Chimney Association",
+            "event_location": "Manassas, VA",
+            "event_description": "Chimney service, hearth retail, and H.V.A.C. pros in Mid-Atlantic share best practices.",
+            "event_link": "https://chimneysafety.org/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_aETKm9": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/NCSG2025.png",
+            "event_date": "<span>MARCH</span>\n<span>4th-8th</span>",
+            "event_title": "NCSG Convention",
+            "event_location": "Covington, KY",
+            "event_description": "Limited-time opportunity: Reserve your spot for a week of sessions, networking, and inspiration at 2025 Convention. Mark your calendars now!",
+            "event_link": "https://na.eventscloud.com/website/60807/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_9ccyea": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/life-of-air.svg",
+            "event_date": "<span>TBD</span>\n<span>DATE</span>",
+            "event_title": "PA Guild Under Pressure -The Life of Air",
+            "event_location": "Duncansville, PA",
+            "event_description": "Establish a Pennsylvania-based Guild uniting chimney sweeps and others to promote professionalism and fellowship in the industry.",
+            "event_link": "https://paguild.org/ourevents/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_LWMEMa": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/nehpba.svg",
+            "event_date": "<span>5-7</span>\n<span>MAY</span>",
+            "event_title": "NEHPBA Northeast Hearth Patio & BBQ Association",
+            "event_location": "Southbridge, MA",
+            "event_description": "Join NEHPBA at Southbridge Hotel & Conference Center, MA for keynotes, legislative impact, cornhole, cocktails, & more!",
+            "event_link": "https://nehpba.org/calendar#!event/2024/5/6/nehpba-2024-annual-event",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_c7DmQa": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "event_image": "shopify://shop_images/msg-winter.svg",
+            "event_date": "<span>27-28</span>\n<span>JANUARY</span>",
+            "event_title": "MCSG Winter Banquet & Annual Meeting",
+            "event_location": "Concord, MA",
+            "event_description": "Non-profit helping find trustworthy contractors. Members stay updated through info network. Supports communities with classes & safety announcements, collaborating with local agencies.",
+            "event_link": "https://mcsguild.org/events/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_96jQhf": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/annual-meeting.svg",
+            "event_date": "<span>JUNE</span>\n<span>1st-3rd</span>",
+            "event_title": "NCHPBA Annual Meeting",
+            "event_location": "Wisconsin Dells, WI",
+            "event_description": "Family-friendly fun, networking, education.",
+            "event_link": "https://northcentralhpba.org/calendar#!event/2024/5/18/nchpba-annual-meeting",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_kthdGW": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/ndl-vendor.svg",
+            "event_date": "<span>MAY</span>\n<span>18th-19th</span>",
+            "event_title": "NDL Open House",
+            "event_location": "Exeter, NH",
+            "event_description": "Vendor displays, Training, Great Food, Industry Peers & More.",
+            "event_link": "https://ndlhearth.com/",
+            "event_btn": "Find OUT More"
+          }
+        },
+        "event_4CQtaA": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/hpba_logo.png",
+            "event_date": "<span>MARCH</span> \n<span>26th-29th</span>",
+            "event_title": "HPBA Expo",
+            "event_location": "New Orleans, LA",
+            "event_description": "Come to North America’s largest marketplace for the latest hearth, barbecue, and outdoor living products and take it all in for yourself.",
+            "event_link": "https://hpbexpo.com/attend/top-reasons-to-attend/",
+            "event_btn": "find out more"
+          }
+        },
+        "event_WwXGgr": {
+          "type": "event",
+          "settings": {
+            "event_image": "shopify://shop_images/nccsa_logo.webp",
+            "event_date": "<span>February</span> \n<span>7-8</span>",
+            "event_title": "NCCSA Winter Educational Meeting",
+            "event_location": "Waynesville, NC",
+            "event_description": "",
+            "event_link": "https://www.ncchimneysweeps.com/",
+            "event_btn": "find out more"
+          }
+        }
+      },
+      "block_order": [
+        "event_jATVVU",
+        "event_CkDf96",
+        "event_6UEYLV",
+        "event_Rc9zif",
+        "event_jg4tfx",
+        "event_FkXhhr",
+        "event_aETKm9",
+        "event_9ccyea",
+        "event_LWMEMa",
+        "event_c7DmQa",
+        "event_96jQhf",
+        "event_kthdGW",
+        "event_4CQtaA",
+        "event_WwXGgr"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "events_banner_Krq48m",
+    "events_ga6irR"
+  ]
+}

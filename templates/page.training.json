@@ -1,0 +1,209 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "e4d4404f-3a8c-4aff-9118-232c5593fe57": {
+      "type": "training-banner",
+      "blocks": {
+        "template--21822205395262__e4d4404f-3a8c-4aff-9118-232c5593fe57-logos-1": {
+          "type": "logos",
+          "settings": {
+            "logo_1": "shopify:\/\/shop_images\/CCP_RGB_web-logo-1.png",
+            "logo_2": "shopify:\/\/shop_images\/training-logo-2.svg",
+            "logo_3": "shopify:\/\/shop_images\/training-logo-3.svg",
+            "logo_4": "shopify:\/\/shop_images\/training-logo-4.svg",
+            "logo_5": "shopify:\/\/shop_images\/CCR_RGB_web-logo-2.png",
+            "logo_6": "shopify:\/\/shop_images\/CCJ_RGB_web-logo-3.png"
+          }
+        }
+      },
+      "block_order": [
+        "template--21822205395262__e4d4404f-3a8c-4aff-9118-232c5593fe57-logos-1"
+      ],
+      "settings": {
+        "bg_image": "shopify:\/\/shop_images\/recropped_training_page_hero_image.png",
+        "heading": "<span>Professional<\/span>\n<span>Training<\/span>"
+      }
+    },
+    "595db2c6-20f6-4a96-85f0-ccb369ed59f7": {
+      "type": "fireguard-session",
+      "blocks": {
+        "template--21822205395262__595db2c6-20f6-4a96-85f0-ccb369ed59f7-select_location-1": {
+          "type": "select_location",
+          "settings": {
+            "tab_heading": "Select a Location and Request a Date:",
+            "tab_title_1": "VERMONT",
+            "tab_title_2": "VIRGINIA",
+            "tab_intobtn": true
+          }
+        },
+        "template--21822205395262__595db2c6-20f6-4a96-85f0-ccb369ed59f7-side_image-1": {
+          "type": "side_image",
+          "settings": {
+            "side_image": "shopify:\/\/shop_images\/fireguard.svg"
+          }
+        }
+      },
+      "block_order": [
+        "template--21822205395262__595db2c6-20f6-4a96-85f0-ccb369ed59f7-select_location-1",
+        "template--21822205395262__595db2c6-20f6-4a96-85f0-ccb369ed59f7-side_image-1"
+      ],
+      "settings": {
+        "heading": "<span>Become a <\/span>\n<span>Fireguard installer!<\/span>",
+        "description": "Becoming a FireGuard Installer is simple, and training at our facility is free with equipment purchase. Are you already installing a competing product and looking for something better? You may already have some of the equipment you need!"
+      }
+    },
+    "385ce073-0c9f-445c-a1eb-bd86e51c0781": {
+      "type": "fire-training",
+      "blocks": {
+        "template--21822205395262__385ce073-0c9f-445c-a1eb-bd86e51c0781-upcoming_session-1": {
+          "type": "upcoming_session",
+          "disabled": true,
+          "settings": {
+            "title": "Vermont",
+            "date": "FCI-01  |  Feb 21st",
+            "description": "Lorem ipsum dolor sit amet consectetur. Nisl vulputate rhoncus orci mattis."
+          }
+        },
+        "0d7e045d-5219-482e-bb43-e4487bc32fc0": {
+          "type": "upcoming_session",
+          "disabled": true,
+          "settings": {
+            "title": "Virginia",
+            "date": "FCI-03  |  Feb 26th",
+            "description": "Lorem ipsum dolor sit amet consectetur. Nisl vulputate rhoncus orci mattis."
+          }
+        }
+      },
+      "block_order": [
+        "template--21822205395262__385ce073-0c9f-445c-a1eb-bd86e51c0781-upcoming_session-1",
+        "0d7e045d-5219-482e-bb43-e4487bc32fc0"
+      ],
+      "settings": {
+        "logo": "shopify:\/\/shop_images\/fire-session-logo.svg",
+        "heading": "FIRE Training",
+        "description": "<p>The Fireplace Investigation, Research &amp; Education Service is the first and only organization to administer a Fireplace &amp; Chimney Inspection Certification. These courses are designed for professionals within the Insurance, Fire Investigation, Litigation, Home Inspection and Hearth Industries. The F.I.R.E. Service Certification program delivers detailed and accurate information to those within these fields to support their professional needs.<\/p>\n<ul>\n<li>Come spend six days with an expert instructor learning:<\/li>\n<li>ICC Building Codes<\/li>\n<li>NFPA 211 Standards<\/li>\n<li>Industry Standards<\/li>\n<li>Professional Report Writing &amp; Documentation<\/li>\n<li>Manufacturers Specifications &amp; Requirements<\/li>\n<li>Forensic Evaluation, Fire Technology &amp; Investigation<\/li>\n<li>Product Performance &amp; Evaluation<\/li>\n<\/ul>",
+        "side_image": "shopify:\/\/shop_images\/fire-session.svg",
+        "upcoming_sessions_heading": "",
+        "btn_1_text": "Enroll now",
+        "btn_1_link": "https:\/\/fireservice.digitalchalk.com\/auth\/login",
+        "btn_2_text": "Learn More",
+        "btn_2_link": "https:\/\/f-i-r-e-service.com\/"
+      }
+    },
+    "scholarship_program_9WKANx": {
+      "type": "scholarship-program",
+      "blocks": {
+        "approved_events_qX4m9r": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "CCP Review and Exam"
+          }
+        },
+        "approved_events_bbh6Nf": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "CSIA Review and Exam"
+          }
+        },
+        "approved_events_GKANQx": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "CSIA Sweeps Week"
+          }
+        },
+        "approved_events_tyAVGV": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "SureFire: Training Academy"
+          }
+        },
+        "approved_events_iWHkYf": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "CVC Coaching - Online or live training"
+          }
+        },
+        "approved_events_J4cbVK": {
+          "type": "approved_events",
+          "settings": {
+            "badge": "Approved individual State guild workshops"
+          }
+        }
+      },
+      "block_order": [
+        "approved_events_qX4m9r",
+        "approved_events_bbh6Nf",
+        "approved_events_GKANQx",
+        "approved_events_tyAVGV",
+        "approved_events_iWHkYf",
+        "approved_events_J4cbVK"
+      ],
+      "settings": {
+        "heading": "<span>Best Education<\/span>\n<span>Scholarship Program<\/span>",
+        "description": "Unlock a world of professional growth with New England Chimney Supply's exclusive BEST Education Scholarship Program! Earn credits equivalent to 1% of your annual sales, converting your purchases into opportunities for growth. Simply keep and submit all 2023 education receipts by the end of January. We'll swiftly apply your credits to your account by February 15th, 2024, granting you cost-effective access to approved educational events and classes. These credits remain valid until December 31st, 2024 – a limited-time offer to elevate your expertise. Seize the opportunity and enroll now to make the most of your partnership with NECS!",
+        "side_image": "shopify:\/\/shop_images\/scholership-image.svg",
+        "approved_events": "Currently approved education events and classes:",
+        "btn_text": "Register Now",
+        "btn_link": "shopify:\/\/pages\/scholarship-program"
+      }
+    },
+    "47192979-c0ed-4a32-b350-2b9bca82b118": {
+      "type": "industry-events",
+      "disabled": true,
+      "settings": {
+        "heading": "Industry Events",
+        "description": "Lorem ipsum dolor sit amet consectetur. Nisl vulputate rhoncus orci mattis interdum elementum commodo ipsum. Felis vitae commodo sed sit. Vulputate sagittis velit mauris lorem porttitor. Sed velit tellus non mattis.",
+        "side_image": "shopify:\/\/shop_images\/industry-image.svg",
+        "btn_text": "Learn more about Soles 4 Souls",
+        "btn_link": "https:\/\/www.youtube.com\/watch?v=LwhjFmquyS0&ab_channel=Soles4Souls"
+      }
+    },
+    "732c3d5a-463e-4a94-a3bf-55d6bea2d4e4": {
+      "type": "training-trust",
+      "blocks": {
+        "template--21822205395262__732c3d5a-463e-4a94-a3bf-55d6bea2d4e4-logos-1": {
+          "type": "logos",
+          "settings": {
+            "logo_1": "shopify:\/\/shop_images\/CCP_RGB_web-logo-1.png",
+            "logo_2": "shopify:\/\/shop_images\/trust-logo-2.svg",
+            "logo_3": "shopify:\/\/shop_images\/trust-logo-3.svg",
+            "logo_4": "shopify:\/\/shop_images\/trust-logo-4..svg",
+            "logo_5": "shopify:\/\/shop_images\/CCR_RGB_web-logo-2.png",
+            "logo_6": "shopify:\/\/shop_images\/CCJ_RGB_web-logo-3.png"
+          }
+        }
+      },
+      "block_order": [
+        "template--21822205395262__732c3d5a-463e-4a94-a3bf-55d6bea2d4e4-logos-1"
+      ],
+      "settings": {
+        "heading": "<span>Training you<\/span>\n<span>can trust<\/span>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "e4d4404f-3a8c-4aff-9118-232c5593fe57",
+    "595db2c6-20f6-4a96-85f0-ccb369ed59f7",
+    "385ce073-0c9f-445c-a1eb-bd86e51c0781",
+    "scholarship_program_9WKANx",
+    "47192979-c0ed-4a32-b350-2b9bca82b118",
+    "732c3d5a-463e-4a94-a3bf-55d6bea2d4e4"
+  ]
+}

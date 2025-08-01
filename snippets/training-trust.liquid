@@ -1,0 +1,33 @@
+<div class="training__trust">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      <div class="left__column">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="right__column">
+        <div class="logos__wrapper">
+          {% for block in section.blocks %}
+          <div class="image__wrapper">
+            <img src="{{ block.settings.logo_1 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+          <div class="image__wrapper">
+            <img src="{{ block.settings.logo_2 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+          <div class="image__wrapper">
+            <img src="{{ block.settings.logo_3 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+          <div class="image__wrapper">
+            <img src="{{ block.settings.logo_4 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+           <div class="image__wrapper">
+            <img src="{{ block.settings.logo_5 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+           <div class="image__wrapper">
+            <img src="{{ block.settings.logo_6 | img_url: 'master' }}" alt="Logo Image">
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<style>
+  .blogs-banner {
+    background:  linear-gradient(rgba(0, 0, 0, 0%), rgba(0, 0, 0, 70%)), url('{{ section.settings.bg_image | img_url: "master" }};');
+  }
+
+  @media (max-width: 525px) {
+    .blogs-banner {
+      background:  linear-gradient(rgba(0, 0, 0, 0%), rgba(0, 0, 0, 70%)), url('{{ section.settings.bg_image | img_url: "master" }};');
+   }
+  }
+</style>
+
+<div>
+  <div class="page-width">
+    <div class="banner__content">
+      <h1>{{ section.settings.heading }}</h1>
+    </div>
+  </div>
+</div>

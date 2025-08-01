@@ -1,0 +1,89 @@
+<section class="custmers_say">
+  <h1>{{ section.settings.custmers_head }}</h1>
+  <div class="cs_inner page-width">
+    {% for block in section.blocks %}
+      {% if block.type == 'cust_say' %}
+        <div>
+          {{ block.settings.custom_liquid }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custmers Say", 
+  "settings": [
+    {
+      "type":"text",
+      "id":"custmers_head",
+      "label":"Add Heading"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"cust_say",
+      "name":"Customer Reviews",
+      "settings":[       
+        {
+          "type":"html",
+          "id":"custom_liquid",
+          "label":"Custom Liquid"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"custmers_say"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.cs_inner {padding: 20px 40px!important;}
+.cs_inner .slick-slide { margin: 20px;opacity:0.4 } 
+.cs_inner .slick-center{ opacity:1 } 
+.custmers_say {background: #F1EFEC; padding: 48px 0;}
+.custmers_say h1 { color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 48px; font-style: normal; font-weight: 900; line-height: 100%; text-transform: uppercase; margin: 0 0 50px 0; }
+.cs_block { background: white; padding: 16px; border-radius: 12px; border-radius: 8px; border: 1px solid rgba(226, 226, 226, 0.80); background: #FFF; box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.08); }
+.cs_child{display: flex; justify-content: space-between;} 
+.cs_txt { color: #000; font-family: Roboto; font-size: 20px; font-style: normal; font-weight: 700; line-height: normal; display: flex; align-items: end; }
+.cs_heading { letter-spacing: 0; color: #040707; text-transform: uppercase; opacity: 1; font-family: 'Avenir-Black'; font-size: 20px; line-height: 25px; margin-top: 1.041vw; margin-bottom: 0.52vw; }
+.cs_text {color: #000; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px;}
+.cs_img{ display:flex;gap:1.09375vw; } 
+.cs_star {margin: 8px 0;}
+.cs_img img {width: 32px;height: 32px;flex-shrink: 0;}
+.cs_inner .btn2 {position: absolute; left: 25px; top: 41%; z-index: 1; border: 0; background: no-repeat; cursor: pointer;}
+.cs_inner .btn1{position: absolute; right:  25px; top: 41%; z-index: 1;border: 0; background: no-repeat; cursor: pointer;}  
+.cs_inner .cs_star img {height: 24px;}
+.cs_inner button.slick-arrow img {width: 55px;}
+.cs_date { color: #858585; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: normal; margin-bottom: 16px;}
+
+ @media screen and (min-width:320px) and (max-width:767px){
+.cs_inner {padding: 20px  0px!important;}
+.custmers_say h1 {font-size: 32px;font-style: normal;line-height: 32px; margin: 0 0 16px 0;}
+.cs_inner .slick-slide {margin: 10px;}
+.cs_inner button.slick-arrow img {width: 40px;}
+.cs_inner .btn1 {right: 8px;}
+.cs_inner .btn2 {left: 8px;}
+ }  
+ @media screen and (min-width:768px) and (max-width:991px){
+  .cs_inner {padding: 20px  0px!important;}
+.custmers_say h1 {font-size: 45px;font-style: normal;line-height: 50px; margin: 0 0 16px 0;}
+.cs_inner .btn1 {right: 15px;}
+.cs_inner .btn2 {left: 15px;}
+.custmers_say {background: #F1EFEC; padding: 48px 0 24px 0;}
+ }  
+
+ @media (max-width: 525px) {
+  .custmers_say {
+    padding-inline: 24px;
+  }
+ }
+
+  
+</style>
+

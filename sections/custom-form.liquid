@@ -1,0 +1,191 @@
+{{ 'hulk-form-popup.css' | asset_url | stylesheet_tag }}
+
+<div class="order_header" style="background-image: url('{{ section.settings.bg_img | img_url:'master' }}');">
+  <div class="header_content page-width">
+    <h4>{{ section.settings.head_title }}</h4>
+    <h2>{{ section.settings.main_head }}</h2>
+  </div>
+</div>
+<div class="custom_order page-width">
+<div class="custom_cont">
+<div class="order_block"> 
+  {% for block in section.blocks %}
+  <div class="order_item">
+    <div class="order_img"><img src="{{ block.settings.order_img | img_url:'master' }}"></div>
+    <div class="order_content">
+       <h3>{{ block.settings.custom_head }}</h3>
+       <p>{{ block.settings.custom_txt }}</p>
+       <div class="hulk__btn" data_form_id="{{ block.settings.form_id }}"><img src="https://cdn.shopify.com/s/files/1/0844/6391/1230/files/solar_download-outline.svg?v=1703072493">
+         <span>Open the Form</span>
+       </div>
+
+       <div class="hulkForm hulkForm_popup" data_id="{{ block.settings.form_id }}">
+        <div class="closeForm">
+          <div class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+          </div>
+        </div>
+        <div style="margin:0 auto;" class="pxFormGenerator" id="{{ block.settings.form_id }}"></div>
+      </div>
+
+    </div>
+      
+    <div class="pro_img"><img src="{{ block.settings.pro_img | img_url:'master' }}"></div>
+  </div>
+ {% endfor %} 
+</div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Form",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"bg_img",
+        "label":"Add BG Image"
+      },
+       {
+        "type":"text",
+        "id":"head_title",
+        "label":"Add Heading Title "
+      },
+     {
+        "type":"text",
+        "id":"main_head",
+        "label":"Add Main Heading"
+      }
+    ],
+    "blocks":[
+  {
+    "type":"text",
+    "name":"custom_order",
+    "settings":[   
+    {
+        "type":"image_picker",
+        "id":"order_img",
+        "label":"Add Form Image"
+      },
+    {
+        "type":"text",
+        "id":"custom_head",
+        "label":"Add Order Title"
+      },
+      {
+        "type":"text",
+        "id":"custom_txt",
+        "label":"Add Order Text"
+      },
+      {
+        "type":"html",
+        "id":"form_id",
+        "label":"Add Form ID"
+      },
+      {
+        "type":"image_picker",
+        "id":"pro_img",
+        "label":"Add Product Image"
+      }
+    ]
+  }
+  ],
+"presets":[
+  {
+    "name":"Custom Form"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+.order_header{background-size: cover;}
+.header_content { padding-top: 64px; padding-bottom: 64px; padding-left: 5vw; padding-right: 4vw; }
+.header_content h4 { color: #FFF; font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase; margin: 10px 0 10px 0; }
+.header_content h2 { color: #FFF; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 900; line-height: 64px; letter-spacing: -1.28px; text-transform: uppercase;    margin: 0; }
+.custom_order {padding: 64px 4vw 64px 4vw;}
+.custom_order h2 { color: #19454B; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: -2.56px; text-transform: uppercase; margin: 0;}
+.order_block {display: flex; flex-flow: wrap;gap: 24px;justify-content: center;}
+.order_item { width: 47.1%; display: flex; padding: 12px 16px; align-items: center; gap: 16px; border-radius: 4px; background: #F1EFEC; height: 120px; justify-content: space-between; }
+.order_item a { display: flex;text-decoration: none;}
+.order_item h3 { color:#19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;    margin: 0 0 4px 0; }
+.order_img img {height: 96px; position: relative; top: 6px;}
+.pro_img {display: flex; align-items: center; justify-content: center;}
+.pro_img img { width: 80px; height: 80px;}
+.order_content p { color: #19454B; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%;     margin: 0 0 12px 0; }
+.order_item a { text-decoration: none; display: inline-flex; padding: 8px 12px; justify-content: flex-start; align-items: center; gap: 8px; border-radius: 4px; border: 1px solid #19454B; background: #FFF; color: #19454B; text-align: center; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 24px; }
+.order_content {flex-grow: 1;}
+
+.hulk__btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid #19454B;
+  gap: 8px;
+  background: #FFF;
+  color: #19454B;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.hulk__btn img {
+  width: 20px;
+}
+
+.close {
+  background: #fff;
+  width: max-content;
+  right: 5%;
+  position: absolute;
+  height: 34px;
+  padding: 0.5rem;
+}
+
+.form_banner_div img {
+  object-fit: contain !important;
+}
+
+.form_title_div h1 {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+.custom_order {padding: 36px 2vw 36px 2vw;}
+.order_item h3 { white-space: nowrap; width: 225px; overflow: hidden; text-overflow: ellipsis; } .order_content { flex-grow: 1; min-width: 232px; max-width: 100%; }
+}
+@media screen and (min-width:768px) and (max-width:991px){  
+.header_content h2 {font-size: 50px; line-height: 55px;}
+.header_content h4 {font-size: 20px; line-height: 20px;}
+.order_block {flex-direction: column; }
+.order_item { width: 100%;}
+.custom_order {padding: 40px 5vw 40px 5vw;}
+}
+@media screen and (max-width:767px){
+.header_content h2 {font-size: 28px; line-height: 30px;}
+.header_content h4 { color: #FFF; font-family: Poppins; font-size: 18px; font-weight: 500; line-height: 20px; text-transform: capitalize;}
+.order_block {flex-direction: column; }
+.order_item { width: 100%;}
+.custom_order {padding: 24px 5vw 24px 5vw;}
+.pro_img {display: none;}
+.order_img img {height: 120px;}
+.order_item { height: auto; }
+}
+@media screen and (min-width:320px) and (max-width:389px){  
+.order_item a img {display: none;}
+.order_item h3 {font-size: 16px;}
+.order_content p {font-size: 10px;}
+.order_item {gap: 10px;}
+.header_content h2 {font-size: 26px; line-height: 30px;}
+.header_content h4 {font-size: 16px;line-height: 17px; text-transform: capitalize;}
+}
+</style>

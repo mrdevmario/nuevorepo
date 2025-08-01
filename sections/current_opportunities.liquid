@@ -1,0 +1,135 @@
+<div class="current_opp page-width">
+<div class="current_opp_cont">
+<div class="current_opp_head">
+<h2>{{ section.settings.heading }}</h2>
+</div>
+<div class="current_opp_block">
+    <div class="current_item heading">
+      <div class="td">Position</div>
+      <div class="td">Location</div>
+      <div class="td"></div>
+    </div>
+   {% for block in section.blocks %}
+    <div class="current_item content">
+      <div class="td">{{ block.settings.job_position }}
+       <span class="co_mobile">{{ block.settings.job_location }}</span></div>
+      <div class="td">{{ block.settings.job_location }}</div>
+      <div class="td">
+      <div class="job_money">{{ block.settings.job_salary }} <span>{{ block.settings.job_tag }}</span></div> <div class="job_btn"><a href="{{ block.settings.job_link }}">View</a></div> </div>     
+    </div>  
+   {% endfor %} 
+</div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "current-opportunities",
+    "settings": [
+     {
+        "type":"text",
+        "id":"heading",
+        "label":"Add Heading"
+      }    
+    ], 
+    "blocks":[
+    {
+    "type":"text",
+    "name":"Career_Opp",
+    "settings":[ 
+      {
+        "type":"text",
+        "id":"job_position",
+        "label":"Add Job Position"
+      },
+      {
+        "type":"text",
+        "id":"job_location",
+        "label":"Add Job Location"
+      },     
+     
+      {
+        "type":"text",
+        "id":"job_salary",
+        "label":"Add Job Salary"
+      } ,
+       {
+        "type":"text",
+        "id":"job_tag",
+        "label":"Add Job Tag"
+      } 
+      ,
+        {
+        "type":"url",
+        "id":"job_link",
+        "label":"Add Job Link"
+      } 
+     
+    ]
+    
+  }
+  ],
+"presets":[
+  {
+    "name":"CurrentOpportunities:"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+.current_opp_cont {margin: 40px 0;}
+.current_item.content {display: flex;border-bottom: 1px solid #d1dadb;align-items: center;padding: 16px;margin: 8px 0;}
+.current_item.heading { display: flex;border-bottom: 1px solid #d1dadb;align-items: center;    margin: 8px 0;}
+.current_item.heading .td { flex-grow: 1;display: block; flex: 0 0 33.33%;margin: 8px 0;}
+.current_item.content .td { flex-grow: 1;flex: 0 0 33.33%;}
+.current_item.content .td { color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; }
+.current_item.heading .td { color: #1E4A7D; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%; }
+.current_item.content .td:last-child {display: flex; justify-content: end; gap: 24px; align-items: center;}
+.current_opp_cont .job_money span { display: block; color:  #19454B; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%; }
+.current_opp_cont .job_btn { padding-top: 0; display: flex; justify-content: end; }
+.current_opp_cont .job_btn a { color: #FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; display: inline-block; padding: 8px 24px; border-radius: 40px; background: #39AA6E; text-decoration: none; } 
+.current_opp_head h2 { color: #1E4A7D; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; }
+.current_opp_cont .job_money {text-align: right;}
+.co_mobile{display:none}
+  
+@media screen and (min-width:320px) and (max-width:767px){ 
+.co_mobile{display:block}
+.current_item.content .td:nth-child(2) {display: none!important;}
+.current_item.content .td:nth-child(1) {flex-grow: 1;}
+.current_item.content {padding: 0 0 8px 0;}
+.current_opp_cont .job_btn a { font-size: 12px; font-weight: 500; line-height: 125%; }
+.current_item.content .td:last-child { gap: 12px;}
+.current_item.heading .td:nth-child(2) {display: none;}
+.current_opp_cont .job_money {text-align: right; width: 60px;}
+span.co_mobile { color: #19454B;  font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%; }
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+.current_item.content .td {font-size: 12px;}
+span.co_mobile {font-size: 10px;}
+}  
+@media screen and (min-width:768px) and (max-width:991px){  
+
+}
+@media screen and (min-width:992px) and (max-width:1365px){  
+
+}
+
+</style>
+
+  <script>
+   
+    $(document).ready(function() {
+	var $btns = $('.btn').click(function() {
+	  if (this.id == 'all') {
+	    $('.slick-track > div').fadeIn(450);
+	  } else {
+	    var $el = $('.' + this.id).fadeIn(450);
+	    $('.slick-track > div').not($el).hide();
+	  }
+	  $btns.removeClass('active');
+	  $(this).addClass('active');
+	})
+});
+    </script>
+

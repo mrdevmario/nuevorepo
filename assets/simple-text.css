@@ -1,0 +1,32 @@
+.simple-text {
+  padding-block: 64px;
+}
+
+.simple-text p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+}
+
+.simple-text span {
+  display: block;
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .simple-text {
+    padding-block: 40px;
+  }
+
+  .simple-text .page-width {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 525px) {
+  .simple-text {
+    padding-block: 20px;
+  }
+}

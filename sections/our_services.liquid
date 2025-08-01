@@ -1,0 +1,111 @@
+<div class="nec_services page-width">
+  <h2 class="service_head">{{ section.settings.head }}</h2>
+  <p class="service_dsc nec_mobile">{{ section.settings.mobile_desc }}</p> 
+<div class="service_cont">
+    {% for block in section.blocks %} 
+   <div class="item">
+    <img src="{{ block.settings.image | img_url:'master' }}" height="100" width="100">
+    <div class="bottom_txt">
+      <h3 class="service_title">{{ block.settings.title }}</h3>
+      <p class="service_desc">{{ block.settings.desc }}</p>      
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+{% if section.settings.read_txt != blank %}
+  <div class="service_btn">
+    <a href="{{ section.settings.read_url }}">{{ section.settings.read_txt }}</a>
+  </div>
+{% endif %}
+</div>
+{% schema %}
+  {
+    "name": "NEC_Services",
+    "settings": [
+    {
+      "type":"text",
+      "id":"head",
+      "label":"Heading"  
+    },
+    {
+      "type":"text",
+      "id":"mobile_desc",
+      "label":"Service Main Desc"  
+    },
+     {
+      "type":"url",
+      "id":"read_url",
+      "label":"Add Button URL"
+    },
+    {
+      "type":"text",
+      "id":"read_txt",
+      "label":"Add Button Text"
+    }  
+    ],
+  "blocks":[
+  {
+    "type":"text",
+    "name":"Services",
+    "settings":[
+       {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Choose Image"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Add Title"
+    },
+    {
+      "type":"text",
+      "id":"desc",
+      "label":"Add Description"
+    }
+   
+   
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name":"NEC Services"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>
+.nec_services {margin-top: 64px; margin-bottom: 64px;}
+.nec_services h2.service_head { color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 48px; font-style: normal; font-weight: 900; line-height: 100%; text-transform: uppercase; margin: 0 0 24px 0; }
+.nec_services h3.service_title {color:#39AA6E; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%;    margin: 16px 0; }
+.nec_services p.service_desc { color: var(--Darkest-Green, #19454B); text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px;    margin: 0; }
+.nec_services .service_cont .item img {width: 64px;height: 64px;}
+.nec_services .service_cont { display: flex; align-items: center; justify-content: center; text-align: center; gap: 35px;margin: 48px 0;}
+.nec_services .service_btn { text-align: center; margin-top: 24px; }
+.nec_services .service_btn a {padding: 16px 32px;border-radius: 40px; background: #39AA6E; display: inline-block; color: #FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; text-decoration: none; }
+.nec_services .service_btn a:hover{background: #1E4A7D;}
+body.company .nec_services .service_btn { display: none;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+ .nec_services h2.service_head {margin: 0; font-size: 32px; font-weight: 900; line-height: 32px; text-transform: uppercase;}
+ p.service_dsc.nec_mobile { color:  #19454B; text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px; }
+ .nec_services p.service_desc {padding: 0 40px;}
+ .nec_services .service_cont {flex-direction: column;}
+ }
+
+@media screen and (min-width:768px) and (max-width:991px){  
+ .nec_services h2.service_head { margin: 0; font-size: 45px; font-weight: 900; line-height: 50px; text-transform: uppercase;}
+ p.service_dsc.nec_mobile { color:  #19454B; text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px; }
+ .nec_services p.service_desc {padding: 0 40px;}
+ .nec_services .service_cont {flex-direction: column;}
+ }
+
+
+
+</style>
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,109 @@
+.contact-directions__wrapper {
+  margin-bottom: 64px;
+}
+
+.contact-directions__wrapper h2 {
+  font-family: Poppins;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.contact-directions__wrapper .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.contact-directions__wrapper .grid__wrapper .left__column,
+.contact-directions__wrapper .grid__wrapper .right__column {
+  padding: 40px;
+}
+
+.contact-directions__wrapper .grid__wrapper h4 {
+  margin: 0;
+  margin-bottom: 24px;
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.contact-directions__wrapper .content__wrapper__last {
+  margin-top: 40px;
+}
+
+.contact-directions__wrapper .content__wrapper h5 {
+  margin: 0;
+  margin-bottom: 16px;
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.contact-directions__wrapper .content__wrapper li {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.contact-directions__wrapper .content__wrapper li:not(:first-child) {
+  margin-top: 12px;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .contact-directions__wrapper .page-width {
+    padding: 0 20px;
+  }
+
+  .contact-info__wrapper {
+    margin-bottom: 40px;
+  }
+
+  .contact-directions__wrapper .grid__wrapper .left__column,
+  .contact-directions__wrapper .grid__wrapper .right__column {
+    padding: 40px;
+  }
+
+  .contact-directions__wrapper {
+    margin-bottom: 40px;
+  }
+
+  .contact-directions__wrapper h2 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 525px) {
+  .contact-directions__wrapper {
+    margin-bottom: 48px;
+  }
+
+  .contact-directions__wrapper .grid__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-directions__wrapper .page-width {
+    padding: 0 20px;
+  }
+
+  .contact-directions__wrapper .grid__wrapper .left__column,
+  .contact-directions__wrapper .grid__wrapper .right__column {
+    padding: 24px;
+  }
+
+  .contact-directions__wrapper .grid__wrapper h4 {
+    font-size: 18px;
+  }
+}

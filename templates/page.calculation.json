@@ -1,0 +1,171 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "820eb884-3c02-46ee-9538-ca616e88e404": {
+      "type": "calculator",
+      "blocks": {
+        "9ac547b2-4b07-432e-a03c-26dcca53c8d4": {
+          "type": "calculation_type",
+          "settings": {
+            "tab_link": "best-mix",
+            "title": "Best-Mix Calculation (2 cubic foot bag)"
+          }
+        },
+        "5c569046-471e-4168-b3eb-7492fb362faf": {
+          "type": "calculation_type",
+          "settings": {
+            "tab_link": "thermix",
+            "title": "TherMix Calculation (2 cubic foot bag)"
+          }
+        }
+      },
+      "block_order": [
+        "9ac547b2-4b07-432e-a03c-26dcca53c8d4",
+        "5c569046-471e-4168-b3eb-7492fb362faf"
+      ],
+      "settings": {
+        "spec_strip": "",
+        "main_heading": "INSULATION MIX CALCULATOR",
+        "main_image": "shopify:\/\/shop_images\/calculator-main.jpg"
+      }
+    },
+    "d0fad5eb-6d32-47f8-8067-716adc7d7e3a": {
+      "type": "calculation-details",
+      "blocks": {
+        "template--21748357759294__d0fad5eb-6d32-47f8-8067-716adc7d7e3a-calculation_details_step-1": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "1",
+            "title": "Step 1:",
+            "text": "Measure the Length & Width of the interior of the chimney space. Multiply them together to find the GROSS area in sq-in.EX: 13\"L x 13\"W = 169 GROSS sq-in."
+          }
+        },
+        "template--21748357759294__d0fad5eb-6d32-47f8-8067-716adc7d7e3a-calculation_details_step-2": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "3",
+            "title": "Step 2:",
+            "text": "Subtract the Liner area (in sq-in) from the GROSS area from Step 1.EX: 169 - 28.26 = 140.74 sq-in NET sq-in area."
+          }
+        },
+        "7569105c-371a-4056-aa86-971fcd78a1f4": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "5",
+            "title": "Step 3:",
+            "text": "Multiply the NET sq-in area by the height (in inches) of the chimney to find the cubic-inch volume.EX: 140.74 x 180\"H = 25333.2 cubic-inches."
+          }
+        },
+        "8fefd94e-ea24-4ac7-ac14-53920396580d": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "2",
+            "title": "Step 4:",
+            "text": "Convert cubic-inches to cubic-feet by dividing the cubic-inches from Step 3 by 1728. (1728 = 12L x 12W x 12D)EX: 25333.2 \/ 1728 = 14.66 cubic-feet."
+          }
+        },
+        "2f39b89b-a113-44b8-9d62-197dc0dd5ec9": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "4",
+            "title": "Step 5:",
+            "text": "Each BEST-Mix bag is 2 cubic-feet. Divide the cubic feet from Step 4 by 2.EX: 14.66 \/ 2 = 8 bags required."
+          }
+        }
+      },
+      "block_order": [
+        "template--21748357759294__d0fad5eb-6d32-47f8-8067-716adc7d7e3a-calculation_details_step-1",
+        "template--21748357759294__d0fad5eb-6d32-47f8-8067-716adc7d7e3a-calculation_details_step-2",
+        "7569105c-371a-4056-aa86-971fcd78a1f4",
+        "8fefd94e-ea24-4ac7-ac14-53920396580d",
+        "2f39b89b-a113-44b8-9d62-197dc0dd5ec9"
+      ],
+      "settings": {
+        "tab_link": "best-mix",
+        "active_class": "active active-content",
+        "main_heading": "BEST-Mix Example:",
+        "text": "A chimney that is 13\" Long x 13\" Wide and is 180\" Tall with a 6\" Liner installed needs 8 bags of BEST-Mix (see below)."
+      }
+    },
+    "57b29847-b5b0-4f11-b3c3-dc1152acddb6": {
+      "type": "calculation-details",
+      "blocks": {
+        "template--21748357759294__57b29847-b5b0-4f11-b3c3-dc1152acddb6-calculation_details_step-1": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "1",
+            "title": "Step 1:",
+            "text": "Measure the Length & Width of the interior of the chimney space. Multiply them together to find the GROSS area in sq-in.\nEX: 13\"L x 13\"W = 169 GROSS sq-in."
+          }
+        },
+        "49144204-21ab-4ede-abb8-4fb96ac65052": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "3",
+            "title": "Step 2:",
+            "text": "Subtract the Liner area (in sq-in) from the GROSS area from Step 1.\nEX: 169 - 28.26 = 140.74 sq-in NET sq-in area."
+          }
+        },
+        "fb3e4034-f894-4d95-95b4-b62248248869": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "5",
+            "title": "Step 3:",
+            "text": "Multiply the NET sq-in area by the height (in inches) of the chimney to find the cubic-inch volume.\nEX: 140.74 x 180\"H = 25333.2 cubic-inches."
+          }
+        },
+        "template--21748357759294__57b29847-b5b0-4f11-b3c3-dc1152acddb6-calculation_details_step-2": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "2",
+            "title": "Step 4:",
+            "text": "Convert cubic-inches to cubic-feet by dividing the cubic-inches from Step 3 by 1728. (1728 = 12L x 12W x 12D)\nEX: 25333.2 \/ 1728 = 14.66 cubic-feet."
+          }
+        },
+        "20b5f29a-5a97-4255-a876-eb0e8765ed75": {
+          "type": "calculation_details_step",
+          "settings": {
+            "block_order": "4",
+            "title": "Step 5:",
+            "text": "Each Ther-Mix bag is 2 cubic-feet. Divide the cubic feet from Step 4 by 2.\nEX: 14.66 \/ 2 = 8 bags required."
+          }
+        }
+      },
+      "block_order": [
+        "template--21748357759294__57b29847-b5b0-4f11-b3c3-dc1152acddb6-calculation_details_step-1",
+        "49144204-21ab-4ede-abb8-4fb96ac65052",
+        "fb3e4034-f894-4d95-95b4-b62248248869",
+        "template--21748357759294__57b29847-b5b0-4f11-b3c3-dc1152acddb6-calculation_details_step-2",
+        "20b5f29a-5a97-4255-a876-eb0e8765ed75"
+      ],
+      "settings": {
+        "tab_link": "thermix",
+        "active_class": "",
+        "main_heading": "TherMix Example:",
+        "text": "A chimney that is 13\" Long x 13\" Wide and is 180\" Tall with a 6\" Liner installed needs 8 bags of Ther-Mix (see below)."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "820eb884-3c02-46ee-9538-ca616e88e404",
+    "d0fad5eb-6d32-47f8-8067-716adc7d7e3a",
+    "57b29847-b5b0-4f11-b3c3-dc1152acddb6"
+  ]
+}

@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "d84daf95-5536-4238-bbf8-f7badd24c70c": {
+      "type": "specification_detail",
+      "blocks": {
+        "88dcc909-aaa8-47cd-988e-c04b4607689d": {
+          "type": "text",
+          "settings": {
+            "title": "Product Information:",
+            "desc": "<span>BEST-Flex Stainless Steel<\/span> components are manufactured by New England Chimney Supply Inc. Located in Williston, VT.<br><br>\nThe <span>BEST-Flex<\/span> lining system is designed to be installed inside masonry chimneys. BEST-Flex liners are used to vent the flue gases and combustion byproducts produced by appliances that burn oil, gas, or solid fuels.<br><br>\nIn the United States they are tested to <span>UL 1777<\/span> and can be installed in <span>NEW &amp; EXISTING<\/span> masonry chimneys.<br><br>In Canada they are tested to <span>ULC S635<\/span> and are to be installed in <span>EXISTING<\/span> masonry chimneys."
+          }
+        },
+        "6687e503-1a79-42de-8d4c-eb43751a6701": {
+          "type": "text",
+          "settings": {
+            "title": "Product Description:",
+            "desc": "The <span>BEST-Flex<\/span> Stainless Steel Flexible Chimney liner is designed to reline existing chimneys or to be used as a liner in new construction. Manufactured with the highest quality, mill certified alloy. BEST-Flex Stainless Steel Flexible Chimney Liner has a high acid fighting capability. Listed by UL Laboratories to UL 1777 &amp; ULC S635 standards for zero clearance installation. BEST-Flex can be used to vent wood, wood pellet, coal, noncondensing gas and oil, making it the choice for venting all standard efficiency installations. UL listed BEST-Flex is available in 3\" to 12\" diameters (13\" above is not listed) to cover a wide range of requirements found in the field today.<br><br>The unique manufacturing systems used to make BEST-Flex utilizes a continuous strip of stainless steel, 7-ply interlocked and crimped to produce a gas and water tight lining system of superior strength and durability. BEST-Flex can be curved to go around offsets in chimneys and can be factory ovalized to custom sizes to fit most any installation requirement. Unless specified by the manufacturer, the liner is not to be field ovalized. The corrugated construction allows for expansion &amp; contraction during the heat-up &amp; cool-down periods, which removes any stresses on the system.\u2028<br><br>BEST-Flex can be insulated with either a vermiculite based poured insulation or with a foil-faced ceramic wool blanket to meet UL 1777 &amp; ULC S635 standards for chimney exteriors with zero clearance to combustibles.<br><br>\nBEST-Flex Stainless Steel Chimney Liner comes with a Life Time Warranty for all fuels, with appliance efficiencies at 83 percent or lower."
+          }
+        },
+        "07c313ea-7911-4644-b0d4-ea1100b29c47": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "desc": "<div class=\"spec_table\">\n<table>\n\t\t  <tbody>\n<tr>\n\t\t\t<td>Metal Alloy:<\/td>\n\t\t\t<td>430, 446, 316L, 304 Stainless Steel<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>Thickness:<\/td>\n\t\t\t<td>.025\"<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>Mill Certified:<\/td>\n\t\t\t<td>Yes<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>UL Listed:<\/td>\n\t\t\t<td>Yes - 3\" dia through 12\" dia (UL 1777)<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>Available Diameters:<\/td>\n\t\t\t<td>3\" dia through 18\" dia<\/td>\n\t\t  <\/tr>\n\t\t  <tr>\n\t\t\t<td>Manufacturing Process:<\/td>\n\t\t\t<td>Computer designed and manufactured with CNC machinery<\/td>\n\t\t  <\/tr>\n\n\t  <\/tbody>\n<\/table>\n\t <\/div>"
+          }
+        }
+      },
+      "block_order": [
+        "88dcc909-aaa8-47cd-988e-c04b4607689d",
+        "6687e503-1a79-42de-8d4c-eb43751a6701",
+        "07c313ea-7911-4644-b0d4-ea1100b29c47"
+      ],
+      "settings": {
+        "qr": "shopify:\/\/shop_images\/image_15.jpg",
+        "spec_main": "shopify:\/\/shop_images\/Frame_187.jpg",
+        "spec_info": "<ul>\n<li>Suitable for All Fuel Applications<\/li>\n<li>Manufactured and tested to UL1777 (US) and ULCS635 (Canada) standards<\/li>\n<li>Transferrable Lifetime Warranty<\/li>\n<\/ul>",
+        "spec_brd": "Home \/ Specification sheets \/ BF-SC Storm Collar",
+        "spec_head": "BEST-Flex Model \"LHR\" SC Storm Collar",
+        "spec_sku": "SKU: BF-LHR-250-C"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "d84daf95-5536-4238-bbf8-f7badd24c70c"
+  ]
+}

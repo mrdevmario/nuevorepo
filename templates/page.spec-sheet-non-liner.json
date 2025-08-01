@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "16ccaecf-0547-41f3-8d42-9abe4b6ffd6e": {
+      "type": "spec-sheet",
+      "settings": {
+        "show_spec_card": false,
+        "spec_card_title": "",
+        "spec_card_item_1": "Suitable for All Fuel Applications",
+        "spec_card_item_2": "Manufactured and tested to UL1777 (US) and ULCS635 (Canada) standards",
+        "spec_card_item_3": "Transferrable Lifetime Warranty",
+        "spec_card_item_4": "",
+        "spec_card_item_5": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16ccaecf-0547-41f3-8d42-9abe4b6ffd6e"
+  ]
+}

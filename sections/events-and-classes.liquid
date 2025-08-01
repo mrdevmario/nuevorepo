@@ -1,0 +1,91 @@
+{{ 'events-and-classes.css' | asset_url | stylesheet_tag }}
+{% render 'events-and-classes' %}
+
+{% schema %}
+{
+  "name": "Events and Classes",
+  "tag": "section",
+  "class": "events-and-classes",
+  "settings": [     
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text"
+    },
+
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+     {
+      "name": "Event Badges",
+      "type": "event_badges",
+      "settings": [
+        {
+          "type": "html",
+          "id": "event_badges",
+          "label": "Event Badges"
+        }
+      ]
+    },
+
+    {
+      "name": "Event Rules",
+      "type": "event_rules",
+      "settings": [
+        {
+          "type": "color_background",
+          "id": "background",
+          "label": "Background",
+          "default": "#F1EFEC"
+        },
+
+        {
+          "type": "html",
+          "id": "heading",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "event_list",
+          "label": "Event List"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Events and Classes",
+      "blocks": [
+        {
+          "type": "event_badges"
+        },
+
+        {
+          "type": "event_rules"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

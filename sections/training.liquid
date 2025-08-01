@@ -1,0 +1,82 @@
+<div class="nec_training page-width">
+   <div class="training_head">
+     <h2>{{ section.settings.head }}</h2>
+   </div>
+  <div class="training_logo">    
+     <div class="nec_item left">
+        <img src="{{ section.settings.left_image | img_url:'master' }}">
+     </div>
+    <div class="nec_item right">
+        <img class="img_1" src="{{ section.settings.right_image | img_url:'master' }}">
+       <img src="{{ section.settings.right_image2 | img_url:'master' }}">
+     </div>  
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "NEC_training",
+    "settings": [
+    {
+      "type":"html",
+      "id":"head",
+      "label":"Add Heading"  
+    },
+       {
+      "type":"image_picker",
+      "id":"left_image",
+      "label":"Add Left Image"
+    },
+    {
+      "type":"image_picker",
+      "id":"right_image",
+      "label":"Add Right Image"
+    },
+    {
+      "type":"image_picker",
+      "id":"right_image2",
+      "label":"Add Right Image 2"
+    }  
+    ],
+
+  "presets":[
+  {
+    "name":"NEC Training"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>
+.nec_training .training_head h2 { color: #1E4A7D; font-family: Poppins; font-size: 48px; font-style: normal; font-weight: 900; line-height: 100%; text-transform: uppercase;     margin: 0;}
+.nec_training { display: flex; align-items: center; gap: 144px; justify-content: space-evenly;padding: 0 85px } 
+.training_logo { display: flex; align-items: center; flex: 90px; justify-content: space-between;padding: 40px 0; }
+.training_logo .nec_item.right {display: flex; gap: 90px;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+.nec_training {gap: 0;padding: 0 20px;}
+.nec_training .training_head h2 { margin: 0; color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 32px; font-style: normal; font-weight: 900; line-height: 32px; text-transform: uppercase; }
+.training_logo .nec_item.right {display: flex; gap: 16px; flex-direction: column;    align-items: center;}
+.training_logo {justify-content: space-between; padding: 40px 0; flex-direction: row; gap: 24px;}
+.training_logo .nec_item .img_1 {width: 120px; height: 65px;}
+.training_logo {flex-direction: column;}
+.nec_training {flex-direction: column;}
+}
+@media screen and (min-width:768px) and (max-width:991px){  
+.nec_training {gap: 0;padding: 0 20px;}
+.nec_training .training_head h2 { margin: 0; color: #1E4A7D; text-align: center; font-family: Poppins; font-size: 45px; font-style: normal; font-weight: 900; line-height: 50px; text-transform: uppercase; }
+.training_logo .nec_item.right {display: flex; gap: 16px; flex-direction: row; align-items: center;}
+.training_logo {justify-content: space-between; padding: 40px 0; flex-direction: row; gap: 24px;}
+.training_logo .nec_item .img_1 {width: 120px; height: 65px;}
+.training_logo {flex-direction: row;}
+.nec_training {flex-direction: column;}
+}
+@media screen and (min-width:992px) and (max-width:1365px){  
+ .nec_training {display: flex;flex-direction: column; align-items: center; gap: 0; justify-content: space-evenly; padding: 35px 85px 0 85px;text-align: center;}
+ .training_logo {gap: 90px;}
+}
+
+  
+</style>
+
+{% javascript %}
+{% endjavascript %}

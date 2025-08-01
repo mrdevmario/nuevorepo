@@ -1,0 +1,62 @@
+<div class="home__map">
+  <div class="page-width">
+    <div class="map__wrapper">
+      <img src="{{ section.settings.map_image | img_url: 'master' }}" alt="Map Image">
+    </div>
+    <div class="map__information">
+      <div class="grid__wrapper">
+        {% for block in section.blocks %}
+          {% if block.settings.show_content_icon %}
+            <div class="custom-grid-column {{ block.settings.custom_css }}">
+              <div class="grid__i">
+                <div class="icon__wrapper" {% if block.settings.show_background %} style="background:{{ block.settings.icon_background }};"{% endif %}>
+                  {% unless block.settings.show_background %}
+                    <span>{{ block.settings.icon_text }}</span>
+                  {% endunless %}
+                </div>
+                <div class="content__wrapper">
+                  <h4>{{ block.settings.heading }}</h4>
+                </div>
+              </div>
+              
+              {% if block.settings.text_1 != blank or block.settings.text_1 != empty %}
+                <div class="grid__i">
+                  <div class="icon__wrapper" style="background:{{ block.settings.text_1_icon }};"></div>
+                  <div class="content__wrapper">
+                    <p>{{ block.settings.text_1 }}</p>
+                  </div>
+                </div>
+              {% endif %}
+              
+              {% if block.settings.text_2 != blank or block.settings.text_2 != empty %}
+                <div class="grid__i">
+                  <div class="icon__wrapper" style="background:{{ block.settings.text_2_icon }};"></div>
+                  <div class="content__wrapper">
+                    <p>{{ block.settings.text_2 }}</p>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="grid__i {{ block.settings.custom_css }}">
+              <div class="icon__wrapper {{ block.settings.custom_css }}" {% if block.settings.show_background %} style="background:{{ block.settings.icon_background }};"{% endif %}>
+                {% unless block.settings.show_background %}
+                  <span>{{ block.settings.icon_text }}</span>
+                {% endunless %}
+              </div>
+              <div class="content__wrapper">
+                <h4>{{ block.settings.heading }}</h4>
+                {% if block.settings.text_1 != blank or block.settings.text_1 != empty %}
+                  <p>{{ block.settings.text_1 }}</p>
+                {% endif %}
+                {% if block.settings.text_2 != blank or block.settings.text_2 != empty %}
+                  <p>{{ block.settings.text_2 }}</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+{{ 'dummy-product-layout.css' | asset_url | stylesheet_tag }}
+
+{% assign prod = product %}
+{% assign current_variant = prod.selected_or_first_available_variant %}
+
+{% comment %} {%- form 'product', product -%} {% endcomment %}
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+<div class="prod_layout">
+  <div class="prod_layout_in">
+    <div class="prod_gallery_slider">
+      <div id="sync_prod_1" class="owl-carousel owl-theme">
+        {% for img_1 in prod.images %}
+          <div class="item">
+            <img src="{{ img_1.src |  image_url: width:'1024x1024' }}" alt="">
+          </div>
+        {% endfor %}
+      </div>
+      <div id="sync_prod_2" class="owl-carousel owl-theme">
+        {% for img_2 in prod.images %}
+          <div class="item">
+            <img src="{{ img_2.src |  image_url: width:'1024x1024' }}" alt="">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="prod_content_right">
+      <h1>{{ prod.title }}</h1>
+      <h6>SKU: {{ current_variant.sku }}</h6>
+      {% if customer %}
+        <div class="prod_price">{{ current_variant.price | money }}</div>
+        <div class="prod__options-wrapper">
+        <p>KIT INCLUDES:</p>
+         {% if product.metafields.custom.lid_cap.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Lid Cap Option:</label>
+              <div class="custom__select">
+                <select id="lid_cap_select">
+                  {% for cap in product.metafields.custom.lid_cap.value %}
+                    <option name="properties[lid_cap]">{{ cap }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+          {% if product.metafields.custom.top_plates.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Top Plate Option:</label>
+              <div class="custom__select">
+                <select id="top_plates_select">
+                  {% for plate in product.metafields.custom.top_plates.value %}
+                    <option name="properties[top_plate]">{{ plate }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.tee_body.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Tee Body Option:</label>
+              <div class="custom__select">
+                <select id="tee_body_select">
+                  {% for tee in product.metafields.custom.tee_body.value %}
+                    <option name="properties[tee_body]">{{ tee }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.tee_snout.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Tee Snout Option:</label>
+              <div class="custom__select">
+                <select id="tee_snout_select">
+                  {% for snout in product.metafields.custom.tee_snout.value %}
+                    <option name="properties[tee_snout]">{{ snout }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.tee_end_cap.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Tee End Cap Option:</label>
+              <div class="custom__select">
+                <select id="tee_end_select">
+                  {% for end in product.metafields.custom.tee_end_cap.value %}
+                    <option name="properties[tee_end_cap]">{{ end }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.adapters.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Adapters Option:</label>
+              <div class="custom__select">
+                <select id="adapters_select">
+                  {% for adapters in product.metafields.custom.adapters.value %}
+                    <option name="properties[adapters]">{{ adapters }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.top_clamps.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Top Clamps Option:</label>
+              <div class="custom__select">
+                <select id="top_clamps_select">
+                  {% for clamps in product.metafields.custom.top_clamps.value %}
+                    <option name="properties[adapters]">{{ clamps }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.storm_collar.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Storm Collar Option:</label>
+              <div class="custom__select">
+                <select id="storm_collar_select">
+                  {% for collar in product.metafields.custom.storm_collar.value %}
+                    <option name="properties[storm_collar]">{{ collar }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+         {% if product.metafields.custom.mortar_collar.value != blank %}
+           <div class="prod__option">
+              <label class="option__name">Select a Mortar Collar Option:</label>
+              <div class="custom__select">
+                <select id="mortar_collar_select">
+                  {% for mortar in product.metafields.custom.mortar_collar.value %}
+                    <option name="properties[mortar_collar]">{{ mortar }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+         {% endif %}
+        </div>
+        <div class="prod_content_right_actions">
+          <div class="prod_qty_block">
+            <button class="mins_qty">-</button>
+            <input type="text" name="" id="main_prod_qty" value="1">
+            <button class="plus_qty">+</button>
+          </div>
+          <div class="prod_qty_cart_btn">
+            <a
+              href="#"
+              id="add_to_cart_custom"
+              data_prod_id="{{ current_variant.id }}"
+              {% if current_variant.available %}
+              {% else %}
+                disabled
+              {% endif %}
+              >Add to order</a
+            >
+          </div>
+        </div>
+      {% else %}
+        <div class="prod_price">Please login to see our pricing</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% comment %} {%- endform -%} {% endcomment %}
+{% schema %}
+{
+  "name": "Sample Product",
+  "settings": []
+}
+{% endschema %}
+

@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "form_side_title": "Get access to:",
+        "form_side_content": "<ul><li>Manufacturer direct pricing<\/li><li>Personalized technical support<\/li><li>99.6% on-time shipping with the  <strong>NECS On-time Promise®<\/strong><\/li><li>Customized premium account benefits with exclusive rebates, early buy programs and access to our free shipping program<\/li><li>Access to seminars and specialized training<\/li><\/ul>",
+        "custom_form_submit_text": "Login",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

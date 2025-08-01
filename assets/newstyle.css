@@ -1,0 +1,88 @@
+.newsleterr_new button#Subscribe,
+.inner_content button#Subscribe {
+  position: unset;
+  width: 100%;
+  height: 4.5rem;
+  border-radius: 4px;
+  background: var(--Darkest-Green, #19454b);
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 130%;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+.newsleterr_new form,
+.inner_content form,
+.newsleterr_new
+  .newsletter-form__field-wrapper.scroll-trigger.animate--slide-in,
+.inner_content
+  .newsletter-form__field-wrapper.scroll-trigger.animate--slide-in {
+  width: 100%;
+  max-width: 100%;
+}
+.newsleterr_new .newsletter-form__field-wrapper .field,
+.inner_content .newsletter-form__field-wrapper .field {
+  margin-bottom: 15px;
+  background: #fff;
+}
+.newsleterr_new .newsletter-form__field-wrapper .field:after,
+.inner_content .newsletter-form__field-wrapper .field:after {
+  border-radius: 4px;
+}
+.newsleterr_new .checkbox,
+.inner_content .checkbox,
+.newsleterr_new form button,
+.inner_content form button {
+  margin-bottom: 15px;    margin-top: 15px;
+}
+.newsleterr_new label,
+.inner_content label {
+  color: rgba(25, 69, 75, 0.60);
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+}
+.newsleterr_new .checkbox label,
+.inner_content .checkbox label,
+.inner_content p {
+  color: #19454b;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -.32px;
+}
+.newsleterr_new p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+
+
+footer .field__label, footer .customer .field label {top: 10px;}
+footer .field:after, footer .field:before{box-shadow:none;}
+footer .field__input:focus-visible {box-shadow: none;}
+footer .newsletter-form__field-wrapper .field:hover.field:after {box-shadow: none;}
+footer .newsletter-form__field-wrapper .field {border-radius: 4px;}
+footer .newsletter-form__field-wrapper .field__input { height: 33px;}
+footer .field__input:focus, footer .field__input{padding: 1.2rem 1.5rem 0.8rem 2rem;}
+footer .field__input:focus, footer .field__input:not(:placeholder-shown) { padding: 1.2rem 1.5rem 0.8rem 2rem;}
+footer .field__input:focus~.field__label, footer .field__input:not(:placeholder-shown)~.field__label { top: 0;}
+footer .newsleterr_new .newsletter-form__field-wrapper .field { margin-bottom: 8px;}
+footer .newsleterr_new button#Subscribe {margin-top: 8px;}
+footer .newsleterr_new button#Subscribe { height: 37px;margin-bottom: 0;}
+footer .newsleterr_new p {font-size: 11px;}
+
+.popup-content .newsleterr_new label, .popup-content .inner_content label { top: 16px;}
+.popup-content .field__input:focus {box-shadow: none;}
+.popup-content .field:hover.field:after {box-shadow: none; border: 1px solid rgb(18 18 18); border-radius: 5px;}

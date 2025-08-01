@@ -1,0 +1,219 @@
+<div class="spec_strip nec_mobile">{{ section.settings.spec_strip }}</div>
+<div class="sheet_spec page-width">
+<div class="sheet_cont">
+<h2>{{ section.settings.heading }}</h2>
+<div class="sheet_search"> 
+ <!--<predictive-search class="search-modal__form" data-loading-text="Po ngarkohet..."><form action="/search" method="get" role="search" class="search search-modal__form">
+                  <div class="field">
+                    <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search" role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <label class="field__label" for="Search-In-Modal">Search</label>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button class="search__button field__button" aria-label="Search">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M13.8067 13.36L11.54 11.1C12.2713 10.1683 12.6681 9.01777 12.6667 7.83334C12.6667 6.7785 12.3539 5.74736 11.7678 4.87029C11.1818 3.99323 10.3489 3.30965 9.37431 2.90598C8.39978 2.50231 7.32742 2.39669 6.29285 2.60248C5.25829 2.80827 4.30798 3.31622 3.5621 4.0621C2.81622 4.80798 2.30827 5.75829 2.10248 6.79285C1.89669 7.82742 2.00231 8.89978 2.40598 9.87431C2.80965 10.8489 3.49323 11.6818 4.37029 12.2678C5.24736 12.8539 6.2785 13.1667 7.33334 13.1667C8.51777 13.1681 9.66831 12.7713 10.6 12.04L12.86 14.3067C12.922 14.3692 12.9957 14.4188 13.077 14.4526C13.1582 14.4864 13.2453 14.5039 13.3333 14.5039C13.4213 14.5039 13.5085 14.4864 13.5897 14.4526C13.671 14.4188 13.7447 14.3692 13.8067 14.3067C13.8692 14.2447 13.9188 14.171 13.9526 14.0897C13.9864 14.0085 14.0039 13.9213 14.0039 13.8333C14.0039 13.7453 13.9864 13.6582 13.9526 13.577C13.9188 13.4957 13.8692 13.422 13.8067 13.36ZM3.33334 7.83334C3.33334 7.04221 3.56793 6.26885 4.00746 5.61106C4.44698 4.95326 5.0717 4.44057 5.8026 4.13782C6.53351 3.83507 7.33777 3.75585 8.1137 3.91019C8.88962 4.06454 9.60235 4.4455 10.1618 5.00491C10.7212 5.56432 11.1021 6.27705 11.2565 7.05297C11.4108 7.8289 11.3316 8.63317 11.0289 9.36407C10.7261 10.095 10.2134 10.7197 9.55562 11.1592C8.89782 11.5987 8.12446 11.8333 7.33334 11.8333C6.27247 11.8333 5.25505 11.4119 4.50491 10.6618C3.75476 9.91162 3.33334 8.8942 3.33334 7.83334Z" fill="#254238"/>
+</svg>
+                    </button>
+                  </div><div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search="">
+                      <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                    </div>
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span></form></predictive-search>
+    <button class="search_btn">Search</button>-->
+
+
+<form id="searchForm" style="width:100%;display:flex;gap: 10px;">
+  <div class="field">
+                    <input class="search__input field__input" id="searchInput" type="search" value="" placeholder="Search">
+                    <label class="field__label" for="Search-In-Modal">Search</label>
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <button class="search__button field__button" aria-label="Search" type="button" >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M13.8067 13.36L11.54 11.1C12.2713 10.1683 12.6681 9.01777 12.6667 7.83334C12.6667 6.7785 12.3539 5.74736 11.7678 4.87029C11.1818 3.99323 10.3489 3.30965 9.37431 2.90598C8.39978 2.50231 7.32742 2.39669 6.29285 2.60248C5.25829 2.80827 4.30798 3.31622 3.5621 4.0621C2.81622 4.80798 2.30827 5.75829 2.10248 6.79285C1.89669 7.82742 2.00231 8.89978 2.40598 9.87431C2.80965 10.8489 3.49323 11.6818 4.37029 12.2678C5.24736 12.8539 6.2785 13.1667 7.33334 13.1667C8.51777 13.1681 9.66831 12.7713 10.6 12.04L12.86 14.3067C12.922 14.3692 12.9957 14.4188 13.077 14.4526C13.1582 14.4864 13.2453 14.5039 13.3333 14.5039C13.4213 14.5039 13.5085 14.4864 13.5897 14.4526C13.671 14.4188 13.7447 14.3692 13.8067 14.3067C13.8692 14.2447 13.9188 14.171 13.9526 14.0897C13.9864 14.0085 14.0039 13.9213 14.0039 13.8333C14.0039 13.7453 13.9864 13.6582 13.9526 13.577C13.9188 13.4957 13.8692 13.422 13.8067 13.36ZM3.33334 7.83334C3.33334 7.04221 3.56793 6.26885 4.00746 5.61106C4.44698 4.95326 5.0717 4.44057 5.8026 4.13782C6.53351 3.83507 7.33777 3.75585 8.1137 3.91019C8.88962 4.06454 9.60235 4.4455 10.1618 5.00491C10.7212 5.56432 11.1021 6.27705 11.2565 7.05297C11.4108 7.8289 11.3316 8.63317 11.0289 9.36407C10.7261 10.095 10.2134 10.7197 9.55562 11.1592C8.89782 11.5987 8.12446 11.8333 7.33334 11.8333C6.27247 11.8333 5.25505 11.4119 4.50491 10.6618C3.75476 9.91162 3.33334 8.8942 3.33334 7.83334Z" fill="#254238"></path>
+</svg>
+                    </button>
+                  </div>
+  <button type="button" class="search_btn" onclick="searchWithinSections()">Search</button>
+</form>
+
+
+</div>
+<div class="spec_block"> 
+
+  {% for block in section.blocks %}
+  <div class="spec_item">
+    <a href="{{ block.settings.link }}"><img src="https://cdn.shopify.com/s/files/1/0844/6391/1230/files/basil_document-outline.svg?v=1702705156"><h3>{{ block.settings.txt }}</h3></a>
+  </div>
+ {% endfor %} 
+
+</div>
+<div class="specific_paging">
+    <div class="specific_list">
+       <span class="first">1</span>- <span class="last_spec"></span> of <span class="total_spec"></span>
+    </div>
+    <a href="#" id="seeMore"><span>Load More</span></a>
+</div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "sheet_spec",
+    "settings": [
+     {
+        "type":"text",
+        "id":"spec_strip",
+        "label":"Add Strip Text"
+      },
+     {
+        "type":"html",
+        "id":"heading",
+        "label":"Add Heading"
+      }    
+    ],
+    "blocks":[
+  {
+    "type":"text",
+    "name":"Spec Sheet",
+    "settings":[   
+    {
+        "type":"url",
+        "id":"link",
+        "label":"Add Link"
+      },
+    {
+        "type":"text",
+        "id":"txt",
+        "label":"Add Title"
+      }
+    ]
+  }
+  ],
+"presets":[
+  {
+    "name":"Specification Sheets"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+.sheet_cont {padding: 64px 2vw 64px 2vw;}
+.sheet_cont h2 { color: #19454B; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: -2.56px; text-transform: uppercase; margin: 0;}
+.sheet_search { display: flex; padding: 24px; align-items: flex-start; gap: 16px;  border-radius: 4px; background: #F1EFEC; margin: 40px 0; }
+.sheet_search .search-modal__form { max-width: 100%;}
+.sheet_search .search__input.field__input {height: 39px; border-radius: 50px;padding:8px 24px; }
+.sheet_search .field:hover.field:after, .sheet_search .field:before, .sheet_search .field:after { box-shadow: none;}
+.sheet_search button.search_btn { display: flex; min-width: 200px; padding: 8px 12px; justify-content: center; align-items: center; gap: 8px; border-radius: 40px; background:#19454B; color:#FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; border: 1px solid #19454b; }
+.sheet_search .field__label {display: none;}
+.sheet_search .search__input.field__input::placeholder{opacity:1;color: rgba(0, 0, 0, 0.40); font-family: Roboto;font-size: 18px; font-style: normal; font-weight: 500; line-height: 23px; letter-spacing: -0.36px;position:relative}
+.sheet_search button.search__button svg { position: relative; top: -3px;}
+.sheet_search .field__input:focus-visible {box-shadow: none;}
+.sheet_search .field__input:focus-visible {outline: 0; outline-offset: 0; box-shadow: none;}
+.sheet_search .predictive-search__loading-state { display: none;}
+.spec_block {display: flex; flex-flow: wrap;gap: 16px 64px;}
+.spec_item { width: 47%; display: flex; padding: 24px 40px; align-items: center; gap: 8px; align-self: stretch; border-radius: 4px; background: #F1EFEC;    height: 88px; }
+.spec_item a { display: flex;text-decoration: none;}
+.spec_item img { margin-right: 8px;}
+.spec_item h3 { color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; }
+.spec_strip.nec_mobile { color: #F9C001; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 140%; display: flex; padding: 16px; text-align: center;justify-content: center; align-items: center; gap: 16px; background: #1E4A7D; }
+.nec_mobile{display:none!important;}
+#seeMore, .specific_paging{ display:none;}  
+@media screen and (min-width:320px) and (max-width:767px){ 
+.nec_rtmenu {background: #F9C001;}
+.sheet_cont {padding: 24px 5px 24px 5px;}
+.sheet_cont h2 {color: #19454B; font-family: Poppins; font-size: 28px; font-style: normal; font-weight: 700; line-height: 30px;  letter-spacing: -1.12px; text-transform: uppercase;}
+.sheet_search {margin: 24px 0;    flex-direction: column;}
+.sheet_search button.search_btn {min-width: 100%;}
+.spec_item { width: 100%; display: flex; padding: 16px 24px; align-items: center; gap: 8px; align-self: stretch; border-radius: 4px; background: #F1EFEC; height: 72px; }
+.spec_item h3{coor: #19454B;  font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 140%;}
+body.specification-sheets sticky-header {border: 0!important;}
+.nec_mobile{display:block!important;}
+form#searchForm { flex-direction: column;}
+
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+.spec_strip.nec_mobile {font-size: 9px;}
+.sheet_cont h2 {font-size: 26px;}
+}
+  
+@media screen and (min-width:768px) and (max-width:991px){  
+.nec_rtmenu {background: #F9C001;}
+.sheet_cont {padding: 50px 5px 50px 5px;}
+.sheet_cont h2 {color: #19454B; font-family: Poppins; font-size: 35px; font-style: normal; font-weight: 700; line-height: 40px;  letter-spacing: -1.12px; text-transform: uppercase;}
+.sheet_search {margin: 24px 0;}
+.spec_item { width: 48.1%; display: flex; padding: 16px 24px; align-items: center; gap: 8px; align-self: stretch; border-radius: 4px; background: #F1EFEC; height: 72px; }
+.spec_item h3{coor: #19454B; font-family: Roboto; font-size: 14px; font-style: normal; font-weight: 500; line-height: 140%;}
+.spec_block {gap: 16px 24px;}
+.nec_mobile{display:block!important;}
+body.specification-sheets sticky-header {border: 0!important;}
+}
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+.spec_block { gap: 16px 48px;}
+.nec_mobile{display:none!important;}
+}
+
+@media screen and (max-width:767px){
+.spec_item {
+    display: none;
+}
+#seeMore {
+    display: flex;
+    min-width: 200px;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 40px;
+    background: #19454B;
+    flex: 1 0 0;
+    text-decoration: unset;
+}
+#seeMore span{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 130%; 
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+}
+.spec{
+   display:block;
+}
+.specific_list{
+  color: #19454B;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%; 
+}
+.specific_paging {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 25px;
+}
+}
+</style>
+
+{% javascript %}
+
+  $(".spec_item").slice(0,12).show();
+  $('.last_spec').text($(".spec_item:visible").length);
+  $('.total_spec').text($(".spec_item").length);
+  $("#seeMore").click(function(e){
+    e.preventDefault();
+    $(".spec_item:hidden").slice(0,12).fadeIn("slow");
+    var len_spec=$(".spec_item:visible").length;
+    $('.last_spec').text($(".spec_item:visible").length);
+    if($(".spec_item:hidden").length == 0){
+       $("#seeMore").fadeOut("slow");
+      }
+  });
+{% endjavascript %}

@@ -1,0 +1,22 @@
+{{ 'simple-text.css' | asset_url | stylesheet_tag }}
+{% render 'simple-text' %}
+
+{% schema %}
+{
+  "name": "Simple Text",
+  "tag": "section",
+  "class": "simple-text",
+  "settings": [
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Simple Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "d0afbb94-5108-4152-a027-54ffa4272d5a": {
+          "type": "text",
+          "settings": {
+            "checkboxnews": false,
+            "heading": "New England Chimney Supply, Inc.",
+            "subtext": "<h3>Hours of operation<\/h3>\n<p>Monday - Friday: 7:30AM - 4:00PM<\/p>\n<p>Sat &amp; Sun: Closed<\/p>"
+          }
+        },
+        "0ad1516b-63f6-4ada-8d95-e98914a135a6": {
+          "type": "text",
+          "settings": {
+            "checkboxnews": true,
+            "heading": "Stay up to date",
+            "subtext": "<p>Get all the latest information, offers and more from the NECS team.<\/p>"
+          }
+        },
+        "81bf25e2-787a-46d9-a6ec-5d347d4c7f18": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Info",
+            "menu": "info"
+          }
+        },
+        "5e086f6c-b054-4d4a-abe8-1ea66c645849": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Menu",
+            "menu": "menu"
+          }
+        },
+        "175f7fcb-eeee-4aaf-ae01-f0c5fd6ca0e7": {
+          "type": "text",
+          "settings": {
+            "checkboxnews": false,
+            "heading": "Contact us:",
+            "subtext": "<p>Local: (802) 858-4577 <\/p>\n<p>Toll Free: (888) 900-8106 <\/p>\n<p>Email: order@nesbestflex.com<\/p> <p>Fax: (888) 392-4432<\/p>"
+          }
+        },
+        "4c4f9714-8418-4d07-9cd0-a73c09b16f93": {
+          "type": "text",
+          "settings": {
+            "checkboxnews": false,
+            "heading": "Corporate Headquarters",
+            "subtext": "<p>34 Commerce Street<br>\u2028Williston, VT 05495<\/p>\n<a href=\"\/pages\/contact\" class=\"nec_direc\">Get Directions<\/a>"
+          }
+        },
+        "485f7dff-5479-4f6a-9fc3-2dc83e6787f7": {
+          "type": "text",
+          "settings": {
+            "checkboxnews": false,
+            "heading": "Mid-Atlantic Facility",
+            "subtext": "<p>7956-B Cameron Brown Court,\u2028Springfield, VA 22153<\/p>\n<a href=\"\/pages\/contact\" class=\"nec_direc\">Get Directions<\/a>"
+          }
+        },
+        "2eb19f60-d94d-488f-8428-972e7c08ebb0": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        }
+      },
+      "block_order": [
+        "d0afbb94-5108-4152-a027-54ffa4272d5a",
+        "0ad1516b-63f6-4ada-8d95-e98914a135a6",
+        "81bf25e2-787a-46d9-a6ec-5d347d4c7f18",
+        "5e086f6c-b054-4d4a-abe8-1ea66c645849",
+        "175f7fcb-eeee-4aaf-ae01-f0c5fd6ca0e7",
+        "4c4f9714-8418-4d07-9cd0-a73c09b16f93",
+        "485f7dff-5479-4f6a-9fc3-2dc83e6787f7",
+        "2eb19f60-d94d-488f-8428-972e7c08ebb0"
+      ],
+      "settings": {
+        "bottom_txt": "Leading manufacturer & supplier of chimney products to chimney professionals across the nation",
+        "color_scheme": "background-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": false,
+        "margin_top": 0,
+        "padding_top": 56,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

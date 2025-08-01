@@ -1,0 +1,131 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "9dbb18e9-db88-4f60-bc9f-16564a59a099": {
+      "type": "privacy",
+      "blocks": {
+        "85654bed-303a-49d5-83d1-612ab434284c": {
+          "type": "text",
+          "settings": {
+            "tab_link": "ordering",
+            "tab_class": "active",
+            "pp_tab": "Ordering"
+          }
+        },
+        "c8070252-2dc7-40ee-8642-847ff3038524": {
+          "type": "privacy_cont",
+          "settings": {
+            "tab_id": "ordering",
+            "cont_class": "active active-content",
+            "cont_head": "Ordering",
+            "cont_txt": "<div>\n    <p>We offer many convenient ways for ordering your products.<\/p>\n    <ul>\n      <li>View catalog on the Web at <a href=\"http:\/\/www.newenglandchimneysupply.com\">http:\/\/www.newenglandchimneysupply.com<\/a>\n<\/li>\n      <li>Order by email to <a href=\"mailto:order@nesbestflex.com\">order@nesbestflex.com<\/a>\n<\/li>\n      <li>Order by toll free fax at: <a href=\"fax:(888)%20392-4432\">(888) 392-4432<\/a>\n<\/li>\n      <li>Order by toll free phone at: <a href=\"tel:+18889008106\">(888) 900-8106<\/a>\n<\/li>\n      <li>Visit our office\/warehouse and order in person from one of our team members.<\/li>\n    <\/ul>\n    <p>You can feel confident your order will be handled with care. We appreciate your patience and understanding if we need to contact you with any questions about your order.<\/p>\n  <\/div>"
+          }
+        },
+        "25fe3403-ed62-46fd-8bee-ca101e6006f9": {
+          "type": "text",
+          "settings": {
+            "tab_link": "delivery-shipping",
+            "tab_class": "",
+            "pp_tab": "Delivery & Shipping"
+          }
+        },
+        "778151ff-5c3b-4dde-bc75-4497cdea4444": {
+          "type": "privacy_cont",
+          "settings": {
+            "tab_id": "delivery-shipping",
+            "cont_class": "",
+            "cont_head": "Delivery & Shipping Information",
+            "cont_txt": "<div>\n    <h3>FREE Standard Shipping applies to:<\/h3>\n    <ul>\n      <li>Qualified clients in the Continental US only, East of the Mississippi<\/li>\n      <li>Clients who are in good standing with current balances<\/li>\n      <li>Only *STOCK parts (as shown in our NECS 2024-2025 Catalog unless noted otherwise, some items may be subject to change without notice)<\/li>\n    <\/ul>\n  <\/div>\n  \n  <div>\n    <h3>FREE Shipping does NOT apply to:<\/h3>\n    <ul>\n      <li>Custom \/ Special orders<\/li>\n      <li>Miscellaneous items noted at the item in the catalog (Examples include, but not limited to: Aluminum Liners &amp; Parts, Aluminum Kits, Refractory Panels, Best MIX, Thermix, Airjet chimneys, etc… )<\/li>\n      <li>Additional charges incurred due to vendor drop shipments (broken carton fees, customer drop ship fees)<\/li>\n      <li>Expedited shipments<\/li>\n      <li>LTL\/Freight Accessorial Fees (Examples include, but not limited to: Residential, Liftgate, Limited access, Inside Delivery, Appointment, Notification\/Call ahead, Short truck, Re-route, Re-delivery, Over-length or Extreme length fees due to item sizes)<\/li>\n    <\/ul>\n  <\/div>\n  \n  <div>\n    <h3>SPLIT shipping charges: (via freight): customer pays any applicable accessorial fees:<\/h3>\n    <ul>\n      <li>Order includes: items that are Free and NOT free (Ex. BMIX =not free &amp; LW Kit =free) Custom Order (Chasecover or CUSTCMFH Cap) &amp; also has items that are free shipping<\/li>\n    <\/ul>\n  <\/div>\n  \n  <div>\n    <h3>EXAMPLES \/ GUIDELINES:<\/h3>\n    <ul>\n      <li>Fedex Ground shipment: customer pays shipping on items not included in Free Shipping (Ex. Custom, BMIX). Items ship in separate boxes, so they would get charged for those.<\/li>\n      <li>NECS reserves the right to ship products the most efficient way possible. If an item(s) is free shipping to a customer (Ie. If fedex ground cost is more than freight), we will ship via LTL\/Freight Free, BUT let the customer know they are responsible for any applicable accessorial fees, such as Residential, Liftgate, etc).<\/li>\n    <\/ul>\n  <\/div>\n  \n  <div>\n    <h3>WEST of the Mississippi River?<\/h3>\n    <p>Free Standard Shipping does NOT apply. We apologize for any inconvenience this causes, but due to rising freight carrier costs, we are unable to accommodate free shipping in these areas.<\/p>\n  <\/div>"
+          }
+        },
+        "848b6699-2e2c-4d73-bc99-2f55b55fd02a": {
+          "type": "text",
+          "settings": {
+            "tab_link": "payments",
+            "tab_class": "",
+            "pp_tab": "Payments"
+          }
+        },
+        "f932d217-9e2d-4fea-8fbb-695ec7885fd0": {
+          "type": "privacy_cont",
+          "settings": {
+            "tab_id": "payments",
+            "cont_class": "",
+            "cont_head": "Payments",
+            "cont_txt": "<div>\n<h3>(Remit to: 34 Commerce St. Williston, VT 05495)<\/h3>\n    <p>For your convenience we accept Credit Cards, Debit Cards, Checks, Money Orders or Cash.<\/p>\n    <ul>\n      <li>All orders must be paid for at the time of purchase or you can be approved for in-house credit.<\/li>\n      <li>Customers wishing to set up an in-house credit account will receive a booklet containing all information and credit applications required. Your application will be processed quickly and you will be notified by mail of the result.<\/li>\n      <li>All returned checks will have a $50 processing fee.<\/li>\n      <li>NECS reserves the right to modify terms or put any past due account on credit hold.<\/li>\n      <li>All credit accounts past due are subject to an additional charge of 1.5% mo or an 18% annual finance fee.<\/li>\n    <\/ul>\n  <\/div>"
+          }
+        },
+        "e01f07d2-126d-481b-b92e-53b528992654": {
+          "type": "text",
+          "settings": {
+            "tab_link": "returns",
+            "tab_class": "",
+            "pp_tab": "Returns"
+          }
+        },
+        "33c97d61-d4b9-4aa1-beb2-27e79ac63da8": {
+          "type": "privacy_cont",
+          "settings": {
+            "tab_id": "returns",
+            "cont_class": "",
+            "cont_head": "Returns",
+            "cont_txt": "<div>\n    <p>New England Supply will accept returns on the following conditions:<\/p>\n    <ul>\n      <li>Items must be undamaged, unused and returned with a postmark up to 30 days from day of delivery.<\/li>\n      <li>All return shipping charges will be paid for by the customer unless given prior authorization.<\/li>\n      <li>A 15% restocking fee will apply on all undamaged, unused STOCK items. BTO stock CMFH caps a 30% restocking fee will apply.<\/li>\n      <li>Custom Parts, special order items &amp; vendor drop ships are non-returnable\/refundable (ie. Goat &amp; AirJet)<\/li>\n      <li>If any visible damage to the exterior of the shipping container is seen please do not accept the shipment. Call our Customer Service immediately to handle your issue.<\/li>\n      <li>Upon opening your shipment if items appear to be damaged, please contact our Customer Service immediately for assistance. All damaged items will be handled on a claim-by-claim basis.<\/li>\n      <li>All returns must be authorized before return shipping can occur. You will be assigned an (RMA) number by Customer Service for identification. Please write this RMA number directly on the outside of the box.<\/li>\n      <li>Your delivery driver is NOT authorized to bring returned products back on the truck without an RMA number.<\/li>\n    <\/ul>\n  <\/div>"
+          }
+        },
+        "19d25663-d313-4524-9ca2-8ff1d341c2f9": {
+          "type": "text",
+          "settings": {
+            "tab_link": "credits",
+            "tab_class": "",
+            "pp_tab": "Credits"
+          }
+        },
+        "6d827d24-cda4-4f2a-8432-37fd29b83180": {
+          "type": "privacy_cont",
+          "settings": {
+            "tab_id": "credits",
+            "cont_class": "",
+            "cont_head": "Credits",
+            "cont_txt": "<div>\n    <p>All returned items will be inspected upon arrival by a New England Supply specialist. If the inspected item(s) is deemed resellable, the following action will take place depending on your original form of payment. An in-house credit will be applied to your account, refund to your credit card, or mailed refund check.<\/p>\n  <\/div>"
+          }
+        }
+      },
+      "block_order": [
+        "85654bed-303a-49d5-83d1-612ab434284c",
+        "c8070252-2dc7-40ee-8642-847ff3038524",
+        "25fe3403-ed62-46fd-8bee-ca101e6006f9",
+        "778151ff-5c3b-4dde-bc75-4497cdea4444",
+        "848b6699-2e2c-4d73-bc99-2f55b55fd02a",
+        "f932d217-9e2d-4fea-8fbb-695ec7885fd0",
+        "e01f07d2-126d-481b-b92e-53b528992654",
+        "33c97d61-d4b9-4aa1-beb2-27e79ac63da8",
+        "19d25663-d313-4524-9ca2-8ff1d341c2f9",
+        "6d827d24-cda4-4f2a-8432-37fd29b83180"
+      ],
+      "settings": {
+        "spec_strip": "NEED A CUSTOM ORDER? TRY OUR CUSTOM CAP BUILDER",
+        "main_heading": "New England Chimney Supply Terms & policies"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "9dbb18e9-db88-4f60-bc9f-16564a59a099"
+  ]
+}

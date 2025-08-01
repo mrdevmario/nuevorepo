@@ -1,0 +1,105 @@
+{{ 'fire-training.css' | asset_url | stylesheet_tag }}
+{% render 'fire-training' %}
+
+{% schema %}
+{
+  "name": "Fire Training",
+  "tag": "section",
+  "class": "fire-training",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+        
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side Image"
+    },
+
+    {
+      "type": "text",
+      "id": "upcoming_sessions_heading",
+      "label": "Upcoming Sessions Heading",
+      "default": "Upcoming sessions"
+    },
+
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Button Text"
+    },
+
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Button Link"
+    },
+
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Button Text"
+    },
+
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Button Link"
+    }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "name": "Upcoming Session",
+      "type": "upcoming_session",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+
+        {
+          "type": "html",
+          "id": "date",
+          "label": "Date"
+        },
+
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fire Training",
+      "blocks": [
+        {
+          "type": "upcoming_session"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

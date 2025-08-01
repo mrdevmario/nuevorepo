@@ -1,0 +1,549 @@
+<kit-variant-metafield-select id="Kit-variant-options-{{ section.id }}" class="kit__options-wrapper" data-token="{{ settings.token }}" data-url="{{ settings.endpoint_url }}">
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign options = "mortar_collar,storm_collar,top_clamp,adapter,tee_end_cap,tee_snout,tee_body,top_plate,lid_cap" | split: ',' %}
+  <input type="hidden" name="kit-variant-netsuite-id" value="{{ current_variant.metafields.custom.netsuite_id.value }}" id="kit-variant-netsuite-id">
+  
+  {% for option in options %}
+    {% assign metafield_value = current_variant.metafields.custom[option].value %}
+    {% if metafield_value != blank %}
+      <div class="select__menu">
+        <label class="option__name">Select {{ option | replace: '_', ' ' | capitalize }}:</label>
+        <div class="custom__select">
+          <select class="kit__select" name="properties[{{ option }}]" id="{{ option }}" data-id="{{ option }}">
+            {% for v in metafield_value %}
+              <option value="{{ v.title }}" 
+                      name="properties[{{ option }}]" 
+                      data-price="{{ v.metafields.custom.netsuite_id.value }}">
+                {{ v.title }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  /**
+   * Dynamic adapter search and addition script
+   * Automatically locates adapters beyond the 50-item limit
+   */
+  
+  console.log('==========================================');
+  console.log('INITIALIZING DYNAMIC ADAPTER SEARCH');
+  console.log('==========================================');
+  
+  // Keep track of the current variant
+  let currentVariant = null;
+  
+  // Map dropdown IDs to kit_data keys
+  const optionMapping = {
+    'top_plate': 'tplate',
+    'lid_cap': 'lidcap',
+    'adapter': 'adapter',
+    'tee_body': 'body',
+    'tee_snout': 'snout',
+    'tee_end_cap': 'endcap',
+    'mortar_collar': 'collar',
+    'storm_collar': 'storm',
+    'top_clamp': 'clamp'
+  };
+  
+  // Function to get all adapters from the product.metafields json
+  function getAllAdapterOptions() {
+    // Try to access window.all_adapters if it was already set by Liquid
+    if (window.all_adapters && Array.isArray(window.all_adapters)) {
+      return window.all_adapters;
+    }
+    
+    // Or access from a hidden div with JSON (fallback)
+    const adapterDataEl = document.getElementById('all-adapter-options');
+    if (adapterDataEl) {
+      try {
+        return JSON.parse(adapterDataEl.textContent);
+      } catch (e) {
+        console.error('Error parsing adapter data from element:', e);
+      }
+    }
+    
+    return null;
+  }
+  
+  // Function to search for an adapter by NetSuite ID
+  function findAdapterByNetsuiteId(netsuiteId) {
+    const allAdapters = getAllAdapterOptions();
+    
+    if (!allAdapters) {
+      console.log('No complete adapter list available');
+      return null;
+    }
+    
+    // Look for a matching adapter
+    for (let i = 0; i < allAdapters.length; i++) {
+      const adapter = allAdapters[i];
+      
+      // Check various possible structures for the NetSuite ID
+      let adapterNetsuiteId = null;
+      
+      if (adapter.metafields && adapter.metafields.custom && adapter.metafields.custom.netsuite_id) {
+        adapterNetsuiteId = adapter.metafields.custom.netsuite_id.value || adapter.metafields.custom.netsuite_id;
+      } else if (adapter.netsuite_id) {
+        adapterNetsuiteId = adapter.netsuite_id;
+      } else if (adapter.data_price) {
+        adapterNetsuiteId = adapter.data_price;
+      }
+      
+      // Compare as strings to handle type differences
+      if (String(adapterNetsuiteId) === String(netsuiteId)) {
+        console.log(`Found matching adapter: ${adapter.title || adapter.value}`);
+        return adapter;
+      }
+    }
+    
+    console.log(`Adapter with NetSuite ID ${netsuiteId} not found in complete list`);
+    return null;
+  }
+  
+  // Function to add an adapter to the dropdown
+  function addAdapterToDropdown(adapter, netsuiteId) {
+    if (!adapter) {
+      console.log('Invalid adapter data');
+      return null;
+    }
+    
+    const select = document.getElementById('adapter');
+    if (!select) {
+      console.log('Adapter select element not found');
+      return null;
+    }
+    
+    // Determine the adapter title and NetSuite ID
+    const adapterTitle = adapter.title || adapter.value;
+    const adapterNetsuiteId = netsuiteId || 
+                              (adapter.metafields && adapter.metafields.custom && adapter.metafields.custom.netsuite_id ? 
+                               adapter.metafields.custom.netsuite_id.value || adapter.metafields.custom.netsuite_id : 
+                               adapter.netsuite_id || adapter.data_price);
+    
+    if (!adapterTitle || !adapterNetsuiteId) {
+      console.log('Adapter has no title or NetSuite ID');
+      return null;
+    }
+    
+    // Check if the adapter already exists in the dropdown
+    for (let i = 0; i < select.options.length; i++) {
+      const opt = select.options[i];
+      const optNetsuiteId = opt.getAttribute('data-price');
+      
+      if (optNetsuiteId === String(adapterNetsuiteId) || opt.value === adapterTitle) {
+        console.log(`Adapter ${adapterTitle} already exists in dropdown`);
+        return i; // Return existing index
+      }
+    }
+    
+    // Add the new adapter option
+    const option = document.createElement('option');
+    option.value = adapterTitle;
+    option.setAttribute('name', 'properties[adapter]');
+    option.setAttribute('data-price', adapterNetsuiteId);
+    option.textContent = adapterTitle;
+    
+    select.appendChild(option);
+    
+    console.log(`Added new adapter option: ${adapterTitle} (${adapterNetsuiteId})`);
+    return select.options.length - 1; // Return the new index
+  }
+  
+  // Function to get all kit select dropdowns
+  function getKitSelects() {
+    const selects = document.querySelectorAll('.kit__select');
+    console.log(`Found ${selects.length} kit select dropdowns`);
+    return selects;
+  }
+  
+  // Log the available options in each dropdown for debugging
+  function logAvailableOptions() {
+    console.log('---------------------------------------------');
+    console.log('AVAILABLE OPTIONS IN EACH DROPDOWN:');
+    
+    getKitSelects().forEach(select => {
+      const optionType = select.getAttribute('data-id');
+      console.log(`\n${optionType} dropdown options:`);
+      
+      for (let i = 0; i < select.options.length; i++) {
+        const opt = select.options[i];
+        console.log(`  Option ${i}: value="${opt.value}", data-price="${opt.getAttribute('data-price')}"`);
+      }
+    });
+    
+    console.log('---------------------------------------------');
+  }
+  
+  // Enhanced function to check for matching option using NetSuite ID
+  function findMatchingOption(select, defaultId, optionType) {
+    console.log(`  🔍 Looking for option with NetSuite ID ${defaultId} for ${optionType}`);
+    
+    // First try direct data-price matches (which contains the NetSuite ID)
+    for (let i = 0; i < select.options.length; i++) {
+      const opt = select.options[i];
+      const optionPrice = opt.getAttribute('data-price');
+      
+      // Try multiple comparison approaches to handle string/number mismatches
+      if (
+        optionPrice === defaultId || 
+        String(optionPrice) === String(defaultId) ||
+        Number(optionPrice) === Number(defaultId)
+      ) {
+        console.log(`  ✅ DIRECT MATCH FOUND! Setting ${optionType} to:`, opt.value);
+        return i; // Return the matching index
+      }
+    }
+    
+    // If no match found by data-price, log all available values for debugging
+    console.log(`  ⚠️ No direct match found for NetSuite ID ${defaultId}`);
+    const availableIds = Array.from(select.options).map(opt => opt.getAttribute('data-price'));
+    console.log(`  Available NetSuite IDs:`, availableIds);
+    
+    return -1; // No match found
+  }
+  
+  // The critical function that sets the default selections based on variant kit_data
+  function updateKitOptionsFromVariant(variant) {
+    console.log('---------------------------------------------');
+    console.log('UPDATING KIT OPTIONS FOR VARIANT:', variant.id);
+    console.log('---------------------------------------------');
+    
+    try {
+      // Make sure we have kit_data
+      if (!variant || !variant.metafields || !variant.metafields.custom || !variant.metafields.custom.kit_data) {
+        console.log('❌ ERROR: No kit_data found for variant');
+        return;
+      }
+      
+      // Parse the kit_data
+      let kitData;
+      if (typeof variant.metafields.custom.kit_data === 'string') {
+        kitData = JSON.parse(variant.metafields.custom.kit_data);
+      } else if (variant.metafields.custom.kit_data.value) {
+        // Handle both string and object with value property
+        if (typeof variant.metafields.custom.kit_data.value === 'string') {
+          kitData = JSON.parse(variant.metafields.custom.kit_data.value);
+        } else {
+          kitData = variant.metafields.custom.kit_data.value;
+        }
+      } else {
+        console.log('❌ ERROR: Invalid kit_data format');
+        return;
+      }
+      
+      console.log('📊 KIT DATA STRUCTURE:', JSON.stringify(kitData, null, 2));
+      
+      // Update each dropdown based on the kit_data
+      getKitSelects().forEach(select => {
+        const optionType = select.getAttribute('data-id');
+        if (!optionType) {
+          console.log(`❌ WARNING: Select element missing data-id attribute`);
+          return;
+        }
+        
+        console.log(`\n🔍 PROCESSING ${optionType.toUpperCase()} DROPDOWN:`);
+        
+        // Try multiple possible keys
+        const possibleKeys = [
+          optionMapping[optionType],
+          optionType,
+          optionType.replace('tee_', ''),
+          optionType.split('_').pop()
+        ].filter(Boolean);
+        
+        console.log(`  Possible kit_data keys:`, possibleKeys);
+        
+        let found = false;
+        
+        // Try each key
+        for (const key of possibleKeys) {
+          if (kitData[key] && kitData[key].length > 0) {
+            const defaultId = kitData[key][0];
+            console.log(`  ✅ Found default for ${optionType} (${key}):`, defaultId);
+            
+            // Log available options and their data-price values
+            console.log(`  Available options in dropdown:`);
+            let optionsCount = 0;
+            for (let i = 0; i < select.options.length; i++) {
+              optionsCount++;
+              const opt = select.options[i];
+              const dataPrice = opt.getAttribute('data-price');
+              console.log(`    Option ${i}: "${opt.value}" (data-price="${dataPrice}")`);
+            }
+            console.log(`  Total options: ${optionsCount}`);
+            
+            // Try to find a matching option
+            let matchIndex = findMatchingOption(select, defaultId, optionType);
+            
+            // If no match found and it's an adapter, try to add it dynamically
+            if (matchIndex < 0 && optionType === 'adapter') {
+              console.log(`  🔄 Trying to find missing adapter (${defaultId})`);
+              
+              // Look for the adapter in the complete list
+              const missingAdapter = findAdapterByNetsuiteId(defaultId);
+              
+              if (missingAdapter) {
+                // We found the missing adapter, add it to the dropdown
+                matchIndex = addAdapterToDropdown(missingAdapter, defaultId);
+              } else {
+                // Try a fallback approach for common adapter naming patterns
+                console.log(`  Trying common adapter patterns for ID ${defaultId}`);
+                
+                // Simple fallback for adapters with standard naming patterns
+                const sizes = ['5', '6', '8'];
+                const types = ['SA', 'IR', 'EA', 'EF'];
+                const colors = ['R', 'B'];
+                
+                // This builds likely adapter titles based on patterns we've seen
+                const possibleTitles = [];
+                
+                for (const size of sizes) {
+                  for (const type of types) {
+                    for (const color of colors) {
+                      possibleTitles.push(`${type}${size}-${color}`);
+                      possibleTitles.push(`${type}${size}OD-${color}`);
+                    }
+                  }
+                }
+                
+                console.log(`  Generated ${possibleTitles.length} possible adapter titles`);
+                
+                // Try to match the defaultId with a known pattern
+                const lastChars = String(defaultId).slice(-2);
+                
+                // In many cases, the last digits of the ID might indicate if it's -R or -B
+                let colorHint = null;
+                if (lastChars === '26' || lastChars === '08') {
+                  colorHint = 'R';
+                } else if (lastChars === '95' || lastChars === '00') {
+                  colorHint = 'B';
+                }
+                
+                if (colorHint) {
+                  console.log(`  ID pattern suggests color might be ${colorHint}`);
+                  
+                  // Create a placeholder adapter with an educated guess
+                  const placeholderTitle = `SA8-${colorHint}`;
+                  const placeholderAdapter = {
+                    title: placeholderTitle,
+                    value: placeholderTitle
+                  };
+                  
+                  console.log(`  Creating placeholder adapter: ${placeholderTitle}`);
+                  matchIndex = addAdapterToDropdown(placeholderAdapter, defaultId);
+                }
+              }
+            }
+            
+            if (matchIndex >= 0) {
+              // Match found
+              select.selectedIndex = matchIndex;
+              found = true;
+              console.log(`  ✅ Set ${optionType} to option index ${matchIndex}: ${select.options[matchIndex].value}`);
+            } else {
+              // No match found, apply fallback
+              console.log(`  ❌ NO MATCH FOUND for ${optionType} with NetSuite ID ${defaultId}`);
+              console.log(`  ⚠️ FALLBACK APPLIED: Keeping first option (${select.options[0].value})`);
+            }
+            
+            found = true;
+            break; // Stop after finding a match in kit_data
+          }
+        }
+        
+        if (!found) {
+          console.log(`  ❓ No default ID found in kit_data for ${optionType}`);
+          console.log(`  Dropdown will keep first option as default`);
+        }
+      });
+    } catch (e) {
+      console.error('❌ ERROR updating kit options:', e);
+    }
+  }
+  
+  // Handle variant change
+  function handleVariantChange(variant) {
+    console.log('---------------------------------------------');
+    console.log('VARIANT CHANGE DETECTED');
+    console.log('---------------------------------------------');
+    
+    // If we don't have the variant object, try to get it
+    if (!variant) {
+      console.log('Variant object not provided, attempting to detect...');
+      
+      // First try to get from the variantChange event
+      if (window.event && window.event.detail && window.event.detail.variant) {
+        variant = window.event.detail.variant;
+        console.log('Found variant from event.detail');
+      } else {
+        // Otherwise try to get from other global sources
+        const variantId = document.querySelector('input[name="id"][type="hidden"]')?.value;
+        if (variantId) {
+          console.log('Found variant ID from hidden input:', variantId);
+          if (window.product && window.product.variants) {
+            variant = window.product.variants.find(v => v.id == variantId);
+            if (variant) {
+              console.log('Found matching variant in window.product.variants');
+            }
+          }
+        }
+      }
+    }
+    
+    // If we have a variant, update kit options
+    if (variant) {
+      console.log('Variant identified:', variant.id || variant.title || 'Unknown');
+      currentVariant = variant;
+      updateKitOptionsFromVariant(variant);
+    } else {
+      console.warn('❌ Could not find variant data');
+    }
+  }
+  
+  // Monitor for variant selection changes
+  function setupVariantChangeListeners() {
+    console.log('Setting up variant change listeners...');
+    
+    // 1. Listen for variant-change event
+    document.addEventListener('variant:change', function(event) {
+      if (event.detail && event.detail.variant) {
+        console.log('⚡ variant:change event detected');
+        handleVariantChange(event.detail.variant);
+      }
+    });
+    
+    // 2. Listen for variantChange event (different format)
+    document.addEventListener('variantChange', function(event) {
+      if (event.detail && event.detail.variant) {
+        console.log('⚡ variantChange event detected');
+        handleVariantChange(event.detail.variant);
+      }
+    });
+    
+    // 3. Watch variant selector inputs
+    document.querySelectorAll('[name^="options["]').forEach(selector => {
+      selector.addEventListener('change', function() {
+        console.log('⚡ Option selector changed');
+        setTimeout(handleVariantChange, 100);
+      });
+    });
+    
+    // 4. Monitor the hidden variant input
+    const variantInput = document.querySelector('input[name="id"][type="hidden"]');
+    if (variantInput) {
+      console.log('Setting up observer for hidden variant input');
+      // Use MutationObserver to detect changes
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+            console.log('⚡ Variant input value changed');
+            setTimeout(handleVariantChange, 100);
+          }
+        });
+      });
+      
+      observer.observe(variantInput, { attributes: true });
+    } else {
+      console.log('No hidden variant input found');
+    }
+    
+    // 5. Watch theme variant components
+    const themeElements = document.querySelectorAll('variant-radios, variant-selects');
+    if (themeElements.length > 0) {
+      console.log(`Found ${themeElements.length} theme variant elements`);
+      themeElements.forEach(element => {
+        element.addEventListener('change', function() {
+          console.log('⚡ Theme variant element changed');
+          setTimeout(handleVariantChange, 100);
+        });
+      });
+    } else {
+      console.log('No theme variant elements found');
+    }
+    
+    // 6. Hook into Shopify's OptionSelectors if available
+    if (window.Shopify && window.Shopify.OptionSelectors) {
+      console.log('Hooking into Shopify.OptionSelectors');
+      const original = window.Shopify.OptionSelectors.prototype.updateSelectors;
+      
+      window.Shopify.OptionSelectors.prototype.updateSelectors = function(index, option) {
+        const result = original.apply(this, arguments);
+        console.log('⚡ Shopify OptionSelectors updated');
+        setTimeout(handleVariantChange, 100);
+        return result;
+      };
+    } else {
+      console.log('Shopify.OptionSelectors not available');
+    }
+    
+    console.log('Variant change listeners setup complete');
+  }
+  
+  // Load the current variant data when the page loads
+  function loadCurrentVariant() {
+    console.log('Loading current variant data...');
+    
+    // Try to get the current variant from Liquid variables
+    try {
+      {% if current_variant.metafields.custom.kit_data %}
+        // Use Liquid to get the current variant's kit_data
+        currentVariant = {
+          id: {{ current_variant.id }},
+          metafields: {
+            custom: {
+              kit_data: {
+                value: {{ current_variant.metafields.custom.kit_data.value | json }}
+              }
+            }
+          }
+        };
+        
+        console.log('Initial variant from Liquid:', currentVariant);
+        logAvailableOptions(); // Log all available options for debugging
+        updateKitOptionsFromVariant(currentVariant);
+      {% else %}
+        console.log('⚠️ No kit_data available in Liquid for current variant');
+        
+        // Try to get variant from DOM as fallback
+        const variantId = document.querySelector('input[name="id"][type="hidden"]')?.value;
+        if (variantId) {
+          console.log('Found variant ID from hidden input:', variantId);
+          handleVariantChange();
+        }
+      {% endif %}
+    } catch (e) {
+      console.error('❌ Error loading initial variant from Liquid:', e);
+    }
+  }
+  
+  // Initialize everything
+  console.log('Initializing dynamic adapter search script');
+  loadCurrentVariant();
+  setupVariantChangeListeners();
+  
+  // Re-initialize when content is updated by quickView or other components
+  document.addEventListener('quickview:loaded', function() {
+    console.log('⚡ QuickView loaded, reinitializing');
+    setTimeout(function() {
+      logAvailableOptions();
+      loadCurrentVariant();
+    }, 100);
+  });
+  
+  // Export functions for external use
+  window.kitVariantTools = {
+    updateKitOptions: updateKitOptionsFromVariant,
+    handleVariantChange: handleVariantChange,
+    logOptions: logAvailableOptions,
+    findAdapter: findAdapterByNetsuiteId,
+    addAdapter: addAdapterToDropdown
+  };
+});
+  </script>
+</kit-variant-metafield-select>
+<script src="{{ 'boomi-price-update.js' | asset_url }}" defer="defer"></script>

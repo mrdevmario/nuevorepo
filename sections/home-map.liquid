@@ -1,0 +1,158 @@
+{{ 'home-map.css' | asset_url | stylesheet_tag }}
+{% render 'home-map' %}
+
+{% schema %}
+{
+  "name": "Home Map",
+  "tag": "section",
+  "class": "home-map",
+  "settings": [     
+     {
+        "type": "image_picker",
+        "id": "map_image",
+        "label": "Map Image"
+     }
+  ],
+  "max_blocks": 4,
+   "blocks": [
+    {
+      "name": "Information Column 1",
+      "type": "information_column_1",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text"
+        },
+
+        {
+          "type": "html",
+          "id": "heading",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "address",
+          "label": "address"
+        }
+      ]
+    },
+
+     {
+      "name": "Information Column 2",
+      "type": "information_column_2",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text"
+        },
+
+        {
+          "type": "html",
+          "id": "heading",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "address",
+          "label": "address"
+        }
+      ]
+    },
+
+     {
+      "name": "Information Column 3",
+      "type": "information_column_3",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text_1",
+          "label": "Icon Text"
+        },
+
+        {
+          "type": "html",
+          "id": "heading_1",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "subheading_1",
+          "label": "Sub Heading"
+        },
+
+        {
+          "type": "text",
+          "id": "icon_tex_2",
+          "label": "Icon Text"
+        },
+
+        {
+          "type": "html",
+          "id": "heading_2",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "subheading_2",
+          "label": "Sub Heading"
+        }
+      ]
+    },
+
+     {
+      "name": "Information Column 4",
+      "type": "information_column_4",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text"
+        },
+
+        {
+          "type": "html",
+          "id": "heading",
+          "label": "Heading"
+        },
+
+        {
+          "type": "html",
+          "id": "subheading",
+          "label": "Sub Heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Map",
+      "blocks": [
+        {
+          "type": "information_column_1"
+        },
+
+        {
+          "type": "information_column_2"
+        },
+
+        {
+          "type": "information_column_3"
+        },
+
+        {
+          "type": "information_column_4"
+        }
+      ]
+    }
+  ],
+   "enabled_on": {
+   "templates": ["index"]
+  }
+}
+{% endschema %}

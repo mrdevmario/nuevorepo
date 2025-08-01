@@ -1,0 +1,238 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "31c37d26-7d16-42eb-a02d-8be34b8deee3": {
+      "type": "warranty",
+      "blocks": {
+        "04c2fc2a-12f5-427e-b085-7331a676b1a2": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/Elite_Outside_v4.pdf?v=1719605958",
+            "txt": "Elite Liners (Front)"
+          }
+        },
+        "4fe689b6-3ac4-4571-b737-5841dd8f378f": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/Elite_Inside_PNG.png?v=1719840429",
+            "txt": "Elite Liners (Back)"
+          }
+        },
+        "439c2d9b-9c2a-46f7-82c2-add8eda11514": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/New_Damper_Cap_Combo_trifold_front_PNG.png?v=1719840076",
+            "txt": "Damper Cap Combo (Front)"
+          }
+        },
+        "text_E3pgUp": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/New_damper_cap_combo_back.png?v=1719605959",
+            "txt": "Damper Cap Combo (Back)"
+          }
+        },
+        "4003eded-7900-4ac4-8616-c4a20ab46f4c": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/New_damper_cap_combo_back.png?v=1719605959",
+            "txt": "Damper Cap Combo (Back)"
+          }
+        },
+        "8b836ba2-b266-4896-a666-f1d664c887a6": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/SmoothwallFront_PNG.png?v=1719841041",
+            "txt": "SmoothWall Liners (Front)"
+          }
+        },
+        "fefd8ef8-97b1-4a3c-b6db-4f4e57dab724": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/SmoothWallBack_PNG.png?v=1719841042",
+            "txt": "SmoothWall Liners (Back)"
+          }
+        },
+        "90899220-d00f-40a4-ac3c-731795a16cf5": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/SingleCapFront_PNG.png?v=1719841171",
+            "txt": "Single Cap (Front)"
+          }
+        },
+        "c1345a0c-741a-48de-847c-ccd91c5c5212": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/SingleCapBack_PNG.png?v=1719841172",
+            "txt": "Single Cap (Back)"
+          }
+        },
+        "4672baf8-85a8-45e5-bc1c-f716a38ab2e9": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/MultiFlueFront_PNG.png?v=1719842126",
+            "txt": "Multi-Flue Cap (Front)"
+          }
+        },
+        "2006d4b8-3915-4f3d-be69-b132864fc05c": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/MultiFlueBack_PNG.png?v=1719842127",
+            "txt": "Multi-Flue Cap (Back)"
+          }
+        },
+        "25311d70-8f5b-41f3-9685-fcf06d8d4225": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/LightWallFront_PNG.png?v=1719842501",
+            "txt": "LightWall Liner (Front)"
+          }
+        },
+        "text_7m6VEf": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/LightwallBack_PNG.png?v=1719842500",
+            "txt": "LightWall Liner (Back)"
+          }
+        },
+        "text_hTyx8e": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/HeavyWallFront_PNG.png?v=1719842659",
+            "txt": "HeavyWall Liner (Front)"
+          }
+        },
+        "text_QxhyP8": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/HeavyWallBack_PNG.png?v=1719842659",
+            "txt": "HeavyWall Liner (Back)"
+          }
+        },
+        "text_qPcHTC": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/CrossoverFront_PNG.png?v=1719842814",
+            "txt": "Crossover Liner (Front)"
+          }
+        },
+        "text_cFfPzX": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/CrossoverBack_PNG.png?v=1719842814",
+            "txt": "Crossover Liner (Back)"
+          }
+        },
+        "text_wzdNJ8": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/BestCoversFront_PNG.png?v=1719842938",
+            "txt": "Stainless Steel Chase Covers (Front)"
+          }
+        },
+        "text_bLfeYY": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/BESTCoversBack_PNG.png?v=1719842938",
+            "txt": "Stainless Steel Chase Covers (Back)"
+          }
+        },
+        "text_xh77yT": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/FireguardTrifoldFRONT_PNG.png?v=1719843639",
+            "txt": "FireGuard (Front)"
+          }
+        },
+        "text_nYHUjR": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/FireguardTrifoldBACK_RESIZE_PNG.png?v=1719843638",
+            "txt": "FireGuard (Back)"
+          }
+        },
+        "text_cnahw4": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/ChamberGuardTrifoldResize8.5x11_PROOF_Page_1.jpg?v=1719844032",
+            "txt": "ChamberGuard (Front)"
+          }
+        },
+        "text_RWbKmn": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/ChamberGuardTrifoldResize8.5x11_PROOF_Page_2.jpg?v=1719844032",
+            "txt": "ChamberGuard (Back)"
+          }
+        },
+        "text_qNgprg": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/WeatherTite_8.5x11_Brochure_UPDATED.pdf?v=1753286257",
+            "txt": "All WeatherTite Flyers"
+          }
+        },
+        "text_aYDdWw": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/Firepit_FINAL_full.pdf?v=1747925411",
+            "txt": "Firepits (Front &  Back)"
+          }
+        }
+      },
+      "block_order": [
+        "04c2fc2a-12f5-427e-b085-7331a676b1a2",
+        "4fe689b6-3ac4-4571-b737-5841dd8f378f",
+        "439c2d9b-9c2a-46f7-82c2-add8eda11514",
+        "text_E3pgUp",
+        "4003eded-7900-4ac4-8616-c4a20ab46f4c",
+        "8b836ba2-b266-4896-a666-f1d664c887a6",
+        "fefd8ef8-97b1-4a3c-b6db-4f4e57dab724",
+        "90899220-d00f-40a4-ac3c-731795a16cf5",
+        "c1345a0c-741a-48de-847c-ccd91c5c5212",
+        "4672baf8-85a8-45e5-bc1c-f716a38ab2e9",
+        "2006d4b8-3915-4f3d-be69-b132864fc05c",
+        "25311d70-8f5b-41f3-9685-fcf06d8d4225",
+        "text_7m6VEf",
+        "text_hTyx8e",
+        "text_QxhyP8",
+        "text_qPcHTC",
+        "text_cFfPzX",
+        "text_wzdNJ8",
+        "text_bLfeYY",
+        "text_xh77yT",
+        "text_nYHUjR",
+        "text_cnahw4",
+        "text_RWbKmn",
+        "text_qNgprg",
+        "text_aYDdWw"
+      ],
+      "settings": {
+        "spec_strip": "",
+        "heading": "NECS Product Brochures",
+        "warranty_text": "For print copies of our product brochures, click one of the options below. For each product, we have linked the back of the brochure and the front of the brochure and labeled them accordingly."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "31c37d26-7d16-42eb-a02d-8be34b8deee3"
+  ]
+}

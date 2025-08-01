@@ -1,0 +1,60 @@
+<div class="page-width">
+  <div class="grid__wrapper">
+    <div class="left__column">
+      <img src="{{ section.settings.side_image | img_url: 'master' }}" alt="Scholarship Registration">
+    </div>
+    <div class="right__column">
+      <h4>{{ section.settings.heading }}</h4>
+      <p>{{ section.settings.description }}</p>
+      {% comment %} {% form 'contact' %}
+      {{ form.errors | default_errors }}
+        <div class="name">
+          <label for="name">Name</label>
+          <input type="text" name="contact[name]" id="name" placeholder="John Doe" />
+        </div>
+
+        <div class="email">
+          <label for="email">Email</label>
+          <input type="email" name="contact[email]" id="email" placeholder="name@email.com" />
+        </div>
+
+        <div class="form__group">
+          <div class="company">
+            <label for="company">Company</label>
+            <input type="text" name="contact[company]" id="company" placeholder="Acme, Inc." />
+          </div>
+
+          <div class="phone">
+            <label for="phone">Phone</label>
+            <input type="tel" name="contact[phone]" id="phone" placeholder="(123) 456-7890" />
+          </div>
+
+          <div class="address">
+            <label for="address">Address</label>
+            <input type="text" name="contact[address]" id="address" placeholder="8502 Preston Rd." />
+          </div>
+
+          <div class="city">
+            <label for="city">City</label>
+            <input type="text" name="contact[city]" id="city" placeholder="Inglewood" />
+          </div>
+
+          <div class="state">
+            <label for="state">State</label>
+            <input type="text" name="contact[state]" id="state" placeholder="Maine" />
+          </div>
+
+          <div class="zipcode">
+            <label type="text" for="zipcode">Zipcode</label>
+            <input name="contact[zipcode]" id="zipcode" placeholder="98380" />
+          </div>
+        </div>
+
+        <div class="submit">
+          <input id="submit__btn" type="submit" value="Register NOW" />
+        </div>
+      {% endform %} {% endcomment %}
+      <div class="pxFormGenerator" id="-DhgAk5PcAJgoGZdYxg2oQ"></div>
+    </div>
+  </div>
+</div>

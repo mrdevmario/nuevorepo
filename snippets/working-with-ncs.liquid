@@ -1,0 +1,26 @@
+<div class="page-width">
+  <div class="grid__wrapper">
+    <div class="left__column">
+      {% if page.content != "" %}
+        {{ page.content }}
+      {% else %}
+        <h2>{{ section.settings.heading }}</h2>
+        <div>{{ section.settings.description }}</div>
+      {% endif %}
+    </div>
+    <div class="right__column">
+      <div class="image__wrapper">
+        <img src="{{ section.settings.side_image | img_url: 'master' }}" alt="Ncs Image">
+      </div>
+      <div class="map">
+        {% if section.settings.show_map %}
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.007932269333!2d-73.12322272402119!3d44.45350857107543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cca7901b778923f%3A0x667b0181f7792512!2sNew%20England%20Chimney%20Supply!5e0!3m2!1sen!2sus!4v1706309277370!5m2!1sen!2sus"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>

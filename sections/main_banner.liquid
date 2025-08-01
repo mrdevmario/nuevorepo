@@ -1,0 +1,177 @@
+<div class="banner_main_container"> 
+{% for block in section.blocks %}
+<div class="banner_section" style="background-color:{{ block.settings.bg_color }}">
+   <img src="{{ block.settings.img_id | img_url: 'master'}}" alt="">
+  <div class="banner_cont page-width">  
+    <div class="block__inner" >      
+      <div class="banner__box">
+        <h4 class="banner_subheading nec_desktop">
+              {{ block.settings.banner_subhead}}
+        </h4>
+         <h4 class="banner_subheading nec_mobile">
+              {{ block.settings.banner_mobile_subhead}}
+        </h4>
+        <h2 class="banner_heading nec_desktop">
+              {{ block.settings.banner_head}}
+        </h2>
+        <h2 class="banner_heading nec_mobile">
+              {{ block.settings.banner_mobile_head}}
+        </h2>
+        <div class="banner_text nec_desktop">
+          <p> {{ block.settings.banner_txt}}</p>
+       </div>
+        <div class="banner_text nec_mobile">
+          <p> {{ block.settings.banner_mobile_txt}}</p>
+       </div>
+       <div class="banner_buttons"><a href="{{ block.settings.btn_link}}" class="button button--secondary" target="_blank">{{ block.settings.btn_txt}}</a></div>
+      </div>
+   </div>
+</div>
+</div>
+    {% endfor %}
+    </div>
+{% schema %}
+  {
+    "name": "Banner-section",
+   "settings":[
+      
+   ],
+   "blocks":[
+        {
+        "name":"image_block",
+        "type":"image_section",
+        "settings":[
+           {
+            "type":"color",
+            "id":"bg_color",
+            "label":"Background Color"
+          },
+          {
+            "type":"image_picker",
+            "id":"img_id",
+            "label":"select the image"
+          },
+         {
+          "type":"html",
+          "id": "banner_subhead",
+           "label":"Banner Sub Heading"
+           },
+          {
+          "type":"html",
+          "id": "banner_mobile_subhead",
+           "label":"Banner Sub Heading For Mobile"
+           },
+            {
+          "type":"html",
+          "id": "banner_head",
+           "label":"Banner Heading"
+        },
+            {
+          "type":"html",
+          "id": "banner_mobile_head",
+           "label":"Banner Heading For Mobile"
+        },
+           {
+          "type":"html",
+          "id":"banner_txt",
+           "label":"Banner Text"
+        },
+           {
+          "type":"html",
+          "id":"banner_mobile_txt",
+           "label":"Banner Text For Mobile"
+        },
+       {
+      "type":"url",
+      "id":"btn_link",
+      "label":"Button Link"
+    },
+     {
+      "type":"text",
+      "id":"btn_txt",
+      "label":"Button Text"
+    }
+         ]
+      }
+    ],
+  "presets":[
+  {
+    "name":"Banner section"
+    }
+   ]
+  }
+ 
+{% endschema %}
+<style>
+.banner_section {overflow: hidden;position: relative;} 
+.banner_section img {width: auto;height: 100%; position: absolute; bottom: -214px; right: 0;}
+.banner_cont .block__inner{min-height:744px;}
+.banner_cont .banner__box { max-width: 62%; position: relative; bottom: 0;top: 96px; }
+h4.banner_subheading { color: #FFF; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; margin: 0px 0 10px 0; }
+.banner_cont .banner__box h2.banner_heading { margin: 0; color: #19454B; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 900; line-height: 64px; letter-spacing: -1.28px; text-transform: uppercase; }
+.banner_cont .banner__box h2.banner_heading span{color: #FFF;}
+.banner_cont .banner__box .banner_text p { margin-top: 20px; color: #1B4661; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 140%; }
+.banner_cont .banner__box .banner_text p span{font-weight: 600;}
+.banner_cont .banner__box .banner_buttons a { display: inline-block!important;border-radius: 50px; margin-top: 16px; color: #1E4A7D; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; display: flex; padding: 18px 32px 14px 32px; /* justify-content: center; */ /* align-items: center; */ /* gap: 8px; */ }
+.banner_cont .banner__box .banner_buttons .button:hover {background: #19454b; color: #fff;}
+.banner_cont .banner__box .banner_buttons .button:before,.banner_cont .banner__box .banner_buttons .button:after {box-shadow:none;}
+.banner_main_container .slick-nexts {position: absolute; left: 1%; bottom: 50%; z-index: 1; border: 0; background: no-repeat;cursor: pointer;}
+.banner_main_container .slick-prevs {position: absolute; right: 1%; bottom: 50%; z-index: 1; border: 0; background: no-repeat; cursor: pointer;}
+.banner_main_container .slick-arrow img {width: 40px; height: 40px;}
+.banner_main_container .slick-nexts.slick-arrow img {transform: rotate(180deg);}
+
+
+  @media screen and (min-width: 320px) and (max-width: 560px){
+    .banner_cont .block__inner{min-height:644px;}
+  }
+  
+@media screen and (min-width:320px) and (max-width:767px){
+  
+ .banner_cont {padding-left: 40px; padding-right: 40px;}  
+h4.banner_subheading {font-size: 16px;font-weight: 600;}
+.banner_cont .banner__box h2.banner_heading {font-size: 36px;font-weight: 900; line-height: 36px;letter-spacing: -0.72px;}
+.banner_cont .banner__box {max-width: 100%; top: 40px;}
+.banner_section img { height: 320px; bottom: -50px}
+}
+  
+@media screen and (min-width:768px) and (max-width:991px){
+.banner_cont {padding-left: 40px; padding-right: 40px;}  
+h4.banner_subheading {font-size: 18px;font-weight: 600; line-height: 26px;}
+.banner_cont .banner__box h2.banner_heading {font-size: 64px;font-weight: 900; line-height: 64px;letter-spacing: -0.72px;}
+.banner_cont .banner__box {max-width: 90%; top: 60px;}
+.banner_section img {     height: 500px;
+    bottom: -147px;}
+}  
+@media screen and (min-width:992px) and (max-width:1365px){
+.banner_cont .banner__box {max-width: 81%;top: 50px;}
+.banner_section img {height: 585px;
+    bottom: -168px;
+}
+}
+@media screen and (min-width:320px) and (max-width:389px){
+h4.banner_subheading {font-size: 13px;}
+.banner_cont .banner__box h2.banner_heading {font-size: 28px;line-height: 33px;}
+.banner_cont .banner__box .banner_text p {margin-top: 14px; font-size: 16px;}
+.banner_cont .banner__box .banner_buttons a {margin-top: 16px; font-size: 13px; padding: 18px 20px 14px 20px;}
+}
+
+</style> 
+
+<script>   
+     $(".banner_main_container").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,   
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed:12000,
+    draggable: true, 
+    infinite: true, 
+    fade: true, 
+    cssEase: 'cubic-bezier(0.3, 0, 0.6, 1)',
+    touchThreshold: 100,
+    prevArrow: '<div class="slick-prevs" type="button"><img src="https://cdn.shopify.com/s/files/1/0605/6548/7753/files/next.svg?v=1700283209"></div>',
+    nextArrow: '<div class="slick-nexts" type="button"><img src="https://cdn.shopify.com/s/files/1/0605/6548/7753/files/next.svg?v=1700283209"></div>',  
+});
+
+
+</script>

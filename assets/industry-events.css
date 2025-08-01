@@ -1,0 +1,128 @@
+.industry__events {
+  margin-top: 64px;
+}
+
+.industry__events .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
+}
+
+.industry__events .grid__wrapper .right__column {
+  padding-block: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.industry__events .grid__wrapper .left__column {
+  width: 100%;
+  height: 624px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.industry__events .grid__wrapper .left__column img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.industry__events .grid__wrapper .right__column h2 {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.industry__events .grid__wrapper .right__column p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.36px;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.industry__events .grid__wrapper .right__column a {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 130%;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 40px;
+  background: #39aa6e;
+  text-decoration: none;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .industry__events .grid__wrapper .left__column {
+    height: 600px;
+  }
+
+  .industry__events {
+    margin-top: 60px;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .industry__events {
+    margin-top: 50px;
+  }
+
+  .industry__events .page-width {
+    padding-inline: 20px;
+  }
+
+  .industry__events .grid__wrapper {
+    gap: 30px;
+  }
+
+  .industry__events .grid__wrapper .left__column {
+    height: 500px;
+  }
+
+  .industry__events .grid__wrapper .right__column {
+    padding-block: 20px;
+  }
+
+  .industry__events .grid__wrapper .right__column h2 {
+    font-size: 28px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 525px) {
+  .industry__events {
+    margin-top: 50px;
+  }
+
+  .industry__events .grid__wrapper {
+    grid-template-columns: none;
+    grid-template-rows: 1fr;
+    gap: 50px;
+  }
+
+  .industry__events .grid__wrapper .left__column {
+    height: 420px;
+  }
+
+  .industry__events .grid__wrapper .right__column {
+    padding-block: 0;
+    grid-row: 1 / -1;
+  }
+
+  .industry__events .grid__wrapper .right__column a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,201 @@
+.home__map {
+  margin-bottom: 60px;
+}
+
+.home__map .map__wrapper {
+  height: 620px;
+  background-color: #dedede;
+  border-radius: 4px 4px 0px 0px;
+  padding: 30px;
+}
+
+.home__map .map__wrapper img {
+  height: 100%;
+  width: 100%;
+}
+
+.home__map .map__information {
+  padding: 24px;
+  border-radius: 0px 0px 4px 4px;
+  background: #f1efec;
+}
+
+.home__map .map__information .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 16px 24px;
+}
+
+.home__map .map__information .grid__wrapper .grid__i {
+  display: flex;
+  gap: 16px;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 52.931px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+  box-shadow: 0px 5.293px 5.293px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18.46px;
+  font-weight: 900;
+  line-height: 140%;
+  flex-shrink: 0;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper span {
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18.46px;
+  font-weight: 900;
+  line-height: 140%;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper.information_column_1 span {
+  color: #39aa6e;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper.information_column_2 span {
+  color: #1e4a7d;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper.information_column_4 {
+  width: 32px;
+  height: 32px;
+  border: none;
+  box-shadow: none;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper.information_column_4 {
+  background: #39aa6e;
+  opacity: 0.6;
+}
+
+.home__map .map__information .grid__wrapper .icon__wrapper.information_column_3 {
+  display: none;
+}
+
+.home__map .map__information .grid__wrapper .column__3 .column__3-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 52.931px;
+}
+
+.home__map .map__information .grid__wrapper .column__3 .column__3-icon.column__3-iconf {
+  background: #1e4a7d;
+}
+
+.home__map .map__information .grid__wrapper .column__3 .column__3-icon.column__3-iconl {
+  background: #f9c001;
+}
+
+.column__3 > div:not(:first-child) {
+  margin-top: 20px;
+}
+
+.home__map .map__information .grid__wrapper .column__3 > div {
+  display: flex;
+  gap: 16px;
+}
+
+.home__map .map__information .grid__wrapper .column__3 .column__3-icon {
+  flex-shrink: 0;
+}
+
+.home__map .map__information .grid__wrapper .content__wrapper h4 {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.home__map .map__information .grid__wrapper .content__wrapper p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.36px;
+  margin: 0;
+}
+
+.custom-grid-column .grid__i:not(:first-child) {
+  display: grid !important;
+  grid-template-columns: 42px 1fr !important;
+  gap: 16px !important;
+}
+
+.custom-grid-column .grid__i {
+  margin-bottom: 12px;
+}
+
+.shadow-none .icon__wrapper {
+  border: none!important;
+  box-shadow:none!important;
+}
+
+.custom-grid-column .grid__i:first-child {
+  margin-bottom: 20px;
+}
+
+.custom-grid-column .grid__i:not(:first-child) .icon__wrapper {
+  height: 32px !important;
+  width: 32px !important;
+  margin: 0 auto !important;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .home__map .map__wrapper {
+    height: 550px;
+    padding: 24px;
+  }
+
+  .home__map .map__information .grid__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 16px 24px;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .home__map .map__wrapper {
+    height: 450px;
+    padding: 20px;
+  }
+
+  .home__map .page-width {
+    padding-inline: 20px;
+  }
+
+  .home__map .map__information .grid__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 16px 10px;
+  }
+}
+
+@media (max-width: 525px) {
+  .home__map .map__wrapper {
+    height: 350px;
+    padding: 10px;
+    margin-bottom: 24px;
+  }
+
+  .home__map .map__information .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 16px 0;
+  }
+}

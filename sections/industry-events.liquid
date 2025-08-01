@@ -1,0 +1,49 @@
+{{ 'industry-events.css' | asset_url | stylesheet_tag }}
+{% render 'industry-events' %}
+
+{% schema %}
+{
+  "name": "Industry Events",
+  "tag": "section",
+  "class": "industry-events",
+  "settings": [     
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "html",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side Image"
+    },
+
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text"
+    },
+
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Industry Events"
+    }
+  ],
+   "enabled_on": {
+   "templates": ["page"]
+  }
+}
+{% endschema %}

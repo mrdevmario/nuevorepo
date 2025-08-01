@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "job_badges_A9Fmej": {
+      "type": "job-badges",
+      "settings": {}
+    },
+    "working_with_ncs_iBU9pj": {
+      "type": "working-with-ncs",
+      "settings": {
+        "heading": "Working with NECS",
+        "description": "<p>New England Chimney Supply (NECS) is a leading manufacturing company specializing in chimney venting systems. With over 14 years of experience, we take pride in providing high-quality products and exceptional customer service to our clients. We are currently seeking a positive, self-motivated individual to join our Customer Experience team who reflects our core values and commitment to excellence.<\/p>\n<p>As a Customer Experience Specialist at New England Chimney Supply, you will be the first point of contact for our customers. Your primary responsibilities will include assisting customers with inquiries, processing orders, and ensuring customer satisfaction. We are looking for someone with a positive attitude, strong communication skills, and a willingness to learn and grow within our team.<\/p>",
+        "side_image": "shopify:\/\/shop_images\/career_page.jpg",
+        "show_map": true
+      }
+    },
+    "job_listing_PRLYq6": {
+      "type": "job-listing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "job_badges_A9Fmej",
+    "working_with_ncs_iBU9pj",
+    "job_listing_PRLYq6"
+  ]
+}

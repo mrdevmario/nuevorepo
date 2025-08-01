@@ -1,0 +1,293 @@
+<div class="ft_pos page-width">
+<div class="ft_pos_cont">
+  <div class="ft_btn_head">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="ft_tabs">
+        <button class="active btn" id="all">All</button>
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'loc_btn' %}  
+            {% if block.settings.btn_location %}
+            <button class="btn" id="{{ block.settings.btn_loc_class }}">{{ block.settings.btn_location }}</button>	
+            {% endif %}
+        {% endcase %}
+        {% endfor %} 
+    </div>
+  </div>
+  {% assign text_blocks = section.blocks | where: "type", "text" %} 
+  {% if text_blocks.size > 0 %}
+    <div class="ft_pos_block">
+      {% for block in text_blocks %}
+        {% if block != empty %}
+          <div class="ft_pos_item {{ block.settings.loc_class }}" style="background-color:{{ block.settings.bg_color }}">
+            <h4 class="pos_title">{{ block.settings.job_title }}</h4>
+            <div class="tag_block">
+              <div class="job_type">{{ block.settings.job_type }}</div>
+              <div class="job_location">{{ block.settings.job_location }}</div>
+              <div class="job_exp">{{ block.settings.job_exp }}</div>
+            </div>
+            <div class="job_detail">
+              <div class="job_desc"> {{ block.settings.job_desc }} </div>
+              <div class="job_salary">{{ block.settings.job_salary }} <span>{{ block.settings.job_tag }}</span></div>
+            </div> 
+            <hr>
+            <div class="job_btn">
+              <a href="{{ block.settings.job_link }}">Apply Now</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %} 
+    <p class="job__unavailable empty-pos">Thank you for exploring opportunities with NECS. Currently, there are no available positions. We encourage you to check back for future opportunities as we regularly update our listings. We appreciate your interest and look forward to the possibility of working together.</p>
+    </div>
+  {% else %}
+    <p class="job__unavailable empty-pos">Thank you for exploring opportunities with NECS. Currently, there are no available positions. We encourage you to check back for future opportunities as we regularly update our listings. We appreciate your interest and look forward to the possibility of working together.</p>
+  {% endif %}
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Career_Positions",
+    "settings": [
+     {
+        "type":"text",
+        "id":"heading",
+        "label":"Add Heading"
+      }    
+    ], 
+    "blocks":[
+    {
+    "type":"text",
+    "name":"Career_Positions",
+    "settings":[   
+    {
+        "type":"color",
+        "id":"bg_color",
+        "label":"Add BG Color"
+      },
+    {
+        "type":"text",
+        "id":"job_title",
+        "label":"Add Job Title"
+      },
+      {
+        "type": "select",
+        "id": "job_type",
+        "label": "Job Type",
+        "options": [
+          {
+            "value": "Full Time",
+            "label": "Full Time"
+          },
+          {
+            "value": "Part Time",
+            "label": "Part Time"
+          }          
+        ],
+        "default": "Full Time"
+      },
+       {
+        "type":"text",
+        "id":"loc_class",
+        "label":"Add Location Class"
+       },
+      {
+        "type": "select",
+        "id": "job_location",
+        "label": "Job Location",
+        "options": [
+          {
+            "value": "Springfield, VA",
+            "label": "Springfield, VA"
+          },
+          {
+            "value": "Williston, VT",
+            "label": "Williston, VT"
+          }       
+        ],
+        "default": "Springfield, VA"
+      },
+      {
+        "type": "select",
+        "id": "job_exp",
+        "label": "Job Experience",
+        "options": [
+          {
+            "value": "Entry-level",
+            "label": "Entry-level"
+          },
+          {
+            "value": "Experienced",
+            "label": "Experienced"
+          }          
+        ],
+        "default": "Experienced"
+      },
+      {
+        "type":"text",
+        "id":"job_desc",
+        "label":"Add Job Description"
+      },
+      {
+        "type":"text",
+        "id":"job_salary",
+        "label":"Add Job Salary"
+      } ,
+       {
+        "type":"text",
+        "id":"job_tag",
+        "label":"Add Job Tag"
+      } 
+      ,
+        {
+        "type":"url",
+        "id":"job_link",
+        "label":"Add Job Link"
+      } 
+     
+    ]
+    
+  },
+  {
+    "type":"loc_btn",
+    "name":"Location_btn",
+    "settings":[   
+     {
+        "type":"text",
+        "id":"btn_loc_class",
+        "label":"Add Location Class"
+       },
+      {
+        "type":"text",
+        "id":"btn_location",
+        "label":"Add Location"
+       }
+    ]
+    
+  }
+  ],
+"presets":[
+  {
+    "name":"Career_Positions"
+  }
+]
+  }
+{% endschema %}
+
+<style> 
+
+.ft_pos_cont h2 { color:#1E4A7D; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase;    margin: 0; }
+.ft_pos_item {padding: 24px; border-radius: 8px; width: 100%;}
+h4.pos_title { color:#19454B; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase;    margin: 0 0 8px 0; }
+.tag_block { display: flex; padding: 8px 0; justify-content: flex-start; align-items: center; gap: 8px; }
+.tag_block div { color: #000; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%; padding: 8px 16px; border-radius: 4px; border: 1px solid #19454B; }
+.job_desc { color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px; }  
+.job_salary { color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;    white-space: nowrap; }
+.job_salary span { color: #19454B;font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 125%; display: block;text-align: right; }
+.job_detail {padding: 16px 0; margin: 8px 0;}
+.ft_pos_item hr {margin: 8px 0;}
+.ft_pos_block {display: grid; grid-template-columns: 49% 49%; gap: 24px;}
+.ft_pos_cont .job_detail {display: flex; gap: 40px;}
+.ft_pos_cont .job_btn {padding-top: 16px;display: flex;justify-content: end;}
+.ft_pos_cont .job_btn a { color: #FFF; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; display: inline-block; padding: 8px 24px; border-radius: 40px; background: #39AA6E; text-decoration: none; } 
+.ft_pos_cont  .slick-slider {margin:0 -12px;}
+.ft_pos_cont  .slick-slide {margin-right:12px;margin-left:12px;}
+.ft_tabs {display: flex; gap: 8px;}
+.ft_btn_head {display: flex;    gap: 8px; align-items: center; padding: 8px 0; margin-bottom: 16px; }
+.ft_tabs .btn { color: #1E4A7D; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase; padding: 6px 12px;  border-radius: 4px; background: #F1EFEC; border: 0; cursor: pointer;}  
+.ft_tabs .active {background:#F9C001;}
+.job__unavailable {
+  color: #19454B;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.36px;
+}
+
+  
+@media screen and (min-width:320px) and (max-width:767px){ 
+.ft_btn_head {flex-direction: column; align-items: baseline;}
+.ft_tabs .btn {font-size: 14px;}
+.ft_pos_block {display: grid; grid-template-columns: 100%; gap: 16px;}
+.tag_block div {padding: 8px 14px;}
+.ft_pos_cont .job_detail {gap: 24px;}
+.ft_pos_item {padding: 12px;}
+.ft_pos_cont .job_btn {padding-top: 4px;}
+}
+@media screen and (min-width:768px) and (max-width:991px){  
+.ft_pos_block {display: grid; grid-template-columns: 100%; gap: 20px;}
+.ft_tabs .btn {font-size: 16px;}
+}
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+.ft_tabs .btn {font-size: 12px;padding: 6px 8px;}
+.tag_block div {padding: 8px;font-size: 11px;}
+.job_desc {font-size: 15px;}
+h4.pos_title {font-size: 16px; line-height: 125%;}
+.ft_pos_cont .job_btn a {font-size: 14px;padding: 8px 20px;}
+
+}  
+
+
+</style>
+
+  <script>
+    // $(".ft_pos_block").slick({
+    //    slidesToShow: 2,
+    //    infinite:false,       
+    //    slidesToScroll: 1,
+    //    autoplay: true,
+    //    arrows: false,       
+    //      responsive: [
+    //     {
+    //       breakpoint:768,
+    //       settings: {
+    //         slidesToShow: 1        
+    //       }
+    //     },
+    //     {
+    //       breakpoint:991,
+    //       settings: {
+    //         slidesToShow: 1
+            
+    //       }
+    //     }
+    //   ]
+    // });
+    
+    $(document).ready(function() {
+      var $elements = $('.ft_pos_block');
+      if ($elements.length > 0) {
+        $('.ft_pos_block > .empty-pos').hide();
+      } else {
+        $('.ft_pos_block > .empty-pos').show();
+      }
+
+      var $btns = $('.btn').click(function() {
+        if (this.id == 'all') {
+          $('.ft_pos_block > div').fadeIn(450);
+          if ($elements.length > 0) {
+            $('.ft_pos_block > .empty-pos').hide();
+          } else {
+            $('.ft_pos_block > .empty-pos').show();
+          }
+        } else {
+          var $el = $('.' + this.id).fadeIn(450);
+          $('.ft_pos_block > div').not($el).hide();
+          if($el.length > 0) {
+            $('.ft_pos_block > .empty-pos').hide();
+          } else {
+            $('.ft_pos_block > .empty-pos').show();
+          }
+        }
+        $btns.removeClass('active');
+        $(this).addClass('active');
+      })
+    });
+  </script>
+

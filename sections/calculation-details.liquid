@@ -1,0 +1,191 @@
+<div class="page-width calculation-details-page calculation_type_content {{ section.settings.active_class }}" id="{{ section.settings.tab_link }}">
+  <div class="calculation-details">
+    <div class="calculation-details__head">
+      <h2 class="calculation-details__head-title">{{ section.settings.main_heading }}</h2>
+      <p class="calculation-details__head-text">{{ section.settings.text }}</p>
+    </div>
+    <div class="calculation-details__steps">
+      {% for block in section.blocks %}
+        <div class="calculation-details__steps-item order-desktop-{{ block.settings.block_order }}" id="{{ section.settings.tab_link }}">
+          <h4 class="calculation-details__steps-item-title">{{ block.settings.title }}</h4>
+          <p class="calculation-details__steps-item-text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Calculation Details",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tab_link",
+      "label": "Add tab link"
+    },
+    {
+      "type": "text",
+      "id": "active_class",
+      "label": "Add active class"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Add Main Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Add text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "calculation_details_step",
+      "name": "Calculation Details Step",
+      "settings": [ 
+        {
+          "type": "text",
+          "id": "block_order",
+          "label": "Step Order Desktop"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Add Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Add Step Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calculation Details",
+      "blocks": [
+        {
+          "type": "calculation_details_step"
+        },
+        {
+          "type": "calculation_details_step"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .calculation-details-page {
+    padding: 64px 4vw 64px 4vw;
+  }
+  
+  .calculation_type_content {
+    display: none;
+  }
+
+  .calculation_type_content.active {
+    display: block;
+  }
+
+  .active-content > * { opacity: 1; transform: translateY(0); }
+
+  .calculation-details {
+    background: var(--Neutral---Stone, #F1EFEC);
+    border-radius: 8px;
+    padding: 40px;
+  }
+
+  .calculation-details__head {
+    width: 50%;
+  }
+
+  .calculation-details__head-title {
+    color: var(--Bright-Green, #39AA6E);
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-top: 0px
+  }
+
+  .calculation-details__steps-item-title {
+    color: var(--Bright-Green, #39AA6E);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0px;
+  }
+
+  .calculation-details__head-text { 
+    font-weight: 700;
+  }
+
+  .calculation-details__steps-item-text {
+    font-weight: 500;
+  }
+
+  .calculation-details__head-text,
+  .calculation-details__steps-item-text {
+    color: var(--Darkest-Green, #19454B);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 130%;
+    letter-spacing: -0.36px;
+  }
+
+  .calculation-details__steps-item-text {
+    margin: 0px;
+  }
+
+  .calculation-details__steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+    row-gap: 24px;
+    margin-top: 24px;
+  }
+
+  @media screen and (min-width:992px) and (max-width:1365px){  
+    .calculation-details-page {padding: 36px 2vw 36px 2vw;}
+    .calculation-details {padding: 40px}
+  }
+
+  @media screen and (min-width:768px) and (max-width:991px){ 
+    .calculation-details-page {padding: 40px 5vw 40px 5vw;}
+    .calculation-details {padding: 32px}
+    .calculation-details__head {width: 100%};
+  }
+
+  @media screen and (min-width: 767px) {
+    .order-desktop-1{order: 1}
+    .order-desktop-2{order: 2}
+    .order-desktop-3{order: 3}
+    .order-desktop-4{order: 4}
+    .order-desktop-5{order: 5}
+  }
+
+  @media screen and (max-width:767px){
+    .calculation-details-page {padding: 0px 5vw 24px 5vw;}
+    .calculation-details {padding: 24px}
+    .calculation-details__head {width: 100%;}
+    .calculation-details__steps {grid-template-columns: repeat(1, 1fr);}
+  }
+
+  @media screen and (min-width:320px) and (max-width:389px){  
+    .calculation-details {padding: 24px}
+    .calculation-details__head {width: 100%};
+    .calculation-details__steps {grid-template-columns: repeat(1, 1fr);}
+  }
+</style>

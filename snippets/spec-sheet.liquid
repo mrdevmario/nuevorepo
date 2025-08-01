@@ -1,0 +1,76 @@
+<div class="page-width">
+  <div class="sheet__wrapper">
+  <div class="mobile__content">
+      <div class="breadcrumb__wrapper">
+        {% render 'breadcrumb' %}
+      </div>
+      <h1 class="page__title__mobile">{{ page.title }}</h1>
+      {% if page.metafields.custom.sku.value %}
+        <span class="product__sku__mobile">
+          {% assign current_variant = page.metafields.custom.sku.value.selected_or_first_available_variant %}
+          SKU: {{ current_variant.sku }}
+        </span>
+      {% endif %}
+    </div>
+    <div class="left__column">
+      <div class="spec__images">
+      {% assign spec_images = page.metafields.custom.spec_sheet_images.value %}
+        {% for image in spec_images  %}
+          <div>
+            {% if image %}
+              <img src="{{ image | image_url }}">
+              {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      
+      {% comment %} Editable specification card {% endcomment %}
+      {% if section.settings.show_spec_card %}
+        <div class="spec__card">
+          {% if section.settings.spec_card_title != blank %}
+            <h3 class="spec__card__title">{{ section.settings.spec_card_title }}</h3>
+          {% endif %}
+          <ul>
+            {% if section.settings.spec_card_item_1 != blank %}
+              <li>{{ section.settings.spec_card_item_1 }}</li>
+            {% endif %}
+            {% if section.settings.spec_card_item_2 != blank %}
+              <li>{{ section.settings.spec_card_item_2 }}</li>
+            {% endif %}
+            {% if section.settings.spec_card_item_3 != blank %}
+              <li>{{ section.settings.spec_card_item_3 }}</li>
+            {% endif %}
+            {% if section.settings.spec_card_item_4 != blank %}
+              <li>{{ section.settings.spec_card_item_4 }}</li>
+            {% endif %}
+            {% if section.settings.spec_card_item_5 != blank %}
+              <li>{{ section.settings.spec_card_item_5 }}</li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+    <div class="right__column">
+      <div class="breadcrumb__wrapper">
+        {% render 'breadcrumb' %}
+      </div>
+      <div class="page__content">
+        <h1 class="page__title">{{ page.title }}</h1>
+        {% if page.metafields.custom.sku.value %}
+        <span class="product__sku__mobile">
+          {% assign current_variant = page.metafields.custom.sku.value.selected_or_first_available_variant %}
+            SKU: {{ current_variant.sku }}
+          </span>
+        {% endif %}
+        <div>
+          {{ page.content }}
+        </div>
+      </div>
+      <div class="spec__table">
+        {{ page.metafields.custom.spec_table }}
+      </div>
+    </div>
+  </div>
+</div>

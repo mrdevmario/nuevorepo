@@ -1,0 +1,143 @@
+<section class="spec_detail page-width">
+  <div class="spec_left">
+    <div class="spec_top nec_mobile"><h5>{{ section.settings.spec_brd }}</h5>
+    <h2>{{ section.settings.spec_head }}</h2>
+    <h6>{{ section.settings.spec_sku }}</h6></div>
+    <div class="spec_img">
+      <img src="{{ section.settings.qr | img_url:'master' }}">
+      <img src="{{ section.settings.spec_main | img_url:'master' }}">
+    </div>
+    <div class="spec_info">
+     {{ section.settings.spec_info }}
+    </div>
+  </div>
+  <div class="spec_right">
+    <div class="spec_top nec_desktop"><h5>{{ section.settings.spec_brd }}</h5>
+    <h2>{{ section.settings.spec_head }}</h2>
+    <h6>{{ section.settings.spec_sku }}</h6></div>
+    {% for block in section.blocks %} 
+    <div class="spec_detail">
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.desc }}</p>
+    </div>
+    {% endfor %} 
+  
+  </div>
+  
+</section>
+{% schema %}
+  {
+    "name": "Spec Detail",
+    "settings": [
+     {
+        "type":"image_picker",
+        "id":"qr",
+        "label":"Add QR Image"
+      },
+       {
+        "type":"image_picker",
+        "id":"spec_main",
+        "label":"Add Spec Image"
+      },
+      {
+        "type":"html",
+        "id":"spec_info",
+        "label":"Add Spec Infomations"
+      },
+     {
+        "type":"text",
+        "id":"spec_brd",
+        "label":"Add Breadcrumb Path"
+      },
+      {
+        "type":"text",
+        "id":"spec_head",
+        "label":"Add Spec Heading"
+      },     
+      {
+        "type":"text",
+        "id":"spec_sku",
+        "label":"Add Spec SKU"
+      }
+    ],
+  "blocks":[
+  {
+    "type":"text",
+    "name":"spec_detail",
+    "settings":[   
+    {
+        "type":"text",
+        "id":"title",
+        "label":"Add Title"
+      },
+    {
+        "type":"html",
+        "id":"desc",
+        "label":"Add Desc"
+      }
+    ]
+  }
+ 
+  ],
+"presets":[
+  {
+    "name":"Spec Detail"
+  }
+]
+  }
+{% endschema %}
+
+<style>  
+section.spec_detail { display: flex; column-gap: 64px; margin-top: 40px; margin-bottom: 40px; }
+.spec_info {display: flex; padding: 24px; align-items: center; gap: 8px; align-self: stretch; border-radius: 4px; background: #19454B; }
+.spec_info ul li {color: #FFF; font-family: Roboto; font-size: 19px; font-style: normal; font-weight: 700; line-height: 130%;    margin-bottom: 10px; }
+.spec_info ul li:last-child {margin-bottom: 0;}
+.spec_info ul { margin: 0; padding: 0 0 0 24px; }
+.spec_top h5 {color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;margin: 0 0 8px 0; }
+.spec_top h2 {color: #19454B; font-family: Poppins; font-size: 40px; font-style: normal; font-weight: 900; line-height: 48px; letter-spacing: -0.8px; text-transform: uppercase; max-width: 600px;margin: 0;}
+.spec_top h6 {color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%;margin: 16px 0 0 0; }
+.spec_detail {margin-top: 24px; margin-bottom: 24px;}
+.spec_detail:last-child {margin-bottom: 0;}
+.spec_detail h3 {color: #39AA6E; font-family: Poppins; font-size: 18px; font-style: normal; font-weight: 600; line-height: 140%; letter-spacing: 0.72px; text-transform: uppercase;    margin: 0 0 16px 0; }
+.spec_detail p{color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px;    margin: 0;}  
+.spec_detail p span {font-weight: 700;}
+  
+.spec_table table { border-spacing: 0; border-color: #f1efec; border: 1.314px solid #f1efec!important; border-top: 0; width: 100%;     box-shadow: none;table-layout: auto;}
+.spec_table table tr td:nth-child(1) { background: #19454B; color: #fff; font-weight: 500;    border-color: #f1efec!important;}
+.spec_table table tr td {border-top: 1.314px solid #f1efec!important; padding: 8px 16px; color: #000; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 130%;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+section.spec_detail {flex-direction: column; margin-top: 24px;margin-bottom: 24px;}
+.spec_img img { width: 49%;}
+.spec_info { padding: 16px 8px;}
+.spec_detail {margin-top: 40px; margin-bottom: 24px;}
+.spec_top h5 {font-size: 12px;}
+.spec_top h2 {font-size: 28px;font-weight: 900; line-height: 32px;}
+.spec_top h6 {font-size: 18px;}
+.spec_detail p span {font-weight: 700;}
+.nec_rtmenu {background: #F9C001;}  
+.spec_table {overflow-y: hidden;}
+.spec_table table {width: 600px;}
+.spec_table table tr td:nth-child(1) {width: 180px;}
+}  
+@media screen and (min-width:768px) and (max-width:991px){  
+section.spec_detail {flex-direction: column; margin-top: 24px;margin-bottom: 24px;}
+.spec_img img { width: 49%;}
+.spec_info { padding: 16px 8px;}
+.spec_detail {margin-top: 40px; margin-bottom: 24px;}
+.spec_top h5 {font-size: 15px;}
+.spec_top h2 {font-size: 28px;font-weight: 900; line-height: 32px;}
+.spec_top h6 {font-size: 18px;}
+.nec_rtmenu {background: #F9C001;}
+}
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+section.spec_detail {column-gap: 30px;}
+.spec_top h2 {font-size: 35px; line-height: 40px;}
+.spec_detail {margin-top: 16px; margin-bottom: 16px;}
+}
+
+</style>
+
+{% javascript %}
+{% endjavascript %}

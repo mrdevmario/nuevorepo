@@ -1,0 +1,30 @@
+<style>
+  .scholarship-program-banner {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.70) 100%),
+    url('{{ section.settings.bg_image | img_url: ' master' }}'),
+    lightgray 50% / cover no-repeat;
+    background-blend-mode: darken, normal;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  @media (max-width: 525px) {
+    .scholarship-program-banner {
+      background-image: none;
+      background: linear-gradient(13deg, rgba(0, 0, 0, 0.70) 8.33%, rgba(0, 0, 0, 0.00) 54.12%),
+      url('{{ section.settings.bg_mobile | img_url: ' master' }}'),
+      lightgray 50% / cover no-repeat;
+      background-blend-mode: darken, normal;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      background-position: center !important;
+    }
+  }
+</style>
+
+<div class="page-width">
+  <div class="banner__content">
+    <h1>{{ section.settings.heading }}</h1>
+  </div>
+</div>

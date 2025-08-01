@@ -1,0 +1,50 @@
+<style>
+  .contact-directions__wrapper h2 {
+    color: {{ section.settings.color }};
+    font-size: {{ section.settings.font_size }}px;
+  }
+</style>
+
+<div class="contact-directions__wrapper">
+  <div class="page-width">
+  <h2>{{ section.settings.heading }}</h2>
+    <div class="grid__wrapper">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'left_column' %}
+          <div class="left__column" style="background-color: {{ block.settings.background }}; border-radius: {{ block.settings.border_radius }}px">
+            <h4>{{ block.settings.heading }}</h4>
+            <div class="content__wrapper">
+              <h5>{{ block.settings.sub_heading_1 }}</h5>
+              <ul>
+                {{ block.settings.list_1 }}
+              </ul>
+            </div>
+             <div class="content__wrapper content__wrapper__last">
+              <h5>{{ block.settings.sub_heading_2 }}</h5>
+              <ul>
+                {{ block.settings.list_2 }}
+              </ul>
+            </div>
+          </div>
+          {% when 'right_column' %}
+          <div class="right__column" style="background-color: {{ block.settings.background }}; border-radius: {{ block.settings.border_radius }}px">
+            <h4>{{ block.settings.heading }}</h4>
+             <div class="content__wrapper">
+              <h5>{{ block.settings.sub_heading_1 }}</h5>
+              <ul>
+                {{ block.settings.list_1 }}
+              </ul>
+            </div>
+             <div class="content__wrapper content__wrapper__last">
+              <h5>{{ block.settings.sub_heading_2 }}</h5>
+              <ul>
+                {{ block.settings.list_2 }}
+              </ul>
+            </div>
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "31c37d26-7d16-42eb-a02d-8be34b8deee3": {
+      "type": "warranty",
+      "blocks": {
+        "04c2fc2a-12f5-427e-b085-7331a676b1a2": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/INSTALLATION_INSTRUCTIONS_-_ALL_BEST_FLEX_LINERS_updated.pdf?v=1731506891",
+            "txt": "Best-Flex Stainless Steel Liner"
+          }
+        },
+        "text_GmUraa": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/NES-RIGID-instruction-manual-4-1-2017.pdf?v=1752691745",
+            "txt": "Rigid Liner"
+          }
+        },
+        "text_8kFw4p": {
+          "type": "text",
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/NES-ALUMINUM-instruction-manual-4-1-2017.pdf?v=1752691745",
+            "txt": "Aluminum Liner"
+          }
+        },
+        "4fe689b6-3ac4-4571-b737-5841dd8f378f": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=cap",
+            "txt": "BEST CAPS Warranty"
+          }
+        },
+        "439c2d9b-9c2a-46f7-82c2-add8eda11514": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=chamberguard",
+            "txt": "NECS ChamberGuard Warranty"
+          }
+        },
+        "4003eded-7900-4ac4-8616-c4a20ab46f4c": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=crowntite",
+            "txt": "NECS CrownTite Warranty"
+          }
+        },
+        "8b836ba2-b266-4896-a666-f1d664c887a6": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=crowntitewinterformula",
+            "txt": "NECS CrownTite Winter Formula Warranty"
+          }
+        },
+        "fefd8ef8-97b1-4a3c-b6db-4f4e57dab724": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=fireguard",
+            "txt": "NECS FireGuard Warranty"
+          }
+        },
+        "90899220-d00f-40a4-ac3c-731795a16cf5": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=flashtite",
+            "txt": "NECS FlashTite Warranty"
+          }
+        },
+        "c1345a0c-741a-48de-847c-ccd91c5c5212": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=flexiblecrown",
+            "txt": "NECS Flexible Crown Warranty"
+          }
+        },
+        "4672baf8-85a8-45e5-bc1c-f716a38ab2e9": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=repelh2o",
+            "txt": "NECS Repel H₂0 Warranty"
+          }
+        },
+        "2006d4b8-3915-4f3d-be69-b132864fc05c": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=stainless",
+            "txt": "BEST FLEX Stainless Steel Warranty"
+          }
+        },
+        "25311d70-8f5b-41f3-9685-fcf06d8d4225": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://6082225.extforms.netsuite.com/app/site/crm/externalcustrecordpage.nl/compid.6082225/.f?formid=8&h=AAFdikaICWz4mVRLJTtDQBZy18FcUz9Yo77aGWvdEEA6LQ8AcT4&redirect_count=1&did_javascript_redirect=T&warranty=watertite",
+            "txt": "NECS WaterTite Warranty"
+          }
+        },
+        "text_7m6VEf": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/NES-Aluminum-Warranty.pdf?v=1716407980",
+            "txt": "BEST FLEX Aluminum Warranty (PRINT)"
+          }
+        },
+        "text_hTyx8e": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/Weathertite_full_warranty_card.pdf?v=1716407937",
+            "txt": "WeatherTite Warranty (PRINT)"
+          }
+        },
+        "text_QxhyP8": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/NES_Stainless_Warranty.pdf?v=1716407937",
+            "txt": "BEST FLEX Stainless Steel Warranty (PRINT)"
+          }
+        },
+        "text_qPcHTC": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "link": "https://cdn.shopify.com/s/files/1/0844/6391/1230/files/NECS-CMFH-Warranty-CARD.pdf?v=1716407980",
+            "txt": "BEST CAPS Warranty (PRINT)"
+          }
+        }
+      },
+      "block_order": [
+        "04c2fc2a-12f5-427e-b085-7331a676b1a2",
+        "text_GmUraa",
+        "text_8kFw4p",
+        "4fe689b6-3ac4-4571-b737-5841dd8f378f",
+        "439c2d9b-9c2a-46f7-82c2-add8eda11514",
+        "4003eded-7900-4ac4-8616-c4a20ab46f4c",
+        "8b836ba2-b266-4896-a666-f1d664c887a6",
+        "fefd8ef8-97b1-4a3c-b6db-4f4e57dab724",
+        "90899220-d00f-40a4-ac3c-731795a16cf5",
+        "c1345a0c-741a-48de-847c-ccd91c5c5212",
+        "4672baf8-85a8-45e5-bc1c-f716a38ab2e9",
+        "2006d4b8-3915-4f3d-be69-b132864fc05c",
+        "25311d70-8f5b-41f3-9685-fcf06d8d4225",
+        "text_7m6VEf",
+        "text_hTyx8e",
+        "text_QxhyP8",
+        "text_qPcHTC"
+      ],
+      "settings": {
+        "spec_strip": "",
+        "heading": "NECS Installation Instructions",
+        "warranty_text": "Click below to learn more about Best Flex Liner Installation."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "31c37d26-7d16-42eb-a02d-8be34b8deee3"
+  ]
+}

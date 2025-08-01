@@ -1,0 +1,85 @@
+.join-the-team {
+  height: 582px;
+  background-color: #9a9595;
+  background-position: 0% 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-inline: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-blend-mode: multiply;
+}
+
+.join-the-team .join-the-team__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 92px;
+}
+
+.join-the-team .join-the-team__wrapper h2 {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.72px;
+  text-transform: uppercase;
+  width: 607px;
+  margin: 0 !important;
+}
+
+@media (min-width: 1024px) and (max-width: 1299px) {
+  .join-the-team .join-the-team__wrapper h2 {
+    width: auto;
+  }
+
+  .join-the-team .join-the-team__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .join-the-team {
+    background-position: 80%;
+    padding-inline: 0;
+  }
+
+  .join-the-team .join-the-team__wrapper {
+    gap: 30px;
+  }
+
+  .join-the-team .join-the-team__wrapper h2 {
+    width: auto;
+    font-size: 30px;
+  }
+
+  .join-the-team .join-the-team__wrapper img {
+    width: 350px;
+  }
+}
+
+@media (max-width: 525px) {
+  .join-the-team {
+    padding-inline: 24px;
+    background-position: 75%;
+  }
+
+  .join-the-team .join-the-team__wrapper h2 {
+    width: auto;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: -1.12px;
+  }
+
+  .join-the-team .join-the-team__wrapper {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .join-the-team .join-the-team__wrapper img {
+    width: 260px;
+  }
+}

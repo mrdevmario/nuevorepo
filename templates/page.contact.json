@@ -1,0 +1,137 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "db6a25b8-4de9-476c-943f-67b570bbb686": {
+      "type": "contact-map",
+      "settings": {
+        "heading": "Contact US at NECS",
+        "color": "#1e4a7d",
+        "font_size": 64,
+        "show_map": true
+      }
+    },
+    "54e0129b-0c62-4530-af5f-678ffa137555": {
+      "type": "contact-info",
+      "blocks": {
+        "template--21758900076862__54e0129b-0c62-4530-af5f-678ffa137555-hours-1": {
+          "type": "hours",
+          "settings": {
+            "heading": "VT & VA Hours of Operation:",
+            "days_1": "Monday-Friday",
+            "time_1": "7:30am - 4:00pm",
+            "days_2": "",
+            "time_2": "",
+            "days_3": "Saturday & Sunday",
+            "time_3": "Closed"
+          }
+        },
+        "template--21758900076862__54e0129b-0c62-4530-af5f-678ffa137555-address-1": {
+          "type": "address",
+          "settings": {
+            "heading": "Address:",
+            "sub_heading_1": "Corporate Headquarters",
+            "address_description_1": "<p>New England Chimney Supply, Inc.<\/p>\n<p>34 Commerce Street<\/p>\n<p>Williston, VT 05495<\/p>",
+            "sub_heading_2": "Mid-Atlantic Facility",
+            "address_description_2": "<p>New England Chimney Supply, Inc.<\/p>\n<p>7956-B Cameron Brown Court<\/p>\n<p>Springfield, VA 22153<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21758900076862__54e0129b-0c62-4530-af5f-678ffa137555-hours-1",
+        "template--21758900076862__54e0129b-0c62-4530-af5f-678ffa137555-address-1"
+      ],
+      "settings": {
+        "background": "#F1EFEC",
+        "border_radius": 8
+      }
+    },
+    "af1e674c-caea-478f-bf72-5a90fcaa4c90": {
+      "type": "contact-directions",
+      "blocks": {
+        "template--21758900076862__af1e674c-caea-478f-bf72-5a90fcaa4c90-left_column-1": {
+          "type": "left_column",
+          "settings": {
+            "background": "#F1EFEC",
+            "border_radius": 8,
+            "heading": "Directions for Small Vehicles:",
+            "sub_heading_1": "Corporate Headquarters",
+            "list_1": "<li>I89 North EXIT 12 (RIGHT at end of ramp)<\/li>\n<li>I89 South EXIT 12 (LEFT at end of ramp)<\/li>\n<li>At the 3rd light, LEFT onto Williston Rd (RT 2)<\/li>\n<li>1\/2mile LEFT onto Commerce Street<\/li>\n<li>34 Commerce Street on RIGHT<\/li>",
+            "sub_heading_2": "Mid-Atlantic Facility",
+            "list_2": "<li>Take EXIT 166B towards Fairfax Court Pkwy (286 North)<\/li>\n<li>Take EXIT for Boudinot Drive (On RIGHT)<\/li>\n<li>At the light, take a RIGHT onto Fullerton Road<\/li>\n<li>In about 1\/2 mile, take a LEFT onto Cameron Brown Court<\/li>\n<li>7956-B Cameron Brown Court is located at the end of the street on the RIGHT<\/li>"
+          }
+        },
+        "template--21758900076862__af1e674c-caea-478f-bf72-5a90fcaa4c90-right_column-1": {
+          "type": "right_column",
+          "settings": {
+            "background": "rgba(249, 192, 1, 0.20)",
+            "border_radius": 8,
+            "heading": "Directions for Trucks:",
+            "sub_heading_1": "Corporate Headquarters",
+            "list_1": "<li>I89 North EXIT 12 (RIGHT at end of ramp)<\/li>\n<li>I89 South EXIT 12 (LEFT at end of ramp)<\/li>\n<li>At the 3rd light, LEFT onto Williston Rd (RT 2)<\/li>\n<li>1\/2mile LEFT onto Commerce Street<\/li>",
+            "sub_heading_2": "Mid-Atlantic Facility",
+            "list_2": "<li>Take EXIT 166B towards Fairfax Court Pkwy (286 North)<\/li>\n<li>Take EXIT for Boudinot Drive (On RIGHT)<\/li>\n<li>At the light, take a RIGHT onto Fullerton Road<\/li>\n<li>In about 1\/2 mile, take a LEFT onto Cameron Brown Court<\/li>\n<li>7956-B Cameron Brown Court is located at the end of the street on the RIGHT<\/li>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21758900076862__af1e674c-caea-478f-bf72-5a90fcaa4c90-left_column-1",
+        "template--21758900076862__af1e674c-caea-478f-bf72-5a90fcaa4c90-right_column-1"
+      ],
+      "settings": {
+        "heading": "DIRECTIONS",
+        "color": "#1e4a7d",
+        "font_size": 48
+      }
+    },
+    "6323e704-db88-4b31-a0a9-bee0596050af": {
+      "type": "get-in-touch",
+      "blocks": {
+        "template--21683348865342__6323e704-db88-4b31-a0a9-bee0596050af-side_image-1": {
+          "type": "side_image",
+          "settings": {
+            "side_img": "shopify:\/\/shop_images\/Get_in_touch_dd4e1372-9925-4dd8-b592-394803fa1a8c.png"
+          }
+        },
+        "template--21683348865342__6323e704-db88-4b31-a0a9-bee0596050af-contact_form-1": {
+          "type": "contact_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--21683348865342__6323e704-db88-4b31-a0a9-bee0596050af-side_image-1",
+        "template--21683348865342__6323e704-db88-4b31-a0a9-bee0596050af-contact_form-1"
+      ],
+      "settings": {
+        "heading": "Get In Touch",
+        "color": "#1e4a7d",
+        "font_size": 24,
+        "call_us": "<span>CALL US:<\/span>\n<span>Local: <a href=\"tel:(802)%20858-4577\">(802) 858-4577<\/a><\/span>",
+        "toll_free": "<span>Toll Free: <a href=\"tel:(888)%20900-8106\">(888) 900-8106<\/a><\/span>",
+        "toll_free_fax": "<span>Toll Free Fax: <a href=\"tel:(888)%20392-4432\">(888) 392-4432<\/a><\/span>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "db6a25b8-4de9-476c-943f-67b570bbb686",
+    "54e0129b-0c62-4530-af5f-678ffa137555",
+    "af1e674c-caea-478f-bf72-5a90fcaa4c90",
+    "6323e704-db88-4b31-a0a9-bee0596050af"
+  ]
+}

@@ -1,0 +1,47 @@
+<div class="nec_company" style="background-image:url('{{ section.settings.comp_img | img_url:'master' }}')">  
+<div class="company_box page-width">
+  <h2 class="comp_head">{{ section.settings.head }}</h2>
+</div>
+</div>
+{% schema %}
+  {
+    "name": "NEC_Company",
+    "settings": [
+    {
+      "type":"image_picker",
+      "id":"comp_img",
+      "label":"Add Image"  
+    },
+    {
+      "type":"html",
+      "id":"head",
+      "label":"Add Heading"  
+    }
+    ],
+  "presets":[
+  {
+    "name":"NEC Company"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>
+.nec_company { height: 412px; overflow: hidden; background-position: center; background-size: cover; }
+h2.comp_head { color: #FFF; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 900; line-height: 64px; letter-spacing: -1.28px; text-transform: uppercase; margin: 32px 0 0 0; }
+
+@media screen and (min-width:320px) and (max-width:767px){  
+.nec_company { height: 570px;}
+h2.comp_head {color:  #FFF; text-align: center; font-family: Poppins; font-size: 36px; font-style: normal; font-weight: 900; line-height: 36px; letter-spacing: -0.72px; text-transform: uppercase;margin-top:74px}
+}
+  
+@media screen and (min-width:768px) and (max-width:991px){  
+h2.comp_head { color: #FFF; font-family: Poppins; font-size: 45px; font-style: normal; font-weight: 900; line-height: 50px; letter-spacing: -0.72px; text-transform: uppercase; margin-top: 32px; }
+ }
+
+
+
+</style>
+
+{% javascript %}
+{% endjavascript %}

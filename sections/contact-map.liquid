@@ -1,0 +1,46 @@
+{{ 'contact-map.css' | asset_url | stylesheet_tag }}
+{% render 'contact-map' %}
+
+{% schema %}
+{
+  "name": "Contact Map",
+  "tag": "section",
+  "class": "contact-map",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "#1E4A7D"
+    },
+
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 32,
+      "max": 64,
+      "unit": "px",
+      "default": 64,
+      "label": "Font Size"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_map",
+      "label": "Show Map",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Map"
+    }
+  ]
+}
+{% endschema %}

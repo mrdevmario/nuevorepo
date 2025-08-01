@@ -1,0 +1,307 @@
+.job-listing .job__outline h4,
+.job-listing .overview h4 {
+  margin: 0;
+  margin-bottom: 20px;
+  color: #1e4a7d;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.job-listing .job__outline .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.job-listing .job__outline .grid__wrapper div {
+  padding: 40px 24px;
+  border-radius: 8px;
+  background: #f1efec;
+}
+
+.job-listing .job__outline .grid__wrapper ul,
+.benefits-and-requirements .grid__wrapper ul,
+.job-listing .overview .grid__wrapper ul {
+  padding-left: 34px;
+  margin-block: 0;
+}
+
+.job-listing .job__outline .grid__wrapper h5,
+.benefits-and-requirements .grid__wrapper h5 {
+  margin: 0;
+  margin-bottom: 16px;
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.job-listing .job__outline .grid__wrapper li {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: -0.36px;
+}
+
+.job-listing .job__outline .grid__wrapper li:not(:first-child),
+.benefits-and-requirements .grid__wrapper li:not(:first-child) {
+  margin-top: 16px;
+}
+
+.benefits-and-requirements {
+  margin-block: 40px;
+}
+
+.benefits-and-requirements .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.benefits-and-requirements .grid__wrapper div:first-child,
+.benefits-and-requirements .grid__wrapper .requirements {
+  padding: 24px;
+  border-radius: 8px;
+  align-self: start;
+}
+
+.benefits-and-requirements .grid__wrapper div:first-child {
+  background: rgba(57, 170, 110, 0.2);
+}
+
+.benefits-and-requirements .grid__wrapper .right__column .requirements {
+  background: rgba(249, 192, 1, 0.2);
+}
+
+.benefits-and-requirements .grid__wrapper li {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.our__passion {
+  padding: 16px 24px;
+}
+
+.our__passion span {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.our__passion p {
+  margin: 0;
+  color: #39aa6e;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  text-transform: uppercase;
+}
+
+.job-listing hr {
+  margin: 0;
+  background-color: #19454b;
+  opacity: 0.2;
+}
+
+.job-listing .overview {
+  margin-top: 40px;
+  margin-bottom: 0;
+  padding: 24px;
+  width: 815px;
+}
+
+.job-listing .overview .grid__wrapper ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 64px;
+  row-gap: 16px;
+}
+
+.job-listing .overview .grid__wrapper li {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+
+.job-listing .overview hr {
+  margin-block: 32px !important;
+}
+
+.job-listing .overview a {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 40px;
+  background: #39aa6e;
+  text-decoration: none;
+}
+
+.benefits-and-requirements ul li::marker {
+  color: #39aa6e !important;
+}
+
+.job-listing .job__outline .grid__wrapper .left__column div {
+  padding: 0;
+  margin-top: 30px;
+}
+
+.job-listing .job__outline .grid__wrapper .left__column div:first-child {
+  margin-top: 0;
+}
+
+.job-listing .job__outline .grid__wrapper .left__column div h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.job-listing .job__outline .grid__wrapper .left__column div .text__underline {
+  text-decoration: underline;
+}
+
+.job-listing .job__outline .grid__wrapper .left__column p {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.72px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.job-listing .mt {
+  margin-top: 60px;
+}
+
+.other_desc {
+    color: #19454b;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 23px;
+    letter-spacing: -.36px;
+    padding-block: 30px;
+    border-block-end: 1px solid rgb(25 69 75 / 20%);
+}
+
+.other_desc p:first-of-type {
+    margin-top: 0;
+}
+
+.other_desc p:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .job-listing .page-width {
+    padding-inline: 20px;
+  }
+
+  .our__passion p {
+    font-size: 20px;
+  }
+
+  .job-listing .overview {
+    margin-top: 30px;
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  .job-listing .overview .grid__wrapper ul {
+    column-gap: 40px;
+  }
+
+  .job-listing .overview .grid__wrapper li {
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 525px) {
+  .job__outline {
+    margin-top: 24px;
+  }
+
+  .job-listing .job__outline h4,
+  .job-listing .overview h4 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0 0 24px;
+  }
+
+  .job-listing .job__outline .grid__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .job-listing .job__outline .grid__wrapper div {
+    padding: 24px;
+  }
+
+  .job-listing .job__outline .grid__wrapper ul,
+  .benefits-and-requirements .grid__wrapper ul,
+  .job-listing .overview .grid__wrapper ul {
+    padding-left: 30px;
+  }
+
+  .benefits-and-requirements {
+    margin-block: 24px;
+  }
+
+  .benefits-and-requirements .grid__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .our__passion {
+    padding: 24px 8px;
+  }
+
+  .job-listing .overview {
+    margin-top: 24px;
+    padding: 24px 0;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .job-listing .overview h4 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .job-listing .overview .grid__wrapper ul {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 24px;
+  }
+
+  .job-listing .overview a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 16px;
+  }
+}

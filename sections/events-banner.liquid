@@ -1,0 +1,34 @@
+{{ 'events-banner.css' | asset_url | stylesheet_tag }}
+{% render 'events-banner' %}
+
+{% schema %}
+{
+  "name": "Events Banner",
+  "tag": "section",
+  "class": "events-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image for Mobile"
+    },
+
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Events Banner"
+    }
+  ]
+}
+{% endschema %}

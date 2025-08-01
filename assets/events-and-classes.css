@@ -1,0 +1,172 @@
+.events-and-classes {
+  margin-bottom: 64px;
+}
+
+.events-and-classes .grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
+}
+
+.events-and-classes .grid__wrapper .left__column,
+.events-and-classes .grid__wrapper .right__column {
+  padding-block: 40px;
+}
+
+.events-and-classes .grid__wrapper .right__column {
+  padding-inline: 64px;
+  border-radius: 8px;
+}
+
+.events-and-classes .grid__wrapper h2 {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.events-and-classes .grid__wrapper h4 {
+  color: #19454b;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.events-and-classes .grid__wrapper p {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.events-and-classes .grid__wrapper .left__column ul {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 40px;
+}
+
+.events-and-classes .grid__wrapper .left__column ul li {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.36px;
+  border-radius: 40px;
+  background: #f1efec;
+  padding: 8px 16px;
+  list-style: none;
+}
+
+.events-and-classes .grid__wrapper .left__column ul li:last-child {
+  background: none;
+}
+
+.events-and-classes .grid__wrapper .left__column a {
+  padding: 16px 32px;
+  border-radius: 40px;
+  background: #19454b;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 18px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.events-and-classes .grid__wrapper .right__column {
+  display: flex;
+  align-items: center;
+}
+
+.events-and-classes .grid__wrapper .right__column ul {
+  padding-left: 0;
+}
+
+.events-and-classes .grid__wrapper .right__column ul li {
+  color: #19454b;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.36px;
+  position: relative;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+}
+
+.events-and-classes .grid__wrapper .right__column ul li:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.events-and-classes .grid__wrapper .right__column ul li:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-image: url(list-icon.svg);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+@media (min-width: 526px) and (max-width: 1023px) {
+  .events-and-classes .page-width {
+    padding-inline: 20px;
+  }
+
+  .events-and-classes .grid__wrapper {
+    gap: 32px;
+  }
+
+  .events-and-classes .grid__wrapper .right__column {
+    padding-inline: 32px;
+  }
+}
+
+@media (max-width: 525px) {
+  .events-and-classes .grid__wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .events-and-classes .grid__wrapper .left__column,
+  .events-and-classes .grid__wrapper .right__column {
+    padding-block: 24px;
+  }
+
+  .events-and-classes .grid__wrapper .right__column {
+    padding: 24px;
+    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .events-and-classes {
+    margin-bottom: 0;
+  }
+
+  .events-and-classes .page-width {
+    padding-inline: 0;
+  }
+
+  .events-and-classes .grid__wrapper .left__column {
+    padding-inline: 24px;
+  }
+}

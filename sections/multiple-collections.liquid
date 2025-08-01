@@ -1,0 +1,1355 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- if section.settings.enable_quick_add -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% assign first_collection = section.settings.selected_collections.first %}
+{% assign base_collection = collections[first_collection.handle] %}
+
+{% assign storefront_token = 'e20beb154107a1b1903aa6c770483b63' %}
+
+<script>
+  window.shopifyStorefrontToken = '{{ storefront_token }}';
+</script>
+
+<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <h1 class="page-width__heading text-center">Products</h1>
+    <!-- Subfilters -->
+    <div class="subfilters-wrapper" style="display: none;">
+      <div class="subfilters-section alloy-filters" style="display: none;">
+        <div class="subfilters-list" id="alloy-subfilters"></div>
+      </div>
+      
+      <div class="subfilters-section type-filters" style="display: none;">
+        <div class="subfilters-list" id="type-subfilters"></div>
+      </div>
+    </div>
+
+    <div class="sorting-wrapper">
+      <div class="sorting-container">
+        <span class="sorting-label">Sort by:</span>
+        <select id="SortBy" class="sorting-select">
+          <option value="featured">Featured</option>
+          <option value="best-selling">Best selling</option>
+          <option value="title-ascending">Alphabetically, A-Z</option>
+          <option value="title-descending">Alphabetically, Z-A</option>
+          <option value="price-ascending">Price, low to high</option>
+          <option value="price-descending">Price, high to low</option>
+          <option value="created-ascending">Date, old to new</option>
+          <option value="created-descending">Date, new to old</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="collection-layout">
+      <!-- Active filters -->
+      <div class="active-filters-wrapper">
+        <div class="active-filters" id="active-filters">
+          <!-- Active filters will be rendered here -->
+        </div>
+      </div>
+      
+      <!-- Filtros laterales -->
+      <div class="collection-filters" id="collection-filters">
+        <div class="filter-group">
+          <div class="filter-options" id="product-type-filters">
+            <!-- Los filtros se generarán dinámicamente aquí -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenedor principal de productos -->
+      <div class="collection-content">
+        <div id="ProductGridContainer">
+          <div class="collection">
+            <div id="product-grid" data-id="{{ section.id }}" class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop">
+            </div>
+          </div>
+          <div id="pagination-container" class="pagination center"></div>
+          <div id="loading-indicator" style="display: none">Loading more products...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+class MultiCollectionHandler {
+  constructor() {
+    this.collections = {{ section.settings.selected_collections | json }};
+    this.alloySubfilters = {{ section.settings.alloy_subfilters | json }};
+    this.typeSubfilters = {{ section.settings.type_subfilters | json }};
+    this.productGrid = document.getElementById('product-grid');
+    this.loadingIndicator = document.getElementById('loading-indicator');
+    this.paginationContainer = document.getElementById('pagination-container');
+    this.filterContainer = document.getElementById('product-type-filters');
+    this.activeFiltersContainer = document.getElementById('active-filters');
+    this.productsPerPage = {{ section.settings.products_per_page }};
+    this.currentPage = 1;
+    this.filteredProducts = [];
+    this.isLoading = false;
+    this.currentCollection = 0;
+    this.currentCollectionPage = 1;
+    this.hasMoreProducts = true;
+    this.activeFilters = new Set();
+    this.activeKitTypes = new Set();
+    this.activeMetafilters = new Set();
+    this.activeAlloyFilter = null;
+    this.activeTypeFilter = null;
+    this.subfiltersWrapper = document.querySelector('.subfilters-wrapper');
+    this.alloyFiltersSection = document.querySelector('.alloy-filters');
+    this.typeFiltersSection = document.querySelector('.type-filters');
+    this.storefrontToken = window.shopifyStorefrontToken;
+
+    this.initialize();
+  }
+
+  showLoading() {
+    this.isLoading = true;
+    if (this.loadingIndicator) {
+      this.loadingIndicator.style.display = 'flex';
+    }
+  }
+
+  hideLoading() {
+    this.isLoading = false;
+    if (this.loadingIndicator) {
+      this.loadingIndicator.style.display = 'none';
+    }
+  }
+
+  async initialize() {
+    try {
+      this.showLoading();
+      await this.setupFilters();
+      await this.setupSubfilters();
+      this.setupSorting();
+      await this.handleFilterChange();
+    } catch (error) {
+      console.error('Initialization error:', error);
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  async setupSubfilters() {
+  const alloySubfiltersList = document.getElementById('alloy-subfilters');
+  const typeSubfiltersList = document.getElementById('type-subfilters');
+
+  const alloyOrder = ['aluminum', '304', '316'];
+  
+  alloyOrder.forEach(alloyHandle => {
+    const collection = this.alloySubfilters.find(c => 
+      c.handle.toLowerCase() === alloyHandle.toLowerCase()
+    );
+    
+    if (collection) {
+      const tag = document.createElement('div');
+      tag.className = 'subfilter-tag';
+      tag.textContent = collection.title;
+      tag.dataset.handle = collection.handle;
+      tag.addEventListener('click', () => this.handleAlloySubfilterClick(tag));
+      alloySubfiltersList.appendChild(tag);
+    }
+  });
+
+  // Create an empty container for type filters
+  typeSubfiltersList.innerHTML = '';
+}
+
+  async fetchProductsWithMetafields(handle) {
+    const query = `
+  query getCollectionProducts($handle: String!) {
+    collection(handle: $handle) {
+      products(first: 250) {
+        edges {
+          node {
+            id
+            title
+            handle
+            productType
+            featuredImage {
+              url
+              altText
+              width
+              height
+            }
+            images(first: 2) {
+              edges {
+                node {
+                  url
+                  altText
+                  width
+                  height
+                }
+              }
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            variants(first: 1) {
+              edges {
+                node {
+                  price {
+                    amount
+                  }
+                  compareAtPrice {
+                    amount
+                  }
+                }
+              }
+            }
+            metafields(identifiers: [
+              {namespace: "custom", key: "alloy"},
+              {namespace: "custom", key: "liner_type"}
+            ]) {
+              key
+              value
+            }
+            tags
+          }
+        }
+      }
+    }
+  }
+`;
+
+    try {
+      const response = await fetch('/api/2024-01/graphql.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': this.storefrontToken
+        },
+        body: JSON.stringify({
+          query,
+          variables: { handle }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`GraphQL request failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.errors) {
+        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+      }
+
+      return data.data.collection.products.edges.map(edge => {
+  const product = edge.node;
+  return {
+    id: product.id,
+    title: product.title,
+    handle: product.handle,
+    product_type: product.productType,
+    featured_image: {
+      src: product.featuredImage?.url,
+      alt: product.featuredImage?.altText,
+      width: product.featuredImage?.width,
+      height: product.featuredImage?.height
+    },
+    images: product.images.edges.map(img => ({
+      src: img.node.url,
+      alt: img.node.altText,
+      width: img.node.width,
+      height: img.node.height
+    })),
+    variants: [{
+      price: parseFloat(product.variants.edges[0].node.price.amount),
+      compare_at_price: product.variants.edges[0].node.compareAtPrice ? 
+        parseFloat(product.variants.edges[0].node.compareAtPrice.amount) : null
+    }],
+    metafields: {
+      alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
+      liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
+    },
+    tags: product.tags
+  };
+});
+    } catch (error) {
+      console.error(`Error fetching products for collection ${handle}:`, error);
+      throw error;
+    }
+  }
+
+  async setupFilters() {
+    try {
+      this.showLoading();
+      const productTypes = new Set();
+      const productsByCollection = new Map();
+
+      // Fetch initial products to set up filter options
+      for (const collection of this.collections) {
+        const products = await this.fetchProductsWithMetafields(collection.handle);
+        productsByCollection.set(collection.handle, products);
+        products.forEach(product => {
+          if (product.product_type) {
+            let type = product.product_type;
+            if (type.endsWith('Liner')) {
+              type = 'Liner';
+            } else if (type.endsWith('Kit')) {
+              type = 'Liner Kits';
+            }
+            productTypes.add(type);
+          }
+        });
+      }
+
+      const filterOrderSetting = {{ section.settings.filter_order | json }};
+      const orderedFilters = filterOrderSetting.split(/\r?\n/).filter(Boolean);
+      const validOrderedFilters = orderedFilters.filter(type => productTypes.has(type));
+      const remainingTypes = [...productTypes].filter(type => !orderedFilters.includes(type)).sort();
+      const allFilters = [...validOrderedFilters, ...remainingTypes];
+
+      this.filterContainer.innerHTML = `
+        <div class="filter-group">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('expanded')">
+            <h3 class="filter-group__title">Product type</h3>
+            <span class="filter-group__toggle">+</span>
+          </div>
+          <div class="filter-group__content">
+            ${allFilters.map(type => `
+              <div class="filter-option">
+                <label class="filter-checkbox">
+                  <input type="checkbox" value="${type}" data-filter="type">
+                  <span class="checkbox-custom"></span>
+                  <span class="filter-label">${type}</span>
+                </label>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="filter-spacer"></div>
+
+        <div class="filter-group">
+          <div class="filter-group__header" onclick="this.parentElement.classList.toggle('expanded')">
+            <h3 class="filter-group__title">Liner Kit Type</h3>
+            <span class="filter-group__toggle">+</span>
+          </div>
+          <div class="filter-group__content">
+            <div class="filter-option">
+              <label class="filter-checkbox">
+                <input type="checkbox" value="Insert" data-filter="kit-type">
+                <span class="checkbox-custom"></span>
+                <span class="filter-label">Insert</span>
+              </label>
+            </div>
+            <div class="filter-option">
+              <label class="filter-checkbox">
+                <input type="checkbox" value="Tee" data-filter="kit-type">
+                <span class="checkbox-custom"></span>
+                <span class="filter-label">Tee</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const checkboxes = this.filterContainer.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => this.handleFilterChange());
+      });
+    } catch (error) {
+      console.error('Error setting up filters:', error);
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  async handleFilterChange() {
+  try {
+    this.showLoading();
+    const selectedTypes = Array.from(document.querySelectorAll('input[data-filter="type"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    const selectedKitTypes = Array.from(document.querySelectorAll('input[data-filter="kit-type"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    this.subfiltersWrapper.style.display = 'none';
+    this.alloyFiltersSection.style.display = 'none';
+    this.typeFiltersSection.style.display = 'none';
+
+    if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits') || selectedTypes.includes('Components, Adapters, & Fittings')) {
+      const filteredProducts = await this.getFilteredProducts(selectedTypes, selectedKitTypes);
+      
+      // Check which alloys have products based on metafields
+      // Always show aluminum for Components category
+      const alloyWithProducts = new Set();
+      if (selectedTypes.includes('Components, Adapters, & Fittings')) {
+        alloyWithProducts.add('aluminum');
+      }
+      // Add other alloys from metafields
+      filteredProducts.forEach(product => {
+        if (product.metafields?.alloy) {
+          alloyWithProducts.add(product.metafields.alloy.toLowerCase());
+        }
+      });
+
+      // Show alloy buttons that have products
+      const alloyButtons = document.querySelectorAll('#alloy-subfilters .subfilter-tag');
+      alloyButtons.forEach(button => {
+        const handle = button.dataset.handle;
+        button.style.display = alloyWithProducts.has(handle.toLowerCase()) ? 'flex' : 'none';
+      });
+
+      if (alloyWithProducts.size > 0) {
+        this.subfiltersWrapper.style.display = 'block';
+        this.alloyFiltersSection.style.display = 'block';
+      }
+
+      // Move type filter logic outside of the alloy check
+      if (selectedTypes.includes('Liner Kits')) {
+        const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
+        const filteredByAlloys = activeAlloyTags.length > 0 
+          ? filteredProducts.filter(product => 
+              Array.from(activeAlloyTags).some(tag => 
+                product.metafields?.alloy?.toLowerCase() === tag.dataset.handle.toLowerCase()
+              )
+            )
+          : filteredProducts;
+
+        const typeWithProducts = new Set();
+        
+        // Check each product's liner_type metafield
+        filteredByAlloys.forEach(product => {
+          if (product.metafields?.liner_type) {
+            typeWithProducts.add(product.metafields.liner_type.toLowerCase());
+          }
+        });
+
+        console.log('Types found:', Array.from(typeWithProducts)); // Debug log
+
+        if (typeWithProducts.size > 0) {
+          // Clear existing type filters
+          const typeSubfiltersList = document.getElementById('type-subfilters');
+          typeSubfiltersList.innerHTML = '';
+
+          // Create a filter tag for each unique type found
+          typeWithProducts.forEach(type => {
+            const tag = document.createElement('div');
+            tag.className = 'subfilter-tag';
+            tag.textContent = type.split(' ')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+            tag.dataset.handle = type;
+            tag.dataset.type = type;
+            tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
+            typeSubfiltersList.appendChild(tag);
+          });
+
+          this.typeFiltersSection.style.display = 'block';
+          this.subfiltersWrapper.style.display = 'block';
+        }
+      }
+    }
+
+    this.activeFilters = new Set(selectedTypes);
+    this.activeKitTypes = new Set(selectedKitTypes);
+    await this.loadProducts();
+  } catch (error) {
+    console.error('Error handling filter change:', error);
+  } finally {
+    this.hideLoading();
+  }
+}
+
+  async getFilteredProducts(selectedTypes, selectedKitTypes) {
+    try {
+      this.showLoading();
+      let allProducts = [];
+      
+      for (const collection of this.collections) {
+        const products = await this.fetchProductsWithMetafields(collection.handle);
+        const filteredProducts = products.filter(product => {
+          // Normalize the product type for Liners
+          let type = product.product_type;
+          if (type.endsWith('Liner')) {
+            type = 'Liner';
+          }
+
+          const matchesType = selectedTypes.includes(type);
+          const matchesKitType = selectedKitTypes.length === 0 || 
+            selectedKitTypes.some(kitType => 
+              product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
+            );
+
+          return matchesType && matchesKitType;
+        });
+        
+        allProducts = [...allProducts, ...filteredProducts];
+      }
+
+      return allProducts;
+    } catch (error) {
+      console.error('Error getting filtered products:', error);
+      throw error;
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  async loadProducts() {
+  try {
+    this.showLoading();
+    this.filteredProducts = [];
+    this.productGrid.innerHTML = '';
+
+    let collectionsToFetch = new Set(this.collections.map(c => c.handle));
+
+    const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
+    const activeTypeTags = document.querySelectorAll('#type-subfilters .subfilter-tag.active');
+
+    activeAlloyTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
+    activeTypeTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
+
+    const results = await Promise.all(
+      Array.from(collectionsToFetch).map(handle => this.fetchProductsWithMetafields(handle))
+    );
+
+    let filteredProducts = new Set();
+    
+    results.forEach(products => {
+      products.forEach(product => {
+        let type = product.product_type;
+        if (type.endsWith('Liner')) {
+          type = 'Liner';
+        }
+
+        const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
+
+        const matchesAlloyFilters = activeAlloyTags.length === 0 || 
+          Array.from(activeAlloyTags).some(tag => {
+            const alloyHandle = tag.dataset.handle.toLowerCase();
+            return product.metafields?.alloy?.toLowerCase() === alloyHandle;
+          });
+
+        const matchesTypeFilters = activeTypeTags.length === 0 || 
+          Array.from(activeTypeTags).some(tag => {
+            const typeHandle = tag.dataset.handle.toLowerCase();
+            return product.metafields?.liner_type?.toLowerCase() === typeHandle;
+          });
+
+        const matchesKitTypes = this.activeKitTypes.size === 0 || 
+          Array.from(this.activeKitTypes).some(kitType => 
+            product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
+          );
+
+        if (matchesMainFilter && matchesAlloyFilters && matchesTypeFilters && matchesKitTypes) {
+          filteredProducts.add(product);
+        }
+      });
+    });
+
+    this.filteredProducts = Array.from(filteredProducts);
+    await this.showPage(1);
+
+  } catch (error) {
+    console.error('Error loading products:', error);
+  } finally {
+    this.hideLoading();
+  }
+}
+
+  handleAlloySubfilterClick(tag) {
+  const wasActive = tag.classList.contains('active');
+  
+  if (!wasActive) {
+    tag.classList.add('active');
+    this.activeAlloyFilter = tag.dataset.handle;
+  } else {
+    tag.classList.remove('active');
+    this.activeAlloyFilter = null;
+  }
+  
+  this.loadProducts();
+}
+
+  handleTypeSubfilterClick(tag) {
+    if (tag.style.display === 'none') return;
+    
+    const wasActive = tag.classList.contains('active');
+    
+    if (!wasActive) {
+      tag.classList.add('active');
+      this.activeTypeFilter = tag.dataset.handle;
+    } else {
+      tag.classList.remove('active');
+      this.activeTypeFilter = null;
+    }
+
+    this.loadProducts();
+  }
+
+  setupSorting() {
+    const sortSelect = document.getElementById('SortBy');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        this.showLoading();
+        this.sortProducts(sortSelect.value);
+        this.hideLoading();
+      });
+    }
+  }
+
+  sortProducts(sortBy) {
+    this.filteredProducts.sort((a, b) => {
+      switch(sortBy) {
+        case 'price-ascending':
+          return a.variants[0].price - b.variants[0].price;
+        case 'price-descending':
+          return b.variants[0].price - a.variants[0].price;
+        case 'title-ascending':
+          return a.title.localeCompare(b.title);
+        case 'title-descending':
+          return b.title.localeCompare(a.title);
+        case 'created-ascending':
+          return new Date(a.created_at) - new Date(b.created_at);
+        case 'created-descending':
+          return new Date(b.created_at) - new Date(a.created_at);
+        default:
+          return 0;
+      }
+    });
+
+    this.showPage(1);
+  }
+
+  async showPage(page) {
+    if (page < 1) return;
+
+    const start = (page - 1) * this.productsPerPage;
+    const end = start + this.productsPerPage;
+    const pageProducts = this.filteredProducts.slice(start, end);
+
+    if (pageProducts.length > 0) {
+      this.productGrid.innerHTML = pageProducts.map(product => this.createProductCard(product)).join('');
+      this.currentPage = page;
+    }
+
+    this.renderPagination();
+  }
+
+  renderPagination() {
+    const totalPages = Math.ceil(this.filteredProducts.length / this.productsPerPage);
+
+    this.paginationContainer.innerHTML = `
+      <div class="pagination">
+        <button class="pagination__button" ${this.currentPage === 1 ? 'disabled' : ''} 
+          onclick="multiCollectionHandler.showPage(${this.currentPage - 1})">
+          ←
+        </button>
+        <button class="pagination__button" ${this.currentPage >= totalPages ? 'disabled' : ''} 
+          onclick="multiCollectionHandler.showPage(${this.currentPage + 1})">
+          →
+        </button>
+      </div>
+    `;
+  }
+
+  createProductCard(product) {
+    const firstVariant = product.variants[0];
+    const comparePrice = firstVariant.compare_at_price > firstVariant.price ? 
+      `<span class="price--compare">${this.formatMoney(firstVariant.compare_at_price)}</span>` : '';
+    
+    const imageRatio = '{{ section.settings.image_ratio }}';
+    const showSecondaryImage = {{ section.settings.show_secondary_image | json }};
+    
+    const primaryImage = product.featured_image || (product.images && product.images[0]);
+    const secondaryImage = showSecondaryImage && product.images && product.images[1];
+    
+    const imageMarkup = primaryImage ? `
+      <div class="card__media">
+        <div class="media media--transparent media--hover-effect">
+          <img
+            srcset="${primaryImage.src} 1x, ${primaryImage.src} 2x"
+            src="${primaryImage.src}"
+            sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+            alt="${product.title}"
+            loading="lazy"
+            class="motion-reduce"
+            width="${primaryImage.width || ''}"
+            height="${primaryImage.height || ''}"
+          >
+          ${secondaryImage ? `
+            <img
+              srcset="${secondaryImage.src} 1x, ${secondaryImage.src} 2x"
+              src="${secondaryImage.src}"
+              sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+              alt="${product.title}"
+              loading="lazy"
+              class="motion-reduce"
+              width="${secondaryImage.width || ''}"
+              height="${secondaryImage.height || ''}"
+            >
+          ` : ''}
+        </div>
+      </div>
+    ` : '<div class="card__media"><div class="media media--transparent"><div class="no-image-placeholder">No image available</div></div></div>';
+
+    return `
+      <div class="grid__item">
+        <div class="card-wrapper product-card-wrapper underline-links-hover">
+          <div class="card card--standard card--media ${imageRatio !== 'adapt' ? `card--${imageRatio}` : ''} ${product.featured_image ? '' : 'card--text-only card--soft'}">
+            <div class="card__inner color-background-2 ratio${imageRatio === 'adapt' && primaryImage ? ` ratio--adapt`: ''}"
+              style="${imageRatio === 'adapt' && primaryImage ? `--ratio-percent: ${1 / (primaryImage.width / primaryImage.height) * 100}%;` : ''}"
+            >
+              ${imageMarkup}
+            </div>
+            <div class="card__content">
+              <div class="card__information">
+                <h3 class="card__heading">
+                  <a href="/products/${product.handle}" class="full-unstyled-link">
+                    ${product.title}
+                  </a>
+                </h3>
+                
+                {%- if section.settings.show_vendor -%}
+                  <div class="card-information__text caption-with-letter-spacing light">
+                    ${product.vendor}
+                  </div>
+                {%- endif -%}
+
+                <div class="card-information">
+                  {%- if section.settings.show_rating -%}
+                    <div class="rating" role="img" aria-label="Rating">
+                      <span aria-hidden="true" class="rating-star" style="--rating: ${product.rating || 0}; --rating-max: 5.0; --rating-decimal: 0;">
+                      </span>
+                    </div>
+                  {%- endif -%}
+                  
+                  <div class="price ${firstVariant.compare_at_price > firstVariant.price ? 'price--on-sale' : ''}">
+                    <div class="price__regular">
+                      <span class="price-item price-item--regular">
+                        ${this.formatMoney(firstVariant.price)}
+                      </span>
+                      ${comparePrice}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {%- if section.settings.enable_quick_add -%}
+                <div class="quick-add no-js-hidden">
+                  <button type="button" class="button button--full-width button--secondary" data-product-id="${product.id}">
+                    Quick add
+                  </button>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  formatMoney(price) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(price);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.multiCollectionHandler = new MultiCollectionHandler();
+});
+</script>
+
+<style>
+.page-width__heading {
+  font-size: 4rem;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  color: #333;
+  padding-left: 30px;
+}
+
+.sorting-wrapper {
+  margin-bottom: 20px;
+  padding: 0 30px;
+}
+
+.sorting-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.sorting-label {
+  font-size: 14px;
+  color: #333;
+}
+
+.sorting-select {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 25px 8px 0;
+  appearance: none;
+  outline: none;
+}
+
+.sorting-select:focus {
+  outline: none;
+}
+
+.sorting-container::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+  pointer-events: none;
+}
+
+.active-filters-wrapper {
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.subfilters-wrapper {
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px 30px;
+}
+
+.subfilters-section {
+  margin-bottom: 15px;
+}
+
+.subfilters-title {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.subfilters-list {
+  display: flex;
+  gap: 10px;
+}
+
+.subfilter-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 40px;
+  color: white;
+  background: #39aa6e;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 135px;
+  height: 50px;
+  text-align: center;
+}
+
+#type-subfilters {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+#type-subfilters .subfilter-tag {
+  background: #19454b;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.subfilter-tag:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.subfilter-tag.active {
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+.subfilters-list {
+  display: flex;
+  gap: 15px;
+}
+
+.collection-layout {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.collection-filters {
+  height: 100%;
+  width: 300px;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+  background: #f1efec;
+  border-radius: 8px;
+}
+
+.collection-content {
+  flex-grow: 1;
+}
+
+.filter-spacer {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 20px 0;
+}
+
+.filter-group {
+  padding: 15px;
+  border-radius: 4px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+}
+
+.filter-group__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  height: 35px;
+}
+
+.filter-group__content {
+  display: none;
+  padding-top: 10px;
+}
+
+.filter-group.expanded .filter-group__content {
+  display: block;
+}
+
+.filter-group.expanded .filter-group__toggle {
+  transform: rotate(45deg);
+}
+
+.filter-group__title {
+ font-size: 1.4rem;
+ font-weight: 500;
+ margin-bottom: 15px;
+ padding-bottom: 10px;
+ color: #333;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-option {
+  position: relative;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.filter-label {
+  flex-grow: 1;
+  font-size: 1.4rem;
+  color: #666;
+  padding: 10px 20px 10px 0;
+}
+
+/* Custom checkbox styles */
+.filter-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 0.5px solid #ccc;
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+  background-color: white;
+  border-color: black;
+}
+
+.filter-checkbox input[type="checkbox"]:checked {
+  background-color: #333;
+  border-color: #333;
+}
+
+.filter-checkbox input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.filter-checkbox input[type="checkbox"]:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.1);
+  outline-offset: 2px;
+}
+
+.card {
+  height: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-2);
+}
+
+.card__inner {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card__media {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__media img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: auto;
+}
+
+.card__content {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__heading {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.card-information {
+  margin-top: auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.pagination__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination__button:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.pagination__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f8f8f8;
+}
+
+#loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Grid Responsive */
+@media screen and (max-width: 749px) {
+  .collection-layout {
+    flex-direction: column;
+  }
+
+  .collection-filters {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .sorting-container {
+    width: 100%;
+  }
+  
+  .sorting-select {
+    width: 100%;
+  }
+
+  .product-grid {
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Multi Collection Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "selected_collections",
+      "label": "Collections",
+      "info": "Select collections to display",
+      "limit": 30
+    },
+    {
+      "type": "collection_list",
+      "id": "alloy_subfilters",
+      "label": "Alloy Subfilter Collections",
+      "info": "Select up to 10 collections for Alloy subfilters",
+      "limit": 10
+    },
+    {
+      "type": "collection_list",
+      "id": "type_subfilters",
+      "label": "Type Subfilter Collections", 
+      "info": "Select up to 10 collections for Type subfilters",
+      "limit": 10
+    },
+    {
+      "type": "textarea",
+      "id": "filter_order",
+      "label": "Filter Order",
+      "info": "Enter product types in desired order, one per line. Any types not listed will appear in alphabetical order at the end.",
+      "default": "Caps & Dampers"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "arch",
+          "label": "Arch"
+        },
+        {
+          "value": "blob",
+          "label": "Blob"
+        }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "Enable sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": false,
+      "label": "Enable quick add"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi Collection Grid",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

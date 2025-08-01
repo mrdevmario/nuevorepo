@@ -1,0 +1,79 @@
+<div class="nec_acc" style="background-image:url('{{ section.settings.image | img_url:'master' }}')">  
+  <div class="acc_cont">
+    <div class="acc_content page-width">
+        <h2>{{ section.settings.head }}</h2>
+      <p>{{ section.settings.text }}</p>
+      <a href="{{ section.settings.tour_url }}">{{ section.settings.tour_btn }}</a>      
+      </div>     
+   </div>
+</div>
+{% schema %}
+  {
+    "name": "NEC_Acc",
+    "settings": [
+     {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Add BG Image"  
+    },
+    {
+      "type":"html",
+      "id":"head",
+      "label":"Add Heading"  
+    },
+     {
+      "type":"html",
+      "id":"text",
+      "label":"Add Text"  
+    },
+     {
+      "type":"url",
+      "id":"tour_url",
+      "label":"Add Button URL"
+    },
+    {
+      "type":"text",
+      "id":"tour_btn",
+      "label":"Add Button Text"
+    }  
+    ], 
+  "presets":[
+  {
+    "name":"NEC Acc"
+  }
+  ]
+  }
+{% endschema %}
+
+<style>
+.nec_acc {position: relative; background: #0D522C; min-height: 636px; background-size: 100%; background-position: bottom;}
+.acc_cont { position: absolute; top: 0; width: 100%; bottom: 0; height: 100%; display: flex; align-items: center; justify-content: center; }
+.acc_content {text-align: center;}
+.acc_block {flex-basis: 35%;}
+.acc_content h2 {margin: 0; color:#FFF; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 900; line-height: 64px; letter-spacing: -1.28px; text-transform: uppercase; }
+.acc_content p { color: #FFF; text-align: center; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px; }
+.acc_content a { display: inline-block; padding: 16px 32px; justify-content: center; align-items: center; gap: 8px; border-radius: 40px; background: #FFF; color:#1E4A7D; font-family: Roboto; font-size: 16px; font-style: normal; font-weight: 800; line-height: 130%; letter-spacing: 0.32px; text-transform: uppercase; text-decoration: none;     margin-top: 17px;}
+
+@media screen and (min-width:320px) and (max-width:767px){  
+.acc_content h2 {margin: 0;font-size: 36px; font-weight: 900; line-height: 36px; letter-spacing: -0.72px;}
+.acc_content p {color: #FFF; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px;}
+.nec_acc {min-height: 372px; background-size: cover; background-position: top center;}
+}
+
+@media screen and (min-width:768px) and (max-width:991px){  
+.acc_content h2 {margin: 0;font-size: 45px; font-weight: 900; line-height: 50px; letter-spacing: -0.72px;}
+.acc_content p {color: #FFF; font-size: 18px; font-style: normal; font-weight: 400; line-height: 130%; letter-spacing: -0.36px;}
+.nec_acc {min-height: 500px; background-size: cover; background-position: top center;}
+}
+
+ @media screen and (min-width:320px) and (max-width:389px){  
+ .acc_content h2 {font-size: 32px; line-height: 35px;}
+.acc_content a {padding: 16px 25px;}
+.acc_content p {font-size: 16px;line-height: 140%;}
+}
+ 
+
+</style>
+
+{% javascript %}
+{% endjavascript %}

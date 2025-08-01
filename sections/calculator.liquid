@@ -1,0 +1,356 @@
+<div class="career_strip nec_mobile">{{ section.settings.spec_strip }}</div>
+<div class="calculator_page page-width">	
+<div class="grid grid--1-col grid--2-col-desktop grid-column-reverse">
+  <div class="grid__item calculation-form">
+    <h2 class="calculator_head">{{ section.settings.main_heading }}</h2>
+    <form class="insulationMixCalculator form">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'calculation_type' %}
+            <div class="form-group">
+              <label class="form-label pointer calculationTab" for="{{ block.settings.tab_link }}-type">
+                <input type="radio" name="mix-calculation" id="{{ block.settings.tab_link }}-type" data-tab="{{ block.settings.tab_link }}" class="hidden calculation_type_link" {% if forloop.first %}checked="true"{% endif %}>
+                <span class="circle"></span>
+                <span class="form-label__text">{{ block.settings.title }}</span>
+              </label>
+            </div>
+        {% endcase %}
+      {% endfor %}
+      <div class="form-group row">
+        <label class="form-label" for="length">
+          <span class="form-label__text">Length: (in)</span>
+        </label>
+        <input type="text" name="length" id="length" placeholder="Length">
+      </div>
+      <div class="form-group row">
+        <label class="form-label" for="width">
+          <span class="form-label__text">Width: (in)</span>
+        </label>
+        <input type="text" name="width" id="width" placeholder="Width">
+      </div>
+      <div class="form-group row">
+        <label class="form-label" for="height-ft">
+          <span class="form-label__text">Height: (ft/in)</span>
+        </label>
+        <input type="text" name="height-ft" id="height-ft" placeholder="Height (ft):">
+        <input type="text" name="height-in" id="height-in" placeholder="Height (in):"  >
+      </div>
+      <div class="form-group row">
+        <label class="form-label" for="diameter">
+          <span class="form-label__text">Diameter: (in)</span>
+        </label>
+        <input type="text" name="diameter" id="diameter" placeholder="Diameter">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Calculate" id="submit" name="submit">
+      </div>
+
+      <div class="form-group total-bags">
+        <label class="form-label" for="diameter">
+          <span class="form-label__text">Total Bags:</span>
+        </label>
+        <input type="text" name="result" id="result" placeholder="Result">
+      </div>
+    </form>
+  </div>
+  <div class="grid__item calculator_page__main-image center">
+    <img src="{{ section.settings.main_image | img_url:'master' }}">
+  </div>
+</div>
+</div>
+{% schema %}
+  {
+    "name": "Calculator",
+    "tag": "section",
+    "class": "calculator",
+    "settings": [
+      {
+        "type": "text",
+        "id": "spec_strip",
+        "label": "Add Strip Text"
+      },
+      {
+        "type": "text",
+        "id": "main_heading",
+        "label": "Add Main Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Section Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "calculation_type",
+        "name": "Calculation Type",
+        "settings": [
+          {
+            "type": "text",
+            "id": "tab_link",
+            "label": "Add Calculation Type ID"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Add Calculation Type"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Insulation Mix Calculator",
+        "blocks": [
+          {
+            "type": "calculation_type",
+            "settings": {
+              "title": "Best-Mix Calculation (2 cubic foot bag)"
+            }
+          },
+          {
+            "type": "calculation_type",
+            "settings": {
+              "title": "TherMix Calculation (2 cubic foot bag)"
+            }
+          }
+        ]
+        
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+  .hidden {display: none}
+  .pointer {cursor: pointer}
+  .circle {
+    display: block;
+    border-radius: 50%;
+    border: 2px solid var(--Darkest-Green, #19454B);
+    height: 20px;
+    width: 20px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .insulationMixCalculator input[type=radio]:checked + .circle::after{
+    display: block !important;
+  }
+  .circle::after{
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    display: none;
+    top: 50%;
+    left: 50%;
+    background: #F9C001;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+  }
+  .grid-column-reverse { flex-direction: row }
+  .calculator_page {padding: 64px 4vw 16px 4vw;}
+  .calculator_page__main-image {align-self: center; padding: 0px 40px;}
+  .calculator_page__main-image img {width: 100%; height: 41.2rem; object-fit: contain;}
+  .calculator_page h2{color: var(--Darkest-Green, #19454B); font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase;}
+  .calculation-form { padding: 0px 40px 40px 40px; }
+  .insulationMixCalculator { display: flex; flex-wrap: wrap; flex-direction: column; gap: 8px; }
+  .form-group { width: 100%; }
+  .form-label { padding: 16px 24px; background: #F1F1F1; border-radius: 4px; display: flex; align-items: center; gap: 12px;}
+  .form-label__text { color: var(--Darkest-Green, #19454B); font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px; }
+  .insulationMixCalculator .row { display: flex; gap: 8px;}
+  .insulationMixCalculator .row .form-label { flex: 0 0 154px; }
+  .insulationMixCalculator input[type=text] { width: 100%; display: inline-block; padding: 16px 24px; border-radius: 4px;font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 24px; border: 1px solid var(--Darkest-Green, #19454B);}
+  .insulationMixCalculator input[type=submit] {
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    padding: 16px 32px;
+    text-align: center;
+    gap: 8px;
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 21px;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+    background: var(--Darkest-Green, #19454B);
+    border-radius: 4px;
+    border: 1px solid var(--Darkest-Green, #19454B) }
+  .form-group.total-bags { margin-top: 40px; display: flex; gap: 8px }
+  .form-group.total-bags .form-label{ flex-shrink: 0; background: var(--Darkest-Green, #19454B); }
+  .highlighted {border-color: #bb2124 !important;}
+
+  .form-group.total-bags .form-label__text {color: var(--White, #FFFFFF);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.36px;}
+
+  @media screen and (min-width:992px) and (max-width:1365px){  
+    .calculator_page {padding: 36px 2vw 16px 2vw;}
+    .calculation-form { padding: 0px 40px 40px 40px; }
+  }
+
+  @media screen and (min-width:768px) and (max-width:991px){ 
+    .grid-column-reverse { flex-direction: column-reverse; } 
+    .calculator_page {padding: 40px 5vw 40px 5vw;}
+    .calculation-form { padding: 0px; }
+  }
+
+  @media screen and (max-width:767px){
+    .grid-column-reverse { flex-direction: column-reverse; }
+    .calculator_page {padding: 24px 5vw 24px 5vw;}
+    .calculator_page__main-image {padding: 40px 0px;}
+    .calculation-form { padding: 0px; }
+    .calculator_page__main-image img{height: 31.1rem}
+  }
+
+  @media screen and (min-width:320px) and (max-width:389px){  
+    .calculation-form { padding: 0px; }
+  }
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Variables
+    const tabLinks = document.querySelectorAll('.calculation_type_link');
+    const tabBodies = document.querySelectorAll('.calculation_type_content');
+    let timerOpacity;
+
+    console.log("tabLinks", tabLinks)
+    console.log("tabBodies", tabBodies)
+  
+    // Toggle Class
+    const init = () => {
+      // Menu Click
+      tabLinks.forEach(function (link) {
+        link.addEventListener('change', function (e) {
+          // Prevent Default
+          e.preventDefault();
+          e.stopPropagation();
+  
+          // Clear Timers
+          window.clearTimeout(timerOpacity);
+  
+          // Toggle Class Logic
+          // Remove Active Classes
+          tabBodies.forEach(function (tabBody) {
+            tabBody.classList.remove('active', 'active-content');
+          });
+  
+          // Add Active Classes
+          document.querySelector(`#${this.dataset['tab']}`).classList.add('active');
+  
+          // Opacity Transition Class
+          timerOpacity = setTimeout(() => {
+            document.querySelector(`#${this.dataset['tab']}`).classList.add('active-content');
+          }, 50);
+        });
+      });
+    };
+  
+    // Document Ready
+    init();
+  });  
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let form = document.querySelector('.insulationMixCalculator');
+    
+    // Function to calculate the bags required
+    function calculateBags(length, width, heightFt, heightIn, diameter, linerArea, bagSize) {
+      // Step 1
+      let grossArea = length * width;
+  
+      // Step 2
+      let netArea = grossArea - linerArea;
+  
+      // Step 3
+      let height = (heightFt && heightIn) ? (heightFt * 12 + heightIn) : (heightFt ? (heightFt * 12) : heightIn);
+      let cubicInches = netArea * height;
+  
+      // Step 4
+      let cubicFeet = cubicInches / 1728;
+  
+      // Step 5
+      let bagsRequired = cubicFeet / bagSize;
+  
+      return Math.ceil(bagsRequired);
+    }
+
+    function calculateLinearArea(diameter) {
+      // Calculate Net Area (subtracting the area of the liner)
+      let radius = diameter / 2;
+      let linerArea = Math.PI * Math.pow(radius, 2);
+  
+      return linerArea;
+    }
+
+    // Function to highlight an input field
+    function highlightInput(inputId) {
+      document.getElementById(inputId).classList.add('highlighted');
+    }
+
+    // Function to reset highlighting on all input fields
+    function resetHighlight() {
+      let inputs = document.querySelectorAll('.insulationMixCalculator input');
+      inputs.forEach(function (input) {
+        input.classList.remove('highlighted');
+      });
+    }
+  
+    // Event listener for form submission
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Reset previous highlighting
+      resetHighlight();
+  
+      // Get form values
+      let length = parseFloat(document.getElementById('length').value);
+      let width = parseFloat(document.getElementById('width').value);
+      let heightFt = parseFloat(document.getElementById('height-ft').value);
+      let heightIn = parseFloat(document.getElementById('height-in').value || 0);
+      let diameter = parseFloat(document.getElementById('diameter').value || 1);
+
+      // Validate input values
+      if (isNaN(length) || length <= 0) {
+        highlightInput('length');
+      }
+      if (isNaN(width) || width <= 0) {
+        highlightInput('width');
+      }
+      {% comment %}
+        // Customer can input only foot or inches
+        if (isNaN(heightFt) || heightFt < 0) {
+          highlightInput('height-ft');
+        }
+        if (isNaN(heightIn) || heightIn < 0 || heightIn >= 12) {
+          highlightInput('height-in');
+        }
+      {% endcomment %}
+      if (isNaN(diameter) || diameter <= 0) {
+        highlightInput('diameter');
+      }
+
+      let linerArea = calculateLinearArea(diameter); // Assuming a constant liner area for both calculations
+
+      let bagSize = 2; // BEST-Mix bag size
+  
+      // Calculate results
+      let totalBags = calculateBags(length, width, heightFt, heightIn, diameter, linerArea, bagSize);
+  
+      // Display results
+      document.getElementById('result').value = !isNaN(totalBags) ? totalBags : '';
+    });
+  });
+
+</script>

@@ -1,0 +1,34 @@
+<div class="page-width">
+  <div class="grid__wrapper">
+    <div class="left__column">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+      {% for block in section.blocks %}
+        {% if block.type == "event_badges" %}
+          {% if block.settings != empty %}
+            <ul class="event__badges">
+              {{ block.settings.event_badges }}
+            </ul>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% if section.settings.btn_text != empty %}
+        <a href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+      {% endif %}
+    </div>
+    {% for block in section.blocks %}
+        {% if block.type == "event_rules" %}
+          <div class="right__column" style="background: {{ block.settings.background }}">
+            {% if block.settings != empty %}
+              <div>
+                <h4>{{ block.settings.heading }}</h4>
+                <ul class="event_rules">
+                  {{ block.settings.event_list }}
+                 </ul>
+              </div>
+            {% endif %}
+           </div>
+        {% endif %}
+      {% endfor %}
+  </div>
+</div>

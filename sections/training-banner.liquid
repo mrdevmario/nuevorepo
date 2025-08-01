@@ -1,0 +1,77 @@
+{{ 'training-banner.css' | asset_url | stylesheet_tag }}
+{% render 'training-banner' %}
+
+{% schema %}
+{
+  "name": "Training Banner",
+  "tag": "section",
+  "class": "training-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+
+     {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "name": "Logos",
+      "type": "logos",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_1",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_2",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_3",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_4",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_5",
+          "label": "Logo"
+        },
+
+        {
+          "type": "image_picker",
+          "id": "logo_6",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Training Banner",
+      "blocks": [
+        {
+          "type": "logos"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

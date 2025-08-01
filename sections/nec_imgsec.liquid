@@ -1,0 +1,191 @@
+<div class="nec_img popup-link">
+  {% for block in section.blocks %}
+    <div class="nec_block ">
+      <a href="#catalog">
+        <img src="{{ block.settings.image |img_url:'master' }}">
+        <span>{{ block.settings.title }}</span>
+      </a>
+    </div>
+  {% endfor %}
+  <div id="catalog" class="popup-container">
+    <div class="popup-content">
+      <a href="#" class="close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <path d="M11.7307 34.8332L9.16406 32.2665L19.4307 21.9998L9.16406 11.7332L11.7307 9.1665L21.9974 19.4332L32.2641 9.1665L34.8307 11.7332L24.5641 21.9998L34.8307 32.2665L32.2641 34.8332L21.9974 24.5665L11.7307 34.8332Z" fill="#120E0B"/>
+        </svg>
+      </a>     
+      <div class="inner_content">
+        {% form 'customer', class: 'newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="hidden" name="customer[note][phone_number]">
+            
+          <div
+            class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            <div class="checkbox">
+              <input type="checkbox" name="contact[contact_time_1]" value="morning"
+              required><label for="morning">Would you like to receive our physical catalog?</label>
+            </div>
+            <div class="field">
+              <input
+                id="NewsletterForm--{{ section.id }}"
+                type="text"
+                name="contact[first_name]"
+                class="field__input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="first_name"
+                {% if form.errors %}
+                  autofocus
+                  aria-invalid="true"
+                  aria-describedby="Newsletter-error--{{ section.id }}"
+                {% elsif form.posted_successfully? %}
+                  aria-describedby="Newsletter-success--{{ section.id }}"
+                {% endif %}
+                placeholder="Business name"
+                required
+              >
+              <label class="field__label" for="NewsletterForm--{{ section.id }}"> Business name </label>
+            </div>
+
+            <div class="field">
+              <input
+                id="NewsletterForm--{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="field__input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                {% if form.errors %}
+                  autofocus
+                  aria-invalid="true"
+                  aria-describedby="Newsletter-error--{{ section.id }}"
+                {% elsif form.posted_successfully? %}
+                  aria-describedby="Newsletter-success--{{ section.id }}"
+                {% endif %}
+                placeholder="{{ 'newsletter.label' | t }}"
+                required
+              >
+              <label class="field__label" for="NewsletterForm--{{ section.id }}"> johndoe@csweeps.com </label>
+            </div>
+           
+            <div class="field">
+              <input
+                type="tel"
+                id="ContactForm-phone"
+                class="field__input"
+                autocomplete="tel"
+                name="contact[note][phone_number]" 
+                pattern="[0-9\-]*"
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                placeholder="{{ 'templates.contact.form.phone' | t }}"
+              >
+              <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+            </div>
+            <button
+              type="submit"
+              class="newsletter-form__button field__button"
+              name="commit"
+              id="Subscribe"
+              aria-label="{{ 'newsletter.button_label' | t }}"
+            >
+              Sign up today
+            </button>
+            {%- if form.errors -%}
+              <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+                {%- render 'icon-error' -%}
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </small>
+            {%- endif -%}
+          </div>
+          {%- if form.posted_successfully? -%}
+            <h3
+              class="newsletter-form__message newsletter-form__message--success form__message"
+              id="Newsletter-success--{{ section.id }}"
+              tabindex="-1"
+              autofocus
+            >
+              {% render 'icon-success' -%}
+              {{- 'newsletter.success' | t }}
+            </h3>
+          {%- endif -%}
+          <p>By signing up you agree to receive marketing messages from NECS. View Terms & Privacy</p>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "NEC_Images",
+  "settings": [
+
+  ],
+  "blocks":[
+    {
+      "type":"NEC_Images",
+      "name":"Image",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Add Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Title"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"NEC Image"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .nec_img {display: flex; margin: 0; padding: 0;}
+  .nec_img .nec_block {overflow: hidden; cursor: pointer;}
+  .nec_img .nec_block img {width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; transition: all 300ms ease-out;}
+  .nec_img .nec_block  img:hover {transform: scale(1.1);}
+  .nec_img .nec_block { position: relative; }
+  .nec_img .nec_block a > span { position: absolute; bottom: 0; padding: 10px 20px; display: block; background: #00000090; left: 0; right: 0; font-size: 16px; }
+  /*** Popup ****/
+  .popup-link a { color: #fff; font-size: 12px; cursor: pointer; }
+  .popup-container { visibility: hidden; opacity: 0; transition: all 0.3s ease-in-out; transform: scale(1.3); position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(21, 17, 17, 0.61); display: flex; align-items: center; }
+  .popup-content { background-color: #fefefe; margin: auto; padding: 48px; width: 45%; border-radius: 24px; }
+  .popup-content .inner_content { padding: 0; color: #505050; font-family: "Roboto-Regular"; font-size: 14px; font-style: normal; font-weight: 400; line-height: 140%; }
+  .popup-content a.close { color: #aaaaaa; float: right; font-size: 28px; font-weight: bold; background: none; padding: 0; margin: 0; text-decoration: none; position: relative; top: 4px; }
+  .popup-content a.close:hover { color: #333; }
+  .popup-content span:hover, .popup-content span:focus { color: #000; text-decoration: none; cursor: pointer; }
+  .popup-container:target { visibility: visible; opacity: 1; transform: scale(1); }
+  .popup-container h3 { margin: 0 0 24px 0; color: #000; font-family: "Roboto-Bold"; font-size: 48px; font-style: normal; font-weight: 700; line-height: 120%; text-align: left; }
+  .popup-style-2 { transform: scale(0.3); }
+  .popup-style-2:target { transform: scale(1); }
+  .popup-content .inner_content h3 { font-size: 20px; padding: 7px 0; margin: 0; color: #505050; }
+  .popup-content .inner_content p { margin: 0; padding-bottom: 10px; color: #505050; }
+
+   @media screen and (min-width:320px) and (max-width:767px){  
+     .popup-content {padding: 30px;width: 90%;border-radius: 24px;}
+   }
+  @media screen and (min-width:768px) and (max-width:991px){  
+   .popup-content {background-color: #fefefe;margin: auto; padding: 35px; width: 60%; border-radius: 24px;}
+
+  }
+  
+  
+</style>

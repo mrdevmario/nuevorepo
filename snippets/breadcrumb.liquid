@@ -1,0 +1,35 @@
+{% if template == 'product' or template == 'new-template' %}
+  {% assign current_collection = product.collections.first %}
+  {% if current_collection %}
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+      <a href="/" title="Home">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ current_collection.url }}" title="{{ current_collection.title }}">{{ current_collection.title }}</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ product.title }}</span>
+    </nav>
+  {% endif %}
+{% endif %}
+
+{% if template.suffix == 'new-template' %}
+  {% assign current_collection = product.collections.first %}
+  {% if current_collection %}
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+      <a href="/" title="Home">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ current_collection.url }}" title="{{ current_collection.title }}">{{ current_collection.title }}</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ product.title }}</span>
+    </nav>
+  {% endif %}
+{% endif %}
+
+{% if template.suffix contains 'spec-sheet' %}
+  <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+    <a href="/" title="Home">Home</a>
+    <span aria-hidden="true">/</span>
+    <a href="/pages/specification-sheets">Specification sheets</a>
+    <span aria-hidden="true">/</span>
+    <span>{{ page.title }}</span>
+  </nav>
+{% endif %}

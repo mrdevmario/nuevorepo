@@ -1,0 +1,196 @@
+<div class="career_strip nec_mobile">{{ section.settings.spec_strip }}</div>
+<div class="privacy page-width">	
+<h2 class="privacy_head">{{ section.settings.main_heading }}</h2>
+						<div id="tabs-section" class="tabs">
+							<ul class="tab-head"> 
+                               {% for block in section.blocks %}
+                               {% if block.settings.tab_link %}
+								<li>
+									<a href="#{{ block.settings.tab_link }}" class="tab-link {{ block.settings.tab_class }}">{{ block.settings.pp_tab }}</a>
+								</li>	
+                               {% endif %}
+                               {% endfor %} 
+							</ul>
+                          <div class="pp_content">
+                            {% for block in section.blocks %}
+                            {% if block.settings.tab_id %}
+							<section id="{{ block.settings.tab_id }}" class="tab-body entry-content {{ block.settings.cont_class }}">
+								<h2>{{ block.settings.cont_head }}</h2>
+								<p>{{ block.settings.cont_txt }}</p>
+							</section>	
+                            {% endif %}
+                            {% endfor %} 
+                          </div>
+						</div>			
+		</div>
+{% schema %}
+  {
+    "name": "privacy_policy",
+    "settings": [
+       {
+        "type":"text",
+        "id":"spec_strip",
+        "label":"Add Strip Text"
+      },
+     {
+        "type":"text",
+        "id":"main_heading",
+        "label":"Add Main Heading"
+      }    
+    ], 
+    "blocks":[
+    {
+    "type":"text",
+    "name":"privacy_tabs",
+    "settings":[       
+      {
+        "type":"text",
+        "id":"tab_link",
+        "label":"Add Tab Link"
+      },
+      {
+        "type":"text",
+        "id":"tab_class",
+        "label":"Add Tab Class"
+      } , 
+      {
+        "type":"text",
+        "id":"pp_tab",
+        "label":"Add Tab Title"
+      }     
+    ]    
+  },
+  {
+    "type":"privacy_cont",
+    "name":"privacy_cont",
+    "settings":[ 
+      {
+        "type":"text",
+        "id":"tab_id",
+        "label":"Add Tab ID"
+       },
+     {
+        "type":"text",
+        "id":"cont_class",
+        "label":"Add Content Class"
+       },
+      {
+        "type":"text",
+        "id":"cont_head",
+        "label":"Add Content Heading"
+       },
+      {
+        "type":"html",
+        "id":"cont_txt",
+        "label":"Add Content Text"
+       }
+    ]
+    
+  }
+  ],
+"presets":[
+  {
+    "name":"Privacy Policy"
+  }
+]
+  }
+{% endschema %}
+
+<style>
+.career_strip.nec_mobile { color: #F9C001; font-family: Roboto; font-size: 12px; font-style: normal; font-weight: 500; line-height: 140%; display: flex; padding: 16px; text-align: center;justify-content: center; align-items: center; gap: 16px; background: #1E4A7D;display:none; }
+.privacy h2.privacy_head { color: #19454B; font-family: Poppins; font-size: 64px; font-style: normal; font-weight: 700; line-height: 100%; letter-spacing: -2.56px; text-transform: uppercase; margin: 0; padding-top: 64px; }
+.privacy ul.tab-head li a { color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 700; line-height: 130%; }
+.privacy .tabs {display: flex; gap: 56px; margin-top: 40px; padding-bottom: 64px;}
+.privacy .tabs > ul {list-style-type: none;margin: 0;padding: 0;	width: 20%;}
+.privacy .tabs > ul li {display: block; margin-bottom: 8px;}
+.privacy .tabs > ul li a {display: flex; padding: 8px 16px; gap: 8px; align-self: stretch; border-radius: 4px;text-decoration: none;}
+.privacy .tabs > ul li a.active { background: #F1EFEC;}
+.privacy .tabs > ul li a > span { width: 100%; display: flex; align-items: center; justify-content: center; text-align: center; } 
+.privacy .pp_content{width: 80%; background-color: #fff; }
+.privacy .tabs section {display: none;}
+.privacy .tabs section > * { opacity: 0; transform: translateY(20px); transition: opacity 0.2s, transform 0.2s; } 
+.privacy .tabs section.active { display: block; } 
+.privacy .tabs section.active-content > * { opacity: 1; transform: translateY(0); }
+.privacy .tabs section h2 { margin: 0 0 24px 0; color: #19454B; font-family: Poppins; font-size: 24px; font-style: normal; font-weight: 700; line-height: 24px; text-transform: uppercase; }
+.privacy .tabs section h3 { margin: 0 0 24px 0; color: #19454B; font-family: Poppins; font-size: 20px; font-style: normal; font-weight: 700; line-height: 20px; text-transform: uppercase; }
+.privacy .tabs section p { margin: 0; color: #19454B; font-family: Roboto; font-size: 18px; font-style: normal; font-weight: 500; line-height: 130%; letter-spacing: -0.36px; }
+.privacy .pp_content a {color: #19454B;font-family: Roboto;font-style: normal;font-weight: 600;line-height: 140%;letter-spacing: -0.32px;text-decoration-line: underline;}
+.privacy .pp_content a:hover {color: rgb(var(--color-link));text-decoration-thickness: 0.2rem;}
+
+@media screen and (min-width:320px) and (max-width:767px){ 
+.privacy.page-width {padding-left: 24px; padding-right: 24px;}
+.privacy h2.privacy_head {font-size: 28px; line-height: 30px ; letter-spacing: -1.12px; margin: 0; padding-top: 24px; }
+.privacy .tabs { display: flex; gap: 40px; margin-top: 24px; padding-bottom: 40px; flex-direction: column; }
+.privacy .tabs > ul { width: 100%;}
+.privacy .pp_content {width: 100%;}
+.privacy .tabs section p { padding-left: 16px;}
+.career_strip.nec_mobile {display:block; }
+.nec_rtmenu {background: #F9C001;}
+body.privacy-policy .header-wrapper--border-bottom {border-bottom: 0;}
+}
+@media screen and (min-width:768px) and (max-width:991px){  
+.privacy .tabs > ul {width: 40%;}
+.privacy .pp_content {width: 60%;}
+.privacy .tabs {gap: 30px; margin-top: 30px; padding-bottom: 40px;}
+.privacy h2.privacy_head {font-size: 48px; padding-top: 40px;}  
+.career_strip.nec_mobile {display:block; }
+.nec_rtmenu {background: #F9C001;}
+body.privacy-policy .header-wrapper--border-bottom {border-bottom: 0;}
+}
+
+@media screen and (min-width:992px) and (max-width:1365px){  
+.privacy h2.privacy_head {padding-top: 40px;}
+.privacy .tabs > ul {width: 25%;}
+.privacy .pp_content {width: 75%;}
+}
+@media screen and (min-width:320px) and (max-width:389px){ 
+.career_strip.nec_mobile {font-size: 10px; padding: 16px 8px;}
+.privacy.page-width {padding-left: 20px; padding-right: 20px;}
+.privacy h2.privacy_head {font-size: 28px; line-height: 30px ; letter-spacing: -1.12px; margin: 0; padding-top: 24px; }
+.privacy .tabs section p { padding-left: 10px;}
+.privacy .tabs section h2 {font-size: 22px;}
+}  
+
+</style>
+
+<script>
+ (function ($) {
+  // Variables
+  const $tabLink = $('#tabs-section .tab-link');
+  const $tabBody = $('#tabs-section .tab-body');
+  let timerOpacity;
+
+  // Toggle Class
+  const init = () => {
+    // Menu Click
+    $tabLink.off('click').on('click', function (e) {
+      // Prevent Default
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Clear Timers
+      window.clearTimeout(timerOpacity);
+
+      // Toggle Class Logic
+      // Remove Active Classes
+      $tabLink.removeClass('active ');
+      $tabBody.removeClass('active ');
+      $tabBody.removeClass('active-content');
+
+      // Add Active Classes
+      $(this).addClass('active');
+      $($(this).attr('href')).addClass('active');
+
+      // Opacity Transition Class
+      timerOpacity = setTimeout(() => {
+        $($(this).attr('href')).addClass('active-content');
+      }, 50);
+    });
+  };
+
+  // Document Ready
+  $(function () {
+    init();
+  });
+})(jQuery);
+</script>

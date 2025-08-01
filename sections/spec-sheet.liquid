@@ -1,0 +1,59 @@
+{{ 'spec-sheet.css' | asset_url | stylesheet_tag }}
+{% render 'spec-sheet' %}
+{% schema %}
+{
+  "name": "Spec Sheet",
+  "tag": "section",
+  "class": "spec-sheet",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_spec_card",
+      "label": "Show specification card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "spec_card_title",
+      "label": "Card title (optional)",
+      "info": "Leave empty if you don't want to show a title"
+    },
+    {
+      "type": "textarea",
+      "id": "spec_card_item_1",
+      "label": "Item 1",
+      "default": "Suitable for All Fuel Applications"
+    },
+    {
+      "type": "textarea",
+      "id": "spec_card_item_2",
+      "label": "Item 2",
+      "default": "Manufactured and tested to UL1777 (US) and ULCS635 (Canada) standards"
+    },
+    {
+      "type": "textarea",
+      "id": "spec_card_item_3",
+      "label": "Item 3",
+      "default": "Transferrable Lifetime Warranty"
+    },
+    {
+      "type": "textarea",
+      "id": "spec_card_item_4",
+      "label": "Item 4 (optional)",
+      "info": "Leave empty if you don't need a fourth item"
+    },
+    {
+      "type": "textarea",
+      "id": "spec_card_item_5",
+      "label": "Item 5 (optional)",
+      "info": "Leave empty if you don't need a fifth item"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spec Sheet"
+    }
+  ]
+}
+{% endschema %}

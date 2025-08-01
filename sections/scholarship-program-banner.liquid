@@ -1,0 +1,34 @@
+{{ 'scholarship-program-banner.css' | asset_url | stylesheet_tag }}
+{% render 'scholarship-program-banner' %}
+
+{% schema %}
+{
+  "name": "Scholarship Banner",
+  "tag": "section",
+  "class": "scholarship-program-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "bg_mobile",
+      "label": "Background Image for Mobile"
+    },
+
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scholarship Banner"
+    }
+  ]
+}
+{% endschema %}

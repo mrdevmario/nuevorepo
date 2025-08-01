@@ -1,0 +1,18 @@
+<div class="industry__events">
+  <div class="page-width">
+    <div class="grid__wrapper">
+      <div class="left__column">
+       {% if section.settings.bg_image != empty %}
+        <img src="{{ section.settings.side_image | img_url: 'master' }}" />
+        {% endif %}
+      </div>
+      <div class="right__column">
+         <div>
+          <h2>{{ section.settings.heading }}</h2>
+          <p>{{ section.settings.description }}</p>
+          <a href="{{ section.settings.btn_url }}">{{ section.settings.btn_text }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
