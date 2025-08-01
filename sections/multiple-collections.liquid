@@ -712,6 +712,7 @@ class MultiCollectionHandler {
             </div>
             <div class="card__content">
               <div class="card__information">
+              ${product.product_type ? `<div class="product-card__category">${product.product_type}</div>` : ''}
                 <h3 class="card__heading">
                   <a href="/products/${product.handle}" class="full-unstyled-link">
                     ${product.title}
