@@ -1154,6 +1154,16 @@ a.header__icon--account.link {
   display: block;
   margin: 0 auto;
   padding: 10px 0; 
+}
+.media > img:not([src]),
+.media > img[src=""],
+.media > img[src="null"],
+.media > img[src="undefined"] {
+  content: url("https://cdn.shopify.com/s/files/1/0844/6391/1230/files/image-place-holder.png?v=1754072595");
+  object-fit: contain;
+  background-color: white;
+}
+
 
 .media > img {
   object-fit: cover;
