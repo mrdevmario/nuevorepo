@@ -672,7 +672,7 @@ createProductCard(product) {
   const primaryImage = product.featured_image || (product.images && product.images[0]);
   const secondaryImage = showSecondaryImage && product.images && product.images[1];
 
-  const placeholderImage = 'https://cdn.shopify.com/s/files/your-placeholder.jpg'; // ⚠️ Usa tu imagen real
+  const placeholderImage = 'https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591'; // ⚠️ Usa tu imagen real
 
   const imageUrlSmall = primaryImage?.src
     ? `${primaryImage.src.split('?')[0]}?width=200`
