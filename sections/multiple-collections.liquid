@@ -678,7 +678,7 @@ const imageMarkup = primaryImage ? `
   <div class="card__media">
     <div class="media media--transparent media--hover-effect">
       <img
-        srcset="${imageUrlSmall} 1x, ${imageUrlSmall2x} 2x"
+        srcset="${imageUrlSmall} 1x, ${imageUrlSmall}&dpr=2 2x"
         src="${imageUrlSmall}"
         sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
         alt="${product.title}"
@@ -689,8 +689,8 @@ const imageMarkup = primaryImage ? `
       >
       ${secondaryImage ? `
         <img
-          srcset="${secondaryUrlSmall} 1x, ${secondaryUrlSmall2x} 2x"
-          src="${secondaryUrlSmall}"
+          srcset="${secondaryImage.src}&width=00 1x, ${secondaryImage.src}&width=400&dpr=2 2x"
+          src="${secondaryImage.src}&width=200"
           sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
           alt="${product.title}"
           loading="lazy"
