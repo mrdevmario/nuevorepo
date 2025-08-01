@@ -283,7 +283,6 @@ class MultiCollectionHandler {
   }
 }
 
-// Updated fetch function to properly handle both product and variant metafields
 async fetchProductsWithMetafields(handle) {
   const query = `
 query getCollectionProducts($handle: String!) {
@@ -316,7 +315,7 @@ query getCollectionProducts($handle: String!) {
               amount
             }
           }
-          variants(first: 10) {
+          variants(first: 5) {
             edges {
               node {
                 price {
@@ -377,29 +376,13 @@ query getCollectionProducts($handle: String!) {
       const product = edge.node;
       const firstVariant = product.variants.edges[0].node;
       
-      // Get product metafields
-      const productMetafields = {
-        alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
-        liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
-      };
+      // Obtener metafields del producto
+      const productAlloy = product.metafields?.find(m => m?.key === 'alloy')?.value || null;
+      const productLinerType = product.metafields?.find(m => m?.key === 'liner_type')?.value || null;
       
-      // Get variant metafields
-      const variantMetafields = {
-        alloy: firstVariant.metafields?.find(m => m?.key === 'alloy')?.value || null,
-        liner_type: firstVariant.metafields?.find(m => m?.key === 'liner_type')?.value || null
-      };
-      
-      // Combine metafields - prefer variant over product
-      const combinedMetafields = {
-        alloy: variantMetafields.alloy || productMetafields.alloy,
-        liner_type: variantMetafields.liner_type || productMetafields.liner_type
-      };
-      
-      // Store all variant metafields for debugging
-      const allVariantMetafields = product.variants.edges.map(v => ({
-        alloy: v.node.metafields?.find(m => m?.key === 'alloy')?.value || null,
-        liner_type: v.node.metafields?.find(m => m?.key === 'liner_type')?.value || null
-      })).filter(v => v.alloy || v.liner_type);
+      // Obtener metafields de la primera variante
+      const variantAlloy = firstVariant.metafields?.find(m => m?.key === 'alloy')?.value || null;
+      const variantLinerType = firstVariant.metafields?.find(m => m?.key === 'liner_type')?.value || null;
       
       return {
         id: product.id,
@@ -423,9 +406,10 @@ query getCollectionProducts($handle: String!) {
           compare_at_price: firstVariant.compareAtPrice ? 
             parseFloat(firstVariant.compareAtPrice.amount) : null
         }],
-        metafields: combinedMetafields,
-        variantMetafields: allVariantMetafields, // Store for debugging
-        productMetafields: productMetafields, // Store original product metafields
+        metafields: {
+          alloy: variantAlloy || productAlloy,
+          liner_type: variantLinerType || productLinerType
+        },
         tags: product.tags
       };
     });
