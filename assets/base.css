@@ -1148,7 +1148,7 @@ a.header__icon--account.link {
 .media model-viewer {
   position: relative;
   z-index: 1;
-  max-width: 80%;
+  max-width: 70%;
   height: auto;
   object-fit: contain;
   display: block;
