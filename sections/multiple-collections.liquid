@@ -672,13 +672,13 @@ class MultiCollectionHandler {
     const primaryImage = product.featured_image || (product.images && product.images[0]);
     const secondaryImage = showSecondaryImage && product.images && product.images[1];
     
-    const imageUrlSmall = `${primaryImage.src}&width=400`;
+    const imageUrlSmall = `${primaryImage.src}&width=200`;
 
 const imageMarkup = primaryImage ? `
   <div class="card__media">
     <div class="media media--transparent media--hover-effect">
       <img
-        srcset="${imageUrlSmall} 1x, ${imageUrlSmall}&dpr=2 1x"
+        srcset="${imageUrlSmall} 1x, ${imageUrlSmall}&dpr=2 2x"
         src="${imageUrlSmall}"
         sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
         alt="${product.title}"
@@ -689,7 +689,7 @@ const imageMarkup = primaryImage ? `
       >
       ${secondaryImage ? `
         <img
-          srcset="${secondaryImage.src}&width=00 1x, ${secondaryImage.src}&width=400&dpr=2 2x"
+          srcset="${secondaryImage.src}&width=200 1x, ${secondaryImage.src}&width=200&dpr=2 2x"
           src="${secondaryImage.src}&width=200"
           sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
           alt="${product.title}"
@@ -702,7 +702,6 @@ const imageMarkup = primaryImage ? `
     </div>
   </div>
 ` : '<div class="card__media"><div class="media media--transparent"><div class="no-image-placeholder">No image available</div></div></div>';
-
     return `
       <div class="grid__item">
         <div class="card-wrapper product-card-wrapper underline-links-hover">
