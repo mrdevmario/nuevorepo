@@ -384,8 +384,8 @@ class MultiCollectionHandler {
     this.alloyFiltersSection.style.display = 'none';
     this.typeFiltersSection.style.display = 'none';
 
-   const filteredProducts = await this.getFilteredProducts(selectedTypes, selectedKitTypes);
-
+    if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits') || selectedTypes.includes('Components, Adapters, & Fittings')) {
+      const filteredProducts = await this.getFilteredProducts(selectedTypes, selectedKitTypes);
       
       // Check which alloys have products based on metafields
       // Always show aluminum for Components category
