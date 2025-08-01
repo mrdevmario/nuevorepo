@@ -167,124 +167,273 @@ class MultiCollectionHandler {
   typeSubfiltersList.innerHTML = '';
 }
 
-  async fetchProductsWithMetafields(handle) {
-    const query = `
-  query getCollectionProducts($handle: String!) {
-    collection(handle: $handle) {
-      products(first: 250) {
-        edges {
-          node {
-            id
-            title
-            handle
-            productType
-            featuredImage {
-              url
-              altText
-              width
-              height
-            }
-            images(first: 2) {
-              edges {
-                node {
-                  url
-                  altText
-                  width
-                  height
-                }
-              }
-            }
-            priceRange {
-              minVariantPrice {
-                amount
-              }
-            }
-            variants(first: 1) {
-              edges {
-                node {
-                  price {
-                    amount
-                  }
-                  compareAtPrice {
-                    amount
-                  }
-                }
-              }
-            }
-            metafields(identifiers: [
-              {namespace: "custom", key: "alloy"},
-              {namespace: "custom", key: "liner_type"}
-            ]) {
-              key
-              value
-            }
-            tags
+  async handleFilterChange() {
+  try {
+    this.showLoading();
+    const selectedTypes = Array.from(document.querySelectorAll('input[data-filter="type"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    const selectedKitTypes = Array.from(document.querySelectorAll('input[data-filter="kit-type"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    this.subfiltersWrapper.style.display = 'none';
+    this.alloyFiltersSection.style.display = 'none';
+    this.typeFiltersSection.style.display = 'none';
+
+    if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits') || selectedTypes.includes('Components, Adapters, & Fittings')) {
+      const filteredProducts = await this.getFilteredProducts(selectedTypes, selectedKitTypes);
+      
+      // Check which alloys have products based on metafields
+      const alloyWithProducts = new Set();
+      
+      // Always show aluminum for Components category
+      if (selectedTypes.includes('Components, Adapters, & Fittings')) {
+        alloyWithProducts.add('aluminum');
+      }
+      
+      // Add other alloys from metafields
+      filteredProducts.forEach(product => {
+        if (product.metafields?.alloy) {
+          alloyWithProducts.add(product.metafields.alloy.toLowerCase());
+        }
+      });
+
+      // Show alloy buttons that have products
+      const alloyButtons = document.querySelectorAll('#alloy-subfilters .subfilter-tag');
+      alloyButtons.forEach(button => {
+        const handle = button.dataset.handle;
+        button.style.display = alloyWithProducts.has(handle.toLowerCase()) ? 'flex' : 'none';
+      });
+
+      if (alloyWithProducts.size > 0) {
+        this.subfiltersWrapper.style.display = 'block';
+        this.alloyFiltersSection.style.display = 'block';
+      }
+
+      // Show type filters for both Liner and Liner Kits
+      if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
+        const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
+        
+        // Filter products by selected alloys if any are active
+        let filteredByAlloys = filteredProducts;
+        if (activeAlloyTags.length > 0) {
+          filteredByAlloys = filteredProducts.filter(product => 
+            Array.from(activeAlloyTags).some(tag => 
+              product.metafields?.alloy?.toLowerCase() === tag.dataset.handle.toLowerCase()
+            )
+          );
+        }
+
+        const typeWithProducts = new Set();
+        
+        // Check each product's liner_type metafield
+        filteredByAlloys.forEach(product => {
+          // Check both product and variant metafields for liner_type
+          if (product.metafields?.liner_type) {
+            typeWithProducts.add(product.metafields.liner_type.toLowerCase());
           }
+          
+          // Also check if the product has variant metafields with liner_type
+          if (product.variantMetafields) {
+            product.variantMetafields.forEach(variant => {
+              if (variant.liner_type) {
+                typeWithProducts.add(variant.liner_type.toLowerCase());
+              }
+            });
+          }
+        });
+
+        console.log('Filtered products:', filteredByAlloys);
+        console.log('Types found from metafields:', Array.from(typeWithProducts));
+
+        if (typeWithProducts.size > 0) {
+          // Clear existing type filters
+          const typeSubfiltersList = document.getElementById('type-subfilters');
+          typeSubfiltersList.innerHTML = '';
+
+          // Create a filter tag for each unique type found
+          typeWithProducts.forEach(type => {
+            const tag = document.createElement('div');
+            tag.className = 'subfilter-tag';
+            // Capitalize properly
+            tag.textContent = type.split(' ')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+            tag.dataset.handle = type;
+            tag.dataset.type = type;
+            tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
+            typeSubfiltersList.appendChild(tag);
+          });
+
+          this.typeFiltersSection.style.display = 'block';
+          this.subfiltersWrapper.style.display = 'block';
+        } else {
+          console.log('No liner types found in metafields');
+        }
+      }
+    }
+
+    this.activeFilters = new Set(selectedTypes);
+    this.activeKitTypes = new Set(selectedKitTypes);
+    await this.loadProducts();
+  } catch (error) {
+    console.error('Error handling filter change:', error);
+  } finally {
+    this.hideLoading();
+  }
+}
+
+// Updated fetch function to properly handle both product and variant metafields
+async fetchProductsWithMetafields(handle) {
+  const query = `
+query getCollectionProducts($handle: String!) {
+  collection(handle: $handle) {
+    products(first: 250) {
+      edges {
+        node {
+          id
+          title
+          handle
+          productType
+          featuredImage {
+            url
+            altText
+            width
+            height
+          }
+          images(first: 2) {
+            edges {
+              node {
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          variants(first: 10) {
+            edges {
+              node {
+                price {
+                  amount
+                }
+                compareAtPrice {
+                  amount
+                }
+                metafields(identifiers: [
+                  {namespace: "custom", key: "alloy"},
+                  {namespace: "custom", key: "liner_type"}
+                ]) {
+                  key
+                  value
+                }
+              }
+            }
+          }
+          metafields(identifiers: [
+            {namespace: "custom", key: "alloy"},
+            {namespace: "custom", key: "liner_type"}
+          ]) {
+            key
+            value
+          }
+          tags
         }
       }
     }
   }
+}
 `;
 
-    try {
-      const response = await fetch('/api/2024-01/graphql.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Storefront-Access-Token': this.storefrontToken
-        },
-        body: JSON.stringify({
-          query,
-          variables: { handle }
-        })
-      });
+  try {
+    const response = await fetch('/api/2024-01/graphql.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': this.storefrontToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { handle }
+      })
+    });
 
-      if (!response.ok) {
-        throw new Error(`GraphQL request failed: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      
-      if (data.errors) {
-        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
-      }
-
-      return data.data.collection.products.edges.map(edge => {
-  const product = edge.node;
-  return {
-    id: product.id,
-    title: product.title,
-    handle: product.handle,
-    product_type: product.productType,
-    featured_image: {
-      src: product.featuredImage?.url,
-      alt: product.featuredImage?.altText,
-      width: product.featuredImage?.width,
-      height: product.featuredImage?.height
-    },
-    images: product.images.edges.map(img => ({
-      src: img.node.url,
-      alt: img.node.altText,
-      width: img.node.width,
-      height: img.node.height
-    })),
-    variants: [{
-      price: parseFloat(product.variants.edges[0].node.price.amount),
-      compare_at_price: product.variants.edges[0].node.compareAtPrice ? 
-        parseFloat(product.variants.edges[0].node.compareAtPrice.amount) : null
-    }],
-    metafields: {
-      alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
-      liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
-    },
-    tags: product.tags
-  };
-});
-    } catch (error) {
-      console.error(`Error fetching products for collection ${handle}:`, error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`GraphQL request failed: ${response.statusText}`);
     }
+
+    const data = await response.json();
+    
+    if (data.errors) {
+      throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+    }
+
+    return data.data.collection.products.edges.map(edge => {
+      const product = edge.node;
+      const firstVariant = product.variants.edges[0].node;
+      
+      // Get product metafields
+      const productMetafields = {
+        alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
+        liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
+      };
+      
+      // Get variant metafields
+      const variantMetafields = {
+        alloy: firstVariant.metafields?.find(m => m?.key === 'alloy')?.value || null,
+        liner_type: firstVariant.metafields?.find(m => m?.key === 'liner_type')?.value || null
+      };
+      
+      // Combine metafields - prefer variant over product
+      const combinedMetafields = {
+        alloy: variantMetafields.alloy || productMetafields.alloy,
+        liner_type: variantMetafields.liner_type || productMetafields.liner_type
+      };
+      
+      // Store all variant metafields for debugging
+      const allVariantMetafields = product.variants.edges.map(v => ({
+        alloy: v.node.metafields?.find(m => m?.key === 'alloy')?.value || null,
+        liner_type: v.node.metafields?.find(m => m?.key === 'liner_type')?.value || null
+      })).filter(v => v.alloy || v.liner_type);
+      
+      return {
+        id: product.id,
+        title: product.title,
+        handle: product.handle,
+        product_type: product.productType,
+        featured_image: {
+          src: product.featuredImage?.url,
+          alt: product.featuredImage?.altText,
+          width: product.featuredImage?.width,
+          height: product.featuredImage?.height
+        },
+        images: product.images.edges.map(img => ({
+          src: img.node.url,
+          alt: img.node.altText,
+          width: img.node.width,
+          height: img.node.height
+        })),
+        variants: [{
+          price: parseFloat(firstVariant.price.amount),
+          compare_at_price: firstVariant.compareAtPrice ? 
+            parseFloat(firstVariant.compareAtPrice.amount) : null
+        }],
+        metafields: combinedMetafields,
+        variantMetafields: allVariantMetafields, // Store for debugging
+        productMetafields: productMetafields, // Store original product metafields
+        tags: product.tags
+      };
+    });
+  } catch (error) {
+    console.error(`Error fetching products for collection ${handle}:`, error);
+    throw error;
   }
+}
 
   async setupFilters() {
     try {
