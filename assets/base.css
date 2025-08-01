@@ -1155,13 +1155,19 @@ a.header__icon--account.link {
   margin: 0 auto;
   padding: 10px 0; 
 }
-.media > img:not([src]),
-.media > img[src=""],
-.media > img[src="null"],
-.media > img[src="undefined"] {
-  content: url("https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591");
-  object-fit: contain;
+.no-image-placeholder {
+  width: 200px;
+  height: 200px;
+  background-image: url("https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
 }
 .media img[src*="image-place-holder.png"] {
   object-fit: contain;
