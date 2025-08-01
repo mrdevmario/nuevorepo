@@ -1126,10 +1126,10 @@ a.header__icon--account.link {
 
 /* component-media */
 .media {
-  display: block;
-  background-color: rgba(var(--color-foreground), 0.1);
-  position: relative;
-  overflow: hidden;
+position: relative;
+  background-color: white;
+  padding: 10px 0; 
+  text-align: center; 
 }
 
 .media--transparent {
@@ -1144,7 +1144,7 @@ a.header__icon--account.link {
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
+  object-fit: contain;
 }
 
 .media > img {
