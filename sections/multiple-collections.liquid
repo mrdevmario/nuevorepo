@@ -167,124 +167,147 @@ class MultiCollectionHandler {
   typeSubfiltersList.innerHTML = '';
 }
 
-  async fetchProductsWithMetafields(handle) {
-    const query = `
-  query getCollectionProducts($handle: String!) {
-    collection(handle: $handle) {
-      products(first: 250) {
-        edges {
-          node {
-            id
-            title
-            handle
-            productType
-            featuredImage {
-              url
-              altText
-              width
-              height
-            }
-            images(first: 2) {
-              edges {
-                node {
-                  url
-                  altText
-                  width
-                  height
-                }
-              }
-            }
-            priceRange {
-              minVariantPrice {
-                amount
-              }
-            }
-            variants(first: 1) {
-              edges {
-                node {
-                  price {
-                    amount
-                  }
-                  compareAtPrice {
-                    amount
-                  }
-                }
-              }
-            }
-            metafields(identifiers: [
-              {namespace: "custom", key: "alloy"},
-              {namespace: "custom", key: "liner_type"}
-            ]) {
-              key
-              value
-            }
-            tags
+ async fetchProductsWithMetafields(handle) {
+  const query = `
+query getCollectionProducts($handle: String!) {
+  collection(handle: $handle) {
+    products(first: 250) {
+      edges {
+        node {
+          id
+          title
+          handle
+          productType
+          featuredImage {
+            url
+            altText
+            width
+            height
           }
+          images(first: 2) {
+            edges {
+              node {
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          variants(first: 10) {
+            edges {
+              node {
+                price {
+                  amount
+                }
+                compareAtPrice {
+                  amount
+                }
+                metafields(identifiers: [
+                  {namespace: "custom", key: "alloy"},
+                  {namespace: "custom", key: "liner_type"}
+                ]) {
+                  key
+                  value
+                }
+              }
+            }
+          }
+          metafields(identifiers: [
+            {namespace: "custom", key: "alloy"},
+            {namespace: "custom", key: "liner_type"}
+          ]) {
+            key
+            value
+          }
+          tags
         }
       }
     }
   }
+}
 `;
 
-    try {
-      const response = await fetch('/api/2024-01/graphql.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Storefront-Access-Token': this.storefrontToken
-        },
-        body: JSON.stringify({
-          query,
-          variables: { handle }
-        })
-      });
+  try {
+    const response = await fetch('/api/2024-01/graphql.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': this.storefrontToken
+      },
+      body: JSON.stringify({
+        query,
+        variables: { handle }
+      })
+    });
 
-      if (!response.ok) {
-        throw new Error(`GraphQL request failed: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      
-      if (data.errors) {
-        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
-      }
-
-      return data.data.collection.products.edges.map(edge => {
-  const product = edge.node;
-  return {
-    id: product.id,
-    title: product.title,
-    handle: product.handle,
-    product_type: product.productType,
-    featured_image: {
-      src: product.featuredImage?.url,
-      alt: product.featuredImage?.altText,
-      width: product.featuredImage?.width,
-      height: product.featuredImage?.height
-    },
-    images: product.images.edges.map(img => ({
-      src: img.node.url,
-      alt: img.node.altText,
-      width: img.node.width,
-      height: img.node.height
-    })),
-    variants: [{
-      price: parseFloat(product.variants.edges[0].node.price.amount),
-      compare_at_price: product.variants.edges[0].node.compareAtPrice ? 
-        parseFloat(product.variants.edges[0].node.compareAtPrice.amount) : null
-    }],
-    metafields: {
-      alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
-      liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
-    },
-    tags: product.tags
-  };
-});
-    } catch (error) {
-      console.error(`Error fetching products for collection ${handle}:`, error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`GraphQL request failed: ${response.statusText}`);
     }
+
+    const data = await response.json();
+    
+    if (data.errors) {
+      throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+    }
+
+    return data.data.collection.products.edges.map(edge => {
+      const product = edge.node;
+      const firstVariant = product.variants.edges[0].node;
+      
+      // Combine product and variant metafields, giving priority to variant metafields
+      const productMetafields = {
+        alloy: product.metafields?.find(m => m?.key === 'alloy')?.value || null,
+        liner_type: product.metafields?.find(m => m?.key === 'liner_type')?.value || null
+      };
+      
+      const variantMetafields = {
+        alloy: firstVariant.metafields?.find(m => m?.key === 'alloy')?.value || null,
+        liner_type: firstVariant.metafields?.find(m => m?.key === 'liner_type')?.value || null
+      };
+      
+      // Use variant metafields if available, otherwise use product metafields
+      const combinedMetafields = {
+        alloy: variantMetafields.alloy || productMetafields.alloy,
+        liner_type: variantMetafields.liner_type || productMetafields.liner_type
+      };
+      
+      return {
+        id: product.id,
+        title: product.title,
+        handle: product.handle,
+        product_type: product.productType,
+        featured_image: {
+          src: product.featuredImage?.url,
+          alt: product.featuredImage?.altText,
+          width: product.featuredImage?.width,
+          height: product.featuredImage?.height
+        },
+        images: product.images.edges.map(img => ({
+          src: img.node.url,
+          alt: img.node.altText,
+          width: img.node.width,
+          height: img.node.height
+        })),
+        variants: [{
+          price: parseFloat(firstVariant.price.amount),
+          compare_at_price: firstVariant.compareAtPrice ? 
+            parseFloat(firstVariant.compareAtPrice.amount) : null
+        }],
+        metafields: combinedMetafields,
+        tags: product.tags
+      };
+    });
+  } catch (error) {
+    console.error(`Error fetching products for collection ${handle}:`, error);
+    throw error;
   }
+}
 
   async setupFilters() {
     try {
