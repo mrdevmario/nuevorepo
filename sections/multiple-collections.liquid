@@ -59,7 +59,7 @@
         </div>
       </div>
       
-      <!-- Filtros laterales -->
+      <!-- Side FIlters -->
       <div class="collection-filters" id="collection-filters">
         <div class="filter-group">
           <div class="filter-options" id="product-type-filters">
@@ -86,8 +86,8 @@
 <script>
 class MultiCollectionHandler {
   constructor() {
-    console.log('🚀 OPTIMIZED MODE - Starting MultiCollectionHandler');
-    console.log('📊 Collections configured:', {{ section.settings.selected_collections | json }}.length);
+    console.log('OPTIMIZED MODE - Starting MultiCollectionHandler');
+    console.log('Collections configured:', {{ section.settings.selected_collections | json }}.length);
     
     this.collections = {{ section.settings.selected_collections | json }};
     this.alloySubfilters = {{ section.settings.alloy_subfilters | json }};
@@ -110,7 +110,7 @@ class MultiCollectionHandler {
     this.typeFiltersSection = document.querySelector('.type-filters');
     this.storefrontToken = window.shopifyStorefrontToken;
 
-    // OPTIMIZACIÓN CRÍTICA para 27 colecciones
+    // Critical optimization for 27 collections
     this.requestCache = new Map();
     this.debounceTimer = null;
     this.loadingProgress = 0;
@@ -123,7 +123,7 @@ class MultiCollectionHandler {
     this.isLoading = true;
     if (this.loadingIndicator) {
       this.loadingIndicator.style.display = 'flex';
-      // Mostrar progreso
+      // Show progress
       this.loadingIndicator.innerHTML = `Loading collections... ${this.loadingProgress}/${this.totalCollections}`;
     }
   }
@@ -149,35 +149,35 @@ class MultiCollectionHandler {
     try {
       this.showLoading();
       
-      console.log('⚡ Starting PARALLEL loading of 27 collections...');
+      console.log('Starting PARALLEL loading of collections...');
       await this.setupFiltersWithParallelLoading();
       
-      console.log('🏷️ Setting up subfilters...');
+      console.log('Setting up subfilters...');
       await this.setupSubfilters();
       
       this.setupSorting();
       await this.handleFilterChange();
       
     } catch (error) {
-      console.error('❌ Initialization error:', error);
+      console.error('Initialization error:', error);
     } finally {
       this.hideLoading();
       const totalTime = performance.now() - startTime;
-      console.log(`🏁 Total initialization: ${totalTime.toFixed(2)}ms`);
+      console.log(`Total initialization: ${totalTime.toFixed(2)}ms`);
     }
   }
 
-  // OPTIMIZACIÓN CLAVE: Carga paralela con límite de concurrencia
+  // Key optimization: Parallel loading with concurrency limit
   async setupFiltersWithParallelLoading() {
     const startTime = performance.now();
     
     try {
       const productTypes = new Set();
-      const BATCH_SIZE = 6; // Máximo 6 requests paralelos
+      const BATCH_SIZE = 6; // Maximum 6 parallel requests
       
-      console.log(`📦 Loading ${this.collections.length} collections in batches of ${BATCH_SIZE}`);
+      console.log(`Loading ${this.collections.length} collections in batches of ${BATCH_SIZE}`);
       
-      // Dividir colecciones en lotes
+      // Divide collections into batches
       const batches = [];
       for (let i = 0; i < this.collections.length; i += BATCH_SIZE) {
         batches.push(this.collections.slice(i, i + BATCH_SIZE));
@@ -186,9 +186,9 @@ class MultiCollectionHandler {
       let loadedCount = 0;
       
       for (const batch of batches) {
-        console.log(`🔄 Processing batch: ${batch.map(c => c.handle).join(', ')}`);
+        console.log(`Processing batch: ${batch.map(c => c.handle).join(', ')}`);
         
-        // Cargar lote en paralelo
+        // Load batch in parallel
         const batchPromises = batch.map(collection => 
           this.fetchProductsWithMetafields(collection.handle)
             .then(products => {
@@ -200,9 +200,9 @@ class MultiCollectionHandler {
         
         const batchResults = await Promise.all(batchPromises);
         
-        // Procesar productos del lote
+        // Process products from batch
         batchResults.forEach(({ handle, products }) => {
-          console.log(`✅ Processed ${handle}: ${products.length} products`);
+          console.log(`Processed ${handle}: ${products.length} products`);
           products.forEach(product => {
             if (product.product_type) {
               let type = product.product_type;
@@ -216,15 +216,15 @@ class MultiCollectionHandler {
           });
         });
         
-        // Pequeña pausa entre lotes para no sobrecargar
+        // Small pause between batches to avoid overload
         if (batches.indexOf(batch) < batches.length - 1) {
           await new Promise(resolve => setTimeout(resolve, 100));
         }
       }
 
-      console.log('🏷️ Product types found:', Array.from(productTypes));
+      console.log('Product types found:', Array.from(productTypes));
 
-      // Crear filtros
+      // Create filters
       const filterOrderSetting = {{ section.settings.filter_order | json }};
       const orderedFilters = filterOrderSetting.split(/\r?\n/).filter(Boolean);
       const validOrderedFilters = orderedFilters.filter(type => productTypes.has(type));
@@ -282,14 +282,14 @@ class MultiCollectionHandler {
       });
 
       const totalTime = performance.now() - startTime;
-      console.log(`🚀 Parallel loading completed in: ${totalTime.toFixed(2)}ms`);
+      console.log(`Parallel loading completed in: ${totalTime.toFixed(2)}ms`);
       
     } catch (error) {
-      console.error('❌ Error in parallel loading:', error);
+      console.error('Error in parallel loading:', error);
     }
   }
 
-  // Mantener fetch original pero con mejor logging
+  // Keep original fetch but with better logging
   async fetchProductsWithMetafields(handle) {
     if (this.requestCache.has(handle)) {
       return this.requestCache.get(handle);
@@ -403,7 +403,7 @@ query getCollectionProducts($handle: String!) {
       return products;
 
     } catch (error) {
-      console.error(`❌ Error fetching products for collection ${handle}:`, error);
+      console.error(`Error fetching products for collection ${handle}:`, error);
       throw error;
     }
   }
@@ -438,7 +438,7 @@ query getCollectionProducts($handle: String!) {
     }
     
     this.debounceTimer = setTimeout(() => {
-      console.log('🎯 Debounced filter change triggered');
+      console.log('Debounced filter change triggered');
       this.handleFilterChange();
     }, 200);
   }
@@ -528,20 +528,20 @@ query getCollectionProducts($handle: String!) {
       await this.loadProducts();
       
     } catch (error) {
-      console.error('❌ Error handling filter change:', error);
+      console.error('Error handling filter change:', error);
     } finally {
       this.hideLoading();
-      console.log(`⚡ Filter change completed in: ${(performance.now() - startTime).toFixed(2)}ms`);
+      console.log(`Filter change completed in: ${(performance.now() - startTime).toFixed(2)}ms`);
     }
   }
 
-  // OPTIMIZACIÓN: getFilteredProducts ahora usa solo cache
+  // Optimization: getFilteredProducts now uses only cache
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
-    console.log('⚡ Fast filtering using cache...');
+    console.log('Fast filtering using cache...');
     let allProducts = [];
     
     for (const collection of this.collections) {
-      // Usar cache - no fetch
+      // Use cache - no fetch
       const products = this.requestCache.get(collection.handle) || [];
       
       const filteredProducts = products.filter(product => {
@@ -562,11 +562,11 @@ query getCollectionProducts($handle: String!) {
       allProducts = [...allProducts, ...filteredProducts];
     }
 
-    console.log(`✅ Filtered to ${allProducts.length} products using cache`);
+    console.log(`Filtered to ${allProducts.length} products using cache`);
     return allProducts;
   }
 
-  // Resto de funciones igual pero optimizadas para usar cache...
+  // Rest of functions optimized for cache usage
   async loadProducts() {
     try {
       this.filteredProducts = [];
@@ -579,7 +579,7 @@ query getCollectionProducts($handle: String!) {
       activeAlloyTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
       activeTypeTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
 
-      // Usar cache en lugar de nuevos fetches
+      // Use cache instead of new fetches
       const results = Array.from(collectionsToFetch).map(handle => 
         this.requestCache.get(handle) || []
       );
@@ -619,7 +619,7 @@ query getCollectionProducts($handle: String!) {
       await this.showPage(1);
 
     } catch (error) {
-      console.error('❌ Error loading products:', error);
+      console.error('Error loading products:', error);
     }
   }
 
