@@ -542,7 +542,7 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
-  // Optimization: getFilteredProducts now uses only cache with strict filtering
+  // Optimization: getFilteredProducts now uses only cache
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
     console.log('Fast filtering using cache...');
     let allProducts = [];
@@ -555,24 +555,9 @@ query getCollectionProducts($handle: String!) {
         let type = product.product_type;
         if (type.endsWith('Liner')) {
           type = 'Liner';
-        } else if (type.endsWith('Kit')) {
-          type = 'Liner Kits';
         }
 
-        // STRICT TYPE MATCHING - Only exact matches
         const matchesType = selectedTypes.includes(type);
-        
-        // Additional safety check - exclude caps/dampers when filtering for liners
-        if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits')) {
-          const isCapOrDamper = product.product_type && (
-            product.product_type.toLowerCase().includes('cap') ||
-            product.product_type.toLowerCase().includes('damper')
-          );
-          if (isCapOrDamper) {
-            return false; // Explicitly exclude caps/dampers
-          }
-        }
-
         const matchesKitType = selectedKitTypes.length === 0 || 
           selectedKitTypes.some(kitType => 
             product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
@@ -613,22 +598,9 @@ query getCollectionProducts($handle: String!) {
           let type = product.product_type;
           if (type.endsWith('Liner')) {
             type = 'Liner';
-          } else if (type.endsWith('Kit')) {
-            type = 'Liner Kits';
           }
 
           const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
-
-          // STRICT FILTERING - Additional safety check for caps/dampers contamination
-          if (this.activeFilters.has('Liner') || this.activeFilters.has('Liner Kits')) {
-            const isCapOrDamper = product.product_type && (
-              product.product_type.toLowerCase().includes('cap') ||
-              product.product_type.toLowerCase().includes('damper')
-            );
-            if (isCapOrDamper) {
-              return; // Skip caps/dampers when filtering for liners
-            }
-          }
 
           const matchesAlloyFilters = activeAlloyTags.length === 0 || 
             Array.from(activeAlloyTags).some(tag => {
