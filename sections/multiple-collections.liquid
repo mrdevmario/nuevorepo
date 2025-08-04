@@ -412,7 +412,6 @@ query getCollectionProducts($handle: String!) {
     const alloySubfiltersList = document.getElementById('alloy-subfilters');
     const typeSubfiltersList = document.getElementById('type-subfilters');
 
-    // Setup alloy filters (aluminum, 304, 316)
     const alloyOrder = ['aluminum', '304', '316'];
     
     alloyOrder.forEach(alloyHandle => {
@@ -430,23 +429,8 @@ query getCollectionProducts($handle: String!) {
       }
     });
 
-    // Setup type filters (Lightwall, Crossover, Smoothwall, Elite, Heavywall)
-    const typeOrder = ['lightwall', 'crossover', 'smoothwall', 'elite', 'heavywall'];
-    
-    typeOrder.forEach(typeHandle => {
-      const collection = this.typeSubfilters.find(c => 
-        c.handle.toLowerCase().includes(typeHandle.toLowerCase())
-      );
-      
-      if (collection) {
-        const tag = document.createElement('div');
-        tag.className = 'subfilter-tag';
-        tag.textContent = collection.title;
-        tag.dataset.handle = collection.handle;
-        tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
-        typeSubfiltersList.appendChild(tag);
-      }
-    });
+    // Create an empty container for type filters - they will be populated dynamically
+    typeSubfiltersList.innerHTML = '';
   }
 
   handleFilterChangeDebounced() {
@@ -500,7 +484,7 @@ query getCollectionProducts($handle: String!) {
           this.alloyFiltersSection.style.display = 'block';
         }
 
-      // Show type filters for both Liner and Liner Kits OR when type subfilters are selected
+      // Show type filters for both Liner and Liner Kits - ORIGINAL LOGIC RESTORED
       if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
         const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
         const filteredByAlloys = activeAlloyTags.length > 0 
@@ -513,16 +497,21 @@ query getCollectionProducts($handle: String!) {
 
         const typeWithProducts = new Set();
         
+        // Check each product's liner_type metafield
         filteredByAlloys.forEach(product => {
           if (product.metafields?.liner_type) {
             typeWithProducts.add(product.metafields.liner_type.toLowerCase());
           }
         });
 
+        console.log('Types found:', Array.from(typeWithProducts)); // Debug log
+
         if (typeWithProducts.size > 0) {
+          // Clear existing type filters
           const typeSubfiltersList = document.getElementById('type-subfilters');
           typeSubfiltersList.innerHTML = '';
 
+          // Create a filter tag for each unique type found
           typeWithProducts.forEach(type => {
             const tag = document.createElement('div');
             tag.className = 'subfilter-tag';
@@ -538,12 +527,6 @@ query getCollectionProducts($handle: String!) {
           this.typeFiltersSection.style.display = 'block';
           this.subfiltersWrapper.style.display = 'block';
         }
-      }
-      
-      // Always show type subfilters when Liner or Liner Kits are selected
-      if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits')) {
-        this.typeFiltersSection.style.display = 'block';
-        this.subfiltersWrapper.style.display = 'block';
       }
       }
 
@@ -596,6 +579,7 @@ query getCollectionProducts($handle: String!) {
       this.productGrid.innerHTML = '';
 
       let collectionsToFetch = new Set(this.collections.map(c => c.handle));
+
       const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
       const activeTypeTags = document.querySelectorAll('#type-subfilters .subfilter-tag.active');
 
@@ -617,23 +601,19 @@ query getCollectionProducts($handle: String!) {
           }
 
           const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
-          
+
           const matchesAlloyFilters = activeAlloyTags.length === 0 || 
             Array.from(activeAlloyTags).some(tag => {
               const alloyHandle = tag.dataset.handle.toLowerCase();
               return product.metafields?.alloy?.toLowerCase() === alloyHandle;
             });
-          
-          // Enhanced type filter matching - check both metafields and collection handles
+
           const matchesTypeFilters = activeTypeTags.length === 0 || 
             Array.from(activeTypeTags).some(tag => {
               const typeHandle = tag.dataset.handle.toLowerCase();
-              // Check if product comes from this type collection OR matches metafield
-              return collectionsToFetch.has(tag.dataset.handle) || 
-                     product.metafields?.liner_type?.toLowerCase() === typeHandle ||
-                     product.metafields?.liner_type?.toLowerCase().includes(typeHandle);
+              return product.metafields?.liner_type?.toLowerCase() === typeHandle;
             });
-          
+
           const matchesKitTypes = this.activeKitTypes.size === 0 || 
             Array.from(this.activeKitTypes).some(kitType => 
               product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
@@ -664,18 +644,13 @@ query getCollectionProducts($handle: String!) {
       this.activeAlloyFilter = null;
     }
     
-    this.handleFilterChangeDebounced();
+    this.loadProducts();
   }
 
   handleTypeSubfilterClick(tag) {
     if (tag.style.display === 'none') return;
     
     const wasActive = tag.classList.contains('active');
-    
-    // Remove active from all type filter tags first
-    document.querySelectorAll('#type-subfilters .subfilter-tag').forEach(t => {
-      if (t !== tag) t.classList.remove('active');
-    });
     
     if (!wasActive) {
       tag.classList.add('active');
@@ -685,7 +660,7 @@ query getCollectionProducts($handle: String!) {
       this.activeTypeFilter = null;
     }
 
-    this.handleFilterChangeDebounced();
+    this.loadProducts();
   }
 
   setupSorting() {
