@@ -869,18 +869,6 @@ query getCollectionProducts($handle: String!) {
     }).format(price);
   }
 }
-checkForContaminatedCache() {
-  const idMap = new Map();
-  for (const [handle, products] of this.collectionCache.entries()) {
-    for (const p of products) {
-      if (idMap.has(p.id)) {
-        console.warn(`Producto duplicado en varias colecciones: ${p.id} (${handle}, también en ${idMap.get(p.id)})`);
-      } else {
-        idMap.set(p.id, handle);
-      }
-    }
-  }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   window.multiCollectionHandler = new MultiCollectionHandler();
