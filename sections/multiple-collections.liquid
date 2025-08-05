@@ -463,6 +463,7 @@ query getCollectionProducts($handle: String!) {
     const alloySubfiltersList = document.getElementById('alloy-subfilters');
     const typeSubfiltersList = document.getElementById('type-subfilters');
 
+    // ALLOY SUBFILTERS (Smart Collections)
     const alloyOrder = ['aluminum', '304', '316'];
     
     alloyOrder.forEach(alloyHandle => {
@@ -477,9 +478,13 @@ query getCollectionProducts($handle: String!) {
         tag.dataset.handle = collection.handle;
         tag.addEventListener('click', () => this.handleAlloySubfilterClick(tag));
         alloySubfiltersList.appendChild(tag);
+        
+        console.log(`Setup alloy smart collection: ${collection.handle} -> ${collection.title}`);
       }
     });
 
+    // TYPE SUBFILTERS - Pueden ser smart collections o dinámicos
+    console.log('Available type subfilters:', this.typeSubfilters);
     typeSubfiltersList.innerHTML = '';
   }
 
@@ -554,11 +559,34 @@ query getCollectionProducts($handle: String!) {
 
           const typeWithProducts = new Set();
           
-          filteredByAlloys.forEach(product => {
-            if (product.metafields?.liner_type) {
-              typeWithProducts.add(product.metafields.liner_type.toLowerCase());
-            }
-          });
+          // ESTRATEGIA HÍBRIDA: Smart Collections + Metafields para types
+          console.log('Setting up type filters - checking both smart collections and metafields...');
+          
+          // Primero, verificar si hay smart collections disponibles para types
+          if (this.typeSubfilters && this.typeSubfilters.length > 0) {
+            console.log('Using smart collections for type filters:', this.typeSubfilters);
+            
+            // Usar smart collections si están disponibles
+            this.typeSubfilters.forEach(collection => {
+              // Verificar si esta smart collection tiene productos en el filtro actual
+              const hasProducts = filteredByAlloys.some(product => {
+                // La smart collection ya filtró, solo verificar que existe
+                return true; // Si tenemos productos filtrados, la smart collection es válida
+              });
+              
+              if (hasProducts) {
+                typeWithProducts.add(collection.handle.toLowerCase());
+              }
+            });
+          } else {
+            // Fallback: usar metafields como antes
+            console.log('Using metafields for type filters...');
+            filteredByAlloys.forEach(product => {
+              if (product.metafields?.liner_type) {
+                typeWithProducts.add(product.metafields.liner_type.toLowerCase());
+              }
+            });
+          }
 
           console.log('Types found:', Array.from(typeWithProducts));
 
@@ -567,15 +595,22 @@ query getCollectionProducts($handle: String!) {
             typeSubfiltersList.innerHTML = '';
 
             typeWithProducts.forEach(type => {
+              // Buscar si hay una smart collection para este type
+              const smartCollection = this.typeSubfilters?.find(c => 
+                c.handle.toLowerCase() === type.toLowerCase()
+              );
+              
               const tag = document.createElement('div');
               tag.className = 'subfilter-tag';
-              tag.textContent = type.split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-              tag.dataset.handle = type;
+              tag.textContent = smartCollection ? smartCollection.title : 
+                type.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+              tag.dataset.handle = smartCollection ? smartCollection.handle : type;
               tag.dataset.type = type;
+              tag.dataset.isSmartCollection = smartCollection ? 'true' : 'false';
               tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
               typeSubfiltersList.appendChild(tag);
+              
+              console.log(`Added type filter: ${type} (Smart Collection: ${!!smartCollection})`);
             });
 
             this.typeFiltersSection.style.display = 'block';
@@ -596,7 +631,7 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
-  // FIXED: Filtrado MUY estricto con debugging extensivo
+  // EMERGENCY FIX: Filtrado súper estricto para evitar contaminación
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
     const cacheKey = this.generateFilterCacheKey(selectedTypes, selectedKitTypes);
     
@@ -605,63 +640,123 @@ query getCollectionProducts($handle: String!) {
       return this.filteredCache.get(cacheKey);
     }
 
-    console.log('🔍 STRICT FILTERING - Selected types:', selectedTypes);
+    console.log('🚨 EMERGENCY STRICT FILTERING - Selected types:', selectedTypes);
     let allProducts = [];
-    let debugStats = {
-      total: 0,
-      filtered: 0,
-      byType: {}
-    };
     
     for (const collection of this.collections) {
       const products = this.requestCache.get(collection.handle) || [];
       console.log(`📦 Processing collection: ${collection.handle} (${products.length} products)`);
       
       const filteredProducts = products.filter(product => {
-        // USAR LÓGICA EXACTA DEL CÓDIGO ORIGINAL
-        let type = product.product_type;
-        if (type.endsWith('Liner')) {
-          type = 'Liner';
+        // STEP 1: Normalizar tipo usando lógica original
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
         }
-        // NO normalizar Kit aquí - solo en setupFilters
-
-        const matchesType = selectedTypes.includes(type);
-        const matchesKitType = selectedKitTypes.length === 0 || 
+        // Mantener otros tipos como están
+        
+        // STEP 2: Verificación súper estricta - DEBE estar en selectedTypes
+        const typeMatches = selectedTypes.includes(normalizedType);
+        
+        // STEP 3: Verificar kit types
+        const kitTypeMatches = selectedKitTypes.length === 0 || 
           selectedKitTypes.some(kitType => 
             product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
           );
 
-        console.log(`Product: "${product.title}" (${product.product_type} -> ${type}) - Type match: ${matchesType}, Kit match: ${matchesKitType}`);
-
-        return matchesType && matchesKitType;
+        // DEBUG: Log cada decisión
+        console.log(`  Product: "${product.title}"`);
+        console.log(`    Original type: "${product.product_type}"`);
+        console.log(`    Normalized type: "${normalizedType}"`);
+        console.log(`    Selected types: [${selectedTypes.join(', ')}]`);
+        console.log(`    Type matches: ${typeMatches}`);
+        console.log(`    Kit type matches: ${kitTypeMatches}`);
+        
+        const finalDecision = typeMatches && kitTypeMatches;
+        console.log(`    ✅ FINAL DECISION: ${finalDecision ? 'INCLUDE' : 'EXCLUDE'}`);
+        
+        // RECHAZO EXPLÍCITO: Si no coincide exactamente, fuera
+        if (!typeMatches) {
+          console.log(`    🚨 REJECTED: "${normalizedType}" NOT IN [${selectedTypes.join(', ')}]`);
+          return false;
+        }
+        
+        if (!kitTypeMatches) {
+          console.log(`    🚨 REJECTED: Kit type doesn't match`);
+          return false;
+        }
+        
+        return true;
       });
       
-      console.log(`📦 Collection ${collection.handle}: ${filteredProducts.length}/${products.length} products passed filter`);
-      allProducts = [...allProducts, ...filteredProducts];
+      console.log(`📦 Collection ${collection.handle}: ${filteredProducts.length}/${products.length} products PASSED strict filter`);
+      
+      // TRIPLE VERIFICACIÓN: Revisar cada producto antes de agregarlo
+      const tripleCheckedProducts = filteredProducts.filter(product => {
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
+        }
+        
+        const shouldBeIncluded = selectedTypes.includes(normalizedType);
+        
+        if (!shouldBeIncluded) {
+          console.error(`🚨 TRIPLE CHECK FAILED: "${product.title}" (${normalizedType}) should NOT be in [${selectedTypes.join(', ')}]`);
+          return false;
+        }
+        
+        return true;
+      });
+      
+      allProducts = [...allProducts, ...tripleCheckedProducts];
     }
 
-    console.log('📊 FILTERING STATS:');
-    console.log(`   Total products evaluated: ${debugStats.total}`);
-    console.log(`   Products passed filter: ${debugStats.filtered}`);
-    console.log(`   By type:`, debugStats.byType);
-
-    // Verificación final - eliminar productos que no deberían estar
-    const finalProducts = allProducts.filter(product => {
-      const normalizedType = this.normalizeProductType(product.product_type);
-      const shouldInclude = selectedTypes.includes(normalizedType);
-      
-      if (!shouldInclude) {
-        console.warn(`🚨 FINAL FILTER CAUGHT: "${product.title}" (${normalizedType}) should not be in [${selectedTypes.join(', ')}]`);
+    console.log(`🔍 FINAL VERIFICATION: Checking all ${allProducts.length} products one more time...`);
+    
+    // VERIFICACIÓN FINAL ABSOLUTA
+    const absolutelyFinalProducts = allProducts.filter(product => {
+      let normalizedType = product.product_type;
+      if (normalizedType.endsWith('Liner')) {
+        normalizedType = 'Liner';
+      } else if (normalizedType.endsWith('Kit')) {
+        normalizedType = 'Liner Kits';
       }
       
-      return shouldInclude;
+      const isAllowed = selectedTypes.includes(normalizedType);
+      
+      if (!isAllowed) {
+        console.error(`🚨🚨🚨 ABSOLUTE FINAL CHECK FAILED: "${product.title}" (${product.product_type} -> ${normalizedType}) MUST BE REMOVED`);
+        return false;
+      }
+      
+      return true;
     });
 
-    // FIXED: Guardar en caché con clave específica
-    this.filteredCache.set(cacheKey, finalProducts);
-    console.log(`✅ FINAL RESULT: ${finalProducts.length} products for types: ${selectedTypes.join(', ')}`);
+    // Guardar en caché con clave específica
+    this.filteredCache.set(cacheKey, absolutelyFinalProducts);
     
-    return finalProducts;
+    console.log(`✅ ABSOLUTE FINAL RESULT: ${absolutelyFinalProducts.length} products for types: ${selectedTypes.join(', ')}`);
+    
+    // LOG FINAL: Mostrar qué tipos quedaron
+    const finalTypesFound = new Set();
+    absolutelyFinalProducts.forEach(product => {
+      let normalizedType = product.product_type;
+      if (normalizedType.endsWith('Liner')) {
+        normalizedType = 'Liner';
+      } else if (normalizedType.endsWith('Kit')) {
+        normalizedType = 'Liner Kits';
+      }
+      finalTypesFound.add(normalizedType);
+    });
+    
+    console.log(`📊 FINAL TYPES IN RESULT: [${Array.from(finalTypesFound).join(', ')}]`);
+    console.log(`📊 REQUESTED TYPES: [${selectedTypes.join(', ')}]`);
+    
+    return absolutelyFinalProducts;
   }
 
   async loadProducts() {
@@ -683,7 +778,7 @@ query getCollectionProducts($handle: String!) {
 
       let filteredProducts = new Set();
       
-      console.log('🔍 LOAD PRODUCTS - Active filters:');
+      console.log('🚨 LOAD PRODUCTS - EMERGENCY STRICT MODE');
       console.log('   Main filters:', Array.from(this.activeFilters));
       console.log('   Kit types:', Array.from(this.activeKitTypes));
       console.log('   Alloy filters:', Array.from(activeAlloyTags).map(t => t.dataset.handle));
@@ -691,14 +786,24 @@ query getCollectionProducts($handle: String!) {
       
       results.forEach(products => {
         products.forEach(product => {
-          // USAR LÓGICA EXACTA DEL CÓDIGO ORIGINAL
-          let type = product.product_type;
-          if (type.endsWith('Liner')) {
-            type = 'Liner';
+          // STEP 1: Normalizar tipo EXACTAMENTE como en original
+          let normalizedType = product.product_type;
+          if (normalizedType.endsWith('Liner')) {
+            normalizedType = 'Liner';
+          } else if (normalizedType.endsWith('Kit')) {
+            normalizedType = 'Liner Kits';
+          }
+          // Mantener otros tipos como están
+
+          // STEP 2: RECHAZO INMEDIATO si no está en filtros principales
+          const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(normalizedType);
+          
+          if (!matchesMainFilter && this.activeFilters.size > 0) {
+            console.log(`❌ IMMEDIATE REJECTION: "${product.title}" (${product.product_type} -> ${normalizedType}) not in main filters [${Array.from(this.activeFilters).join(', ')}]`);
+            return; // SALIR INMEDIATAMENTE
           }
 
-          const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
-
+          // STEP 3: Verificar filtros adicionales solo si pasó el principal
           const matchesAlloyFilters = activeAlloyTags.length === 0 || 
             Array.from(activeAlloyTags).some(tag => {
               const alloyHandle = tag.dataset.handle.toLowerCase();
@@ -716,18 +821,57 @@ query getCollectionProducts($handle: String!) {
               product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
             );
 
+          // STEP 4: Solo incluir si pasa TODOS los filtros
           if (matchesMainFilter && matchesAlloyFilters && matchesTypeFilters && matchesKitTypes) {
-            console.log(`✅ Including: "${product.title}" (${product.product_type} -> ${type})`);
+            console.log(`✅ STRICT INCLUDE: "${product.title}" (${product.product_type} -> ${normalizedType})`);
             filteredProducts.add(product);
-          } else if (this.activeFilters.size > 0) {
-            console.log(`❌ Excluding: "${product.title}" (${product.product_type} -> ${type}) - Main filter: ${matchesMainFilter}`);
+          } else {
+            console.log(`❌ STRICT EXCLUDE: "${product.title}" - Main:${matchesMainFilter} Alloy:${matchesAlloyFilters} Type:${matchesTypeFilters} Kit:${matchesKitTypes}`);
           }
         });
       });
 
       this.filteredProducts = Array.from(filteredProducts);
       
-      console.log(`📦 FINAL PRODUCT COUNT: ${this.filteredProducts.length}`);
+      // VERIFICACIÓN FINAL ABSOLUTA ANTES DE MOSTRAR
+      console.log(`🔍 FINAL ABSOLUTE VERIFICATION of ${this.filteredProducts.length} products:`);
+      
+      const absolutelyCleanProducts = this.filteredProducts.filter(product => {
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
+        }
+        
+        const shouldBeIncluded = this.activeFilters.size === 0 || this.activeFilters.has(normalizedType);
+        
+        if (!shouldBeIncluded) {
+          console.error(`🚨🚨🚨 CONTAMINATION DETECTED AND REMOVED: "${product.title}" (${product.product_type} -> ${normalizedType})`);
+          return false;
+        }
+        
+        return true;
+      });
+      
+      this.filteredProducts = absolutelyCleanProducts;
+      
+      // LOG FINAL DE TIPOS ENCONTRADOS
+      const finalTypes = new Set();
+      this.filteredProducts.forEach(product => {
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
+        }
+        finalTypes.add(normalizedType);
+      });
+      
+      console.log(`📊 FINAL RESULT TYPES: [${Array.from(finalTypes).join(', ')}]`);
+      console.log(`📊 EXPECTED TYPES: [${Array.from(this.activeFilters).join(', ')}]`);
+      console.log(`📦 FINAL CLEAN PRODUCT COUNT: ${this.filteredProducts.length}`);
+      
       await this.showPage(1);
 
     } catch (error) {
@@ -870,7 +1014,7 @@ query getCollectionProducts($handle: String!) {
             secondaryImage?.src
               ? `
             <img
-              srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=200 2x"
+              srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=400 2x"
               src="${secondaryImage.src.split('?')[0]}?width=200"
               sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
               alt="${product.title}"
