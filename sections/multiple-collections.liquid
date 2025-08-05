@@ -86,38 +86,109 @@
 <script>
 class MultiCollectionHandler {
   constructor() {
-    console.log('OPTIMIZED MODE - Starting MultiCollectionHandler');
+    console.log('OPTIMIZED MODE - Starting MultiCollectionHandler with Smart Collections');
     console.log('Collections configured:', {{ section.settings.selected_collections | json }}.length);
     
     this.collections = {{ section.settings.selected_collections | json }};
     this.alloySubfilters = {{ section.settings.alloy_subfilters | json }};
     this.typeSubfilters = {{ section.settings.type_subfilters | json }};
+    
+    // Elementos DOM
     this.productGrid = document.getElementById('product-grid');
     this.loadingIndicator = document.getElementById('loading-indicator');
     this.paginationContainer = document.getElementById('pagination-container');
     this.filterContainer = document.getElementById('product-type-filters');
     this.activeFiltersContainer = document.getElementById('active-filters');
+    
+    // Configuración
     this.productsPerPage = {{ section.settings.products_per_page }};
     this.currentPage = 1;
     this.filteredProducts = [];
     this.isLoading = false;
+    
+    // Estados de filtros
     this.activeFilters = new Set();
     this.activeKitTypes = new Set();
     this.activeAlloyFilter = null;
     this.activeTypeFilter = null;
+    
+    // Referencias DOM
     this.subfiltersWrapper = document.querySelector('.subfilters-wrapper');
     this.alloyFiltersSection = document.querySelector('.alloy-filters');
     this.typeFiltersSection = document.querySelector('.type-filters');
     this.storefrontToken = window.shopifyStorefrontToken;
 
-    // CRITICAL FIX: Separate cache structure to prevent contamination
-    this.collectionCache = new Map(); // Collection handle -> products array
-    this.productSeenIds = new Set(); // Track unique product IDs across all collections
+    // Sistema de cache principal
+    this.collectionCache = new Map(); // Colecciones principales
+    this.productSeenIds = new Set();
+    
+    // NUEVO: Sistema de cache para Smart Collections
+    this.setupSmartCollectionCache();
+    
+    // Control de carga
     this.debounceTimer = null;
     this.loadingProgress = 0;
     this.totalCollections = this.collections.length;
 
     this.initialize();
+  }
+
+  // NUEVO: Configuración del cache para Smart Collections
+  setupSmartCollectionCache() {
+    this.smartCollectionCache = new Map(); // Cache separado para smart collections
+    this.smartCollectionTimestamps = new Map(); // Timestamps para invalidar cache
+    this.CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+  }
+
+  // NUEVO: Método para obtener productos de Smart Collections con cache inteligente
+  async fetchSmartCollectionProducts(handle) {
+    const now = Date.now();
+    const cached = this.smartCollectionCache.get(handle);
+    const timestamp = this.smartCollectionTimestamps.get(handle);
+    
+    // Usar cache si es válido
+    if (cached && timestamp && (now - timestamp) < this.CACHE_DURATION) {
+      console.log(`Using cached smart collection products for ${handle}`);
+      return cached;
+    }
+    
+    // Fetch fresh data
+    const products = await this.fetchProductsWithMetafields(handle);
+    
+    // Cache results
+    this.smartCollectionCache.set(handle, products);
+    this.smartCollectionTimestamps.set(handle, now);
+    
+    return products;
+  }
+
+  // NUEVO: Método helper para obtener productos de smart collection
+  async getSmartCollectionProducts(handle, useCache = true) {
+    if (useCache) {
+      return await this.fetchSmartCollectionProducts(handle);
+    } else {
+      return await this.fetchProductsWithMetafields(handle);
+    }
+  }
+
+  // NUEVO: Limpiar cache de smart collections
+  clearSmartCollectionCache() {
+    this.smartCollectionCache.clear();
+    this.smartCollectionTimestamps.clear();
+    console.log('Smart collection cache cleared');
+  }
+
+  // NUEVO: Método de debug
+  debugFilterState() {
+    console.log('=== FILTER DEBUG STATE ===');
+    console.log('Active Filters:', Array.from(this.activeFilters));
+    console.log('Active Kit Types:', Array.from(this.activeKitTypes));
+    console.log('Active Alloy:', this.activeAlloyFilter);
+    console.log('Active Type:', this.activeTypeFilter);
+    console.log('Filtered Products Count:', this.filteredProducts.length);
+    console.log('Collection Cache Size:', this.collectionCache.size);
+    console.log('Smart Collection Cache Size:', this.smartCollectionCache.size);
+    console.log('=========================');
   }
 
   showLoading() {
@@ -143,17 +214,23 @@ class MultiCollectionHandler {
     }
   }
 
+  // MODIFICADO: Initialize con precarga de Smart Collections
   async initialize() {
     const startTime = performance.now();
     
     try {
       this.showLoading();
       
-      console.log('Starting PARALLEL loading of collections...');
+      console.log('Starting PARALLEL loading with Smart Collections...');
+      
+      // Cargar colecciones principales
       await this.setupFiltersWithParallelLoading();
       
-      console.log('Setting up subfilters...');
+      // Configurar subfilters
       await this.setupSubfilters();
+      
+      // NUEVO: Precargar smart collections importantes
+      await this.preloadImportantSmartCollections();
       
       this.setupSorting();
       await this.handleFilterChange();
@@ -163,18 +240,40 @@ class MultiCollectionHandler {
     } finally {
       this.hideLoading();
       const totalTime = performance.now() - startTime;
-      console.log(`Total initialization: ${totalTime.toFixed(2)}ms`);
+      console.log(`Total initialization with Smart Collections: ${totalTime.toFixed(2)}ms`);
     }
   }
 
-  // FIXED: Clear cache method for debugging
+  // NUEVO: Precargar Smart Collections importantes
+  async preloadImportantSmartCollections() {
+    console.log('Preloading important smart collections...');
+    
+    const importantCollections = [
+      ...this.alloySubfilters.slice(0, 3), // Los primeros 3 alloy
+      ...this.typeSubfilters.slice(0, 3)   // Los primeros 3 type
+    ];
+    
+    const preloadPromises = importantCollections.map(collection => 
+      this.fetchSmartCollectionProducts(collection.handle)
+        .catch(error => {
+          console.warn(`Failed to preload ${collection.handle}:`, error);
+          return [];
+        })
+    );
+    
+    await Promise.all(preloadPromises);
+    console.log('Smart collections preloaded');
+  }
+
+  // Clear cache method for debugging
   clearCache() {
     this.collectionCache.clear();
     this.productSeenIds.clear();
-    console.log('Cache cleared');
+    this.clearSmartCollectionCache();
+    console.log('All caches cleared');
   }
 
-  // Key optimization: Parallel loading with concurrency limit - FIXED CACHE LOGIC
+  // Key optimization: Parallel loading with concurrency limit
   async setupFiltersWithParallelLoading() {
     const startTime = performance.now();
     
@@ -184,7 +283,7 @@ class MultiCollectionHandler {
       
       console.log(`Loading ${this.collections.length} collections in batches of ${BATCH_SIZE}`);
       
-      // CRITICAL: Clear any existing cache to prevent contamination
+      // Clear any existing cache to prevent contamination
       this.collectionCache.clear();
       this.productSeenIds.clear();
       
@@ -215,7 +314,7 @@ class MultiCollectionHandler {
         batchResults.forEach(({ handle, products }) => {
           console.log(`Processed ${handle}: ${products.length} products`);
           
-          // FIXED: Store products by collection handle to prevent mixing
+          // Store products by collection handle to prevent mixing
           this.collectionCache.set(handle, products);
           
           products.forEach(product => {
@@ -305,7 +404,7 @@ class MultiCollectionHandler {
     }
   }
 
-  // FIXED: Updated fetch method with proper cache isolation
+  // Updated fetch method with proper cache isolation
   async fetchProductsWithMetafields(handle) {
     // Check cache first - using collection-specific cache
     if (this.collectionCache.has(handle)) {
@@ -402,7 +501,7 @@ query getCollectionProducts($handle: String!) {
           title: product.title,
           handle: product.handle,
           product_type: product.productType,
-          collection_source: handle, // ADDED: Track which collection this product came from
+          collection_source: handle, // Track which collection this product came from
           featured_image: {
             src: product.featuredImage?.url,
             alt: product.featuredImage?.altText
@@ -420,7 +519,7 @@ query getCollectionProducts($handle: String!) {
         };
       }).filter(Boolean);
 
-      // FIXED: Store in collection-specific cache
+      // Store in collection-specific cache
       this.collectionCache.set(handle, products);
       console.log(`Cached ${products.length} products for collection ${handle}`);
       
@@ -434,10 +533,12 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
+  // MODIFICADO: Setup subfilters para Smart Collections
   async setupSubfilters() {
     const alloySubfiltersList = document.getElementById('alloy-subfilters');
     const typeSubfiltersList = document.getElementById('type-subfilters');
 
+    // Setup Alloy subfilters basados en smart collections
     const alloyOrder = ['aluminum', '304', '316'];
     
     alloyOrder.forEach(alloyHandle => {
@@ -455,7 +556,7 @@ query getCollectionProducts($handle: String!) {
       }
     });
 
-    // Create an empty container for type filters - they will be populated dynamically
+    // Type subfilters se crearán dinámicamente basados en smart collections disponibles
     typeSubfiltersList.innerHTML = '';
   }
 
@@ -470,6 +571,7 @@ query getCollectionProducts($handle: String!) {
     }, 200);
   }
 
+  // MODIFICADO: Handle filter change para Smart Collections
   async handleFilterChange() {
     const startTime = performance.now();
     
@@ -487,22 +589,35 @@ query getCollectionProducts($handle: String!) {
 
       if (selectedTypes.includes('Liner') || selectedTypes.includes('Liner Kits') || selectedTypes.includes('Components, Adapters, & Fittings')) {
         const filteredProducts = await this.getFilteredProducts(selectedTypes, selectedKitTypes);
-        
+
+        // NUEVO: Cargar productos de smart collections para alloy subfilters
         const alloyWithProducts = new Set();
         if (selectedTypes.includes('Components, Adapters, & Fittings')) {
           alloyWithProducts.add('aluminum');
         }
-        
-        filteredProducts.forEach(product => {
-          if (product.metafields?.alloy) {
-            alloyWithProducts.add(product.metafields.alloy.toLowerCase());
+
+        // Cargar productos de alloy smart collections
+        for (const alloyCollection of this.alloySubfilters) {
+          const alloyProducts = await this.fetchSmartCollectionProducts(alloyCollection.handle);
+          
+          // Verificar si algún producto de esta smart collection coincide con los filtros actuales
+          const hasMatchingProducts = alloyProducts.some(product => {
+            let type = product.product_type;
+            if (type.endsWith('Liner')) {
+              type = 'Liner';
+            }
+            return selectedTypes.includes(type);
+          });
+
+          if (hasMatchingProducts) {
+            alloyWithProducts.add(alloyCollection.handle.toLowerCase());
           }
-        });
+        }
 
         const alloyButtons = document.querySelectorAll('#alloy-subfilters .subfilter-tag');
         alloyButtons.forEach(button => {
-          const handle = button.dataset.handle;
-          button.style.display = alloyWithProducts.has(handle.toLowerCase()) ? 'flex' : 'none';
+          const handle = button.dataset.handle.toLowerCase();
+          button.style.display = alloyWithProducts.has(handle) ? 'flex' : 'none';
         });
 
         if (alloyWithProducts.size > 0) {
@@ -510,44 +625,54 @@ query getCollectionProducts($handle: String!) {
           this.alloyFiltersSection.style.display = 'block';
         }
 
-        // Show type filters for both Liner and Liner Kits
+        // NUEVO: Manejo de type subfilters con smart collections
         if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
-          const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
-          const filteredByAlloys = activeAlloyTags.length > 0 
-            ? filteredProducts.filter(product => 
-                Array.from(activeAlloyTags).some(tag => 
-                  product.metafields?.alloy?.toLowerCase() === tag.dataset.handle.toLowerCase()
-                )
-              )
-            : filteredProducts;
-
           const typeWithProducts = new Set();
-          
-          // Check each product's liner_type metafield
-          filteredByAlloys.forEach(product => {
-            if (product.metafields?.liner_type) {
-              typeWithProducts.add(product.metafields.liner_type.toLowerCase());
-            }
-          });
 
-          console.log('Types found:', Array.from(typeWithProducts));
+          // Cargar productos de type smart collections
+          for (const typeCollection of this.typeSubfilters) {
+            const typeProducts = await this.fetchSmartCollectionProducts(typeCollection.handle);
+            
+            // Verificar si productos coinciden con filtros actuales
+            const hasMatchingProducts = typeProducts.some(product => {
+              let type = product.product_type;
+              if (type.endsWith('Liner')) {
+                type = 'Liner';
+              }
+              
+              const matchesMainType = selectedTypes.includes(type);
+              const matchesKitType = selectedKitTypes.length === 0 || 
+                selectedKitTypes.some(kitType => 
+                  product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
+                );
+
+              return matchesMainType && matchesKitType;
+            });
+
+            if (hasMatchingProducts) {
+              typeWithProducts.add(typeCollection.handle.toLowerCase());
+            }
+          }
 
           if (typeWithProducts.size > 0) {
-            // Clear existing type filters
             const typeSubfiltersList = document.getElementById('type-subfilters');
             typeSubfiltersList.innerHTML = '';
 
-            // Create a filter tag for each unique type found
-            typeWithProducts.forEach(type => {
-              const tag = document.createElement('div');
-              tag.className = 'subfilter-tag';
-              tag.textContent = type.split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-              tag.dataset.handle = type;
-              tag.dataset.type = type;
-              tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
-              typeSubfiltersList.appendChild(tag);
+            // Crear tags basados en smart collections disponibles
+            typeWithProducts.forEach(handle => {
+              const collection = this.typeSubfilters.find(c => 
+                c.handle.toLowerCase() === handle
+              );
+              
+              if (collection) {
+                const tag = document.createElement('div');
+                tag.className = 'subfilter-tag';
+                tag.textContent = collection.title;
+                tag.dataset.handle = collection.handle;
+                tag.dataset.type = collection.handle;
+                tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
+                typeSubfiltersList.appendChild(tag);
+              }
             });
 
             this.typeFiltersSection.style.display = 'block';
@@ -568,7 +693,7 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
-  // FIXED: getFilteredProducts with proper cache isolation and deduplication
+  // getFilteredProducts with proper cache isolation and deduplication
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
     console.log('Fast filtering using isolated cache...');
     
@@ -609,15 +734,15 @@ query getCollectionProducts($handle: String!) {
     return finalProducts;
   }
 
+  // MODIFICADO: Load products para incluir Smart Collections
   async loadProducts() {
     try {
       this.filteredProducts = [];
       this.productGrid.innerHTML = '';
 
-      // FIXED: Only use main collections for product loading, handle subfilters differently
-      const baseProducts = new Map(); // Use Map for deduplication
+      const baseProducts = new Map();
       
-      // Get products from main collections
+      // Cargar productos de colecciones principales
       for (const collection of this.collections) {
         const products = this.collectionCache.get(collection.handle) || [];
         
@@ -628,7 +753,6 @@ query getCollectionProducts($handle: String!) {
           }
 
           const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
-
           const matchesKitTypes = this.activeKitTypes.size === 0 || 
             Array.from(this.activeKitTypes).some(kitType => 
               product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
@@ -640,29 +764,52 @@ query getCollectionProducts($handle: String!) {
         });
       }
 
-      // Apply subfilters
       let finalProducts = Array.from(baseProducts.values());
 
-      // Apply alloy filters
+      // NUEVO: Aplicar filtros de smart collections para alloy
       const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
       if (activeAlloyTags.length > 0) {
-        finalProducts = finalProducts.filter(product =>
-          Array.from(activeAlloyTags).some(tag => {
-            const alloyHandle = tag.dataset.handle.toLowerCase();
-            return product.metafields?.alloy?.toLowerCase() === alloyHandle;
-          })
-        );
+        const alloyFilteredProducts = new Map();
+        
+        // Para cada alloy activo, cargar productos de su smart collection
+        for (const tag of activeAlloyTags) {
+          const alloyHandle = tag.dataset.handle;
+          const alloyProducts = await this.fetchSmartCollectionProducts(alloyHandle);
+          
+          alloyProducts.forEach(product => {
+            // Solo incluir si el producto también está en baseProducts
+            if (baseProducts.has(product.id)) {
+              alloyFilteredProducts.set(product.id, product);
+            }
+          });
+        }
+        
+        finalProducts = Array.from(alloyFilteredProducts.values());
       }
 
-      // Apply type filters  
+      // NUEVO: Aplicar filtros de smart collections para type
       const activeTypeTags = document.querySelectorAll('#type-subfilters .subfilter-tag.active');
       if (activeTypeTags.length > 0) {
-        finalProducts = finalProducts.filter(product =>
-          Array.from(activeTypeTags).some(tag => {
-            const typeHandle = tag.dataset.handle.toLowerCase();
-            return product.metafields?.liner_type?.toLowerCase() === typeHandle;
-          })
-        );
+        const typeFilteredProducts = new Map();
+        
+        // Para cada type activo, cargar productos de su smart collection
+        for (const tag of activeTypeTags) {
+          const typeHandle = tag.dataset.handle;
+          const typeProducts = await this.fetchSmartCollectionProducts(typeHandle);
+          
+          typeProducts.forEach(product => {
+            // Solo incluir si el producto está en finalProducts actual
+            const isInCurrentProducts = activeAlloyTags.length > 0 
+              ? finalProducts.some(p => p.id === product.id)
+              : baseProducts.has(product.id);
+              
+            if (isInCurrentProducts) {
+              typeFilteredProducts.set(product.id, product);
+            }
+          });
+        }
+        
+        finalProducts = Array.from(typeFilteredProducts.values());
       }
 
       this.filteredProducts = finalProducts;
@@ -675,8 +822,18 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
+  // MODIFICADO: Handle alloy subfilter click para Smart Collections
   handleAlloySubfilterClick(tag) {
+    console.log('Alloy subfilter clicked:', tag.dataset.handle);
+    
     const wasActive = tag.classList.contains('active');
+    
+    // Limpiar otros alloy filters activos (solo uno a la vez)
+    document.querySelectorAll('#alloy-subfilters .subfilter-tag').forEach(otherTag => {
+      if (otherTag !== tag) {
+        otherTag.classList.remove('active');
+      }
+    });
     
     if (!wasActive) {
       tag.classList.add('active');
@@ -686,13 +843,24 @@ query getCollectionProducts($handle: String!) {
       this.activeAlloyFilter = null;
     }
     
+    console.log('Active alloy filter set to:', this.activeAlloyFilter);
     this.loadProducts();
   }
 
+  // MODIFICADO: Handle type subfilter click para Smart Collections
   handleTypeSubfilterClick(tag) {
+    console.log('Type subfilter clicked:', tag.dataset.handle);
+    
     if (tag.style.display === 'none') return;
     
     const wasActive = tag.classList.contains('active');
+    
+    // Limpiar otros type filters activos (solo uno a la vez)
+    document.querySelectorAll('#type-subfilters .subfilter-tag').forEach(otherTag => {
+      if (otherTag !== tag) {
+        otherTag.classList.remove('active');
+      }
+    });
     
     if (!wasActive) {
       tag.classList.add('active');
@@ -702,6 +870,7 @@ query getCollectionProducts($handle: String!) {
       this.activeTypeFilter = null;
     }
 
+    console.log('Active type filter set to:', this.activeTypeFilter);
     this.loadProducts();
   }
 
@@ -867,6 +1036,27 @@ query getCollectionProducts($handle: String!) {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     }).format(price);
+  }
+
+  // NUEVO: Método helper para verificar disponibilidad de smart collection
+  async checkSmartCollectionAvailability(collectionHandle, currentFilters) {
+    try {
+      const products = await this.fetchSmartCollectionProducts(collectionHandle);
+      
+      // Verificar si algún producto coincide con los filtros actuales
+      return products.some(product => {
+        let type = product.product_type;
+        if (type.endsWith('Liner')) {
+          type = 'Liner';
+        }
+        
+        const matchesMainFilter = currentFilters.length === 0 || currentFilters.includes(type);
+        return matchesMainFilter;
+      });
+    } catch (error) {
+      console.error(`Error checking availability for collection ${collectionHandle}:`, error);
+      return false;
+    }
   }
 }
 
