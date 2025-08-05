@@ -63,22 +63,6 @@ if (!customElements.get("kit-variant-metafield-select")) {
             e.preventDefault();
             if (!this.isCustomerLoggedIn()) return;
 
-            // Attempt to set this.variant from a global or DOM source
-            // Example: window.currentVariant or from a DOM element's dataset
-            if (window.currentVariant) {
-              this.variant = window.currentVariant;
-            } else {
-              // Try to get variant JSON from a hidden input or script tag
-              const variantJsonElement = document.getElementById("kit-variant-json");
-              if (variantJsonElement && variantJsonElement.textContent) {
-                try {
-                  this.variant = JSON.parse(variantJsonElement.textContent);
-                } catch (err) {
-                  this.variant = null;
-                }
-              }
-            }
-
             this.toggleLoading(true, calculatePriceBtn);
 
             try {
@@ -182,27 +166,27 @@ if (!customElements.get("kit-variant-metafield-select")) {
           console.log("Using token:", token);
           console.log("Variant Netsuite ID:", this.variantNetsuiteId);
           console.log("Customer ID:", this.customerId);
-
-          // Get kit_data metafield JSON for the variant
-          let kitData = {};
-          if (this.variant && this.variant.metafields && this.variant.metafields.kit_data) {
-            try {
-              kitData = JSON.parse(this.variant.metafields.kit_data);
-            } catch (e) {
-              kitData = {};
-            }
-          }
-
-          console.log("Kit Data:", kitData);
-
+          
           const response = await axios.post(
             endpoint,
-              {
+            (() => {
+              // Get kit_data from hidden input
+              const kitDataInput = document.getElementById('kit-data-json');
+              let kitData = {};
+              if (kitDataInput && kitDataInput.value) {
+                try {
+                  kitData = JSON.parse(kitDataInput.value);
+                } catch (e) {
+                  console.error('Error parsing kit_data JSON:', e);
+                }
+              }
+              return {
                 item: this.variantNetsuiteId,
                 customer: this.customerId,
                 ...this.defaultProperties,
-                ...kitData
-              },
+                ...kitData // Spread kit_data keys into the request body
+              };
+            })(),
             {
               headers: {
                 Authorization: `Basic ${btoa(token)}`,
