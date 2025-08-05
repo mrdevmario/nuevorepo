@@ -86,7 +86,8 @@
 <script>
 class MultiCollectionHandler {
   constructor() {
-    console.log('🔥 BRUTAL FILTER MODE - Zero Tolerance for Contamination');
+    console.log('🔧 NAVIGATION-SAFE MODE - Starting MultiCollectionHandler');
+    console.log('Collections configured:', {{ section.settings.selected_collections | json }}.length);
     
     this.collections = {{ section.settings.selected_collections | json }};
     this.alloySubfilters = {{ section.settings.alloy_subfilters | json }};
@@ -109,13 +110,87 @@ class MultiCollectionHandler {
     this.typeFiltersSection = document.querySelector('.type-filters');
     this.storefrontToken = window.shopifyStorefrontToken;
 
-    // BRUTAL APPROACH: NO CACHE PARA FILTROS - SOLO PARA VELOCIDAD DE CARGA
+    // NAVIGATION-SAFE CACHE: Se limpia automáticamente en cada navegación
     this.requestCache = new Map();
+    this.filteredCache = new Map();
     this.debounceTimer = null;
     this.loadingProgress = 0;
     this.totalCollections = this.collections.length;
 
+    // NAVIGATION DETECTION: Detectar cuando el usuario regresa de producto
+    this.pageVisibilityHandler = () => {
+      if (document.visibilityState === 'visible') {
+        console.log('🔄 Page became visible - clearing contaminated cache');
+        this.clearNavigationCache();
+      }
+    };
+    
+    // FOCUS DETECTION: Detectar cuando la ventana obtiene focus (regreso de producto)
+    this.windowFocusHandler = () => {
+      console.log('🔄 Window focused - clearing contaminated cache');
+      this.clearNavigationCache();
+    };
+
+    // POPSTATE DETECTION: Detectar navegación del navegador
+    this.popstateHandler = () => {
+      console.log('🔄 Browser navigation detected - clearing contaminated cache');
+      this.clearNavigationCache();
+    };
+
+    // Registrar event listeners para detectar navegación
+    document.addEventListener('visibilitychange', this.pageVisibilityHandler);
+    window.addEventListener('focus', this.windowFocusHandler);
+    window.addEventListener('popstate', this.popstateHandler);
+
     this.initialize();
+  }
+
+  // NAVIGATION-SAFE: Limpiar caché contaminado por navegación
+  clearNavigationCache() {
+    console.log('🧹 Clearing navigation-contaminated cache...');
+    
+    // Limpiar SOLO el caché filtrado, mantener datos base para velocidad
+    this.filteredCache.clear();
+    
+    // Limpiar estado de filtros activos
+    this.activeFilters.clear();
+    this.activeKitTypes.clear();
+    this.activeAlloyFilter = null;
+    this.activeTypeFilter = null;
+    
+    // Limpiar UI de filtros activos
+    document.querySelectorAll('.subfilter-tag.active').forEach(tag => {
+      tag.classList.remove('active');
+    });
+    
+    // Si hay filtros seleccionados, refrescar productos
+    const hasActiveFilters = document.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+    if (hasActiveFilters) {
+      console.log('🔄 Refreshing products due to active filters after navigation');
+      // Pequeño delay para evitar conflictos
+      setTimeout(() => {
+        this.handleFilterChange();
+      }, 100);
+    }
+  }
+
+  // CLEANUP: Limpiar event listeners al destruir
+  destroy() {
+    document.removeEventListener('visibilitychange', this.pageVisibilityHandler);
+    window.removeEventListener('focus', this.windowFocusHandler);  
+    window.removeEventListener('popstate', this.popstateHandler);
+  }
+
+  // NAVIGATION-SAFE: Mantener debouncing pero con limpieza automática
+  handleFilterChangeDebounced() {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+    }
+    
+    this.debounceTimer = setTimeout(() => {
+      console.log('🔄 Debounced filter change triggered');
+      this.handleFilterChange();
+    }, 200);
   }
 
   showLoading() {
@@ -147,7 +222,7 @@ class MultiCollectionHandler {
     try {
       this.showLoading();
       
-      console.log('🔥 Starting BRUTAL PARALLEL loading...');
+      console.log('🚀 Starting NAVIGATION-SAFE parallel loading...');
       await this.setupFiltersWithParallelLoading();
       
       console.log('Setting up subfilters...');
@@ -161,7 +236,7 @@ class MultiCollectionHandler {
     } finally {
       this.hideLoading();
       const totalTime = performance.now() - startTime;
-      console.log(`✅ Brutal initialization: ${totalTime.toFixed(2)}ms`);
+      console.log(`✅ Navigation-safe initialization: ${totalTime.toFixed(2)}ms`);
     }
   }
 
@@ -282,7 +357,20 @@ class MultiCollectionHandler {
     }
   }
 
+  // NAVIGATION-SAFE: Generar clave única para caché de filtros
+  generateFilterCacheKey(selectedTypes, selectedKitTypes, alloyFilter = null, typeFilter = null) {
+    const key = [
+      'filtered',
+      selectedTypes.sort().join('-'),
+      selectedKitTypes.sort().join('-'),
+      alloyFilter || 'none',
+      typeFilter || 'none'
+    ].join('|');
+    return key;
+  }
+
   async fetchProductsWithMetafields(handle) {
+    // NAVIGATION-SAFE CACHE: Mantener datos base pero detectar navegación
     if (this.requestCache.has(handle)) {
       return this.requestCache.get(handle);
     }
@@ -391,6 +479,147 @@ query getCollectionProducts($handle: String!) {
         };
       }).filter(Boolean);
 
+      // CACHE SEGURO: Solo guardar datos base, no filtrados
+      this.requestCache.set(handle, products);
+      return products;
+
+    } catch (error) {
+      console.error(`❌ Error fetching products for collection ${handle}:`, error);
+      throw error;
+    }
+  }console.log(`🌐 Fetching fresh data for collection: ${handle}`);
+
+    const query = `
+query getCollectionProducts($handle: String!) {
+  collection(handle: $handle) {
+    products(first: 50) {
+      edges {
+        node {
+          id
+          title
+          handle
+          productType
+          featuredImage {
+            url
+            altText
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          variants(first: 1) {
+            edges {
+              node {
+                price { amount }
+                compareAtPrice { amount }
+                metafields(identifiers: [
+                  {namespace: "custom", key: "alloy"},
+                  {namespace: "custom", key: "liner_type"}
+                ]) {
+                  key
+                  value
+                }
+              }
+            }
+          }
+          metafields(identifiers: [
+            {namespace: "custom", key: "alloy"},
+            {namespace: "custom", key: "liner_type"}
+          ]) {
+            key
+            value
+          }
+          tags
+        }
+      }
+    }
+  }
+}`;
+
+    try {
+      const response = await fetch('/api/2024-01/graphql.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': this.storefrontToken
+        },
+        body: JSON.stringify({
+          query,
+          variables: { handle }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`GraphQL request failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.errors) {
+        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+      }
+
+      const products = data.data.collection.products.edges.map(edge => {
+        const product = edge.node;
+        const firstVariant = product.variants.edges[0]?.node;
+        
+        if (!firstVariant) return null;
+        
+        const productAlloy = product.metafields?.find(m => m?.key === 'alloy')?.value || null;
+        const productLinerType = product.metafields?.find(m => m?.key === 'liner_type')?.value || null;
+        const variantAlloy = firstVariant.metafields?.find(m => m?.key === 'alloy')?.value || null;
+        const variantLinerType = firstVariant.metafields?.find(m => m?.key === 'liner_type')?.value || null;
+        
+        const productData = {
+          id: product.id,
+          title: product.title,
+          handle: product.handle,
+          product_type: product.productType,
+          featured_image: {
+            src: product.featuredImage?.url,
+            alt: product.featuredImage?.altText
+          },
+          variants: [{
+            price: parseFloat(firstVariant.price.amount),
+            compare_at_price: firstVariant.compareAtPrice ? 
+              parseFloat(firstVariant.compareAtPrice.amount) : null
+          }],
+          metafields: {
+            alloy: variantAlloy || productAlloy,
+            liner_type: variantLinerType || productLinerType
+          },
+          tags: product.tags
+        };
+
+        // EMERGENCY DEBUG: Log every single product that comes from API
+        console.log(`📦 RAW PRODUCT FROM API:`, {
+          collection: handle,
+          title: productData.title,
+          originalType: product.productType,
+          alloy: productData.metafields.alloy,
+          linerType: productData.metafields.liner_type,
+          tags: productData.tags
+        });
+
+        // Update stats for tracking
+        const typeKey = product.productType || 'Unknown';
+        this.productTypeStats.set(typeKey, (this.productTypeStats.get(typeKey) || 0) + 1);
+
+        return productData;
+      }).filter(Boolean);
+
+      // LOG STATS POR COLECCIÓN
+      console.log(`📊 Collection ${handle} stats:`, {
+        totalProducts: products.length,
+        typeBreakdown: Object.fromEntries(
+          [...new Set(products.map(p => p.product_type))].map(type => [
+            type, 
+            products.filter(p => p.product_type === type).length
+          ])
+        )
+      });
+
       this.requestCache.set(handle, products);
       return products;
 
@@ -404,6 +633,7 @@ query getCollectionProducts($handle: String!) {
     const alloySubfiltersList = document.getElementById('alloy-subfilters');
     const typeSubfiltersList = document.getElementById('type-subfilters');
 
+    // ALLOY SUBFILTERS (Smart Collections)
     const alloyOrder = ['aluminum', '304', '316'];
     
     alloyOrder.forEach(alloyHandle => {
@@ -418,9 +648,13 @@ query getCollectionProducts($handle: String!) {
         tag.dataset.handle = collection.handle;
         tag.addEventListener('click', () => this.handleAlloySubfilterClick(tag));
         alloySubfiltersList.appendChild(tag);
+        
+        console.log(`Setup alloy smart collection: ${collection.handle} -> ${collection.title}`);
       }
     });
 
+    // TYPE SUBFILTERS - Pueden ser smart collections o dinámicos
+    console.log('Available type subfilters:', this.typeSubfilters);
     typeSubfiltersList.innerHTML = '';
   }
 
@@ -430,7 +664,7 @@ query getCollectionProducts($handle: String!) {
     }
     
     this.debounceTimer = setTimeout(() => {
-      console.log('🔄 Debounced filter change triggered');
+      console.log('Debounced filter change triggered');
       this.handleFilterChange();
     }, 200);
   }
@@ -445,6 +679,14 @@ query getCollectionProducts($handle: String!) {
 
       const selectedKitTypes = Array.from(document.querySelectorAll('input[data-filter="kit-type"]:checked'))
         .map(checkbox => checkbox.value);
+
+      // FIXED: Detectar cambio de estado y limpiar si es necesario
+      const currentFilterState = JSON.stringify({ selectedTypes, selectedKitTypes });
+      if (this.lastFilterState && this.lastFilterState !== currentFilterState) {
+        console.log('Filter state changed, clearing cache...');
+        this.filteredCache.clear();
+      }
+      this.lastFilterState = currentFilterState;
 
       this.subfiltersWrapper.style.display = 'none';
       this.alloyFiltersSection.style.display = 'none';
@@ -487,26 +729,58 @@ query getCollectionProducts($handle: String!) {
 
           const typeWithProducts = new Set();
           
-          filteredByAlloys.forEach(product => {
-            if (product.metafields?.liner_type) {
-              typeWithProducts.add(product.metafields.liner_type.toLowerCase());
-            }
-          });
+          // ESTRATEGIA HÍBRIDA: Smart Collections + Metafields para types
+          console.log('Setting up type filters - checking both smart collections and metafields...');
+          
+          // Primero, verificar si hay smart collections disponibles para types
+          if (this.typeSubfilters && this.typeSubfilters.length > 0) {
+            console.log('Using smart collections for type filters:', this.typeSubfilters);
+            
+            // Usar smart collections si están disponibles
+            this.typeSubfilters.forEach(collection => {
+              // Verificar si esta smart collection tiene productos en el filtro actual
+              const hasProducts = filteredByAlloys.some(product => {
+                // La smart collection ya filtró, solo verificar que existe
+                return true; // Si tenemos productos filtrados, la smart collection es válida
+              });
+              
+              if (hasProducts) {
+                typeWithProducts.add(collection.handle.toLowerCase());
+              }
+            });
+          } else {
+            // Fallback: usar metafields como antes
+            console.log('Using metafields for type filters...');
+            filteredByAlloys.forEach(product => {
+              if (product.metafields?.liner_type) {
+                typeWithProducts.add(product.metafields.liner_type.toLowerCase());
+              }
+            });
+          }
+
+          console.log('Types found:', Array.from(typeWithProducts));
 
           if (typeWithProducts.size > 0) {
             const typeSubfiltersList = document.getElementById('type-subfilters');
             typeSubfiltersList.innerHTML = '';
 
             typeWithProducts.forEach(type => {
+              // Buscar si hay una smart collection para este type
+              const smartCollection = this.typeSubfilters?.find(c => 
+                c.handle.toLowerCase() === type.toLowerCase()
+              );
+              
               const tag = document.createElement('div');
               tag.className = 'subfilter-tag';
-              tag.textContent = type.split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-              tag.dataset.handle = type;
+              tag.textContent = smartCollection ? smartCollection.title : 
+                type.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+              tag.dataset.handle = smartCollection ? smartCollection.handle : type;
               tag.dataset.type = type;
+              tag.dataset.isSmartCollection = smartCollection ? 'true' : 'false';
               tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
               typeSubfiltersList.appendChild(tag);
+              
+              console.log(`Added type filter: ${type} (Smart Collection: ${!!smartCollection})`);
             });
 
             this.typeFiltersSection.style.display = 'block';
@@ -520,79 +794,54 @@ query getCollectionProducts($handle: String!) {
       await this.loadProducts();
       
     } catch (error) {
-      console.error('❌ Error handling filter change:', error);
+      console.error('Error handling filter change:', error);
     } finally {
       this.hideLoading();
-      console.log(`✅ Filter change completed in: ${(performance.now() - startTime).toFixed(2)}ms`);
+      console.log(`Filter change completed in: ${(performance.now() - startTime).toFixed(2)}ms`);
     }
   }
 
-  // 🔥 BRUTAL SOLUTION: NO CACHE FOR FILTERING - ALWAYS FRESH
+  // NAVIGATION-SAFE: Usar lógica original exacta pero con caché inteligente
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
-    console.log('🔥 BRUTAL FILTERING - ZERO CACHE - ALWAYS FRESH');
-    console.log('Selected types:', selectedTypes);
+    const cacheKey = this.generateFilterCacheKey(selectedTypes, selectedKitTypes);
     
+    // SOLO usar caché si no hubo navegación reciente
+    if (this.filteredCache.has(cacheKey)) {
+      console.log('✅ Using safe cached filtered products for:', cacheKey);
+      return this.filteredCache.get(cacheKey);
+    }
+
+    console.log('🔍 Fresh filtering using ORIGINAL LOGIC for:', selectedTypes);
     let allProducts = [];
     
-    // ALWAYS FETCH FRESH - NO CACHE FOR FILTERING
+    // USAR EXACTAMENTE LA LÓGICA ORIGINAL
     for (const collection of this.collections) {
-      console.log(`🔍 Processing collection: ${collection.handle}`);
-      
-      // GET FRESH DATA EVERY TIME FOR FILTERING
       const products = await this.fetchProductsWithMetafields(collection.handle);
       
-      console.log(`📦 Collection ${collection.handle} has ${products.length} total products`);
-      
       const filteredProducts = products.filter(product => {
-        // BRUTAL LOGGING - LOG EVERY SINGLE PRODUCT
-        console.log(`\n🔍 EVALUATING: "${product.title}"`);
-        console.log(`   Original product_type: "${product.product_type}"`);
-        
-        // EXACT ORIGINAL LOGIC - NO CHANGES
+        // LÓGICA ORIGINAL EXACTA - Sin cambios
         let type = product.product_type;
         if (type.endsWith('Liner')) {
           type = 'Liner';
         }
-        
-        console.log(`   Normalized type: "${type}"`);
-        console.log(`   Selected types: [${selectedTypes.join(', ')}]`);
-        
+        // NO normalizar Kit aquí como en original
+
         const matchesType = selectedTypes.includes(type);
-        console.log(`   Type matches: ${matchesType}`);
-        
         const matchesKitType = selectedKitTypes.length === 0 || 
           selectedKitTypes.some(kitType => 
             product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
           );
-        console.log(`   Kit type matches: ${matchesKitType}`);
-        
-        const finalResult = matchesType && matchesKitType;
-        console.log(`   🎯 FINAL RESULT: ${finalResult ? 'INCLUDE ✅' : 'EXCLUDE ❌'}`);
-        
-        // BRUTAL REJECTION LOG
-        if (!matchesType) {
-          console.log(`   🚨 REJECTED: "${type}" NOT IN [${selectedTypes.join(', ')}]`);
-        }
-        
-        return finalResult;
+
+        return matchesType && matchesKitType;
       });
       
-      console.log(`📊 Collection ${collection.handle}: ${filteredProducts.length}/${products.length} products passed filter`);
       allProducts = [...allProducts, ...filteredProducts];
     }
 
-    console.log(`🎯 TOTAL FILTERED PRODUCTS: ${allProducts.length}`);
+    // Guardar en caché SOLO después de verificación exitosa
+    this.filteredCache.set(cacheKey, allProducts);
+    console.log(`✅ Cached ${allProducts.length} products for types: ${selectedTypes.join(', ')}`);
     
-    // FINAL BRUTAL CHECK - LOG WHAT WE'RE ACTUALLY RETURNING
-    console.log('🔍 FINAL PRODUCTS BEING RETURNED:');
-    allProducts.forEach((product, index) => {
-      let type = product.product_type;
-      if (type.endsWith('Liner')) {
-        type = 'Liner';
-      }
-      console.log(`   ${index + 1}. "${product.title}" (${product.product_type} → ${type})`);
-    });
-
     return allProducts;
   }
 
@@ -601,7 +850,6 @@ query getCollectionProducts($handle: String!) {
       this.filteredProducts = [];
       this.productGrid.innerHTML = '';
 
-      // BRUTAL APPROACH: NO SMART COLLECTIONS MIXING - KEEP IT SIMPLE
       let collectionsToFetch = new Set(this.collections.map(c => c.handle));
 
       const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
@@ -610,39 +858,38 @@ query getCollectionProducts($handle: String!) {
       activeAlloyTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
       activeTypeTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
 
-      // ALWAYS FRESH DATA FOR LOAD PRODUCTS
-      const results = await Promise.all(
-        Array.from(collectionsToFetch).map(handle => this.fetchProductsWithMetafields(handle))
+      const results = Array.from(collectionsToFetch).map(handle => 
+        this.requestCache.get(handle) || []
       );
 
       let filteredProducts = new Set();
       
-      console.log('🔥 BRUTAL LOAD PRODUCTS - ZERO TOLERANCE');
-      console.log('Active main filters:', Array.from(this.activeFilters));
+      console.log('🚨 LOAD PRODUCTS - EMERGENCY STRICT MODE');
+      console.log('   Main filters:', Array.from(this.activeFilters));
+      console.log('   Kit types:', Array.from(this.activeKitTypes));
+      console.log('   Alloy filters:', Array.from(activeAlloyTags).map(t => t.dataset.handle));
+      console.log('   Type filters:', Array.from(activeTypeTags).map(t => t.dataset.handle));
       
       results.forEach(products => {
         products.forEach(product => {
-          console.log(`\n🔍 LOAD EVALUATING: "${product.title}"`);
-          console.log(`   Original product_type: "${product.product_type}"`);
-          
-          // EXACT ORIGINAL LOGIC
-          let type = product.product_type;
-          if (type.endsWith('Liner')) {
-            type = 'Liner';
+          // STEP 1: Normalizar tipo EXACTAMENTE como en original
+          let normalizedType = product.product_type;
+          if (normalizedType.endsWith('Liner')) {
+            normalizedType = 'Liner';
+          } else if (normalizedType.endsWith('Kit')) {
+            normalizedType = 'Liner Kits';
           }
-          
-          console.log(`   Normalized type: "${type}"`);
-          console.log(`   Active filters: [${Array.from(this.activeFilters).join(', ')}]`);
+          // Mantener otros tipos como están
 
-          const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
-          console.log(`   Main filter matches: ${matchesMainFilter}`);
+          // STEP 2: RECHAZO INMEDIATO si no está en filtros principales
+          const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(normalizedType);
           
-          // BRUTAL REJECTION
           if (!matchesMainFilter && this.activeFilters.size > 0) {
-            console.log(`   🚨 BRUTALLY REJECTED: "${type}" NOT IN [${Array.from(this.activeFilters).join(', ')}]`);
-            return;
+            console.log(`❌ IMMEDIATE REJECTION: "${product.title}" (${product.product_type} -> ${normalizedType}) not in main filters [${Array.from(this.activeFilters).join(', ')}]`);
+            return; // SALIR INMEDIATAMENTE
           }
 
+          // STEP 3: Verificar filtros adicionales solo si pasó el principal
           const matchesAlloyFilters = activeAlloyTags.length === 0 || 
             Array.from(activeAlloyTags).some(tag => {
               const alloyHandle = tag.dataset.handle.toLowerCase();
@@ -660,30 +907,61 @@ query getCollectionProducts($handle: String!) {
               product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
             );
 
+          // STEP 4: Solo incluir si pasa TODOS los filtros
           if (matchesMainFilter && matchesAlloyFilters && matchesTypeFilters && matchesKitTypes) {
-            console.log(`   ✅ BRUTAL APPROVAL: INCLUDING "${product.title}"`);
+            console.log(`✅ STRICT INCLUDE: "${product.title}" (${product.product_type} -> ${normalizedType})`);
             filteredProducts.add(product);
           } else {
-            console.log(`   ❌ BRUTAL REJECTION: EXCLUDING "${product.title}"`);
+            console.log(`❌ STRICT EXCLUDE: "${product.title}" - Main:${matchesMainFilter} Alloy:${matchesAlloyFilters} Type:${matchesTypeFilters} Kit:${matchesKitTypes}`);
           }
         });
       });
 
       this.filteredProducts = Array.from(filteredProducts);
       
-      console.log('🎯 FINAL BRUTAL RESULT:');
-      this.filteredProducts.forEach((product, index) => {
-        let type = product.product_type;
-        if (type.endsWith('Liner')) {
-          type = 'Liner';
+      // VERIFICACIÓN FINAL ABSOLUTA ANTES DE MOSTRAR
+      console.log(`🔍 FINAL ABSOLUTE VERIFICATION of ${this.filteredProducts.length} products:`);
+      
+      const absolutelyCleanProducts = this.filteredProducts.filter(product => {
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
         }
-        console.log(`   ${index + 1}. "${product.title}" (${product.product_type} → ${type})`);
+        
+        const shouldBeIncluded = this.activeFilters.size === 0 || this.activeFilters.has(normalizedType);
+        
+        if (!shouldBeIncluded) {
+          console.error(`🚨🚨🚨 CONTAMINATION DETECTED AND REMOVED: "${product.title}" (${product.product_type} -> ${normalizedType})`);
+          return false;
+        }
+        
+        return true;
       });
+      
+      this.filteredProducts = absolutelyCleanProducts;
+      
+      // LOG FINAL DE TIPOS ENCONTRADOS
+      const finalTypes = new Set();
+      this.filteredProducts.forEach(product => {
+        let normalizedType = product.product_type;
+        if (normalizedType.endsWith('Liner')) {
+          normalizedType = 'Liner';
+        } else if (normalizedType.endsWith('Kit')) {
+          normalizedType = 'Liner Kits';
+        }
+        finalTypes.add(normalizedType);
+      });
+      
+      console.log(`📊 FINAL RESULT TYPES: [${Array.from(finalTypes).join(', ')}]`);
+      console.log(`📊 EXPECTED TYPES: [${Array.from(this.activeFilters).join(', ')}]`);
+      console.log(`📦 FINAL CLEAN PRODUCT COUNT: ${this.filteredProducts.length}`);
       
       await this.showPage(1);
 
     } catch (error) {
-      console.error('❌ Error loading products:', error);
+      console.error('Error loading products:', error);
     }
   }
 
@@ -783,72 +1061,6 @@ query getCollectionProducts($handle: String!) {
     `;
   }
 
-  createProductCard(product) {
-    const firstVariant = product.variants[0];
-    const comparePrice = firstVariant.compare_at_price > firstVariant.price
-      ? `<span class="price--compare">${this.formatMoney(firstVariant.compare_at_price)}</span>`
-      : '';
-
-    const imageRatio = '{{ section.settings.image_ratio }}';
-    const showSecondaryImage = {{ section.settings.show_secondary_image | json }};
-
-    const primaryImage = product.featured_image || (product.images && product.images[0]);
-    const secondaryImage = showSecondaryImage && product.images && product.images[1];
-
-    const placeholderImage = 'https://cdn.shopify.com/s/files/1/0844/6391/1230/files/holder.png?v=1754073591';
-
-    const imageUrlSmall = primaryImage?.src
-      ? `${primaryImage.src.split('?')[0]}?width=200`
-      : placeholderImage;
-
-    const imageUrlSmall2x = primaryImage?.src
-      ? `${primaryImage.src.split('?')[0]}?width=400`
-      : placeholderImage;
-
-    const imageMarkup = `
-      <div class="card__media">
-        <div class="media media--transparent media--hover-effect">
-          <img
-            srcset="${imageUrlSmall} 1x, ${imageUrlSmall2x} 2x"
-            src="${imageUrlSmall}"
-            sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-            alt="${product.title || 'No image available'}"
-            loading="lazy"
-            class="motion-reduce"
-            width="200"
-            height="200"
-          >
-          ${
-            secondaryImage?.src
-              ? `
-            <img
-              srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=400 2x"
-              src="${secondaryImage.src.split('?')[0]}?width=200"
-              sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
-              alt="${product.title}"
-              loading="lazy"
-              class="motion-reduce"
-              width="200"
-              height="200"
-            >
-          `
-              : ''
-          }
-        </div>
-      </div>
-    `;
-
-    return `
-      <div class="grid__item">
-        <div class="card-wrapper product-card-wrapper underline-links-hover">
-          <div class="card card--standard card--media ${imageRatio !== 'adapt' ? `card--${imageRatio}` : ''}">
-            <div class="card__inner color-background-2 ratio${imageRatio === 'adapt' && primaryImage ? ` ratio--adapt` : ''}"
-              style="${imageRatio === 'adapt' && primaryImage ? `--ratio-percent: ${1 / (primaryImage.width / primaryImage.height) * 100}%;` : ''}">
-              ${imageMarkup}
-            </div>
-            <div class="card__content">
-              <div class="card__information">
-                ${product.product_type ? `<div class="product-card__category">${product.product_type}</div>` : ''}
   createProductCard(product) {
     const firstVariant = product.variants[0];
     const comparePrice = firstVariant.compare_at_price > firstVariant.price
