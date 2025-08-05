@@ -166,15 +166,25 @@ if (!customElements.get("kit-variant-metafield-select")) {
           console.log("Using token:", token);
           console.log("Variant Netsuite ID:", this.variantNetsuiteId);
           console.log("Customer ID:", this.customerId);
-          console.log("Metafield kit_data:", this.defaultProperties.kit_data);
+
+          // Get kit_data metafield JSON for the variant
+          let kitData = {};
+          if (this.variant && this.variant.metafields && this.variant.metafields.kit_data) {
+            try {
+              kitData = JSON.parse(this.variant.metafields.kit_data);
+            } catch (e) {
+              kitData = {};
+            }
+          }
 
           const response = await axios.post(
             endpoint,
-            {
-              item: this.variantNetsuiteId,
-              customer: this.customerId,
-              ...this.defaultProperties
-            },
+              {
+                item: this.variantNetsuiteId,
+                customer: this.customerId,
+                ...this.defaultProperties,
+                ...kitData
+              },
             {
               headers: {
                 Authorization: `Basic ${btoa(token)}`,
