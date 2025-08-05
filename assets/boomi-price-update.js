@@ -166,6 +166,7 @@ if (!customElements.get("kit-variant-metafield-select")) {
           console.log("Using token:", token);
           console.log("Variant Netsuite ID:", this.variantNetsuiteId);
           console.log("Customer ID:", this.customerId);
+          console.log("Kit Data:", this.kitData);
 
           const response = await axios.post(
             endpoint,
