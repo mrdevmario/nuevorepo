@@ -175,10 +175,14 @@ if (!customElements.get("kit-variant-metafield-select")) {
               let kitData = {};
               if (kitDataInput && kitDataInput.value) {
                 try {
-                  const rawKitData = JSON.parse(kitDataInput.value);
-                  // Map each key to its first value if it's an array
+                  let rawKitData = kitDataInput.value;
+                  // If it's a stringified JSON, parse it twice
+                  if (typeof rawKitData === 'string') {
+                    rawKitData = JSON.parse(rawKitData);
+                  }
+                  // Map each key to its second value if present, else first, else empty string
                   kitData = Object.fromEntries(
-                    Object.entries(rawKitData).map(([key, val]) => [key, Array.isArray(val) ? (val[0] || "") : val])
+                    Object.entries(rawKitData).map(([key, val]) => [key, Array.isArray(val) ? (val[1] || val[0] || "") : val])
                   );
                   console.log("Parsed kit_data (flattened):", kitData);
                 } catch (e) {
