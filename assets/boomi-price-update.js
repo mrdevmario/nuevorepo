@@ -161,11 +161,6 @@ if (!customElements.get("kit-variant-metafield-select")) {
         const { token, url: endpoint } = optionsWrapper.dataset;
 
         try {
-          console.log("Fetching price with properties:", this.defaultProperties);
-          console.log("Using endpoint:", endpoint);
-          console.log("Using token:", token);
-          console.log("Variant Netsuite ID:", this.variantNetsuiteId);
-          console.log("Customer ID:", this.customerId);
           
           const response = await axios.post(
             endpoint,
