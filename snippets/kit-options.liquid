@@ -2,6 +2,9 @@
   {% assign current_variant = product.selected_or_first_available_variant %}
   {% assign options = "mortar_collar,storm_collar,top_clamp,adapter,tee_end_cap,tee_snout,tee_body,top_plate,lid_cap" | split: ',' %}
   <input type="hidden" name="kit-variant-netsuite-id" value="{{ current_variant.metafields.custom.netsuite_id.value }}" id="kit-variant-netsuite-id">
+  {% if current_variant.metafields.custom.kit_data %}
+    <input type="hidden" id="kit-data-json" value='{{ current_variant.metafields.custom.kit_data.value | json }}'>
+  {% endif %}
   
   {% for option in options %}
     {% assign metafield_value = current_variant.metafields.custom[option].value %}
