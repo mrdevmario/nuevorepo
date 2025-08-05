@@ -175,8 +175,12 @@ if (!customElements.get("kit-variant-metafield-select")) {
               let kitData = {};
               if (kitDataInput && kitDataInput.value) {
                 try {
-                  kitData = JSON.parse(kitDataInput.value);
-                  console.log("Parsed kit_data:", kitData);
+                  const rawKitData = JSON.parse(kitDataInput.value);
+                  // Map each key to its first value if it's an array
+                  kitData = Object.fromEntries(
+                    Object.entries(rawKitData).map(([key, val]) => [key, Array.isArray(val) ? (val[0] || "") : val])
+                  );
+                  console.log("Parsed kit_data (flattened):", kitData);
                 } catch (e) {
                   console.error('Error parsing kit_data JSON:', e);
                 }
@@ -185,7 +189,7 @@ if (!customElements.get("kit-variant-metafield-select")) {
                 item: this.variantNetsuiteId,
                 customer: this.customerId,
                 ...this.defaultProperties,
-                ...kitData // Spread kit_data keys into the request body
+                ...kitData // Spread kit_data keys into the request body as strings
               };
             })(),
             {
