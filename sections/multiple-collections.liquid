@@ -463,7 +463,6 @@ query getCollectionProducts($handle: String!) {
     const alloySubfiltersList = document.getElementById('alloy-subfilters');
     const typeSubfiltersList = document.getElementById('type-subfilters');
 
-    // ALLOY SUBFILTERS (Smart Collections)
     const alloyOrder = ['aluminum', '304', '316'];
     
     alloyOrder.forEach(alloyHandle => {
@@ -478,13 +477,9 @@ query getCollectionProducts($handle: String!) {
         tag.dataset.handle = collection.handle;
         tag.addEventListener('click', () => this.handleAlloySubfilterClick(tag));
         alloySubfiltersList.appendChild(tag);
-        
-        console.log(`Setup alloy smart collection: ${collection.handle} -> ${collection.title}`);
       }
     });
 
-    // TYPE SUBFILTERS - Pueden ser smart collections o dinámicos
-    console.log('Available type subfilters:', this.typeSubfilters);
     typeSubfiltersList.innerHTML = '';
   }
 
@@ -559,34 +554,11 @@ query getCollectionProducts($handle: String!) {
 
           const typeWithProducts = new Set();
           
-          // ESTRATEGIA HÍBRIDA: Smart Collections + Metafields para types
-          console.log('Setting up type filters - checking both smart collections and metafields...');
-          
-          // Primero, verificar si hay smart collections disponibles para types
-          if (this.typeSubfilters && this.typeSubfilters.length > 0) {
-            console.log('Using smart collections for type filters:', this.typeSubfilters);
-            
-            // Usar smart collections si están disponibles
-            this.typeSubfilters.forEach(collection => {
-              // Verificar si esta smart collection tiene productos en el filtro actual
-              const hasProducts = filteredByAlloys.some(product => {
-                // La smart collection ya filtró, solo verificar que existe
-                return true; // Si tenemos productos filtrados, la smart collection es válida
-              });
-              
-              if (hasProducts) {
-                typeWithProducts.add(collection.handle.toLowerCase());
-              }
-            });
-          } else {
-            // Fallback: usar metafields como antes
-            console.log('Using metafields for type filters...');
-            filteredByAlloys.forEach(product => {
-              if (product.metafields?.liner_type) {
-                typeWithProducts.add(product.metafields.liner_type.toLowerCase());
-              }
-            });
-          }
+          filteredByAlloys.forEach(product => {
+            if (product.metafields?.liner_type) {
+              typeWithProducts.add(product.metafields.liner_type.toLowerCase());
+            }
+          });
 
           console.log('Types found:', Array.from(typeWithProducts));
 
@@ -595,22 +567,15 @@ query getCollectionProducts($handle: String!) {
             typeSubfiltersList.innerHTML = '';
 
             typeWithProducts.forEach(type => {
-              // Buscar si hay una smart collection para este type
-              const smartCollection = this.typeSubfilters?.find(c => 
-                c.handle.toLowerCase() === type.toLowerCase()
-              );
-              
               const tag = document.createElement('div');
               tag.className = 'subfilter-tag';
-              tag.textContent = smartCollection ? smartCollection.title : 
-                type.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-              tag.dataset.handle = smartCollection ? smartCollection.handle : type;
+              tag.textContent = type.split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+              tag.dataset.handle = type;
               tag.dataset.type = type;
-              tag.dataset.isSmartCollection = smartCollection ? 'true' : 'false';
               tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
               typeSubfiltersList.appendChild(tag);
-              
-              console.log(`Added type filter: ${type} (Smart Collection: ${!!smartCollection})`);
             });
 
             this.typeFiltersSection.style.display = 'block';
@@ -905,7 +870,7 @@ query getCollectionProducts($handle: String!) {
             secondaryImage?.src
               ? `
             <img
-              srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=400 2x"
+              srcset="${secondaryImage.src.split('?')[0]}?width=200 1x, ${secondaryImage.src.split('?')[0]}?width=200 2x"
               src="${secondaryImage.src.split('?')[0]}?width=200"
               sizes="(min-width: 1200px) 25vw, (min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
               alt="${product.title}"
