@@ -176,6 +176,7 @@ if (!customElements.get("kit-variant-metafield-select")) {
               if (kitDataInput && kitDataInput.value) {
                 try {
                   kitData = JSON.parse(kitDataInput.value);
+                  console.log("Parsed kit_data:", kitData);
                 } catch (e) {
                   console.error('Error parsing kit_data JSON:', e);
                 }
