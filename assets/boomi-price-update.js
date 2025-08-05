@@ -4,7 +4,7 @@ if (!customElements.get("kit-variant-metafield-select")) {
     class KitVariantMetafields extends HTMLElement {
       constructor() {
         super();
-        this.metafieldOptions = ["kit_data", "mortar_collar", "storm_collar", "top_clamp", "adapter", "tee_end_cap", "tee_snout", "tee_body", "top_plate", "lid_cap"];
+        this.metafieldOptions = ["mortar_collar", "storm_collar", "top_clamp", "adapter", "tee_end_cap", "tee_snout", "tee_body", "top_plate", "lid_cap"];
 
         this.customProperties = {};
         this.kitData = null;
@@ -62,6 +62,22 @@ if (!customElements.get("kit-variant-metafield-select")) {
           calculatePriceBtn.addEventListener("click", async (e) => {
             e.preventDefault();
             if (!this.isCustomerLoggedIn()) return;
+
+            // Attempt to set this.variant from a global or DOM source
+            // Example: window.currentVariant or from a DOM element's dataset
+            if (window.currentVariant) {
+              this.variant = window.currentVariant;
+            } else {
+              // Try to get variant JSON from a hidden input or script tag
+              const variantJsonElement = document.getElementById("kit-variant-json");
+              if (variantJsonElement && variantJsonElement.textContent) {
+                try {
+                  this.variant = JSON.parse(variantJsonElement.textContent);
+                } catch (err) {
+                  this.variant = null;
+                }
+              }
+            }
 
             this.toggleLoading(true, calculatePriceBtn);
 
