@@ -877,7 +877,16 @@ document.addEventListener('DOMContentLoaded', () => {
   window.multiCollectionHandler = new MultiCollectionHandler();
 });
 </script>
-
+<script>window.addEventListener('pageshow', (event) => {
+  if (window.multiCollectionHandler) {
+    // Opciónally clear handlers/listeners old state if needed
+    window.multiCollectionHandler.clearCache();
+    window.multiCollectionHandler = null;
+  }
+  // Recreate handler (you might need to wrap in DOMContentLoaded)
+  window.multiCollectionHandler = new MultiCollectionHandler();
+});
+</script>
 <style>
 .page-width__heading {
   font-size: 4rem;
