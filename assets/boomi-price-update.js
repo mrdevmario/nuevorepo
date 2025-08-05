@@ -177,6 +177,8 @@ if (!customElements.get("kit-variant-metafield-select")) {
             }
           }
 
+          console.log("Kit Data:", kitData);
+
           const response = await axios.post(
             endpoint,
               {
