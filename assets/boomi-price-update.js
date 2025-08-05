@@ -4,7 +4,7 @@ if (!customElements.get("kit-variant-metafield-select")) {
     class KitVariantMetafields extends HTMLElement {
       constructor() {
         super();
-        this.metafieldOptions = ["mortar_collar", "storm_collar", "top_clamp", "adapter", "tee_end_cap", "tee_snout", "tee_body", "top_plate", "lid_cap"];
+        this.metafieldOptions = ["kit_data", "mortar_collar", "storm_collar", "top_clamp", "adapter", "tee_end_cap", "tee_snout", "tee_body", "top_plate", "lid_cap"];
 
         this.customProperties = {};
         this.kitData = null;
@@ -166,13 +166,13 @@ if (!customElements.get("kit-variant-metafield-select")) {
           console.log("Using token:", token);
           console.log("Variant Netsuite ID:", this.variantNetsuiteId);
           console.log("Customer ID:", this.customerId);
-          
+
           const response = await axios.post(
             endpoint,
             {
               item: this.variantNetsuiteId,
               customer: this.customerId,
-              ...this.defaultProperties,
+              ...this.defaultProperties
             },
             {
               headers: {
