@@ -110,8 +110,9 @@ class MultiCollectionHandler {
     this.typeFiltersSection = document.querySelector('.type-filters');
     this.storefrontToken = window.shopifyStorefrontToken;
 
-    // Critical optimization for 27 collections
-    this.requestCache = new Map();
+    // CRITICAL FIX: Separate cache structure to prevent contamination
+    this.collectionCache = new Map(); // Collection handle -> products array
+    this.productSeenIds = new Set(); // Track unique product IDs across all collections
     this.debounceTimer = null;
     this.loadingProgress = 0;
     this.totalCollections = this.collections.length;
@@ -123,7 +124,6 @@ class MultiCollectionHandler {
     this.isLoading = true;
     if (this.loadingIndicator) {
       this.loadingIndicator.style.display = 'flex';
-      // Show progress
       this.loadingIndicator.innerHTML = `Loading collections... ${this.loadingProgress}/${this.totalCollections}`;
     }
   }
@@ -167,7 +167,14 @@ class MultiCollectionHandler {
     }
   }
 
-  // Key optimization: Parallel loading with concurrency limit
+  // FIXED: Clear cache method for debugging
+  clearCache() {
+    this.collectionCache.clear();
+    this.productSeenIds.clear();
+    console.log('Cache cleared');
+  }
+
+  // Key optimization: Parallel loading with concurrency limit - FIXED CACHE LOGIC
   async setupFiltersWithParallelLoading() {
     const startTime = performance.now();
     
@@ -176,6 +183,10 @@ class MultiCollectionHandler {
       const BATCH_SIZE = 6; // Maximum 6 parallel requests
       
       console.log(`Loading ${this.collections.length} collections in batches of ${BATCH_SIZE}`);
+      
+      // CRITICAL: Clear any existing cache to prevent contamination
+      this.collectionCache.clear();
+      this.productSeenIds.clear();
       
       // Divide collections into batches
       const batches = [];
@@ -203,6 +214,10 @@ class MultiCollectionHandler {
         // Process products from batch
         batchResults.forEach(({ handle, products }) => {
           console.log(`Processed ${handle}: ${products.length} products`);
+          
+          // FIXED: Store products by collection handle to prevent mixing
+          this.collectionCache.set(handle, products);
+          
           products.forEach(product => {
             if (product.product_type) {
               let type = product.product_type;
@@ -223,6 +238,7 @@ class MultiCollectionHandler {
       }
 
       console.log('Product types found:', Array.from(productTypes));
+      console.log('Collections cached:', this.collectionCache.size);
 
       // Create filters
       const filterOrderSetting = {{ section.settings.filter_order | json }};
@@ -289,10 +305,12 @@ class MultiCollectionHandler {
     }
   }
 
-  // Keep original fetch but with better logging
+  // FIXED: Updated fetch method with proper cache isolation
   async fetchProductsWithMetafields(handle) {
-    if (this.requestCache.has(handle)) {
-      return this.requestCache.get(handle);
+    // Check cache first - using collection-specific cache
+    if (this.collectionCache.has(handle)) {
+      console.log(`Using cached products for ${handle}`);
+      return this.collectionCache.get(handle);
     }
 
     const query = `
@@ -344,6 +362,8 @@ query getCollectionProducts($handle: String!) {
 }`;
 
     try {
+      console.log(`Fetching products for collection: ${handle}`);
+      
       const response = await fetch('/api/2024-01/graphql.json', {
         method: 'POST',
         headers: {
@@ -382,6 +402,7 @@ query getCollectionProducts($handle: String!) {
           title: product.title,
           handle: product.handle,
           product_type: product.productType,
+          collection_source: handle, // ADDED: Track which collection this product came from
           featured_image: {
             src: product.featuredImage?.url,
             alt: product.featuredImage?.altText
@@ -399,12 +420,17 @@ query getCollectionProducts($handle: String!) {
         };
       }).filter(Boolean);
 
-      this.requestCache.set(handle, products);
+      // FIXED: Store in collection-specific cache
+      this.collectionCache.set(handle, products);
+      console.log(`Cached ${products.length} products for collection ${handle}`);
+      
       return products;
 
     } catch (error) {
       console.error(`Error fetching products for collection ${handle}:`, error);
-      throw error;
+      // Return empty array on error to prevent cache contamination
+      this.collectionCache.set(handle, []);
+      return [];
     }
   }
 
@@ -484,50 +510,50 @@ query getCollectionProducts($handle: String!) {
           this.alloyFiltersSection.style.display = 'block';
         }
 
-      // Show type filters for both Liner and Liner Kits - ORIGINAL LOGIC RESTORED
-      if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
-        const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
-        const filteredByAlloys = activeAlloyTags.length > 0 
-          ? filteredProducts.filter(product => 
-              Array.from(activeAlloyTags).some(tag => 
-                product.metafields?.alloy?.toLowerCase() === tag.dataset.handle.toLowerCase()
+        // Show type filters for both Liner and Liner Kits
+        if (selectedTypes.includes('Liner Kits') || selectedTypes.includes('Liner')) {
+          const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
+          const filteredByAlloys = activeAlloyTags.length > 0 
+            ? filteredProducts.filter(product => 
+                Array.from(activeAlloyTags).some(tag => 
+                  product.metafields?.alloy?.toLowerCase() === tag.dataset.handle.toLowerCase()
+                )
               )
-            )
-          : filteredProducts;
+            : filteredProducts;
 
-        const typeWithProducts = new Set();
-        
-        // Check each product's liner_type metafield
-        filteredByAlloys.forEach(product => {
-          if (product.metafields?.liner_type) {
-            typeWithProducts.add(product.metafields.liner_type.toLowerCase());
-          }
-        });
-
-        console.log('Types found:', Array.from(typeWithProducts)); // Debug log
-
-        if (typeWithProducts.size > 0) {
-          // Clear existing type filters
-          const typeSubfiltersList = document.getElementById('type-subfilters');
-          typeSubfiltersList.innerHTML = '';
-
-          // Create a filter tag for each unique type found
-          typeWithProducts.forEach(type => {
-            const tag = document.createElement('div');
-            tag.className = 'subfilter-tag';
-            tag.textContent = type.split(' ')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ');
-            tag.dataset.handle = type;
-            tag.dataset.type = type;
-            tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
-            typeSubfiltersList.appendChild(tag);
+          const typeWithProducts = new Set();
+          
+          // Check each product's liner_type metafield
+          filteredByAlloys.forEach(product => {
+            if (product.metafields?.liner_type) {
+              typeWithProducts.add(product.metafields.liner_type.toLowerCase());
+            }
           });
 
-          this.typeFiltersSection.style.display = 'block';
-          this.subfiltersWrapper.style.display = 'block';
+          console.log('Types found:', Array.from(typeWithProducts));
+
+          if (typeWithProducts.size > 0) {
+            // Clear existing type filters
+            const typeSubfiltersList = document.getElementById('type-subfilters');
+            typeSubfiltersList.innerHTML = '';
+
+            // Create a filter tag for each unique type found
+            typeWithProducts.forEach(type => {
+              const tag = document.createElement('div');
+              tag.className = 'subfilter-tag';
+              tag.textContent = type.split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+              tag.dataset.handle = type;
+              tag.dataset.type = type;
+              tag.addEventListener('click', () => this.handleTypeSubfilterClick(tag));
+              typeSubfiltersList.appendChild(tag);
+            });
+
+            this.typeFiltersSection.style.display = 'block';
+            this.subfiltersWrapper.style.display = 'block';
+          }
         }
-      }
       }
 
       this.activeFilters = new Set(selectedTypes);
@@ -542,14 +568,17 @@ query getCollectionProducts($handle: String!) {
     }
   }
 
-  // Optimization: getFilteredProducts now uses only cache
+  // FIXED: getFilteredProducts with proper cache isolation and deduplication
   async getFilteredProducts(selectedTypes, selectedKitTypes) {
-    console.log('Fast filtering using cache...');
-    let allProducts = [];
+    console.log('Fast filtering using isolated cache...');
     
+    const uniqueProducts = new Map(); // Use Map to deduplicate by product ID
+    
+    // Only process main collections, not subfilter collections
     for (const collection of this.collections) {
-      // Use cache - no fetch
-      const products = this.requestCache.get(collection.handle) || [];
+      const products = this.collectionCache.get(collection.handle) || [];
+      
+      console.log(`Processing collection ${collection.handle}: ${products.length} products`);
       
       const filteredProducts = products.filter(product => {
         let type = product.product_type;
@@ -566,11 +595,18 @@ query getCollectionProducts($handle: String!) {
         return matchesType && matchesKitType;
       });
       
-      allProducts = [...allProducts, ...filteredProducts];
+      // Add to unique products map (this automatically deduplicates)
+      filteredProducts.forEach(product => {
+        if (!uniqueProducts.has(product.id)) {
+          uniqueProducts.set(product.id, product);
+        }
+      });
     }
 
-    console.log(`Filtered to ${allProducts.length} products using cache`);
-    return allProducts;
+    const finalProducts = Array.from(uniqueProducts.values());
+    console.log(`Filtered to ${finalProducts.length} unique products using isolated cache`);
+    
+    return finalProducts;
   }
 
   async loadProducts() {
@@ -578,22 +614,13 @@ query getCollectionProducts($handle: String!) {
       this.filteredProducts = [];
       this.productGrid.innerHTML = '';
 
-      let collectionsToFetch = new Set(this.collections.map(c => c.handle));
-
-      const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
-      const activeTypeTags = document.querySelectorAll('#type-subfilters .subfilter-tag.active');
-
-      activeAlloyTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
-      activeTypeTags.forEach(tag => collectionsToFetch.add(tag.dataset.handle));
-
-      // Use cache instead of new fetches
-      const results = Array.from(collectionsToFetch).map(handle => 
-        this.requestCache.get(handle) || []
-      );
-
-      let filteredProducts = new Set();
+      // FIXED: Only use main collections for product loading, handle subfilters differently
+      const baseProducts = new Map(); // Use Map for deduplication
       
-      results.forEach(products => {
+      // Get products from main collections
+      for (const collection of this.collections) {
+        const products = this.collectionCache.get(collection.handle) || [];
+        
         products.forEach(product => {
           let type = product.product_type;
           if (type.endsWith('Liner')) {
@@ -602,30 +629,45 @@ query getCollectionProducts($handle: String!) {
 
           const matchesMainFilter = this.activeFilters.size === 0 || this.activeFilters.has(type);
 
-          const matchesAlloyFilters = activeAlloyTags.length === 0 || 
-            Array.from(activeAlloyTags).some(tag => {
-              const alloyHandle = tag.dataset.handle.toLowerCase();
-              return product.metafields?.alloy?.toLowerCase() === alloyHandle;
-            });
-
-          const matchesTypeFilters = activeTypeTags.length === 0 || 
-            Array.from(activeTypeTags).some(tag => {
-              const typeHandle = tag.dataset.handle.toLowerCase();
-              return product.metafields?.liner_type?.toLowerCase() === typeHandle;
-            });
-
           const matchesKitTypes = this.activeKitTypes.size === 0 || 
             Array.from(this.activeKitTypes).some(kitType => 
               product.tags.some(tag => tag.toLowerCase().includes(kitType.toLowerCase()))
             );
 
-          if (matchesMainFilter && matchesAlloyFilters && matchesTypeFilters && matchesKitTypes) {
-            filteredProducts.add(product);
+          if (matchesMainFilter && matchesKitTypes) {
+            baseProducts.set(product.id, product);
           }
         });
-      });
+      }
 
-      this.filteredProducts = Array.from(filteredProducts);
+      // Apply subfilters
+      let finalProducts = Array.from(baseProducts.values());
+
+      // Apply alloy filters
+      const activeAlloyTags = document.querySelectorAll('#alloy-subfilters .subfilter-tag.active');
+      if (activeAlloyTags.length > 0) {
+        finalProducts = finalProducts.filter(product =>
+          Array.from(activeAlloyTags).some(tag => {
+            const alloyHandle = tag.dataset.handle.toLowerCase();
+            return product.metafields?.alloy?.toLowerCase() === alloyHandle;
+          })
+        );
+      }
+
+      // Apply type filters  
+      const activeTypeTags = document.querySelectorAll('#type-subfilters .subfilter-tag.active');
+      if (activeTypeTags.length > 0) {
+        finalProducts = finalProducts.filter(product =>
+          Array.from(activeTypeTags).some(tag => {
+            const typeHandle = tag.dataset.handle.toLowerCase();
+            return product.metafields?.liner_type?.toLowerCase() === typeHandle;
+          })
+        );
+      }
+
+      this.filteredProducts = finalProducts;
+      console.log(`Final filtered products: ${this.filteredProducts.length}`);
+      
       await this.showPage(1);
 
     } catch (error) {
