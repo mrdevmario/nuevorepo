@@ -311,92 +311,36 @@
     {% if collection.handle == 'products' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
-    <!-- Continue Shopping Button Redirect - Updated with specific selectors -->
+    <!-- Continue Shopping Button Redirect - Click Interceptor -->
 <script>
 (function() {
-  // Only run on thank you and order status pages
   if (window.location.pathname.includes('/thank_you') || 
       window.location.pathname.includes('/orders/') ||
       window.location.search.includes('thank_you')) {
     
-    console.log('Thank you page detected - looking for continue shopping button');
+    console.log('Thank you page - setting up click interceptor');
     
-    function redirectContinueButton() {
-      // Try multiple specific selectors based on the HTML structure
-      const selectors = [
-        // Based on the classes we can see
-        'a[href="https://newenglandchimneysupply.com"]',
-        'a[class*="_1m2hr9ge_"]',
-        'a[class*="_1m2hr9gd_"]',
-        'a[class*="_1fragemu"]',
-        'a[class*="_1fragmm2_"]',
-        'a[class*="_1fragmp4_"]',
-        // Generic selectors
-        'a[href="/"]',
-        'a[href*="newenglandchimneysupply.com"]'
-      ];
+    // Intercept all clicks on the page
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('a');
       
-      let button = null;
-      
-      // Try each selector
-      for (const selector of selectors) {
-        button = document.querySelector(selector);
-        if (button) {
-          console.log('Found button with selector:', selector);
-          break;
-        }
-      }
-      
-      // If no button found by selector, search by text content
-      if (!button) {
-        const allLinks = document.querySelectorAll('a');
-        for (const link of allLinks) {
-          if (link.textContent && link.textContent.toLowerCase().includes('continue shopping')) {
-            button = link;
-            console.log('Found button by text content');
-            break;
-          }
-        }
-      }
-      
-      if (button) {
-        const newURL = 'https://newenglandchimneysupply.com/collections/all-products';
+      if (target) {
+        const href = target.href;
+        const text = target.textContent.toLowerCase();
         
-        // Update href
-        button.href = newURL;
-        
-        // Also override click behavior
-        button.addEventListener('click', function(e) {
+        // Check if this is the continue shopping button
+        if (href === 'https://newenglandchimneysupply.com/' || 
+            href === 'https://newenglandchimneysupply.com' ||
+            text.includes('continue shopping')) {
+          
+          console.log('Continue shopping click intercepted!');
           e.preventDefault();
-          window.location.href = newURL;
-        });
-        
-        console.log('✅ Continue Shopping button redirected to:', newURL);
-        console.log('Button element:', button);
-        return true;
-      } else {
-        console.log('❌ Continue Shopping button not found');
-        return false;
-      }
-    }
-    
-    // Try multiple times with different delays
-    const delays = [500, 1000, 2000, 3000, 5000];
-    
-    delays.forEach(delay => {
-      setTimeout(() => {
-        if (!redirectContinueButton()) {
-          console.log(`Attempt after ${delay}ms failed`);
+          window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
         }
-      }, delay);
-    });
+      }
+    }, true);
     
-    // Also try when DOM is fully loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(redirectContinueButton, 1000);
-      });
-    }
+    console.log('Click interceptor installed');
   }
 })();
 </script>
