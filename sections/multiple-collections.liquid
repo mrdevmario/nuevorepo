@@ -24,6 +24,33 @@
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <h1 class="page-width__heading text-center">Products</h1>
+    
+    <!-- Buscador independiente -->
+    <div class="search-wrapper">
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input 
+            type="text" 
+            id="product-search" 
+            class="search-input" 
+            placeholder="Search products by name..."
+            autocomplete="off"
+          >
+          <button type="button" class="search-clear" id="search-clear" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="search-results-count" id="search-results-count" style="display: none;">
+          <span id="results-text"></span>
+        </div>
+      </div>
+    </div>
+
     <!-- Subfilters -->
     <div class="subfilters-wrapper" style="display: none;">
       <div class="subfilters-section alloy-filters" style="display: none;">
@@ -110,6 +137,14 @@ class MultiCollectionHandler {
     this.typeFiltersSection = document.querySelector('.type-filters');
     this.storefrontToken = window.shopifyStorefrontToken;
 
+    // Search functionality
+    this.searchInput = document.getElementById('product-search');
+    this.searchClear = document.getElementById('search-clear');
+    this.searchResultsCount = document.getElementById('search-results-count');
+    this.resultsText = document.getElementById('results-text');
+    this.currentSearchTerm = '';
+    this.searchDebounceTimer = null;
+
     // CRITICAL FIX: Separate cache structure to prevent contamination
     this.collectionCache = new Map(); // Collection handle -> products array
     this.productSeenIds = new Set(); // Track unique product IDs across all collections
@@ -156,6 +191,7 @@ class MultiCollectionHandler {
       await this.setupSubfilters();
       
       this.setupSorting();
+      this.setupSearch(); // Nueva función para configurar el buscador
       await this.handleFilterChange();
       
     } catch (error) {
@@ -164,6 +200,93 @@ class MultiCollectionHandler {
       this.hideLoading();
       const totalTime = performance.now() - startTime;
       console.log(`Total initialization: ${totalTime.toFixed(2)}ms`);
+    }
+  }
+
+  // Nueva función para configurar el buscador
+  setupSearch() {
+    if (!this.searchInput) return;
+
+    // Event listener para el input de búsqueda
+    this.searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.trim();
+      
+      // Mostrar/ocultar botón de limpiar
+      if (searchTerm) {
+        this.searchClear.style.display = 'flex';
+      } else {
+        this.searchClear.style.display = 'none';
+      }
+
+      // Debounce para evitar demasiadas búsquedas
+      if (this.searchDebounceTimer) {
+        clearTimeout(this.searchDebounceTimer);
+      }
+
+      this.searchDebounceTimer = setTimeout(() => {
+        this.currentSearchTerm = searchTerm.toLowerCase();
+        this.performSearch();
+      }, 300);
+    });
+
+    // Event listener para el botón de limpiar
+    this.searchClear.addEventListener('click', () => {
+      this.searchInput.value = '';
+      this.searchClear.style.display = 'none';
+      this.currentSearchTerm = '';
+      this.searchResultsCount.style.display = 'none';
+      this.performSearch();
+    });
+
+    // Prevenir envío del formulario al presionar Enter
+    this.searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+      }
+    });
+  }
+
+  // Nueva función para realizar la búsqueda
+  async performSearch() {
+    console.log('Performing search for:', this.currentSearchTerm);
+    
+    try {
+      this.showLoading();
+      await this.loadProducts(); // Esto aplicará automáticamente el filtro de búsqueda
+    } catch (error) {
+      console.error('Error performing search:', error);
+    } finally {
+      this.hideLoading();
+    }
+  }
+
+  // Función para filtrar productos por término de búsqueda
+  filterProductsBySearch(products) {
+    if (!this.currentSearchTerm) {
+      return products;
+    }
+
+    const filtered = products.filter(product => {
+      return product.title.toLowerCase().includes(this.currentSearchTerm);
+    });
+
+    // Actualizar contador de resultados
+    this.updateSearchResults(filtered.length, products.length);
+
+    return filtered;
+  }
+
+  // Función para actualizar el contador de resultados
+  updateSearchResults(filteredCount, totalCount) {
+    if (this.currentSearchTerm) {
+      this.searchResultsCount.style.display = 'block';
+      if (filteredCount === 0) {
+        this.resultsText.textContent = `No products found for "${this.currentSearchTerm}"`;
+      } else {
+        this.resultsText.textContent = `${filteredCount} of ${totalCount} products found`;
+      }
+    } else {
+      this.searchResultsCount.style.display = 'none';
     }
   }
 
@@ -665,6 +788,9 @@ query getCollectionProducts($handle: String!) {
         );
       }
 
+      // NUEVO: Aplicar filtro de búsqueda por nombre
+      finalProducts = this.filterProductsBySearch(finalProducts);
+
       this.filteredProducts = finalProducts;
       console.log(`Final filtered products: ${this.filteredProducts.length}`);
       
@@ -873,9 +999,6 @@ query getCollectionProducts($handle: String!) {
 document.addEventListener('DOMContentLoaded', () => {
   window.multiCollectionHandler = new MultiCollectionHandler();
 });
-document.addEventListener('DOMContentLoaded', () => {
-  window.multiCollectionHandler = new MultiCollectionHandler();
-});
 </script>
 
 <style>
@@ -885,6 +1008,87 @@ document.addEventListener('DOMContentLoaded', () => {
   font-weight: 500;
   color: #333;
   padding-left: 30px;
+}
+
+/* Estilos del buscador */
+.search-wrapper {
+  margin-bottom: 30px;
+  padding: 0 30px;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #e1e1e1;
+  border-radius: 50px;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: #39aa6e;
+  box-shadow: 0 4px 20px rgba(57, 170, 110, 0.15);
+}
+
+.search-icon {
+  color: #666;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 15px 0;
+  font-size: 16px;
+  background: transparent;
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-clear {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 10px;
+  border-radius: 50%;
+  color: #666;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.search-clear:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.search-results-count {
+  margin-top: 10px;
+  text-align: center;
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #666;
+  display: inline-block;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .sorting-wrapper {
@@ -1233,8 +1437,27 @@ document.addEventListener('DOMContentLoaded', () => {
   color: #666;
 }
 
-/* Grid Responsive */
+/* Responsive para el buscador */
 @media screen and (max-width: 749px) {
+  .search-wrapper {
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+
+  .search-input-wrapper {
+    padding: 0 15px;
+  }
+
+  .search-input {
+    padding: 12px 0;
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+
+  .search-results-count {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
   .collection-layout {
     flex-direction: column;
   }
