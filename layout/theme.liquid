@@ -311,7 +311,7 @@
     {% if collection.handle == 'products' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
-    <!-- Continue Shopping Button Redirect -->
+    <!-- Continue Shopping Button Redirect - Updated with specific selectors -->
 <script>
 (function() {
   // Only run on thank you and order status pages
@@ -319,44 +319,84 @@
       window.location.pathname.includes('/orders/') ||
       window.location.search.includes('thank_you')) {
     
-    console.log('Thank you page detected');
+    console.log('Thank you page detected - looking for continue shopping button');
     
     function redirectContinueButton() {
-      // Find the continue shopping button
-      const button = document.querySelector('a[href="/"]') ||
-                     document.querySelector('a[href*="collections"]') ||
-                     document.querySelector('a[href*="products"]') ||
-                     [...document.querySelectorAll('a, button')].find(el => 
-                       el.textContent && el.textContent.toLowerCase().includes('continue shopping')
-                     );
+      // Try multiple specific selectors based on the HTML structure
+      const selectors = [
+        // Based on the classes we can see
+        'a[href="https://newenglandchimneysupply.com"]',
+        'a[class*="_1m2hr9ge_"]',
+        'a[class*="_1m2hr9gd_"]',
+        'a[class*="_1fragemu"]',
+        'a[class*="_1fragmm2_"]',
+        'a[class*="_1fragmp4_"]',
+        // Generic selectors
+        'a[href="/"]',
+        'a[href*="newenglandchimneysupply.com"]'
+      ];
+      
+      let button = null;
+      
+      // Try each selector
+      for (const selector of selectors) {
+        button = document.querySelector(selector);
+        if (button) {
+          console.log('Found button with selector:', selector);
+          break;
+        }
+      }
+      
+      // If no button found by selector, search by text content
+      if (!button) {
+        const allLinks = document.querySelectorAll('a');
+        for (const link of allLinks) {
+          if (link.textContent && link.textContent.toLowerCase().includes('continue shopping')) {
+            button = link;
+            console.log('Found button by text content');
+            break;
+          }
+        }
+      }
       
       if (button) {
-        // Redirect to your desired URL
-        button.href = 'https://newenglandchimneysupply.com/collections/all-products';
+        const newURL = 'https://newenglandchimneysupply.com/collections/all-products';
         
-        // Also update onclick behavior
-        button.onclick = function(e) {
+        // Update href
+        button.href = newURL;
+        
+        // Also override click behavior
+        button.addEventListener('click', function(e) {
           e.preventDefault();
-          window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
-        };
+          window.location.href = newURL;
+        });
         
-        console.log('✅ Continue Shopping button redirected to all-products');
+        console.log('✅ Continue Shopping button redirected to:', newURL);
+        console.log('Button element:', button);
         return true;
+      } else {
+        console.log('❌ Continue Shopping button not found');
+        return false;
       }
-      return false;
     }
     
-    // Try immediately when DOM is ready
+    // Try multiple times with different delays
+    const delays = [500, 1000, 2000, 3000, 5000];
+    
+    delays.forEach(delay => {
+      setTimeout(() => {
+        if (!redirectContinueButton()) {
+          console.log(`Attempt after ${delay}ms failed`);
+        }
+      }, delay);
+    });
+    
+    // Also try when DOM is fully loaded
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
         setTimeout(redirectContinueButton, 1000);
       });
-    } else {
-      setTimeout(redirectContinueButton, 1000);
     }
-    
-    // Also try after a longer delay in case the button loads later
-    setTimeout(redirectContinueButton, 3000);
   }
 })();
 </script>
