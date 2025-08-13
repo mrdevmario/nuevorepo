@@ -311,6 +311,55 @@
     {% if collection.handle == 'products' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
+    <!-- Continue Shopping Button Redirect -->
+<script>
+(function() {
+  // Only run on thank you and order status pages
+  if (window.location.pathname.includes('/thank_you') || 
+      window.location.pathname.includes('/orders/') ||
+      window.location.search.includes('thank_you')) {
+    
+    console.log('Thank you page detected');
+    
+    function redirectContinueButton() {
+      // Find the continue shopping button
+      const button = document.querySelector('a[href="/"]') ||
+                     document.querySelector('a[href*="collections"]') ||
+                     document.querySelector('a[href*="products"]') ||
+                     [...document.querySelectorAll('a, button')].find(el => 
+                       el.textContent && el.textContent.toLowerCase().includes('continue shopping')
+                     );
+      
+      if (button) {
+        // Redirect to your desired URL
+        button.href = 'https://newenglandchimneysupply.com/collections/all-products';
+        
+        // Also update onclick behavior
+        button.onclick = function(e) {
+          e.preventDefault();
+          window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
+        };
+        
+        console.log('✅ Continue Shopping button redirected to all-products');
+        return true;
+      }
+      return false;
+    }
+    
+    // Try immediately when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(redirectContinueButton, 1000);
+      });
+    } else {
+      setTimeout(redirectContinueButton, 1000);
+    }
+    
+    // Also try after a longer delay in case the button loads later
+    setTimeout(redirectContinueButton, 3000);
+  }
+})();
+</script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ page.handle }} template-{{ template.name }} {{ product.template_suffix }}">
