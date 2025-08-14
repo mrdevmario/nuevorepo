@@ -4687,9 +4687,21 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
-.header {
-  display: flex!important;
-  align-items: center!important;
-  justify-content: space-between!important;
-  flex-wrap: wrap!important; 
+.nec_rtmenu.nec_desktop {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  height: 100% !important;
+}
+
+.nec_rtmenu.nec_desktop li {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.nec_rtmenu.nec_desktop a {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
 }
