@@ -4689,19 +4689,15 @@ h1.cart__empty-text {
 }
 .nec_rtmenu.nec_desktop {
   display: flex !important;
-  align-items: center !important;
   gap: 12px !important;
   height: 100% !important;
 }
 
 .nec_rtmenu.nec_desktop li {
   display: flex !important;
-  align-items: center !important;
-  height: 100% !important;
+  align-items: baseline !important;
 }
 
-.nec_rtmenu.nec_desktop a {
-  display: flex !important;
+.nec_rtmenu.nec_desktop li:last-child {
   align-items: center !important;
-  text-decoration: none !important;
 }
