@@ -312,84 +312,102 @@
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
     <!-- Continue Shopping Button Redirect - Click Interceptor -->
-<!-- Continue Shopping Debug Script -->
+<!-- Continue Shopping - Fixed for Checkout Extensibility -->
 <script>
 (function() {
-  console.log('Script loaded, current URL:', window.location.href);
-  console.log('Pathname:', window.location.pathname);
-  console.log('Search:', window.location.search);
+  console.log('🔍 Thank you script loaded, URL:', window.location.href);
   
-  // Verificar si estamos en thank you page
-  const isThankYouPage = window.location.pathname.includes('/thank_you') || 
-                        window.location.pathname.includes('/orders/') ||
-                        window.location.search.includes('thank_you') ||
-                        document.body.innerHTML.includes('Continue shopping');
+  // Detectar thank you page por URL más específica
+  const isThankYouPage = window.location.pathname.includes('/checkout/') && 
+                        window.location.pathname.includes('thank-you');
   
   console.log('Is Thank You page?', isThankYouPage);
   
-  if (isThankYouPage) {
-    console.log('Thank you page detected - starting debug');
+  if (isThankYouPage || document.querySelector('[data-testid="continue-shopping-button"]') || 
+      document.body.textContent.includes('Continue shopping')) {
     
-    function debugButton() {
-      console.log('=== DEBUG ATTEMPT ===');
+    console.log('✅ Thank You page detected');
+    
+    function interceptButton() {
+      console.log('🔍 Looking for Continue Shopping button...');
       
-      // Probar múltiples selectores
+      // Múltiples selectores posibles
       const selectors = [
-        '.MV9Am a',
-        'a[href*="newenglandchimneysupply.com"]',
-        'a[href="/"]',
-        'a[href="https://newenglandchimneysupply.com"]',
-        'a[href="https://newenglandchimneysupply.com/"]'
+        '[data-testid="continue-shopping-button"]',
+        'a:contains("Continue shopping")',
+        'button:contains("Continue shopping")',
+        '.continue-shopping',
+        '[class*="continue"]',
+        '[class*="shopping"]'
       ];
       
-      selectors.forEach(selector => {
-        const element = document.querySelector(selector);
-        console.log(`Selector "${selector}":`, element);
-        if (element) {
-          console.log('- href:', element.href);
-          console.log('- text:', element.textContent);
-          console.log('- classes:', element.className);
-        }
-      });
+      let button = null;
       
-      // Buscar por texto
-      const allLinks = document.querySelectorAll('a');
-      console.log('Total links found:', allLinks.length);
+      // Buscar por selector
+      for (const selector of selectors) {
+        try {
+          button = document.querySelector(selector);
+          if (button) {
+            console.log(`Found button with selector: ${selector}`);
+            break;
+          }
+        } catch (e) {}
+      }
       
-      allLinks.forEach((link, index) => {
-        if (link.textContent.toLowerCase().includes('continue shopping') ||
-            link.textContent.toLowerCase().includes('seguir comprando')) {
-          console.log(`Continue shopping link ${index}:`, link);
-          console.log('- href:', link.href);
-          console.log('- classes:', link.className);
-          console.log('- parent classes:', link.parentElement?.className);
+      // Buscar por texto si no encontramos por selector
+      if (!button) {
+        const allElements = document.querySelectorAll('a, button');
+        for (const element of allElements) {
+          if (element.textContent && element.textContent.toLowerCase().includes('continue shopping')) {
+            button = element;
+            console.log('Found button by text content');
+            break;
+          }
         }
-      });
+      }
       
-      // Intentar cambiar todos los links que vayan a la homepage
-      allLinks.forEach(link => {
-        if (link.href === 'https://newenglandchimneysupply.com/' || 
-            link.href === 'https://newenglandchimneysupply.com') {
-          console.log('Found homepage link, changing URL:', link);
-          link.href = 'https://newenglandchimneysupply.com/collections/all-products';
-          
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Click intercepted, redirecting to all-products');
-            window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
-          });
+      if (button) {
+        console.log('🎯 Button found:', button);
+        console.log('Original href:', button.href);
+        
+        // Cambiar URL
+        if (button.tagName === 'A') {
+          button.href = 'https://newenglandchimneysupply.com/collections/all-products';
         }
-      });
+        
+        // Interceptar click
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('🚀 Click intercepted! Redirecting to all-products');
+          window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
+        }, true);
+        
+        console.log('✅ Button successfully modified');
+        return true;
+      } else {
+        console.log('❌ Continue shopping button not found');
+        return false;
+      }
     }
     
-    // Ejecutar múltiples veces
-    [0, 1000, 2000, 3000, 5000].forEach(delay => {
-      setTimeout(debugButton, delay);
+    // Intentar inmediatamente y con delays
+    interceptButton();
+    setTimeout(interceptButton, 500);
+    setTimeout(interceptButton, 1000);
+    setTimeout(interceptButton, 2000);
+    setTimeout(interceptButton, 3000);
+    
+    // Observer para detectar cambios dinámicos
+    const observer = new MutationObserver(function() {
+      interceptButton();
     });
     
-    // También cuando cambien cosas en la página
-    const observer = new MutationObserver(debugButton);
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
     setTimeout(() => observer.disconnect(), 10000);
   }
 })();
