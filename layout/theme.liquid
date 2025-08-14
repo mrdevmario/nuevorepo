@@ -312,36 +312,85 @@
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
     <!-- Continue Shopping Button Redirect - Click Interceptor -->
-<!-- Continue Shopping Button Redirect -->
+<!-- Continue Shopping Debug Script -->
 <script>
 (function() {
-  if (window.location.pathname.includes('/thank_you') || 
-      window.location.pathname.includes('/orders/') ||
-      window.location.search.includes('thank_you')) {
+  console.log('Script loaded, current URL:', window.location.href);
+  console.log('Pathname:', window.location.pathname);
+  console.log('Search:', window.location.search);
+  
+  // Verificar si estamos en thank you page
+  const isThankYouPage = window.location.pathname.includes('/thank_you') || 
+                        window.location.pathname.includes('/orders/') ||
+                        window.location.search.includes('thank_you') ||
+                        document.body.innerHTML.includes('Continue shopping');
+  
+  console.log('Is Thank You page?', isThankYouPage);
+  
+  if (isThankYouPage) {
+    console.log('Thank you page detected - starting debug');
     
-    console.log('Thank you page detected - targeting .MV9Am a');
-    
-    function interceptContinueButton() {
-      const button = document.querySelector('.MV9Am a');
+    function debugButton() {
+      console.log('=== DEBUG ATTEMPT ===');
       
-      if (button) {
-        button.href = 'https://newenglandchimneysupply.com/collections/all-products';
-        
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
-        });
-        
-        console.log('✅ Continue Shopping redirected to all-products');
-        return true;
-      }
-      return false;
+      // Probar múltiples selectores
+      const selectors = [
+        '.MV9Am a',
+        'a[href*="newenglandchimneysupply.com"]',
+        'a[href="/"]',
+        'a[href="https://newenglandchimneysupply.com"]',
+        'a[href="https://newenglandchimneysupply.com/"]'
+      ];
+      
+      selectors.forEach(selector => {
+        const element = document.querySelector(selector);
+        console.log(`Selector "${selector}":`, element);
+        if (element) {
+          console.log('- href:', element.href);
+          console.log('- text:', element.textContent);
+          console.log('- classes:', element.className);
+        }
+      });
+      
+      // Buscar por texto
+      const allLinks = document.querySelectorAll('a');
+      console.log('Total links found:', allLinks.length);
+      
+      allLinks.forEach((link, index) => {
+        if (link.textContent.toLowerCase().includes('continue shopping') ||
+            link.textContent.toLowerCase().includes('seguir comprando')) {
+          console.log(`Continue shopping link ${index}:`, link);
+          console.log('- href:', link.href);
+          console.log('- classes:', link.className);
+          console.log('- parent classes:', link.parentElement?.className);
+        }
+      });
+      
+      // Intentar cambiar todos los links que vayan a la homepage
+      allLinks.forEach(link => {
+        if (link.href === 'https://newenglandchimneysupply.com/' || 
+            link.href === 'https://newenglandchimneysupply.com') {
+          console.log('Found homepage link, changing URL:', link);
+          link.href = 'https://newenglandchimneysupply.com/collections/all-products';
+          
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Click intercepted, redirecting to all-products');
+            window.location.href = 'https://newenglandchimneysupply.com/collections/all-products';
+          });
+        }
+      });
     }
     
-    // Múltiples intentos
-    [500, 1000, 2000, 3000].forEach(delay => {
-      setTimeout(interceptContinueButton, delay);
+    // Ejecutar múltiples veces
+    [0, 1000, 2000, 3000, 5000].forEach(delay => {
+      setTimeout(debugButton, delay);
     });
+    
+    // También cuando cambien cosas en la página
+    const observer = new MutationObserver(debugButton);
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => observer.disconnect(), 10000);
   }
 })();
 </script>
