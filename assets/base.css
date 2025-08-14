@@ -4687,17 +4687,3 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
-.nec_rtmenu.nec_desktop {
-  display: grid !important;
-  gap: 12px !important;
-  height: 100% !important;
-}
-
-.nec_rtmenu.nec_desktop li {
-  display: flex !important;
-  align-items: baseline !important;
-}
-
-.nec_rtmenu.nec_desktop li:last-child {
-  align-items: center !important;
-}
