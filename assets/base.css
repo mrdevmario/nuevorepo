@@ -4687,3 +4687,9 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+}
