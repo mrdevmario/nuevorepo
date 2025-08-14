@@ -4690,6 +4690,7 @@ h1.cart__empty-text {
 .nec_rtmenu.nec_desktop {
   transform: translateY(1.5rem) !important;
 }
+.nec_rtmenu .cont{transform: translateY(.5rem) !important;}
 .product-media-container .media {
   padding-top: 0 !important;
 }
