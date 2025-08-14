@@ -4687,17 +4687,8 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
-.nec_rtmenu.nec_desktop {
+.nec_rtmenu.nec_desktop li.cont {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
-}
-
-.nec_rtmenu.nec_desktop li {
-  display: flex !important;
-  align-items: center !important;
-}
-
-.nec_rtmenu.nec_desktop li:last-child {
-  margin-top: 4px !important;
+  padding-top: 8px !important;
 }
