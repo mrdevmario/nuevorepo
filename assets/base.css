@@ -4688,7 +4688,7 @@ h1.cart__empty-text {
   display: block;
 }
 .nec_rtmenu.nec_desktop {
-  transform: translateY(1.4rem) !important;
+  transform: translateY(1.5rem) !important;
 }
 .product-media-container .media {
   padding-top: 0 !important;
