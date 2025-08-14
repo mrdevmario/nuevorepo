@@ -1019,9 +1019,13 @@ document.addEventListener('DOMContentLoaded', () => {
 .search-container {
   max-width: 400px;
   margin: 0 auto;
-  transform:translateX(37rem);
+ 
 }
-
+@media screen and (min-width: 990px) {
+  .search-container {
+    transform: translateX(37rem);
+  }
+}
 .search-input-wrapper {
   position: relative;
   display: flex;
