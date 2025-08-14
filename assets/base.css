@@ -1130,7 +1130,31 @@ a.header__icon--account.link {
   background-color: transparent !important;
   overflow: hidden;
 }
+.media::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom:0px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 0;
+}
+.media--transparent {
+  background-color: transparent;
+}
 
+.media > *:not(.zoom):not(.deferred-media__poster-button),
+.media model-viewer {
+  position: relative;
+  z-index: 1;
+  max-width: 70%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 0; 
+}
 .media > img:not([src]),
 .media > img[src=""],
 .media > img[src="null"],
