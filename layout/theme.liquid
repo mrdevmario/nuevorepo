@@ -678,3 +678,29 @@
     {% comment %} {{ 'dynamic-pricing.js' | asset_url | script_tag }} {% endcomment %}
   </body>
 </html>
+<script>
+(function() {
+  if (window.location.pathname.includes('/thank_you') || 
+      window.location.pathname.includes('/orders/')) {
+    
+    // Observer para detectar cuando aparezca el botón
+    const observer = new MutationObserver(function(mutations) {
+      const button = document.querySelector('.MV9Am a');
+      if (button && !button.dataset.urlChanged) {
+        button.href = 'https://newenglandchimneysupply.com/collections/all-products';
+        button.dataset.urlChanged = 'true'; // Marcar como procesado
+        console.log('✅ Continue Shopping URL intercepted and changed');
+      }
+    });
+    
+    // Observar cambios en el DOM
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    // Parar el observer después de 10 segundos
+    setTimeout(() => observer.disconnect(), 10000);
+  }
+})();
+</script>
