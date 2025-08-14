@@ -4687,3 +4687,6 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
+.nec_rtmenu.nec_desktop {
+  transform: translateY(6px) !important;
+}
