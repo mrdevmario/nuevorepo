@@ -4688,8 +4688,8 @@ h1.cart__empty-text {
   display: block;
 }
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap; 
+  display: flex!important;
+  align-items: center!important;
+  justify-content: space-between!important;
+  flex-wrap: wrap!important; 
 }
