@@ -4687,8 +4687,8 @@ h1.cart__empty-text {
   letter-spacing: 0.05em;
   display: block;
 }
-.nec_rtmenu.nec_desktop{
-  transform: translateY(22rem) !important;
+.nec_rtmenu.nec_desktop {
+  transform: translateY(1.2rem) !important;
 }
 .product-media-container .media {
   padding-top: 0 !important;
