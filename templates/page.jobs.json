@@ -64,6 +64,7 @@
         },
         "text_MKJENy": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "bg_color": "#d7eee2",
             "job_title": "Warehouse Lead",
@@ -95,6 +96,7 @@
         },
         "text_bgcPEz": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "bg_color": "#d7eee2",
             "job_title": "Customer Experience Supervisor",
@@ -355,6 +357,7 @@
         },
         "text_crg4Me": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "job_position": "Engineering Tech",
             "job_location": "Williston, VT",
@@ -376,6 +379,7 @@
         },
         "text_NM8jhV": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "job_position": "Production Planning Scheduler\t- L1",
             "job_location": "Williston, VT",
@@ -407,6 +411,7 @@
         },
         "text_iw8Qwm": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "job_position": "Warehouse Associate",
             "job_location": "Williston, VT",
