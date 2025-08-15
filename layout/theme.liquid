@@ -311,7 +311,13 @@
     {% if collection.handle == 'products' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
-    <!-- Continue Shopping Button Redirect - Click Interceptor -->
+<script>
+if (document.referrer.includes('thank-you') || document.referrer.includes('orders')) {
+  if (window.location.pathname === '/') {
+    window.location.href = '/collections/all-products';
+  }
+}
+</script>
 
   </head>
 
