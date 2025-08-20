@@ -240,6 +240,11 @@
       }
       
       console.log('📊 KIT DATA STRUCTURE:', JSON.stringify(kitData, null, 2));
+      const kitDataInput = document.getElementById('kit-data-json');
+if (kitDataInput) {
+  kitDataInput.value = JSON.stringify(kitData);
+  console.log('✅ Updated kit-data-json input with new variant data');
+}
       
       // Update each dropdown based on the kit_data
       getKitSelects().forEach(select => {
